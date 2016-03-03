@@ -136,6 +136,26 @@ function addingPartnerNameResponse(resText) {
     //$('#selfReg').modal('hide');
 }
 
+/* edit transaction gs and st value start*/
+function senderCopy() {
+    var senderIdgs = document.getElementById('gsSenderId');
+    var senderIdst = document.getElementById('stSenderId');
+    senderIdst.value = senderIdgs.value;
+}
+
+function receiverCopy() {
+    var recIdgs = document.getElementById('gsReceiverId');
+    var recIdst = document.getElementById('stReceiverId');
+        recIdst.value = recIdgs.value;
+}
+
+function versionCopy() {
+    var versiongs = document.getElementById('gsVersion');
+    var versionst = document.getElementById('stVersion');
+    versionst.value = versiongs.value;
+}
+/* edit transaction gs and st value end*/
+
 function envelopeUpdating() {
     var envelopeDetails = '';
     var transaction = document.getElementById("transaction").value;
@@ -163,10 +183,10 @@ function envelopeUpdating() {
     } else if (stSenderId.length == 0 || stSenderId == "" || stSenderId == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isaReceiverId.length == 0 || isaReceiverId == "-1" || isaReceiverId == null) {
+    } else if (isaReceiverId.length == 0 || isaReceiverId == "" || isaReceiverId == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gsReceiverId.length == 0 || gsReceiverId == "-1" || gsReceiverId == null) {
+    } else if (gsReceiverId.length == 0 || gsReceiverId == "" || gsReceiverId == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (stReceiverId.length == 0 || stReceiverId == "" || stReceiverId == null) {
@@ -192,8 +212,8 @@ function envelopeUpdating() {
     if (isaSenderId != null || isaSenderId != "") {
         if (gsSenderId != null && gsSenderId != "") {
             if (stSenderId != null && stSenderId != "") {
-                if (isaReceiverId != null && isaReceiverId != "-1") {
-                    if (gsReceiverId != null && gsReceiverId != "-1") {
+                if (isaReceiverId != null && isaReceiverId != "") {
+                    if (gsReceiverId != null && gsReceiverId != "") {
                         if (stReceiverId != null && stReceiverId != "") {
                             if (isaVersion != null && isaVersion != "") {
                                 if (gsVersion != null && gsVersion != "") {

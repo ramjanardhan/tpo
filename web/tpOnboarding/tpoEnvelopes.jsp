@@ -67,15 +67,17 @@
             <s:form action="doAddEnvelopes" method="POST" enctype="multipart/form-data" name="doAddEnvelopes" id="doAddEnvelopes" theme="simple">
                 <div id="site_content" class="jumbotron">
                     <div class="container">
+                         <div id="responseStringMsg">
                         <center>
                             <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                    String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                    out.println(reqponseString);
+                                    String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                    out.println(responseString);
                                     session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                                 }
                             %>
                         </center>
+                        </div>
                         <div id="TransactionsDiv" > 
                             <h4 style="color: #2d8fc8" class="heading_4">Transactions</h4>
                             <div>                                     
@@ -136,46 +138,46 @@
                                                 <input type="text" value="Sender ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
                                         </div>
-
                                         <div class="tp_sm3">
-                                            <div class="form-group">
-                                                <label>ISA</label>
-                                                <s:textfield cssClass="form-control" name="isa850senderIdIB" id="isa850senderIdIB" value="%{isa850senderIdIB}" tabindex="9" onchange="fieldLengthValidator850IB(this);"/>
+                                            <div class="form-group">  
+                                                 <label>ISA</label>
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa850senderIdIB" id="isa850senderIdIB" value="%{isa850senderIdIB}" tabindex="12" cssClass="form-control"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <label>GS</label>
-                                                <s:textfield cssClass="form-control" name="gs850senderIdIB" id="gs850senderIdIB" value="%{gs850senderIdIB}" tabindex="10" onchange="fieldLengthValidator850IB(this);"  onkeyup="IBsender850();" />
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs850senderIdIB" id="gs850senderIdIB" value="%{gs850senderIdIB}" tabindex="13" cssClass="form-control" onclick="IBsender850();"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <label>ST</label>
-                                                <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="11" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="14"  readonly="true"/>
                                             </div>
                                         </div>
+                                            
                                         <div class="tp_sm3">
                                             <div class="threshold" style="position: relative;top:7px">
                                                 <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
                                         </div>
-                                        <div class="tp_sm3">
+                                             <div class="tp_sm3">
                                             <div class="form-group">
-
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa850RecIdIB" id="isa850RecIdIB" value="%{isa850RecIdIB}" tabindex="12" cssClass="form-control"/>
+                                                <s:textfield cssClass="form-control" name="isa850RecIdIB" id="isa850RecIdIB" value="%{isa850RecIdIB}" tabindex="9" onchange="fieldLengthValidator850IB(this);"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs850RecIdIB" id="gs850RecIdIB" value="%{gs850RecIdIB}" tabindex="13" cssClass="form-control" onclick="IBrecId850();"/>
+                                                <s:textfield cssClass="form-control" name="gs850RecIdIB" id="gs850RecIdIB" value="%{gs850RecIdIB}" tabindex="10" onchange="fieldLengthValidator850IB(this);"  onkeyup="IBrecId850();" />
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="14"  readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="11" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                             </div>
                                         </div>
+                                            
                                         <div class="tp_sm3">
                                             <div class="threshold" style="position: relative;top:5px">
                                                 <input type="text" value="Version" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
@@ -236,8 +238,6 @@
                                                 <s:textfield cssClass="form-control" name=""  cssStyle="opacity:0" id="" value="" />
                                             </div>
                                         </div>
-
-
                                         <div class="tp_sm3">
                                             <div class="form-group threshold" style="position: relative;top:0px">
                                                 <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
@@ -303,7 +303,6 @@
                             <div class="table-responsive">
                                 <div style="padding:0 13px;min-width: 785px">
                                     <div class="row">
-
                                         <div class="tp_sm3">
                                             <div class="form-group ">
                                                 <div class="threshold" style="position: relative;top:31px">
@@ -313,19 +312,19 @@
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <label>ISA</label>
-                                                <s:textfield cssClass="form-control" name="isa855senderIdIB" id="isa855senderIdIB" value="%{isa855senderIdIB}" tabindex="22" onchange="fieldLengthValidator855IB(this);"/>
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855senderIdIB" id="isa855senderIdIB" value="%{isa855senderIdIB}" tabindex="25" cssClass="form-control"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
-                                            <div class="form-group">
+                                            <div class="form-group">  
                                                 <label>GS</label>
-                                                <s:textfield cssClass="form-control" name="gs855senderIdIB" id="gs855senderIdIB" value="%{gs855senderIdIB}" tabindex="23" onchange="fieldLengthValidator855IB(this);" onkeyup="IBsender855();" />
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs855senderIdIB" id="gs855senderIdIB" value="%{gs855senderIdIB}" tabindex="26" cssClass="form-control" onclick="IBsender855();"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <label>ST</label>
-                                                <s:textfield cssClass="form-control" name="st855senderIdIB" id="st855senderIdIB" value="%{st855senderIdIB}" tabindex="24" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st855senderIdIB" id="st855senderIdIB" value="%{st855senderIdIB}" tabindex="27"  readonly="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -338,19 +337,19 @@
 
                                             </div>
                                         </div>
-                                        <div class="tp_sm3">
+                                            <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdIB" id="isa855RecIdIB" value="%{isa855RecIdIB}" tabindex="25" cssClass="form-control"/>
+                                                <s:textfield cssClass="form-control" name="isa855RecIdIB" id="isa855RecIdIB" value="%{isa855RecIdIB}" tabindex="22" onchange="fieldLengthValidator855IB(this);"/>
+                                            </div>
+                                        </div>
+                                        <div class="tp_sm3">
+                                            <div class="form-group">  
+                                                <s:textfield cssClass="form-control" name="gs855RecIdIB" id="gs855RecIdIB" value="%{gs855RecIdIB}" tabindex="23" onchange="fieldLengthValidator855IB(this);" onkeyup="IBrecId855();" />
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs855RecIdIB" id="gs855RecIdIB" value="%{gs855RecIdIB}" tabindex="26" cssClass="form-control" onclick="IBrecId855();"/>
-                                            </div>
-                                        </div>
-                                        <div class="tp_sm3">
-                                            <div class="form-group">
-                                                <s:textfield cssClass="form-control" name="st855RecIdIB" id="st855RecIdIB" value="%{st855RecIdIB}" tabindex="27"  readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st855RecIdIB" id="st855RecIdIB" value="%{st855RecIdIB}" tabindex="24" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -486,21 +485,21 @@
                                                 </div>
                                             </div></div>
                                         <div class="tp_sm3">
-                                            <div class="form-group">
+                                            <div class="form-group">  
                                                 <label>ISA</label>
-                                                <s:textfield cssClass="form-control" name="isa856senderIdIB" id="isa856senderIdIB" value="%{isa856senderIdIB}" tabindex="35" onchange="fieldLengthValidator856IB(this);"/>
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856senderIdIB" id="isa856senderIdIB" value="%{isa856senderIdIB}" tabindex="38" cssClass="form-control"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <label>GS</label>
-                                                <s:textfield cssClass="form-control" name="gs856senderIdIB" id="gs856senderIdIB" value="%{gs856senderIdIB}" tabindex="36" onchange="fieldLengthValidator856IB(this);" onkeyup="IBsender856();" />
+                                                 <label>GS</label>
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs856senderIdIB" id="gs856senderIdIB" value="%{gs856senderIdIB}" tabindex="39" cssClass="form-control" onclick="IBsender856();"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <label>ST</label>
-                                                <s:textfield cssClass="form-control" name="st856senderIdIB" id="st856senderIdIB" value="%{st856senderIdIB}" tabindex="37" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st856senderIdIB" id="st856senderIdIB" value="%{st856senderIdIB}" tabindex="40"  readonly="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -511,20 +510,19 @@
                                                     <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                                 </div>
                                             </div></div>
-                                        <div class="tp_sm3">
+                                            <div class="tp_sm3">
                                             <div class="form-group">
-
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856RecIdIB" id="isa856RecIdIB" value="%{isa856RecIdIB}" tabindex="38" cssClass="form-control"/>
+                                                <s:textfield cssClass="form-control" name="isa856RecIdIB" id="isa856RecIdIB" value="%{isa856RecIdIB}" tabindex="35" onchange="fieldLengthValidator856IB(this);"/>
+                                            </div>
+                                        </div>
+                                        <div class="tp_sm3">
+                                            <div class="form-group">  
+                                                <s:textfield cssClass="form-control" name="gs856RecIdIB" id="gs856RecIdIB" value="%{gs856RecIdIB}" tabindex="36" onchange="fieldLengthValidator856IB(this);" onkeyup="IBrecId856();" />
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs856RecIdIB" id="gs856RecIdIB" value="%{gs856RecIdIB}" tabindex="39" cssClass="form-control" onclick="IBrecId856();"/>
-                                            </div>
-                                        </div>
-                                        <div class="tp_sm3">
-                                            <div class="form-group">
-                                                <s:textfield cssClass="form-control" name="st856RecIdIB" id="st856RecIdIB" value="%{st856RecIdIB}" tabindex="40"  readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st856RecIdIB" id="st856RecIdIB" value="%{st856RecIdIB}" tabindex="37" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -660,23 +658,24 @@
                                                 <div class="threshold" style="position: relative;top:31px">
                                                     <input type="text" value="Sender ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                                 </div>
-                                            </div></div>
-                                        <div class="tp_sm3">
+                                            </div>
+                                        </div>
+                                       <div class="tp_sm3">
                                             <div class="form-group">
                                                 <label>ISA</label>
-                                                <s:textfield cssClass="form-control" name="isa810senderIdIB" id="isa810senderIdIB" value="%{isa810senderIdIB}" tabindex="48" onchange="fieldLengthValidator810IB(this);"/>
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810senderIdIB" id="isa810senderIdIB" value="%{isa810senderIdIB}" tabindex="51" cssClass="form-control"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <label>GS</label>
-                                                <s:textfield cssClass="form-control" name="gs810senderIdIB" id="gs810senderIdIB" value="%{gs810senderIdIB}" tabindex="49" onchange="fieldLengthValidator810IB(this);" onkeyup="IBsender810();" />
+                                                 <label>GS</label>  
+                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs810senderIdIB" id="gs810senderIdIB" value="%{gs810senderIdIB}" tabindex="52" cssClass="form-control" onclick="IBsender810();"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <label>ST</label>
-                                                <s:textfield cssClass="form-control" name="st810senderIdIB" id="st810senderIdIB" value="%{st810senderIdIB}" tabindex="50" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
+                                                 <label>ST</label>
+                                                <s:textfield cssClass="form-control" name="st810senderIdIB" id="st810senderIdIB" value="%{st810senderIdIB}" tabindex="72"  readonly="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -686,24 +685,24 @@
                                                 <div class="threshold" style="position: relative;top:7px">
                                                     <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                                 </div>
-
-                                            </div></div>
-                                        <div class="tp_sm3">
+                                            </div>
+                                        </div>
+                                            <div class="tp_sm3">
                                             <div class="form-group">
-
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdIB" id="isa810RecIdIB" value="%{isa810RecIdIB}" tabindex="51" cssClass="form-control"/>
+                                                <s:textfield cssClass="form-control" name="isa810RecIdIB" id="isa810RecIdIB" value="%{isa810RecIdIB}" tabindex="48" onchange="fieldLengthValidator810IB(this);"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs810RecIdIB" id="gs810RecIdIB" value="%{gs810RecIdIB}" tabindex="52" cssClass="form-control" onclick="IBrecId810();"/>
+                                                <s:textfield cssClass="form-control" name="gs810RecIdIB" id="gs810RecIdIB" value="%{gs810RecIdIB}" tabindex="49" onchange="fieldLengthValidator810IB(this);" onkeyup="IBrecId810();" />
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:textfield cssClass="form-control" name="st810RecIdIB" id="st810RecIdIB" value="%{st810RecIdIB}" tabindex="72"  readonly="true"/>
+                                                <s:textfield cssClass="form-control" name="st810RecIdIB" id="st810RecIdIB" value="%{st810RecIdIB}" tabindex="50" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
                                             </div>
                                         </div>
+                                            
                                     </div>
                                     <div class="row">
                                         <div class="tp_sm3">
@@ -1541,10 +1540,7 @@
         $(function() {
             /*  Inbound function start*/
             $("#ib850").click(function() {
-                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                // var protocol=document.getElementById("commnProtocol").value;
-                // if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
-
+                $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue850').value = '850';
                     document.getElementById('ibdirection').value = 'Inbound';
@@ -1554,15 +1550,9 @@
                 } else {
                     $("#ibenvelop850").hide();
                 }
-                //   }else{
-                // document.getElementById("divansferModeMsg").style.display = "block";
-                //  document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //   }
             });
             $("#ib855").click(function() {
-                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                //  var protocol=document.getElementById("commnProtocol").value;
-                //  if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue855').value = '855';
                     document.getElementById('ibdirection855').value = 'Inbound';
@@ -1572,15 +1562,9 @@
                 } else {
                     $("#ibenvelop855").hide();
                 }
-                //  }else{
-                //   document.getElementById("divansferModeMsg").style.display = "block";
-                //   document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //  }
             });
             $("#ib856").click(function() {
-                //  var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                //  var protocol=document.getElementById("commnProtocol").value;
-                //  if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue856').value = '856';
                     document.getElementById('ibdirection856').value = 'Inbound';
@@ -1590,16 +1574,9 @@
                 } else {
                     $("#ibenvelop856").hide();
                 }
-                //  }else{
-                //  document.getElementById("divansferModeMsg").style.display = "block";
-                // document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //   }
-
             });
             $("#ib810").click(function() {
-                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                // var protocol=document.getElementById("commnProtocol").value;
-                // if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue810').value = '810';
                     document.getElementById('ibdirection810').value = 'Inbound';
@@ -1609,16 +1586,10 @@
                 } else {
                     $("#ibenvelop810").hide();
                 }
-                // }else{
-                //  document.getElementById("transferModeMsg").style.display = "block";
-                //   document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                // }
             });
             /*  Outbound function Start*/
             $("#ob850").click(function() {
-                //   var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //   var protocol=document.getElementById("commnProtocol").value;
-                //   if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue850').value = '850';
                     document.getElementById('trans850IdcodeOB').value = '850';
@@ -1628,15 +1599,9 @@
                 } else {
                     $("#obenvelop850").hide();
                 }
-                // }else{
-                //  document.getElementById("transferModeMsg").style.display = "block";
-                //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                // }
             });
             $("#ob855").click(function() {
-                //  var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //  var protocol=document.getElementById("commnProtocol").value;
-                // if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue855').value = '855';
                     document.getElementById('trans855IdcodeOB').value = '855';
@@ -1646,15 +1611,9 @@
                 } else {
                     $("#obenvelop855").hide();
                 }
-                //   }else{
-                //     document.getElementById("transferModeMsg").style.display = "block";
-                //     document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //  }
             });
             $("#ob856").click(function() {
-                // var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //   var protocol=document.getElementById("commnProtocol").value;
-                // if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue856').value = '856';
                     document.getElementById('trans856IdcodeOB').value = '856';
@@ -1664,15 +1623,9 @@
                 } else {
                     $("#obenvelop856").hide();
                 }
-                // }else{
-                //   document.getElementById("transferModeMsg").style.display = "block";
-                //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                // }
             });
             $("#ob810").click(function() {
-                //    var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //   var protocol=document.getElementById("commnProtocol").value;
-                //  if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                 $("#responseStringMsg").hide();
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue810').value = '810';
                     document.getElementById('trans810IdcodeOB').value = '810';
@@ -1682,12 +1635,7 @@
                 } else {
                     $("#obenvelop810").hide();
                 }
-                //  }else{
-                //   document.getElementById("transferModeMsg").style.display = "block";
-                //document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //  }
             });
-            /*  Outbound function End*/
         });
 
         function checkEnvelopes() {
