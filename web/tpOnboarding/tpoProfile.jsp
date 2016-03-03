@@ -1,8 +1,8 @@
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
+<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>
@@ -16,7 +16,6 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
-
         <style>
             .input-group-addon i{
                 color:#2d8fc8;
@@ -40,7 +39,6 @@
         <s:else>
         <body onload="doOnLoad();" class="home">
         </s:else>
-
         <div>
             <s:include value="/includes/template/header.jsp"/>
         </div>    
@@ -106,7 +104,7 @@
                                 </div>
                             </div>
                             <div id="loaderdiv" class="loadingImg" style="display: none">
-                                <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
+                                <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>" ></span>
                         </div>
                         <div id="transferModeMsg" style="display: none;position: relative;right: 226px;bottom: 11px;"></div>
 
