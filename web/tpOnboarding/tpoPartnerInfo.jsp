@@ -38,6 +38,7 @@
             <s:include value="../includes/template/header.jsp"/>
         </div>
         <!-- Header -->
+        Header
         <header id="head">
             <div class="container">
                 <h3 class="thin"><b>Trading Partner Information</b></h3>
