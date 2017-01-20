@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="ajax" extends="default" namespace="/ajax">
+        
+        <default-interceptor-ref name="crudStack"/>
+        
+        <action name="isExistedPartnerName" class="com.mss.tpo.ajax.AjaxHandlerAction" method="isExistedPartnerName"/>
+        
+        <action name="isExistedUserEmail" class="com.mss.tpo.ajax.AjaxHandlerAction" method="isExistedUserEmail"/>
+        
+        <action name="addPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="doAddTpoPartner"/>
+        
+        <action name="selfAddPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="doAddTpoPartnerSelf"/>
+        
+        <action name="getDeleteProfile" class="com.mss.tpo.ajax.AjaxHandlerAction" method="getDeleteProfile"/>
+        
+        <action name="getDeleteEnvelope" class="com.mss.tpo.ajax.AjaxHandlerAction" method="getDeleteEnvelope"/>
+        
+        <action name="updateEnvelope" class="com.mss.tpo.ajax.AjaxHandlerAction" method="updateEnvelope"/>
+        
+        <action name="forgotpassword" class="com.mss.tpo.ajax.AjaxHandlerAction" method="forgotPassword"/>
+        
+        <action name="getProtocolDetails" class="com.mss.tpo.ajax.AjaxHandlerAction" method="getProtocolDetails"/>   
+        
+        <action name="isExistedAS2PartnerProfileName" class="com.mss.tpo.ajax.AjaxHandlerAction" method="isExistedAS2PartnerProfileName"/>
+        
+         <action name="acceptPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="acceptPartner"/>
+         
+         <action name="rejectPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="rejectPartner"/>
+    </package>
+</struts>

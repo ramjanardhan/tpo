@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="tpOnboarding" namespace="/tpOnboarding" extends="default">
+        
+        <default-interceptor-ref name="crudStack"/>     
+        
+        <!-- after successfull login action-->
+        <action name="tpoSuccess" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoSuccess">
+            <result type="redirect">../tpOnboarding/tpoPartnerInfo.action</result>
+<!--            <result name="tpoRegister">/tpOnboarding/tpoRegister.jsp</result>-->
+            <result name="tpoRegister">/tpOnboarding/tpoPartnerAdd.jsp</result>
+            <result name="tpoPartnerInfo">/tpOnboarding/tpoPartnerInfo.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <!-- user creation action-->
+        <action name="tpoRegister" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoRegister">
+            <result>/tpOnboarding/tpoRegister.jsp</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="accessFailed" type="redirect" >../exception/accessFailed.action</result> 
+        </action>
+        
+        <action name="tpoUserAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoUserAdd">
+            <result name="success">/tpOnboarding/tpoRegister.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <!-- partner actions-->
+        <action name="tpoPartnerAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerAdd">
+            <result name="success">/tpOnboarding/tpoPartnerAdd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoPartnerUserAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerUserAdd">
+            <result name="success">/tpOnboarding/tpoPartnerUserAdd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="doAddPartnerUser" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doAddPartnerUser">
+            <result name="success">/tpOnboarding/tpoPartnerUserAdd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoPartnerInfo" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerInfo">
+            <result name="success">/tpOnboarding/tpoPartnerInfo.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="updatePartnerInfo" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="updatePartnerInfo">
+            <result name="success">/tpOnboarding/tpoPartnerInfo.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoPartnersList" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnersList">
+            <result name="success">/tpOnboarding/tpoPartnersList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+        <action name="searchPartner" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchPartner">
+            <result name="success">/tpOnboarding/tpoPartnersList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <!-- profiles actions-->
+        <action name="tpoManageProfiles" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoManageProfiles">
+            <result name="success">/tpOnboarding/tpoSearchProfile.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+        <action name="tpoAddProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoAddProfile">
+            <result name="success">/tpOnboarding/tpoProfile.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="doAddProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doAddProfile">
+            <result name="success">../tpOnboarding/tpoProfile.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="searchProfiles" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoSearchProfiles">
+            <result name="success">/tpOnboarding/tpoSearchProfile.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpogetProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpogetProfile">
+            <result name="success">/tpOnboarding/tpoProfile.jsp</result>
+            <result type="redirect" name="login">../tpOnboarding/tpoLogin.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        <action name="doUpdateProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doUpdateProfile">
+            <result name="success" type="redirect">../tpOnboarding/tpoProfile.jsp</result>
+            <result type="redirect" name="login">../tpOnboarding/tpoLogin.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoDeleteProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoDeleteProfile">
+            <result name="success" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+       
+        
+        <!-- envelopes actions-->
+        <action name="tpoManageEnvelopes" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoManageEnvelopes">
+            <result name="success">/tpOnboarding/tpoSearchEnvelope.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+        <action name="tpoAddEnvelope" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoAddEnvelope">
+            <result name="success">/tpOnboarding/tpoEnvelopes.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="searchEnvelopes" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchEnvelopes">
+            <result name="success">/tpOnboarding/tpoSearchEnvelope.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="doAddEnvelopes" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doAddEnvelopes">
+            <result name="success">/tpOnboarding/tpoEnvelopes.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+      
+        <action name="tpoEditEnvelope" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoEditEnvelope">
+            <result name="success">/tpOnboarding/tpoEditEnvelope.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoDeleteEnvelope" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="getDeleteEnvelope">
+            <result name="success" type="redirect">../tpOnboarding/tpoManageEnvelopes.action</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+<!--   new     -->
+        <action name="tpOnboardingDownloads" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpOnboardingDownloads">
+        </action>
+        
+        <action name="tpoResetMyPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetMyPwd">
+            <result name="success">/tpOnboarding/tpoResetMyPwd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        <action name="doTpoResetMyPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doTpoResetMyPwd">
+            <result name="success">/tpOnboarding/tpoResetMyPwd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoResetUserPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetUserPwd">
+            <result name="success">/tpOnboarding/tpoResetUserPwd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        <action name="doTpoResetUserPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doTpoResetUserPwd">
+            <result name="success">/tpOnboarding/tpoResetUserPwd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoResetPartnerPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetPartnerPwd">
+            <result name="success">/tpOnboarding/tpoResetPartnerPwd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        <action name="doTpoResetPartnerPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doTpoResetPartnerPwd">
+            <result name="success">/tpOnboarding/tpoResetPartnerPwd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+    </package>
+</struts>
