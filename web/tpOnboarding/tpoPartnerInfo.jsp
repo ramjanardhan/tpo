@@ -104,7 +104,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Country<span class="text-danger">*</span></label>
-                                    <s:select cssClass="form-control" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{tpOnboardingBean.country}" />
+                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{tpOnboardingBean.country}" />
                                 </div>
                             </div>
                             <div class="col-sm-3">

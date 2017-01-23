@@ -263,7 +263,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         if (roleId == 2) {
             partnerSearchQuery.append(" AND (CREATED_BY='" + loginId + "' OR ASSIGNED_TO = '" + loginId + "') ");
         }
-        System.out.println("partnerSearchQuery::" + partnerSearchQuery.toString());
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -308,7 +307,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         }
         profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
         profileSearchQuery.append(" order By CREATED_TS DESC");
-        System.out.println("profileSearchQuery-->" + profileSearchQuery.toString());
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -555,16 +553,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             mp = tpAction.getMap();
             if ((isProfileCommnInserted > 0) && (isProtocolInserted > 0)) {
                 responseString = "<font color='green'>Inserted successfully</font>";
-                System.out.println("tpAction.getPartnerName() " + tpAction.getPartnerName());
-                System.out.println("tpAction.getContactName() " + tpAction.getContactName());
-                System.out.println("tpAction.getContactEmail() " + tpAction.getContactEmail());
-                System.out.println(" tpAction.getPhoneNo() " + tpAction.getPhoneNo());
-                System.out.println("tpAction.getCountry() " + tpAction.getCountry());
-                System.out.println("tpAction.getCommnProtocol() " + tpAction.getCommnProtocol());
-                System.out.println("tpAction.getTransferMode() " + tpAction.getTransferMode());
-                System.out.println("user id is " + loginId);
-
-                //System.out.println("Email in Adding IN IMPL "+httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_EMAIL).toString());
                 MailManager.tpoDetails(partnerId, loginId, Email, tpAction.getPartnerName(), tpAction.getCommnProtocol(), tpAction.getTransferMode(),
                         tpAction.getFilepath(), tpAction.getCertGroups(), mp, "Insert");
             } else {
@@ -814,7 +802,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(2, commonprotocol);
                     resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
-                        System.out.println("resultSet.getInt(1)-->" + resultSet.getInt(1));
                         StringBuffer ftpSslUpdateQuery = new StringBuffer();
                         if (resultSet.getInt(1) > 0) {
                             ftpSslUpdateQuery.append("Update MSCVP.TPO_SSL set SSL_PRIORITY=?,CIPHER_STRENGTH=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=? ");
@@ -897,7 +884,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(2, commonprotocol);
                     resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
-                        System.out.println("resultSet.getInt(1)-->" + resultSet.getInt(1));
                         if (resultSet.getInt(1) > 0) {
                             String as2SslUpdateQuery = "Update MSCVP.TPO_SSL set SSL_PRIORITY=?, "
                                     + " CIPHER_STRENGTH=?,CA_CERTIFICATES=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=?,SSL_CERT_DATA=? WHERE COMMUNICATION_ID=" + Id;
@@ -960,7 +946,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(2, commonprotocol);
                     resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
-                        System.out.println("resultSet.getInt(1)-->" + resultSet.getInt(1));
                         if (resultSet.getInt(1) > 0) {
                             String httpSslUpdateQuery = "Update MSCVP.TPO_SSL set SSL_PRIORITY=?, "
                                     + " CIPHER_STRENGTH=?,CA_CERTIFICATES=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=?,SSL_CERT_DATA WHERE COMMUNICATION_ID=" + Id;
@@ -1040,7 +1025,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 preparedStatement.setString(8, "INACTIVE");
                 isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
             }
-            System.out.println("isProtocolUpdated-------" + isProtocolUpdated);
             mp = tpOnboardingAction.getMap();
             if (((isProtocolUpdated > 0))) {
                 responseString = "<font color='green'>Updated successfully</font>";
@@ -1077,7 +1061,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
     public String getDeleteProfile(int communicationId, String commnProtocol, int PartnerId, String transferMode) throws ServiceLocatorException {
         try {
-            System.out.println("communicationId>>" + communicationId + " commnProtocol>>" + commnProtocol + " PartnerId>>" + PartnerId + " transferMode>>" + transferMode);
             connection = ConnectionProvider.getInstance().getConnection();
             callableStatement = connection.prepareCall("call SP_TPO_PROFILE_DELETE(?,?,?,?)");
             callableStatement.setInt(1, communicationId);

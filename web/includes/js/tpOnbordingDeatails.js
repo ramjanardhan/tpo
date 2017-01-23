@@ -18,6 +18,7 @@ function checkPartnerInfo() {
     var address1 = document.getElementById("address1").value;
     var city = document.getElementById("city").value;
     var state = document.getElementById("state").value;
+    var country = document.getElementById("country").value;
     var zipCode = document.getElementById("zipCode").value;
     if (contactEmail == "") {
         document.getElementById("tpResultMessage").innerHTML = "<font style='color:red'>Please enter email</font>";
@@ -33,6 +34,9 @@ function checkPartnerInfo() {
         return false;
     } else if (state == "") {
         document.getElementById("tpResultMessage").innerHTML = "<font style='color:red'>Please enter state</font>";
+        return false;
+    } else if (country == "-1") {
+        document.getElementById("tpResultMessage").innerHTML = "<font style='color:red'>Please select country</font>";
         return false;
     } else if (zipCode == "") {
         document.getElementById("tpResultMessage").innerHTML = "<font style='color:red'>Please enter zip code</font>";
@@ -414,7 +418,11 @@ function IBversion850() {
 function IBrecId850() {
     var recIdgs850Ib = document.getElementById('gs850RecIdIB');
     var recIdst850Ib = document.getElementById('st850RecIdIB');
-    recIdst850Ib.value = recIdgs850Ib.value;
+    if (recIdgs850Ib.value == '-1') {
+        recIdst850Ib.value = "";
+    } else {
+        recIdst850Ib.value = recIdgs850Ib.value;
+    }
 }
 /* 850 inbound gs and st value end*/
 
@@ -434,7 +442,11 @@ function IBversion855() {
 function IBrecId855() {
     var recIdgs855Ib = document.getElementById('gs855RecIdIB');
     var recIdst855Ib = document.getElementById('st855RecIdIB');
-    recIdst855Ib.value = recIdgs855Ib.value;
+    if (recIdgs855Ib.value == '-1') {
+        recIdst855Ib.value = "";
+    } else {
+        recIdst855Ib.value = recIdgs855Ib.value;
+    }
 }
 
 /* 855 inbound gs and st value end*/
@@ -455,7 +467,11 @@ function IBversion856() {
 function IBrecId856() {
     var recIdgs856Ib = document.getElementById('gs856RecIdIB');
     var recIdst856Ib = document.getElementById('st856RecIdIB');
-    recIdst856Ib.value = recIdgs856Ib.value;
+    if (recIdgs856Ib.value == '-1') {
+        recIdst856Ib.value = "";
+    } else {
+        recIdst856Ib.value = recIdgs856Ib.value;
+    }
 }
 /* 856 inbound gs and st value end*/
 
@@ -475,7 +491,11 @@ function IBversion810() {
 function IBrecId810() {
     var recIdgs810Ib = document.getElementById('gs810RecIdIB');
     var recIdst810Ib = document.getElementById('st810RecIdIB');
-    recIdst810Ib.value = recIdgs810Ib.value;
+    if (recIdgs810Ib.value == '-1') {
+        recIdst810Ib.value = "";
+    } else {
+        recIdst810Ib.value = recIdgs810Ib.value;
+    }
 }
 /* 810 inbound gs and st value end*/
 
@@ -497,7 +517,11 @@ function OBversion850() {
 function OB850recId() {
     var recIdgs850Ob = document.getElementById('gs850RecIdOB');
     var recIdst850Ob = document.getElementById('st850RecIdOB');
-    recIdst850Ob.value = recIdgs850Ob.value;
+    if (recIdgs850Ob.value == '-1') {
+        recIdst850Ob.value = "";
+    } else {
+       recIdst850Ob.value = recIdgs850Ob.value;
+    }
 }
 
 /* 850 outbound gs and st value end*/
@@ -518,7 +542,11 @@ function OBversion855() {
 function OBrecId855() {
     var recIdgs855Ob = document.getElementById('gs855RecIdOB');
     var recIdst855Ob = document.getElementById('st855RecIdOB');
-    recIdst855Ob.value = recIdgs855Ob.value;
+    if (recIdgs855Ob.value == '-1') {
+        recIdst855Ob.value = "";
+    } else {
+       recIdst855Ob.value = recIdgs855Ob.value;
+    }
 }
 /* 855 outbound gs and st value end*/
 
@@ -538,7 +566,11 @@ function OBversion856() {
 function OBrecId856() {
     var recIdgs856Ob = document.getElementById('gs856RecIdOB');
     var recIdst856Ob = document.getElementById('st856RecIdOB');
-    recIdst856Ob.value = recIdgs856Ob.value;
+    if (recIdgs856Ob.value == '-1') {
+        recIdst856Ob.value = "";
+    } else {
+       recIdst856Ob.value = recIdgs856Ob.value;
+    }
 }
 /* 856 outbound gs and st value end*/
 
@@ -558,27 +590,35 @@ function OBversion810() {
 function OBrecId810() {
     var recIdgs810Ob = document.getElementById('gs810RecIdOB');
     var recIdst810Ob = document.getElementById('st810RecIdOB');
-    recIdst810Ob.value = recIdgs810Ob.value;
+    if (recIdgs810Ob.value == '-1') {
+        recIdst810Ob.value = "";
+    } else {
+       recIdst810Ob.value = recIdgs810Ob.value;
+    }
 }
 /* 810 outbound gs and st value end*/
 
 /* edit transaction gs and st value start*/
 function senderCopy() {
-    var n1 = document.getElementById('gsSenderId');
-    var n2 = document.getElementById('stSenderId');
-    n2.value = n1.value;
+    var senderIdgs = document.getElementById('gsSenderId');
+    var senderIdst = document.getElementById('stSenderId');
+    senderIdst.value = senderIdgs.value;
 }
 
 function receiverCopy() {
-    var recIdgs850Ib = document.getElementById('gsReceiverId');
-    var recIdst850Ib = document.getElementById('stReceiverId');
-    recIdst850Ib.value = recIdgs850Ib.value;
+    var recIdgs = document.getElementById('gsReceiverId');
+    var recIdst = document.getElementById('stReceiverId');
+    if (recIdgs.value == '-1') {
+        recIdst.value = "";
+    } else {
+       recIdst.value = recIdgs.value;
+    }
 }
 
 function versionCopy() {
-    var versiongs850Ib = document.getElementById('gsVersion');
-    var versionst850Ib = document.getElementById('stVersion');
-    versionst850Ib.value = versiongs850Ib.value;
+    var versiongs = document.getElementById('gsVersion');
+    var versionst = document.getElementById('stVersion');
+    versionst.value = versiongs.value;
 }
 /* edit transaction gs and st value end*/
 
@@ -608,10 +648,10 @@ function checkib850() {
     } else if (st850senderIdIB.length == 0 || st850senderIdIB == "" || st850senderIdIB == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa850RecIdIB.length == 0 || isa850RecIdIB == "" || isa850RecIdIB == null) {
+    } else if (isa850RecIdIB.length == 0 || isa850RecIdIB == "-1" || isa850RecIdIB == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs850RecIdIB.length == 0 || gs850RecIdIB == "" || gs850RecIdIB == null) {
+    } else if (gs850RecIdIB.length == 0 || gs850RecIdIB == "-1" || gs850RecIdIB == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st850RecIdIB.length == 0 || st850RecIdIB == "" || st850RecIdIB == null) {
@@ -637,8 +677,8 @@ function checkib850() {
     if (isa850senderIdIB != null || isa850senderIdIB != "") {
         if (gs850senderIdIB != null && gs850senderIdIB != "") {
             if (st850senderIdIB != null && st850senderIdIB != "") {
-                if (isa850RecIdIB != null && isa850RecIdIB != "") {
-                    if (gs850RecIdIB != null && gs850RecIdIB != "") {
+                if (isa850RecIdIB != null && isa850RecIdIB != "-1") {
+                    if (gs850RecIdIB != null && gs850RecIdIB != "-1") {
                         if (st850RecIdIB != null && st850RecIdIB != "") {
                             if (isa850VersionIB != null && isa850VersionIB != "") {
                                 if (gs850VersionIB != null && gs850VersionIB != "") {
@@ -687,10 +727,10 @@ function checkib855() {
     } else if (st855senderIdIB.length == 0 || st855senderIdIB == "" || st855senderIdIB == null) {
         document.getElementById('resultMessage855ib').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa855RecIdIB.length == 0 || isa855RecIdIB == "" || isa855RecIdIB == null) {
+    } else if (isa855RecIdIB.length == 0 || isa855RecIdIB == "-1" || isa855RecIdIB == null) {
         document.getElementById('resultMessage855ib').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs855RecIdIB.length == 0 || gs855RecIdIB == "" || gs855RecIdIB == null) {
+    } else if (gs855RecIdIB.length == 0 || gs855RecIdIB == "-1" || gs855RecIdIB == null) {
         document.getElementById('resultMessage855ib').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st855RecIdIB.length == 0 || st855RecIdIB == "" || st855RecIdIB == null) {
@@ -716,8 +756,8 @@ function checkib855() {
     if (isa855senderIdIB != null || isa855senderIdIB != "") {
         if (gs855senderIdIB != null && gs855senderIdIB != "") {
             if (st855senderIdIB != null && st855senderIdIB != "") {
-                if (isa855RecIdIB != null && isa855RecIdIB != "") {
-                    if (gs855RecIdIB != null && gs855RecIdIB != "") {
+                if (isa855RecIdIB != null && isa855RecIdIB != "-1") {
+                    if (gs855RecIdIB != null && gs855RecIdIB != "-1") {
                         if (st855RecIdIB != null && st855RecIdIB != "") {
                             if (isa855VersionIB != null && isa855VersionIB != "") {
                                 if (gs855VersionIB != null && gs855VersionIB != "") {
@@ -766,10 +806,10 @@ function checkib856() {
     } else if (st856senderIdIB.length == 0 || st856senderIdIB == "" || st856senderIdIB == null) {
         document.getElementById('resultMessage856ib').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa856RecIdIB.length == 0 || isa856RecIdIB == "" || isa856RecIdIB == null) {
+    } else if (isa856RecIdIB.length == 0 || isa856RecIdIB == "-1" || isa856RecIdIB == null) {
         document.getElementById('resultMessage856ib').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs856RecIdIB.length == 0 || gs856RecIdIB == "" || gs856RecIdIB == null) {
+    } else if (gs856RecIdIB.length == 0 || gs856RecIdIB == "-1" || gs856RecIdIB == null) {
         document.getElementById('resultMessage856ib').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st856RecIdIB.length == 0 || st856RecIdIB == "" || st856RecIdIB == null) {
@@ -795,8 +835,8 @@ function checkib856() {
     if (isa856senderIdIB != null || isa856senderIdIB != "") {
         if (gs856senderIdIB != null && gs856senderIdIB != "") {
             if (st856senderIdIB != null && st856senderIdIB != "") {
-                if (isa856RecIdIB != null && isa856RecIdIB != "") {
-                    if (gs856RecIdIB != null && gs856RecIdIB != "") {
+                if (isa856RecIdIB != null && isa856RecIdIB != "-1") {
+                    if (gs856RecIdIB != null && gs856RecIdIB != "-1") {
                         if (st856RecIdIB != null && st856RecIdIB != "") {
                             if (isa856VersionIB != null && isa856VersionIB != "") {
                                 if (gs856VersionIB != null && gs856VersionIB != "") {
@@ -845,10 +885,10 @@ function checkib810() {
     } else if (st810senderIdIB.length == 0 || st810senderIdIB == "" || st810senderIdIB == null) {
         document.getElementById('resultMessage810ib').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa810RecIdIB.length == 0 || isa810RecIdIB == "" || isa810RecIdIB == null) {
+    } else if (isa810RecIdIB.length == 0 || isa810RecIdIB == "-1" || isa810RecIdIB == null) {
         document.getElementById('resultMessage810ib').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs810RecIdIB.length == 0 || gs810RecIdIB == "" || gs810RecIdIB == null) {
+    } else if (gs810RecIdIB.length == 0 || gs810RecIdIB == "-1" || gs810RecIdIB == null) {
         document.getElementById('resultMessage810ib').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st810RecIdIB.length == 0 || st810RecIdIB == "" || st810RecIdIB == null) {
@@ -874,8 +914,8 @@ function checkib810() {
     if (isa810senderIdIB != null || isa810senderIdIB != "") {
         if (gs810senderIdIB != null && gs810senderIdIB != "") {
             if (st810senderIdIB != null && st810senderIdIB != "") {
-                if (isa810RecIdIB != null && isa810RecIdIB != "") {
-                    if (gs810RecIdIB != null && gs810RecIdIB != "") {
+                if (isa810RecIdIB != null && isa810RecIdIB != "-1") {
+                    if (gs810RecIdIB != null && gs810RecIdIB != "-1") {
                         if (st810RecIdIB != null && st810RecIdIB != "") {
                             if (isa810VersionIB != null && isa810VersionIB != "") {
                                 if (gs810VersionIB != null && gs810VersionIB != "") {
@@ -924,10 +964,10 @@ function checkob850() {
     } else if (st850senderIdOB.length == 0 || st850senderIdOB == "" || st850senderIdOB == null) {
         document.getElementById('resultMessage850ob').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa850RecIdOB.length == 0 || isa850RecIdOB == "" || isa850RecIdOB == null) {
+    } else if (isa850RecIdOB.length == 0 || isa850RecIdOB == "-1" || isa850RecIdOB == null) {
         document.getElementById('resultMessage850ob').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs850RecIdOB.length == 0 || gs850RecIdOB == "" || gs850RecIdOB == null) {
+    } else if (gs850RecIdOB.length == 0 || gs850RecIdOB == "-1" || gs850RecIdOB == null) {
         document.getElementById('resultMessage850ob').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st850RecIdOB.length == 0 || st850RecIdOB == "" || st850RecIdOB == null) {
@@ -953,8 +993,8 @@ function checkob850() {
     if (isa850senderIdOB != null || isa850senderIdOB != "") {
         if (gs850senderIdOB != null && gs850senderIdOB != "") {
             if (st850senderIdOB != null && st850senderIdOB != "") {
-                if (isa850RecIdOB != null && isa850RecIdOB != "") {
-                    if (gs850RecIdOB != null && gs850RecIdOB != "") {
+                if (isa850RecIdOB != null && isa850RecIdOB != "-1") {
+                    if (gs850RecIdOB != null && gs850RecIdOB != "-1") {
                         if (st850RecIdOB != null && st850RecIdOB != "") {
                             if (isa850VersionOB != null && isa850VersionOB != "") {
                                 if (gs850VersionOB != null && gs850VersionOB != "") {
@@ -1003,10 +1043,10 @@ function checkob855() {
     } else if (st855senderIdOB.length == 0 || st855senderIdOB == "" || st855senderIdOB == null) {
         document.getElementById('resultMessage855ob').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa855RecIdOB.length == 0 || isa855RecIdOB == "" || isa855RecIdOB == null) {
+    } else if (isa855RecIdOB.length == 0 || isa855RecIdOB == "-1" || isa855RecIdOB == null) {
         document.getElementById('resultMessage855ob').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs855RecIdOB.length == 0 || gs855RecIdOB == "" || gs855RecIdOB == null) {
+    } else if (gs855RecIdOB.length == 0 || gs855RecIdOB == "-1" || gs855RecIdOB == null) {
         document.getElementById('resultMessage855ob').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st855RecIdOB.length == 0 || st855RecIdOB == "" || st855RecIdOB == null) {
@@ -1032,8 +1072,8 @@ function checkob855() {
     if (isa855senderIdOB != null || isa855senderIdOB != "") {
         if (gs855senderIdOB != null && gs855senderIdOB != "") {
             if (st855senderIdOB != null && st855senderIdOB != "") {
-                if (isa855RecIdOB != null && isa855RecIdOB != "") {
-                    if (gs855RecIdOB != null && gs855RecIdOB != "") {
+                if (isa855RecIdOB != null && isa855RecIdOB != "-1") {
+                    if (gs855RecIdOB != null && gs855RecIdOB != "-1") {
                         if (st855RecIdOB != null && st855RecIdOB != "") {
                             if (isa855VersionOB != null && isa855VersionOB != "") {
                                 if (gs855VersionOB != null && gs855VersionOB != "") {
@@ -1082,10 +1122,10 @@ function checkob856() {
     } else if (st856senderIdOB.length == 0 || st856senderIdOB == "" || st856senderIdOB == null) {
         document.getElementById('resultMessage856ob').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa856RecIdOB.length == 0 || isa856RecIdOB == "" || isa856RecIdOB == null) {
+    } else if (isa856RecIdOB.length == 0 || isa856RecIdOB == "-1" || isa856RecIdOB == null) {
         document.getElementById('resultMessage856ob').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs856RecIdOB.length == 0 || gs856RecIdOB == "" || gs856RecIdOB == null) {
+    } else if (gs856RecIdOB.length == 0 || gs856RecIdOB == "-1" || gs856RecIdOB == null) {
         document.getElementById('resultMessage856ob').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st856RecIdOB.length == 0 || st856RecIdOB == "" || st856RecIdOB == null) {
@@ -1111,8 +1151,8 @@ function checkob856() {
     if (isa856senderIdOB != null || isa856senderIdOB != "") {
         if (gs856senderIdOB != null && gs856senderIdOB != "") {
             if (st856senderIdOB != null && st856senderIdOB != "") {
-                if (isa856RecIdOB != null && isa856RecIdOB != "") {
-                    if (gs856RecIdOB != null && gs856RecIdOB != "") {
+                if (isa856RecIdOB != null && isa856RecIdOB != "-1") {
+                    if (gs856RecIdOB != null && gs856RecIdOB != "-1") {
                         if (st856RecIdOB != null && st856RecIdOB != "") {
                             if (isa856VersionOB != null && isa856VersionOB != "") {
                                 if (gs856VersionOB != null && gs856VersionOB != "") {
@@ -1161,10 +1201,10 @@ function checkob810() {
     } else if (st810senderIdOB.length == 0 || st810senderIdOB == "" || st810senderIdOB == null) {
         document.getElementById('resultMessage810ob').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isa810RecIdOB.length == 0 || isa810RecIdOB == "" || isa810RecIdOB == null) {
+    } else if (isa810RecIdOB.length == 0 || isa810RecIdOB == "-1" || isa810RecIdOB == null) {
         document.getElementById('resultMessage810ob').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gs810RecIdOB.length == 0 || gs810RecIdOB == "" || gs810RecIdOB == null) {
+    } else if (gs810RecIdOB.length == 0 || gs810RecIdOB == "-1" || gs810RecIdOB == null) {
         document.getElementById('resultMessage810ob').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (st810RecIdOB.length == 0 || st810RecIdOB == "" || st810RecIdOB == null) {
@@ -1190,8 +1230,8 @@ function checkob810() {
     if (isa810senderIdOB != null || isa810senderIdOB != "") {
         if (gs810senderIdOB != null && gs810senderIdOB != "") {
             if (st810senderIdOB != null && st810senderIdOB != "") {
-                if (isa810RecIdOB != null && isa810RecIdOB != "") {
-                    if (gs810RecIdOB != null && gs810RecIdOB != "") {
+                if (isa810RecIdOB != null && isa810RecIdOB != "-1") {
+                    if (gs810RecIdOB != null && gs810RecIdOB != "-1") {
                         if (st810RecIdOB != null && st810RecIdOB != "") {
                             if (isa810VersionOB != null && isa810VersionOB != "") {
                                 if (gs810VersionOB != null && gs810VersionOB != "") {
@@ -2022,7 +2062,7 @@ function validateSFTP(flag) {
     }
     if ((document.getElementById('tempTransferMode').value) == 'put') {
         if (((sftp_host_ip == null) || (sftp_host_ip == "")) || ((sftp_remote_port == null) || (sftp_remote_port == "")) || ((sftp_remote_userId == null) || (sftp_remote_userId == "")) || ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) || ((sftp_directory == null) || (sftp_directory == ""))) {
-            document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter all mandetory fields</font>";
+            document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
             return false;
         }
     }
@@ -2043,7 +2083,7 @@ function validateHTTP(flag) {
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
     if (((http_recv_protocol == null) || (http_recv_protocol == "")) || ((http_resp_time == null) || (http_resp_time == "")) || ((http_endpoint == null) || (http_endpoint == "")) || ((http_port == null) || (http_port == ""))) {
-        document.getElementById('protocolmsgHttp').innerHTML = "<font color=red>Please enter all mandetory fields</font>";
+        document.getElementById('protocolmsgHttp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
     if ((document.getElementById('tempTransferMode').value) == 'get') {
@@ -2071,6 +2111,9 @@ function validateAS2(flag) {
     var as2_yourPartname = document.getElementById("as2_yourPartname").value;
     var as2_myEndPoint = document.getElementById("as2_myEndPoint").value;
     var as2_partendpoint = document.getElementById("as2_partendpoint").value;
+    var as2_strMsg = document.getElementById("as2_strMsg").value;
+    var as2_waitForSync = document.getElementById("as2_waitForSync").value;
+    var as2_payloadSendMode = document.getElementById("as2_payloadSendMode").value;
     // var ftp_ssl_req = document.getElementById("ftp_ssl_req").value;
     var as2_ssl_req = document.getElementById("as2_ssl_req").checked;
     document.getElementById('tpResultMessage').innerHTML = "";
@@ -2081,8 +2124,8 @@ function validateAS2(flag) {
             return false;
         }
     }
-    if (((as2_myOrgName == null) || (as2_myOrgName == "")) || ((as2_partOrgName == null) || (as2_partOrgName == "")) || ((as2_myPartname == null) || (as2_myPartname == "")) || ((as2_yourPartname == null) || (as2_yourPartname == "")) || ((as2_myEndPoint == null) || (as2_myEndPoint == "")) || ((as2_partendpoint == null) || (as2_partendpoint == ""))) {
-        document.getElementById('protocolmsgAs2').innerHTML = "<font color=red>Please enter all mandetory fields</font>";
+    if (((as2_myOrgName == null) || (as2_myOrgName == "")) || ((as2_partOrgName == null) || (as2_partOrgName == "")) || ((as2_myPartname == null) || (as2_myPartname == "")) || ((as2_yourPartname == null) || (as2_yourPartname == "")) || ((as2_myEndPoint == null) || (as2_myEndPoint == "")) || ((as2_partendpoint == null) || (as2_partendpoint == "") || (as2_strMsg == "-1")) || ((as2_waitForSync == "-1") || (as2_payloadSendMode == "-1"))) {  
+        document.getElementById('protocolmsgAs2').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
     if (as2_ssl_req == true) {
@@ -2135,7 +2178,7 @@ function resetPartnerValues() {
     document.getElementById("addaddress1").value = "";
     document.getElementById("addcity").value = "";
     document.getElementById("addstate").value = "";
-    document.getElementById("addcountry").value = "US";
+    document.getElementById("addcountry").value = "-1";
     document.getElementById("addzipCode").value = "";
     document.getElementById("correctImg").style.display = "none";
     document.getElementById("wrongImg").style.display = "none";
@@ -2152,7 +2195,7 @@ function resetAddPartnerValues(flag) {
     document.getElementById("addaddress1").value = "";
     document.getElementById("addcity").value = "";
     document.getElementById("addstate").value = "";
-    document.getElementById("addcountry").value = "US";
+    document.getElementById("addcountry").value = "-1";
     document.getElementById("addzipCode").value = "";
     document.getElementById("url").value = "";
     if (flag == 'admin') {
@@ -2171,7 +2214,7 @@ function resetRegisterUser() {
     document.getElementById("regstate").value = "";
     document.getElementById("regzipCode").value = "";
     document.getElementById("regcontactEmail").value = "";
-    document.getElementById("regcountry").value = "US";
+    document.getElementById("regcountry").value = "-1";
     document.getElementById("regphoneNo").value = "";
 }
 
@@ -2246,6 +2289,7 @@ function usrCreationValidation() {
     var regaddress = document.getElementById("regaddress").value;
     var regcity = document.getElementById("regcity").value;
     var regstate = document.getElementById("regstate").value;
+    var regcountry = document.getElementById("regcountry").value;
     var regphoneNo = document.getElementById("regphoneNo").value;
     var regzipCode = document.getElementById("regzipCode").value;
 
@@ -2267,8 +2311,11 @@ function usrCreationValidation() {
     } else if (regstate == "") {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter state.</font>";
         return false;
-    } else if (regphoneNo == "") {
-        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter phone number.</font>";
+    } else if (regstate == "") {
+        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter state.</font>";
+        return false;
+    } else if (regcountry == "-1") {
+        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please select country.</font>";
         return false;
     } else if (regzipCode == "") {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter zip code.</font>";
@@ -2285,6 +2332,7 @@ function partnerUserAddValidation() {
     var address1 = document.getElementById("address1").value;
     var city = document.getElementById("city").value;
     var state = document.getElementById("state").value;
+    var country = document.getElementById("country").value;
     var zipCode = document.getElementById("zipCode").value;
     //contactName contactLastName contactEmail regpassword phoneNo address1 city state country zipCode
     if (contactName == "") {
@@ -2308,6 +2356,9 @@ function partnerUserAddValidation() {
     } else if (state == "") {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter state.</font>";
         return false;
+    } else if (country == "-1") {
+        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please select country.</font>";
+        return false;
     } else if (zipCode == "") {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter ZIP code.</font>";
         return false;
@@ -2323,7 +2374,7 @@ function resetPartnerUserAdd() {
     document.getElementById("address1").value = "";
     document.getElementById("city").value = "";
     document.getElementById("state").value = "";
-    document.getElementById("country").value = "US";
+    document.getElementById("country").value = "-1";
     document.getElementById("zipCode").value = "";
 }
 

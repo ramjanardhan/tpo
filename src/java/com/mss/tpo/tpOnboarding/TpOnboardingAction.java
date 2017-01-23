@@ -172,7 +172,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                System.out.println("roleId::" + roleId);
                 setRoleId(roleId);
                 if (roleId == 1) {
                     setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
@@ -388,7 +387,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 String Email = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_EMAIL).toString();
                 setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
-                System.out.println("in action class user name is " + loginId);
                 String FTPKeys[] = new String[]{"Ftp Method", "Connection Method", "Receiving Protocol", "Response TimeOut", "Host", "Port ", "User ID ", "Password ", "Directory "};
                 String AS2Keys[] = new String[]{"Upload Your System Certificate", "My Organization ", "Your Organization ", "My Partner Profle Name  ", "Your Partner Profle Name ", "My End Point ", "Your End Point", "AS2 Messages", "Synchronous MDN Process"};
                 String SFTPKeys[] = new String[]{"Connection Type", "Authentication Type", " SSH Public Key", "Remote Host IP Address ", "Remote Port ", "Remote UserId ", "Remote Password ", "Directory ", "Type"};

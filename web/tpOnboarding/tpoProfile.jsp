@@ -379,20 +379,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
-                                        <s:select list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="51" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="51" cssClass="form-control"/>
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
-                                        <s:select list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="52"  cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="52"  cssClass="form-control"/>
                                     </div></div>
-
-
-
                                 <div class="col-sm-3">
                                     <div class="form-group"> 
                                         <label>Payload&nbsp;Send&nbsp;Mode</label>
-                                        <s:select list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="52" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="52" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">

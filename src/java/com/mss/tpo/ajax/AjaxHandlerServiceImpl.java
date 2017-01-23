@@ -302,7 +302,6 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(20, direction);
             preparedStatement.setInt(21, partnerId);
             count = count + preparedStatement.executeUpdate();
-            System.out.println("count.....>" + count);
             if (count > 0) {
                 responseString = "<font color='green'>Envelope updated sucessfully</font>";
             } else {

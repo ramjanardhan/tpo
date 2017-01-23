@@ -96,10 +96,13 @@ function addPartner(flag) {
     } else if (addcity.length == 0 || addcity == "" || addcity == null) {
         document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please enter city.</font>";
         return false;
+    } else if (addcountry.length == 0 || addcountry == "-1" || addcountry == null) {
+        document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please select country.</font>";
+        return false;
     } else if (addstate.length == 0 || addstate == "" || addstate == null) {
         document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please enter state.</font>";
         return false;
-    } else if (addzipCode.length == 0 || addzipCode == "" || addzipCode == null) {
+    }else if (addzipCode.length == 0 || addzipCode == "" || addzipCode == null) {
         document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please enter zipcode.</font>";
         return false;
     }
@@ -158,10 +161,10 @@ function envelopeUpdating() {
     } else if (stSenderId.length == 0 || stSenderId == "" || stSenderId == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter senderId ST.</font>";
         return false;
-    } else if (isaReceiverId.length == 0 || isaReceiverId == "" || isaReceiverId == null) {
+    } else if (isaReceiverId.length == 0 || isaReceiverId == "-1" || isaReceiverId == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter RecieverId ISA.</font>";
         return false;
-    } else if (gsReceiverId.length == 0 || gsReceiverId == "" || gsReceiverId == null) {
+    } else if (gsReceiverId.length == 0 || gsReceiverId == "-1" || gsReceiverId == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please enter RecieverId GS.</font>";
         return false;
     } else if (stReceiverId.length == 0 || stReceiverId == "" || stReceiverId == null) {
@@ -187,8 +190,8 @@ function envelopeUpdating() {
     if (isaSenderId != null || isaSenderId != "") {
         if (gsSenderId != null && gsSenderId != "") {
             if (stSenderId != null && stSenderId != "") {
-                if (isaReceiverId != null && isaReceiverId != "") {
-                    if (gsReceiverId != null && gsReceiverId != "") {
+                if (isaReceiverId != null && isaReceiverId != "-1") {
+                    if (gsReceiverId != null && gsReceiverId != "-1") {
                         if (stReceiverId != null && stReceiverId != "") {
                             if (isaVersion != null && isaVersion != "") {
                                 if (gsVersion != null && gsVersion != "") {

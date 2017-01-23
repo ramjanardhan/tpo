@@ -103,7 +103,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="stSenderId" id="stSenderId" value="%{tpOnboardingBean.stSenderId}" tabindex="69" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="stSenderId" id="stSenderId" value="%{tpOnboardingBean.stSenderId}" tabindex="69" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -111,23 +111,23 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                       <div class="threshold" style="position: relative;top:7px">
-                                        <input type="text" value="ReceiverID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                        <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select list="{'12345','123456'}" name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="70" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select list="{'12345','123456'}" name="gsReceiverId" id="gsReceiverId" value="%{tpOnboardingBean.gsReceiverId}" tabindex="71" cssClass="form-control" onclick="receiverCopy();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gsReceiverId" id="gsReceiverId" value="%{tpOnboardingBean.gsReceiverId}" tabindex="71" cssClass="form-control" onclick="receiverCopy();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="stReceiverId" id="stReceiverId" value="%{tpOnboardingBean.stReceiverId}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="stReceiverId" id="stReceiverId" value="%{tpOnboardingBean.stReceiverId}" tabindex="72" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="stVersion" id="stVersion" value="%{tpOnboardingBean.stVersion}" tabindex="75" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="stVersion" id="stVersion" value="%{tpOnboardingBean.stVersion}" tabindex="75" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
