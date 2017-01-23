@@ -32,8 +32,8 @@
             .gutter_hide{
                 padding:0;
             }
-            
-          
+
+
         </style>
     </head>
     <s:if test="%{formAction == 'doAddProfile'}">
@@ -193,7 +193,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>SSH&nbsp;Public&nbsp;key </label>
-                                   
+
                                     <div id="download" >
                                         <%-- <s:textfield cssClass="button" name="sftp_public_key" id="sftp_public_key" tabindex="24" value="Download"/>--%>
                                         <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
@@ -314,7 +314,7 @@
                         <div id="as2Div" style="display: none;clear:both">
                             <div id="protocolmsgAs2"></div>
                             <h3 style="color: #2d8fc8">AS2 Server&nbsp;Details  : </h3>
-                            <div class="col-sm-12 labl_colunm">
+                            <div class="col-sm-12 form-group">
                                 <div class="col-sm-3">
                                     <label class="head_label">System&nbsp;Certificates :</label>
                                 </div>
@@ -323,13 +323,13 @@
                                 <%-- <s:file name="as2_part_cert" id= "as2_part_cert" label="as2_part_cert" tabindex="44"/>--%>
 
                             </div>
-                            <div class="col-sm-12 labl_colunm">    
+                            <div class="col-sm-12">    
                                 <div class="col-sm-3">
 
                                     <label class="head_label">Organization&nbsp;Profiles:</label>
 
                                 </div>
-                                <div class="col-sm-6 gutter_hide">
+                                <div class="col-sm-6 gutter_hide form-group">
                                     <div class="col-sm-6 ">
                                         <label>Your&nbsp;Organization </label>
                                         <s:textfield cssClass="form-control" name="as2_partOrgName" id="as2_partOrgName" tabindex="46" value="%{as2_partOrgName}" onkeyup="as2PartnerProfileNames(this);"/>
@@ -344,13 +344,13 @@
 
                             </div>
 
-                            <div class="col-sm-12 labl_colunm">  
+                            <div class="col-sm-12">  
                                 <div class="col-sm-3">
 
                                     <label class="head_label">Partner&nbsp;Profiles:</label>
 
                                 </div>
-                                <div class="col-sm-6 gutter_hide">
+                                <div class="col-sm-6 gutter_hide form-group">
                                     <div class="col-sm-6"> 
                                         <label>My&nbsp;Partner&nbsp;Profile&nbsp;Name</label>
                                         <s:textfield cssClass="form-control" name="as2_myPartname" id="as2_myPartname" tabindex="47" value="%{as2_myPartname}"/>
@@ -364,8 +364,8 @@
 
                             </div>
                             <hr>
-                            <div class="col-sm-12 labl_colunm">               
-                                <div class="col-sm-3">
+                            <div class="col-sm-12">               
+                                <div class="col-sm-3 col-sm-offset-3">
                                     <div class="form-group">
                                         <label>AS2&nbsp;End&nbsp;Point </label>
                                         <label>My&nbsp;End&nbsp;Point </label>
@@ -376,31 +376,38 @@
                                         <label>Your&nbsp;End&nbsp;Point </label>
                                         <s:textfield cssClass="form-control" name="as2_partendpoint" id="as2_partendpoint" tabindex="50" value="%{as2_partendpoint}"/>
                                     </div></div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="51" cssClass="form-control"/>
-                                    </div></div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="52"  cssClass="form-control"/>
-                                    </div></div>
-                                <div class="col-sm-3">
-                                    <div class="form-group"> 
-                                        <label>Payload&nbsp;Send&nbsp;Mode</label>
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="52" cssClass="form-control"/>
-                                    </div>
+                            </div> 
+                                    
+                                    
+                             <div class="col-sm-12">        
+                            <div class="col-sm-3 col-sm-offset-3">
+                                <div class="form-group">
+                                    <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="51" cssClass="form-control"/>
+                                </div></div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="52"  cssClass="form-control"/>
+                                </div></div>
+                             </div>
+                           <div class="col-sm-12">      
+                            <div class="col-sm-3 col-sm-offset-3">
+                                <div class="form-group"> 
+                                    <label>Payload&nbsp;Send&nbsp;Mode</label>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="52" cssClass="form-control"/>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="" style="margin-top:30px">
-                                        <label for="as2_ssl_req">
-                                            SSL&nbsp;Required
-                                        </label>
-                                        <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="21" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
-                                    </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="" style="margin-top:30px">
+                                    <label for="as2_ssl_req">
+                                        SSL&nbsp;Required
+                                    </label>
+                                    <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="21" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
                                 </div>
-                            </div>    
+                            </div>
+                           </div>
+                                
                         </div>
                     </div></div>
                 <div id="site_content" class="jumbotron">
