@@ -9,7 +9,9 @@ import org.apache.struts2.StrutsStatics;
 
 public class LoginInterceptor extends AbstractInterceptor implements StrutsStatics {
 
-    /** Creates a new instance of LoginInterceptor */
+    /**
+     * Creates a new instance of LoginInterceptor
+     */
     public LoginInterceptor() {
     }
 

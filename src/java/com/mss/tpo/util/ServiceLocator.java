@@ -12,7 +12,9 @@ import com.mss.tpo.tpOnboarding.TpOnboardingServiceImpl;
 
 public class ServiceLocator {
 
-    /** Creates a new instance of ServiceLocator */
+    /**
+     * Creates a new instance of ServiceLocator
+     */
     private ServiceLocator() {
     }
 

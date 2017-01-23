@@ -136,11 +136,19 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String ssl_cipher_stergth2;
     private String certGroups;
     private List<TpOnboardingBean> tpoSearchProfileList;
-    /** The upload is used for storing the upload of the tblCrmAttachments. */
+    /**
+     * The upload is used for storing the upload of the tblCrmAttachments.
+     */
     private File upload;
-    /** The uploadContentType is used for storing the uploadcontenttype of the tblCrmAttachments. */
+    /**
+     * The uploadContentType is used for storing the uploadcontenttype of the
+     * tblCrmAttachments.
+     */
     private String uploadContentType;
-    /** The uploadFileName is used for storing the uploadfilename of the tblCrmAttachments. */
+    /**
+     * The uploadFileName is used for storing the uploadfilename of the
+     * tblCrmAttachments.
+     */
     private String uploadFileName;
     private File upload1;
     private String upload1ContentType;
@@ -326,7 +334,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 if (roleId == 1) {
                     setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
-                }else if(roleId == 2){
+                } else if (roleId == 2) {
                 }
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchPartnersList);
                 tpoSearchPartnersList = ServiceLocator.getTpOnboardingService().tpoSearchPartners(loginId, roleId, "searchFlag", this);
@@ -590,14 +598,14 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         }
         return resultType;
     }
-    
+
     public String getDeleteEnvelope() {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String resultMessage = ServiceLocator.getTpOnboardingService().getDeleteEnvelope(getRegpartnerId(), getTransaction(), getDirection());
-                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
+                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -723,8 +731,8 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         } catch (IOException ex) {
             ex.printStackTrace();
         }/*catch (ServiceLocatorException ex) {
-        ex.printStackTrace();
-        }*/ finally {
+         ex.printStackTrace();
+         }*/ finally {
             try {
                 inputStream.close();
                 outputStream.close();

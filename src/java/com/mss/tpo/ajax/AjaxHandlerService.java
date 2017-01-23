@@ -10,7 +10,9 @@ import com.mss.tpo.util.ServiceLocatorException;
 
 public interface AjaxHandlerService {
 
-    /** Creates a new instance of AjaxHandlerService */
+    /**
+     * Creates a new instance of AjaxHandlerService
+     */
     public String forgotPassword(String userid, String regEmail) throws ServiceLocatorException;
 
     public String isExistedPartnerName(String partnerName) throws ServiceLocatorException;

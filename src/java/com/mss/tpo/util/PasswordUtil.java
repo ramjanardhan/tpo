@@ -5,7 +5,9 @@ package com.mss.tpo.util;
 
 public class PasswordUtil {
 
-    /** Creates a new instance of EncriptDecriptPwd */
+    /**
+     * Creates a new instance of EncriptDecriptPwd
+     */
     public PasswordUtil() {
     }
 

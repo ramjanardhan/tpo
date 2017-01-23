@@ -266,7 +266,7 @@ public class DataSourceDataProvider {
                 userRoleId = 5;
             }
             queryString = "SELECT LOGINID,(NAME || ' ' || LNAME) AS NAME FROM TPO_USER WHERE CREATED_BY = '" + loginId + "' AND ROLE_ID = " + userRoleId;
-            System.out.println("queryString-->"+queryString);
+            System.out.println("queryString-->" + queryString);
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -294,7 +294,7 @@ public class DataSourceDataProvider {
         }
         return adminUsersMap;
     }
-    
+
     public Map getMyPartnersList(String loginId, int roleId) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -303,10 +303,10 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         Map partnersMap = new TreeMap();
         try {
-            if(roleId == 1){
+            if (roleId == 1) {
                 queryString = "SELECT ID,NAME FROM TPO_PARTNERS ";
-            }else{
-                queryString = "SELECT ID,NAME FROM TPO_PARTNERS Where CREATED_BY='"+loginId+"' OR ASSIGNED_TO = '"+loginId+"'";
+            } else {
+                queryString = "SELECT ID,NAME FROM TPO_PARTNERS Where CREATED_BY='" + loginId + "' OR ASSIGNED_TO = '" + loginId + "'";
             }
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
@@ -335,7 +335,7 @@ public class DataSourceDataProvider {
         }
         return partnersMap;
     }
-    
+
     public String getCertificatePath(String filePath) {
         String CertificatePath = "";
         InputStream inputStream = null;

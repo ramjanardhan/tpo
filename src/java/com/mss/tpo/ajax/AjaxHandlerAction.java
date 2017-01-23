@@ -56,7 +56,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
 
     public String forgotPassword() throws Exception {
         try {
-            String response = ServiceLocator.getAjaxHandlerService().forgotPassword(getUserid(),getEmail());
+            String response = ServiceLocator.getAjaxHandlerService().forgotPassword(getUserid(), getEmail());
             httpServletResponse.setContentType("text/html");
             if (response.equals("success")) {
                 responseString = "Password has been sent to your mail Id";
@@ -72,48 +72,48 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     }
 
     public String isExistedPartnerName() {
-      //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                responseString = ServiceLocator.getAjaxHandlerService().isExistedPartnerName(getName());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-       // }
+        //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+        try {
+            responseString = ServiceLocator.getAjaxHandlerService().isExistedPartnerName(getName());
+            httpServletResponse.setContentType("text/xml");
+            httpServletResponse.getWriter().write(responseString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        // }
         return null;
     }
 
     public String isExistedUserEmail() {
-      //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                responseString = ServiceLocator.getAjaxHandlerService().isExistedUserEmail(getEmail());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-       // }
+        //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+        try {
+            responseString = ServiceLocator.getAjaxHandlerService().isExistedUserEmail(getEmail());
+            httpServletResponse.setContentType("text/xml");
+            httpServletResponse.getWriter().write(responseString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        // }
         return null;
     }
 
     public String doAddTpoPartnerSelf() {
-            try {
-                    setRoleId(0);
-                    responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(),"self",this);
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        try {
+            setRoleId(0);
+            responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(), "self", this);
+            httpServletResponse.setContentType("text/xml");
+            httpServletResponse.getWriter().write(responseString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return null;
     }
-    
+
     public String doAddTpoPartner() {
         String loginId = (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
         if (loginId != null) {
             try {
-                    responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(),loginId,this);
+                responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(), loginId, this);
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -163,13 +163,12 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
         }
         return null;
     }
-    
-     public String acceptPartner() {
+
+    public String acceptPartner() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                String loginId=httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                System.out.println("into ajax action "+loginId);
-                responseString = ServiceLocator.getAjaxHandlerService().doAcceptPartner(loginId,getAssignTo(), getId());
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().doAcceptPartner(loginId, getAssignTo(), getId());
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -178,12 +177,12 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
         }
         return null;
     }
-     public String rejectPartner() {
+
+    public String rejectPartner() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                String loginId=httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                System.out.println("into ajax action "+loginId);
-                responseString = ServiceLocator.getAjaxHandlerService().doRejectPartner(loginId,getId());
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().doRejectPartner(loginId, getId());
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
@@ -212,6 +211,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     /**
      *
      * This method is used to set the Servlet Request
+     *
      * @param httpServletRequest
      */
     public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -221,6 +221,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     /**
      *
      * This method is used to set the Servlet Response
+     *
      * @param httpServletResponse
      */
     public void setServletResponse(HttpServletResponse httpServletResponse) {
@@ -422,5 +423,5 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public void setFlag(String flag) {
         this.flag = flag;
     }
-    
+
 }

@@ -149,10 +149,9 @@ public class DateUtility {
 
     /**
      * @param viewDate
-     * @return 
-     * 
-     * INPUT : MM/dd/yyyy HH:MM
-     * OUTPUT : yyy-MM-dd HH:MM:ss.o
+     * @return
+     *
+     * INPUT : MM/dd/yyyy HH:MM OUTPUT : yyy-MM-dd HH:MM:ss.o
      */
     public String DateViewToDBCompare(String viewDate) {
         // String input = "MM/dd/yyyy HH:mm";
@@ -169,8 +168,8 @@ public class DateUtility {
     }
 
     /**
-     *  PM / AM Date Conversion
-     * 
+     * PM / AM Date Conversion
+     *
      */
     public String DateTo12HourceFormat(String datein24) {
         String dateString = "datein24";
@@ -198,7 +197,7 @@ public class DateUtility {
     }
 
     /**
-     * 
+     *
      * to get the current data and time
      */
     public String fromDate() {
@@ -216,10 +215,9 @@ public class DateUtility {
 
     /**
      * @param viewDate
-     * @return 
-     * 
-     * INPUT : MM/dd/yyyy HH:MM
-     * OUTPUT : month or date
+     * @return
+     *
+     * INPUT : MM/dd/yyyy HH:MM OUTPUT : month or date
      */
     public int monthYear(String viewDate, String dateormonth) {
         // String input = "MM/dd/yyyy HH:mm";

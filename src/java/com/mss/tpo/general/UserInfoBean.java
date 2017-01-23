@@ -127,7 +127,6 @@ public class UserInfoBean {
         this.roleId = roleId;
     }
 
-    
     public int getPartnerId() {
         return partnerId;
     }
@@ -143,5 +142,5 @@ public class UserInfoBean {
     public void setActive(String active) {
         this.active = active;
     }
-    
+
 }

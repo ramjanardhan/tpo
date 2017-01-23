@@ -18,30 +18,30 @@
             function doOnLoad() {
                 $("#services").addClass("active");
             }
-            function checkUserPwd(){
-                var uservalue=document.getElementById("contactName").value;
-                var password=document.getElementById("regpassword").value;
-                if(uservalue=="-1")
+            function checkUserPwd() {
+                var uservalue = document.getElementById("contactName").value;
+                var password = document.getElementById("regpassword").value;
+                if (uservalue == "-1")
                 {
-                    document.getElementById("tpoResultMessage").innerHTML="<font color=red> Please select a user from the list </font>";
-                    return false;    
+                    document.getElementById("tpoResultMessage").innerHTML = "<font color=red> Please select a user from the list </font>";
+                    return false;
                 }
-                if(password=="")
+                if (password == "")
                 {
-                    document.getElementById("tpoResultMessage").innerHTML="<font color=red> Please enter password </font>";
-                    return false;  
+                    document.getElementById("tpoResultMessage").innerHTML = "<font color=red> Please enter password </font>";
+                    return false;
                 }
-                    
+
             }
-        function showPwdBox()
-        {
-            document.getElementById("pwdBox").style.display ='block';
-            var uservalue=document.getElementById("contactName").value;
-            if(uservalue=="-1")
+            function showPwdBox()
             {
-                document.getElementById("pwdBox").style.display ='none'; 
+                document.getElementById("pwdBox").style.display = 'block';
+                var uservalue = document.getElementById("contactName").value;
+                if (uservalue == "-1")
+                {
+                    document.getElementById("pwdBox").style.display = 'none';
+                }
             }
-        }
         </script>
     </head>
     <body class="home" onload="doOnLoad()">

@@ -16,9 +16,17 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
 
         <script>
-            function doOnLoad() 
+            function doOnLoad()
             {
                 $("#envelopes").addClass("active");
+                document.getElementById("ib850").checked = false;
+                document.getElementById("ib855").checked = false;
+                document.getElementById("ib856").checked = false;
+                document.getElementById("ib810").checked = false;
+                document.getElementById("ob850").checked = false;
+                document.getElementById("ob855").checked = false;
+                document.getElementById("ob856").checked = false;
+                document.getElementById("ob810").checked = false;
             }
         </script>
 
@@ -78,7 +86,7 @@
                                 <div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Inbound&nbsp;Trans</label>
+                                            <label>Inbound</label>
                                             <div class="lableLeft">
                                                 <s:checkbox name="ib850" id="ib850" fieldValue="true" label="850" tabindex="59" />850&nbsp;
                                                 <s:checkbox name="ib855" id="ib855" fieldValue="true" label="855" tabindex="60" />855&nbsp; 
@@ -89,7 +97,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Outbound&nbsp;Trans</label>
+                                            <label>Outbound</label>
                                             <div class="lableLeft">
                                                 <s:checkbox name="ob850" id ="ob850" fieldValue="true" label="850" tabindex="63" />850&nbsp;
                                                 <s:checkbox name="ob855" id="ob855" fieldValue="true" label="855" tabindex="64" />855&nbsp;
@@ -145,7 +153,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="69" onchange="fieldLengthValidator850IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="69" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +183,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="72"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +207,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850VersionIB" id="st850VersionIB" value="%{st850VersionIB}" tabindex="75" onchange="fieldLengthValidator850IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st850VersionIB" id="st850VersionIB" value="%{st850VersionIB}" tabindex="75" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -316,13 +324,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs855senderIdIB" id="gs855senderIdIB" value="%{gs855senderIdIB}" tabindex="68" onchange="fieldLengthValidator855IB(this);"  onkeyup="IBsender855();" />
+                                        <s:textfield cssClass="form-control" name="gs855senderIdIB" id="gs855senderIdIB" value="%{gs855senderIdIB}" tabindex="68" onchange="fieldLengthValidator855IB(this);" onkeyup="IBsender855();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st855senderIdIB" id="st855senderIdIB" value="%{st855senderIdIB}" tabindex="69" onchange="fieldLengthValidator855IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st855senderIdIB" id="st855senderIdIB" value="%{st855senderIdIB}" tabindex="69" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +354,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855RecIdIB" id="st855RecIdIB" value="%{st855RecIdIB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st855RecIdIB" id="st855RecIdIB" value="%{st855RecIdIB}" tabindex="72"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +378,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855VersionIB" id="st855VersionIB" value="%{st855VersionIB}" tabindex="75" onchange="fieldLengthValidator855IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st855VersionIB" id="st855VersionIB" value="%{st855VersionIB}" tabindex="75" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -489,13 +497,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs856senderIdIB" id="gs856senderIdIB" value="%{gs856senderIdIB}" tabindex="68" onchange="fieldLengthValidator856IB(this);"  onkeyup="IBsender856();" />
+                                        <s:textfield cssClass="form-control" name="gs856senderIdIB" id="gs856senderIdIB" value="%{gs856senderIdIB}" tabindex="68" onchange="fieldLengthValidator856IB(this);" onkeyup="IBsender856();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st856senderIdIB" id="st856senderIdIB" value="%{st856senderIdIB}" tabindex="69" onchange="fieldLengthValidator856IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st856senderIdIB" id="st856senderIdIB" value="%{st856senderIdIB}" tabindex="69" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -519,7 +527,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856RecIdIB" id="st856RecIdIB" value="%{st856RecIdIB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st856RecIdIB" id="st856RecIdIB" value="%{st856RecIdIB}" tabindex="72"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -543,7 +551,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856VersionIB" id="st856VersionIB" value="%{st856VersionIB}" tabindex="75" onchange="fieldLengthValidator856IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st856VersionIB" id="st856VersionIB" value="%{st856VersionIB}" tabindex="75" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -661,13 +669,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs810senderIdIB" id="gs810senderIdIB" value="%{gs810senderIdIB}" tabindex="68" onchange="fieldLengthValidator810IB(this);"  onkeyup="IBsender810();" />
+                                        <s:textfield cssClass="form-control" name="gs810senderIdIB" id="gs810senderIdIB" value="%{gs810senderIdIB}" tabindex="68" onchange="fieldLengthValidator810IB(this);" onkeyup="IBsender810();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st810senderIdIB" id="st810senderIdIB" value="%{st810senderIdIB}" tabindex="69" onchange="fieldLengthValidator810IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st810senderIdIB" id="st810senderIdIB" value="%{st810senderIdIB}" tabindex="69" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -692,7 +700,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810RecIdIB" id="st810RecIdIB" value="%{st810RecIdIB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st810RecIdIB" id="st810RecIdIB" value="%{st810RecIdIB}" tabindex="72"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -716,7 +724,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810VersionIB" id="st810VersionIB" value="%{st810VersionIB}" tabindex="75" onchange="fieldLengthValidator810IB(this);" />
+                                        <s:textfield cssClass="form-control" name="st810VersionIB" id="st810VersionIB" value="%{st810VersionIB}" tabindex="75" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -841,7 +849,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st850senderIdOB" id="st850senderIdOB" value="%{st850senderIdOB}" tabindex="69" onchange="fieldLengthValidator850OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st850senderIdOB" id="st850senderIdOB" value="%{st850senderIdOB}" tabindex="69" onchange="fieldLengthValidator850OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -864,7 +872,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850RecIdOB" id="st850RecIdOB" value="%{st850RecIdOB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st850RecIdOB" id="st850RecIdOB" value="%{st850RecIdOB}" tabindex="72" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -888,7 +896,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850VersionOB" id="st850VersionOB" value="%{st850VersionOB}" tabindex="75" onchange="fieldLengthValidator850OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st850VersionOB" id="st850VersionOB" value="%{st850VersionOB}" tabindex="75" onchange="fieldLengthValidator850OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1012,7 +1020,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st855senderIdOB" id="st855senderIdOB" value="%{st855senderIdOB}" tabindex="69" onchange="fieldLengthValidator855OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st855senderIdOB" id="st855senderIdOB" value="%{st855senderIdOB}" tabindex="69" onchange="fieldLengthValidator855OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1036,7 +1044,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855RecIdOB" id="st855RecIdOB" value="%{st855RecIdOB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st855RecIdOB" id="st855RecIdOB" value="%{st855RecIdOB}" tabindex="72" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -1060,7 +1068,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855VersionOB" id="st855VersionOB" value="%{st855VersionOB}" tabindex="75" onchange="fieldLengthValidator855OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st855VersionOB" id="st855VersionOB" value="%{st855VersionOB}" tabindex="75" onchange="fieldLengthValidator855OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1181,13 +1189,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs856senderIdOB" id="gs856senderIdOB" value="%{gs856senderIdOB}" tabindex="68" onchange="fieldLengthValidator856OB(this);"  onkeyup="OBsender856();" />
+                                        <s:textfield cssClass="form-control" name="gs856senderIdOB" id="gs856senderIdOB" value="%{gs856senderIdOB}" tabindex="68" onchange="fieldLengthValidator856OB(this);" onkeyup="OBsender856();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st856senderIdOB" id="st856senderIdOB" value="%{st856senderIdOB}" tabindex="69" onchange="fieldLengthValidator856OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st856senderIdOB" id="st856senderIdOB" value="%{st856senderIdOB}" tabindex="69" onchange="fieldLengthValidator856OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1211,7 +1219,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856RecIdOB" id="st856RecIdOB" value="%{st856RecIdOB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st856RecIdOB" id="st856RecIdOB" value="%{st856RecIdOB}" tabindex="72" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -1235,7 +1243,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856VersionOB" id="st856VersionOB" value="%{st856VersionOB}" tabindex="75" onchange="fieldLengthValidator856OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st856VersionOB" id="st856VersionOB" value="%{st856VersionOB}" tabindex="75" onchange="fieldLengthValidator856OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1359,7 +1367,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st810senderIdOB" id="st810senderIdOB" value="%{st810senderIdOB}" tabindex="69" onchange="fieldLengthValidator810OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st810senderIdOB" id="st810senderIdOB" value="%{st810senderIdOB}" tabindex="69" onchange="fieldLengthValidator810OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1383,7 +1391,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810RecIdOB" id="st810RecIdOB" value="%{st810RecIdOB}" tabindex="72"  />
+                                        <s:textfield cssClass="form-control" name="st810RecIdOB" id="st810RecIdOB" value="%{st810RecIdOB}" tabindex="72" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -1407,7 +1415,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810VersionOB" id="st810VersionOB" value="%{st810VersionOB}" tabindex="75" onchange="fieldLengthValidator810OB(this);" />
+                                        <s:textfield cssClass="form-control" name="st810VersionOB" id="st810VersionOB" value="%{st810VersionOB}" tabindex="75" onchange="fieldLengthValidator810OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1492,7 +1500,7 @@
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
                             <div class="col-sm-1 pull-right">
-                                <s:submit   value="Save" cssClass="btn btn-primary pull-right" tabindex="171" onclick="return check()"/>
+                                <s:submit   value="Save" cssClass="btn btn-primary pull-right" tabindex="171" onclick="return checkEnvelopes()"/>
                             </div>
                             <div class="col-sm-1  pull-right">
                                 <s:reset   value="Reset" cssClass="btn btn-primary pull-right" tabindex="172"/>
@@ -1520,219 +1528,218 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    $(function () {
-        /*  Inbound function start*/
-        $("#ib850").click(function () {
-            // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-            // var protocol=document.getElementById("commnProtocol").value;
-            // if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+        $(function () {
+            /*  Inbound function start*/
+            $("#ib850").click(function () {
+                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
+                // var protocol=document.getElementById("commnProtocol").value;
+                // if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
 
-            if ($(this).is(":checked")) {
-                document.getElementById('ibvalue850').value = '850';
-                document.getElementById('ibdirection').value = 'Inbound';
-                document.getElementById('trans850IdcodeIB').value = '850';
-                document.getElementById('trans850IdcodeIB').readOnly = true;
-                $("#ibenvelop850").show();
-            } else {
-                $("#ibenvelop850").hide();
-            }
-            //   }else{
-            // document.getElementById("divansferModeMsg").style.display = "block";
-            //  document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            //   }
-        });
-        $("#ib855").click(function () {
-            // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-            //  var protocol=document.getElementById("commnProtocol").value;
-            //  if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('ibvalue855').value = '855';
-                document.getElementById('ibdirection855').value = 'Inbound';
-                document.getElementById('trans855IdcodeIB').value = '855';
-                document.getElementById('trans855IdcodeIB').readOnly = true;
-                $("#ibenvelop855").show();
-            } else {
-                $("#ibenvelop855").hide();
-            }
-            //  }else{
-            //   document.getElementById("divansferModeMsg").style.display = "block";
-            //   document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            //  }
-        });
-        $("#ib856").click(function () {
-            //  var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-            //  var protocol=document.getElementById("commnProtocol").value;
-            //  if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('ibvalue856').value = '856';
-                document.getElementById('ibdirection856').value = 'Inbound';
-                document.getElementById('trans856IdcodeIB').value = '856';
-                document.getElementById('trans856IdcodeIB').readOnly = true;
-                $("#ibenvelop856").show();
-            } else {
-                $("#ibenvelop856").hide();
-            }
-            //  }else{
-            //  document.getElementById("divansferModeMsg").style.display = "block";
-            // document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            //   }
+                if ($(this).is(":checked")) {
+                    document.getElementById('ibvalue850').value = '850';
+                    document.getElementById('ibdirection').value = 'Inbound';
+                    document.getElementById('trans850IdcodeIB').value = '850';
+                    document.getElementById('trans850IdcodeIB').readOnly = true;
+                    $("#ibenvelop850").show();
+                } else {
+                    $("#ibenvelop850").hide();
+                }
+                //   }else{
+                // document.getElementById("divansferModeMsg").style.display = "block";
+                //  document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                //   }
+            });
+            $("#ib855").click(function () {
+                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
+                //  var protocol=document.getElementById("commnProtocol").value;
+                //  if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('ibvalue855').value = '855';
+                    document.getElementById('ibdirection855').value = 'Inbound';
+                    document.getElementById('trans855IdcodeIB').value = '855';
+                    document.getElementById('trans855IdcodeIB').readOnly = true;
+                    $("#ibenvelop855").show();
+                } else {
+                    $("#ibenvelop855").hide();
+                }
+                //  }else{
+                //   document.getElementById("divansferModeMsg").style.display = "block";
+                //   document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                //  }
+            });
+            $("#ib856").click(function () {
+                //  var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
+                //  var protocol=document.getElementById("commnProtocol").value;
+                //  if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('ibvalue856').value = '856';
+                    document.getElementById('ibdirection856').value = 'Inbound';
+                    document.getElementById('trans856IdcodeIB').value = '856';
+                    document.getElementById('trans856IdcodeIB').readOnly = true;
+                    $("#ibenvelop856").show();
+                } else {
+                    $("#ibenvelop856").hide();
+                }
+                //  }else{
+                //  document.getElementById("divansferModeMsg").style.display = "block";
+                // document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                //   }
 
+            });
+            $("#ib810").click(function () {
+                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
+                // var protocol=document.getElementById("commnProtocol").value;
+                // if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('ibvalue810').value = '810';
+                    document.getElementById('ibdirection810').value = 'Inbound';
+                    document.getElementById('trans810IdcodeIB').value = '810';
+                    document.getElementById('trans810IdcodeIB').readOnly = true;
+                    $("#ibenvelop810").show();
+                } else {
+                    $("#ibenvelop810").hide();
+                }
+                // }else{
+                //  document.getElementById("transferModeMsg").style.display = "block";
+                //   document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                // }
+            });
+            /*  Outbound function Start*/
+            $("#ob850").click(function () {
+                //   var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
+                //   var protocol=document.getElementById("commnProtocol").value;
+                //   if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('obvalue850').value = '850';
+                    document.getElementById('trans850IdcodeOB').value = '850';
+                    document.getElementById('trans850IdcodeOB').readOnly = true;
+                    document.getElementById('obdirection').value = 'Outbound';
+                    $("#obenvelop850").show();
+                } else {
+                    $("#obenvelop850").hide();
+                }
+                // }else{
+                //  document.getElementById("transferModeMsg").style.display = "block";
+                //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                // }
+            });
+            $("#ob855").click(function () {
+                //  var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
+                //  var protocol=document.getElementById("commnProtocol").value;
+                // if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('obvalue855').value = '855';
+                    document.getElementById('trans855IdcodeOB').value = '855';
+                    document.getElementById('trans855IdcodeOB').readOnly = true;
+                    document.getElementById('obdirection855').value = 'Outbound';
+                    $("#obenvelop855").show();
+                } else {
+                    $("#obenvelop855").hide();
+                }
+                //   }else{
+                //     document.getElementById("transferModeMsg").style.display = "block";
+                //     document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                //  }
+            });
+            $("#ob856").click(function () {
+                // var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
+                //   var protocol=document.getElementById("commnProtocol").value;
+                // if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('obvalue856').value = '856';
+                    document.getElementById('trans856IdcodeOB').value = '856';
+                    document.getElementById('trans856IdcodeOB').readOnly = true;
+                    document.getElementById('obdirection856').value = 'Outbound';
+                    $("#obenvelop856").show();
+                } else {
+                    $("#obenvelop856").hide();
+                }
+                // }else{
+                //   document.getElementById("transferModeMsg").style.display = "block";
+                //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                // }
+            });
+            $("#ob810").click(function () {
+                //    var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
+                //   var protocol=document.getElementById("commnProtocol").value;
+                //  if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
+                if ($(this).is(":checked")) {
+                    document.getElementById('obvalue810').value = '810';
+                    document.getElementById('trans810IdcodeOB').value = '810';
+                    document.getElementById('trans810IdcodeOB').readOnly = true;
+                    document.getElementById('obdirection810').value = 'Outbound';
+                    $("#obenvelop810").show();
+                } else {
+                    $("#obenvelop810").hide();
+                }
+                //  }else{
+                //   document.getElementById("transferModeMsg").style.display = "block";
+                //document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
+                //  }
+            });
+            /*  Outbound function End*/
         });
-        $("#ib810").click(function () {
-            // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-            // var protocol=document.getElementById("commnProtocol").value;
-            // if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('ibvalue810').value = '810';
-                document.getElementById('ibdirection810').value = 'Inbound';
-                document.getElementById('trans810IdcodeIB').value = '810';
-                document.getElementById('trans810IdcodeIB').readOnly = true;
-                $("#ibenvelop810").show();
-            } else {
-                $("#ibenvelop810").hide();
-            }
-            // }else{
-            //  document.getElementById("transferModeMsg").style.display = "block";
-            //   document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            // }
-        });
-        /*  Outbound function Start*/
-        $("#ob850").click(function () {
-            //   var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-            //   var protocol=document.getElementById("commnProtocol").value;
-            //   if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('obvalue850').value = '850';
-                document.getElementById('trans850IdcodeOB').value = '850';
-                document.getElementById('trans850IdcodeOB').readOnly = true;
-                document.getElementById('obdirection').value = 'Outbound';
-                $("#obenvelop850").show();
-            } else {
-                $("#obenvelop850").hide();
-            }
-            // }else{
-            //  document.getElementById("transferModeMsg").style.display = "block";
-            //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            // }
-        });
-        $("#ob855").click(function () {
-            //  var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-            //  var protocol=document.getElementById("commnProtocol").value;
-            // if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('obvalue855').value = '855';
-                document.getElementById('trans855IdcodeOB').value = '855';
-                document.getElementById('trans855IdcodeOB').readOnly = true;
-                document.getElementById('obdirection855').value = 'Outbound';
-                $("#obenvelop855").show();
-            } else {
-                $("#obenvelop855").hide();
-            }
-            //   }else{
-            //     document.getElementById("transferModeMsg").style.display = "block";
-            //     document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            //  }
-        });
-        $("#ob856").click(function () {
-            // var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-            //   var protocol=document.getElementById("commnProtocol").value;
-            // if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('obvalue856').value = '856';
-                document.getElementById('trans856IdcodeOB').value = '856';
-                document.getElementById('trans856IdcodeOB').readOnly = true;
-                document.getElementById('obdirection856').value = 'Outbound';
-                $("#obenvelop856").show();
-            } else {
-                $("#obenvelop856").hide();
-            }
-            // }else{
-            //   document.getElementById("transferModeMsg").style.display = "block";
-            //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            // }
-        });
-        $("#ob810").click(function () {
-            //    var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-            //   var protocol=document.getElementById("commnProtocol").value;
-            //  if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-            if ($(this).is(":checked")) {
-                document.getElementById('obvalue810').value = '810';
-                document.getElementById('trans810IdcodeOB').value = '810';
-                document.getElementById('trans810IdcodeOB').readOnly = true;
-                document.getElementById('obdirection810').value = 'Outbound';
-                $("#obenvelop810").show();
-            } else {
-                $("#obenvelop810").hide();
-            }
-            //  }else{
-            //   document.getElementById("transferModeMsg").style.display = "block";
-            //document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-            //  }
-        });
-        /*  Outbound function End*/
-    });
 
-    function check()
-    {
-        var ib850 = document.getElementById("ib850").checked;
-        var ib855 = document.getElementById("ib855").checked;
-        var ib856 = document.getElementById("ib856").checked;
-        var ib810 = document.getElementById("ib810").checked;
-        var ob850 = document.getElementById("ob850").checked;
-        var ob855 = document.getElementById("ob855").checked;
-        var ob856 = document.getElementById("ob856").checked;
-        var ob810 = document.getElementById("ob810").checked;
-        var x = true;
-        if (ib850 == true)
-        {
-            x = checkib850();
-            if (x == false)
-                return false;
+        function checkEnvelopes() {
+            var ib850 = document.getElementById("ib850").checked;
+            var ib855 = document.getElementById("ib855").checked;
+            var ib856 = document.getElementById("ib856").checked;
+            var ib810 = document.getElementById("ib810").checked;
+            var ob850 = document.getElementById("ob850").checked;
+            var ob855 = document.getElementById("ob855").checked;
+            var ob856 = document.getElementById("ob856").checked;
+            var ob810 = document.getElementById("ob810").checked;
+            var x = true;
+            if (ib850 == true)
+            {
+                x = checkib850();
+                if (x == false)
+                    return false;
+            }
+            if (ib855 == true)
+            {
+                x = checkib855();
+                if (x == false)
+                    return false;
+            }
+            if (ib856 == true)
+            {
+                x = checkib856();
+                if (x == false)
+                    return false;
+            }
+            if (ib810 == true)
+            {
+                x = checkib810();
+                if (x == false)
+                    return false;
+            }
+            if (ob850 == true)
+            {
+                x = checkob850();
+                if (x == false)
+                    return false;
+            }
+            if (ob855 == true)
+            {
+                x = checkob855();
+                if (x == false)
+                    return false;
+            }
+            if (ob856 == true)
+            {
+                x = checkob856();
+                if (x == false)
+                    return false;
+            }
+            if (ob810 == true)
+            {
+                x = checkob810();
+                if (x == false)
+                    return false;
+            }
+            return x;
         }
-        if (ib855 == true)
-        {
-            x = checkib855();
-            if (x == false)
-                return false;
-        }
-        if (ib856 == true)
-        {
-            x = checkib856();
-            if (x == false)
-                return false;
-        }
-        if (ib810 == true)
-        {
-            x = checkib810();
-            if (x == false)
-                return false;
-        }
-        if (ob850 == true)
-        {
-            x = checkob850();
-            if (x == false)
-                return false;
-        }
-        if (ob855 == true)
-        {
-            x = checkob855();
-            if (x == false)
-                return false;
-        }
-        if (ob856 == true)
-        {
-            x = checkob856();
-            if (x == false)
-                return false;
-        }
-        if (ob810 == true)
-        {
-            x = checkob810();
-            if (x == false)
-                return false;
-        }
-        return x;
-    }
 </script>
 </body>
 </html>

@@ -222,7 +222,7 @@ public class FileUtility {
     }
 
     /**
-     *  Load tendering ReProcess batch file
+     * Load tendering ReProcess batch file
      */
     public void loadPreprocessBatchFile() {
         String filePath = "C:\\SI5.2\\Resubmit\\L_ReSubmit.bat";

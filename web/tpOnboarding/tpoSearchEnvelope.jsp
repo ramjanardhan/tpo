@@ -19,7 +19,7 @@
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
 
         <script>
-            function doOnLoad() 
+            function doOnLoad()
             {
                 $("#envelopes").addClass("active");
             }
@@ -129,8 +129,8 @@
                                         </s:url>
                                         <%--  <s:a href='%{#myUrl}' ><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a>--%>
                                         <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></s:a>
-                                    </td>
-                                    <td align="center">
+                                        </td>
+                                        <td align="center">
                                         <s:url var="myUrl1" action="../tpOnboarding/tpoDeleteEnvelope.action">
                                             <s:param name="regpartnerId"><%=id%></s:param> 
                                             <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 

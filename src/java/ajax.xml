@@ -28,8 +28,8 @@
         
         <action name="isExistedAS2PartnerProfileName" class="com.mss.tpo.ajax.AjaxHandlerAction" method="isExistedAS2PartnerProfileName"/>
         
-         <action name="acceptPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="acceptPartner"/>
+        <action name="acceptPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="acceptPartner"/>
          
-         <action name="rejectPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="rejectPartner"/>
+        <action name="rejectPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="rejectPartner"/>
     </package>
 </struts>

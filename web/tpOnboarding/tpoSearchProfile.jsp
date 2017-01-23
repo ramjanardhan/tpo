@@ -24,16 +24,16 @@
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
 
         <script>
-            function doOnLoad() 
+            function doOnLoad()
             {
                 $("#profiles").addClass("active");
                 showTransferDiv();
             }
-            function showTransferDiv(){
+            function showTransferDiv() {
                 var protocol = document.getElementById("commnProtocol").value;
-                if((protocol=='FTP') || (protocol=='SFTP') || (protocol=='HTTP')){
+                if ((protocol == 'FTP') || (protocol == 'SFTP') || (protocol == 'HTTP')) {
                     document.getElementById("TransferDiv").style.display = "none";
-                }else{
+                } else {
                     document.getElementById("TransferDiv").style.display = "none";
                 }
             }
@@ -85,12 +85,12 @@
                                     <label>Transfer Mode :</label>
                                     <div class="col-sm-12" style="padding: 0">
                                         <s:radio name="transferMode" id="transferMode" list="{'get','put'}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Status</label>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Status</label>
                                     <s:select name="status" id="status" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE','REJECTED':'REJECTED'}" tabindex="1" value="%{status}"  cssClass="form-control"/>         
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                                                         out.println("<font color='orange'>" + tpOnboardingBean.getStatus() + "</font>");
                                                     }
                                                     //out.println(tpOnboardingBean.getStatus());
-%>
+                                                %>
                                             </td>
                                             <td>
                                                 <%
@@ -189,11 +189,11 @@
                                                     }
                                                     if ("no".equalsIgnoreCase(disableButton)) {
                                                 %>
-                                               <%--  <s:a href='%{#myUrl}' ><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a> --%>
+                                                <%--  <s:a href='%{#myUrl}' ><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a> --%>
                                                 <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></span></s:a>
                                                 <% } else {
                                                 %>  
-                                              <%--  <s:a href='' style="disable:true;"><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a>--%>
+                                                <%--  <s:a href='' style="disable:true;"><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a>--%>
                                                 <s:a href='' style="disable:true;" ><span class="glyphicon glyphicon-pencil"></span></s:a>
                                                 <%  }
                                                 %>
@@ -206,8 +206,8 @@
                                                 </s:url>
                                                 <%-- <s:a href='%{#myUrl1}' ><img src="../includes/images/delete.jpg" height="20px" width="20px"></s:a> --%>
                                                 <s:a href='%{#myUrl1}' style="color: red;"><span class="glyphicon glyphicon-trash"></span></s:a>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <%
                                             }
                                         } else {
@@ -242,16 +242,16 @@
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>  
         <script>
-            $(function () {
-                $('#profiletable').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false
-                });
+        $(function () {
+            $('#profiletable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
             });
+        });
         </script>
     </body>
 </html>

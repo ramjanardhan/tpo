@@ -10,8 +10,8 @@ import java.util.MissingResourceException;
 public class ConfigProperties {
 
     private static final String BUNDLE_NAME = "com/mss/tpo/config/config";
-    private static final ResourceBundle RESOURCE_BUNDLE =
-            ResourceBundle.getBundle(BUNDLE_NAME);
+    private static final ResourceBundle RESOURCE_BUNDLE
+            = ResourceBundle.getBundle(BUNDLE_NAME);
 
     public static String getProperty(String property) {
         try {

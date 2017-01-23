@@ -18,11 +18,11 @@ import javax.sql.DataSource;
  * resource-intensive. To eliminate these problems, this pattern provides a
  * mechanism to abstract all dependencies and network details into the Service
  * Locator.
- * 
+ *
  * <p>
  * Usage: This is a Singleton class, usage is as follows:<br>
  * Use the getInstance method to create an instance of the class.
- * 
+ *
  * <code>ServiceLocator serviceLocator = ServiceLocator.getInstance();</code>
  */
 public class DataServiceLocator {

@@ -12,7 +12,9 @@ public class CacheManager {
 
     private static Map<String, Object> cache;
 
-    /** Creates a new instance of ApplicationCacheManager */
+    /**
+     * Creates a new instance of ApplicationCacheManager
+     */
     private CacheManager() {
     }
 

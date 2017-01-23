@@ -29,7 +29,7 @@ public interface TpOnboardingService {
 
     public String getDeleteProfile(int communicationId, String commnProtocol, int PartnerId, String transferMode) throws ServiceLocatorException;
 
-     public String getDeleteEnvelope(int id, String transaction, String direction) throws ServiceLocatorException;
+    public String getDeleteEnvelope(int id, String transaction, String direction) throws ServiceLocatorException;
 
     public ArrayList<TpOnboardingBean> tpoSearchEnvelope(String loginId, int partnerId, String flag, TpOnboardingAction tpAction);
 

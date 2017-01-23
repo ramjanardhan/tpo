@@ -301,10 +301,10 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 profileSearchQuery.append(" AND STATUS='" + tpAction.getStatus() + "' ");
             }
             /*   if ((!"AS2".equals(tpAction.getCommnProtocol().trim())) || (!"SMTP".equals(tpAction.getCommnProtocol().trim()))) {
-            if (tpAction.getTransferMode() != null && !"".equals(tpAction.getTransferMode().trim())) {
-            profileSearchQuery.append(" TRANSFER_MODE='" + tpAction.getTransferMode() + "' AND");
-            }
-            } */
+             if (tpAction.getTransferMode() != null && !"".equals(tpAction.getTransferMode().trim())) {
+             profileSearchQuery.append(" TRANSFER_MODE='" + tpAction.getTransferMode() + "' AND");
+             }
+             } */
         }
         profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
         profileSearchQuery.append(" order By CREATED_TS DESC");
@@ -1077,9 +1077,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
     public String getDeleteProfile(int communicationId, String commnProtocol, int PartnerId, String transferMode) throws ServiceLocatorException {
         try {
-            System.out.println("communicationId>>"+communicationId+" commnProtocol>>"+commnProtocol+" PartnerId>>"+PartnerId+" transferMode>>"+transferMode);
+            System.out.println("communicationId>>" + communicationId + " commnProtocol>>" + commnProtocol + " PartnerId>>" + PartnerId + " transferMode>>" + transferMode);
             connection = ConnectionProvider.getInstance().getConnection();
-            callableStatement = connection.prepareCall("call SPTPOPROFILEDELETE(?,?,?,?)");
+            callableStatement = connection.prepareCall("call SP_TPO_PROFILE_DELETE(?,?,?,?)");
             callableStatement.setInt(1, communicationId);
             callableStatement.setString(2, commnProtocol);
             callableStatement.setInt(3, PartnerId);
@@ -1404,13 +1404,13 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         }
         return responseString;
     }
-    
+
     public String getDeleteEnvelope(int id, String transaction, String direction) throws ServiceLocatorException {
         int count = 0;
         String responseString = "";
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            String query = "DELETE FROM MSCVP.TPO_ENVELOPES WHERE PARTNER_ID =" + id + " AND TRANSACTION='" + transaction + "' AND DIRECTION='" + direction+"'";
+            String query = "DELETE FROM MSCVP.TPO_ENVELOPES WHERE PARTNER_ID =" + id + " AND TRANSACTION='" + transaction + "' AND DIRECTION='" + direction + "'";
             preparedStatement = connection.prepareStatement(query);
             count = preparedStatement.executeUpdate();
             if (count > 0) {

@@ -46,7 +46,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
      * Creating a String queryString used to store SQL Query
      */
     private String queryString;
-    /** Creates a new instance of AjaxHandlerServiceImpl */
+    /**
+     * Creates a new instance of AjaxHandlerServiceImpl
+     */
     private HttpServletRequest httpServletRequest;
     private Statement statement;
 
@@ -55,14 +57,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
     /**
      * This method is used to get the Consultant Details
+     *
      * @param consultantMail
      * @return String
      * @throws com.mss.mirage.util.ServiceLocatorException
      */
-    @Override
     public String forgotPassword(String userid, String regEmail) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
         String str = null;
-        PasswordUtil passwordUtil = new PasswordUtil();
         String sqlQuery = "SELECT EMAIL FROM TPO_USER WHERE LOGINID=? AND EMAIL = ?";
         try {
             String email = null;
@@ -93,7 +96,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     str = "<font size='2' color='red'>please try again later.</font>";
                 }
             } else {
-                str = "<font size='2' color='red'>given email id is not matched with registered email id</font>";
+                str = "<font size='2' color='red'>Given mail id is not matched with registered mail id</font>";
             }
 
         } catch (Exception ex) {
@@ -116,21 +119,21 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
                 throw new ServiceLocatorException(sqle);
             }
-        }// closing finally block
+        }
         return str;
     }
 
     public String isExistedPartnerName(String partnerName) throws ServiceLocatorException {
         Connection connection = null;
-        PreparedStatement statement = null;
+        PreparedStatement PreparedStatement = null;
         ResultSet resultSet = null;
         String responseString = "";
         try {
             queryString = "SELECT NAME FROM TPO_PARTNERS where REPLACE(UPPER(NAME),' ','')=REPLACE(UPPER('" + partnerName + "'),' ','') ";
             // queryString = "SELECT PARTNER_NAME FROM TPO_USER where PARTNER_NAME='"+ partnerName +"'";
             connection = ConnectionProvider.getInstance().getConnection();
-            statement = connection.prepareStatement(queryString);
-            resultSet = statement.executeQuery();
+            PreparedStatement = connection.prepareStatement(queryString);
+            resultSet = PreparedStatement.executeQuery();
             if (resultSet.next()) {
                 responseString = "No";
             } else {
@@ -200,9 +203,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
     public String doAddTpoPartner(int roleId, String createdBy, AjaxHandlerAction ajaxHandlerAction) throws ServiceLocatorException {
         Connection connection = null;
-        Statement statement = null;
         CallableStatement callableStatement = null;
-        ResultSet resultSet = null;
         int insertedRows = 0;
         String responseString = "";
         PasswordUtil passwordUtil = new PasswordUtil();
@@ -525,7 +526,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 resultSet = statement.executeQuery();
                 resultSet.next();
                 responseString = "<font size='2' color='green'>Partner accepted successfully</font>";
-                MailManager.tpoAcceptOrRejectPartner("acceptPartner",resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
+                MailManager.tpoAcceptOrRejectPartner("acceptPartner", resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
             } else {
                 responseString = "<font size='2' color='red'>Partner accept failed</font>";
             }
@@ -575,7 +576,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 resultSet = statement.executeQuery();
                 resultSet.next();
                 responseString = "<font size='2' color='green'>Partner rejected successfully</font>";
-                MailManager.tpoAcceptOrRejectPartner("rejectPartner",resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
+                MailManager.tpoAcceptOrRejectPartner("rejectPartner", resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
             } else {
                 responseString = "<font size='2' color='red'>Partner reject failed</font>";
             }
@@ -604,6 +605,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
     /**
      * This method is used to get the Consultant Resumes
+     *
      * @param consultantId
      * @return String
      * @throws com.mss.mirage.util.ServiceLocatorException

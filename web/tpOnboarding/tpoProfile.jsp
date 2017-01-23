@@ -74,14 +74,14 @@
                                 %>
                                 <div id="protocolmsg"></div>
                                 <s:hidden name="partnerName" id="partnerName" value="%{#session.tpoPartnerName}" ></s:hidden>
-                            </center>
+                                </center>
                             <s:if test="%{formAction == 'doUpdateProfile'}">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-1 pull-right"> 
                                             <s:url var="myUrl" action="../tpOnboarding/tpoManageProfiles.action"></s:url>
                                             <s:a href='%{#myUrl}'><input type="button" style="color: #61eaf1;" value="<< Back to list" class="btn btn-primary"/></s:a> 
-                                                <%--  <s:a href='%{#myUrl}' ><span class="glyphicon glyphicon-arrow-left"></span></s:a> --%>
+                                            <%--  <s:a href='%{#myUrl}' ><span class="glyphicon glyphicon-arrow-left"></span></s:a> --%>
                                         </div>
                                     </div>
                                 </div>
@@ -94,22 +94,22 @@
                                     <h4 style="color: #2d8fc8">Communication Protocols</h4>
                                     <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="10" cssClass="form-control" onchange="protocolsSelect(this.value)"/>
                                     <s:hidden name="protocolValue" id="protocolValue"></s:hidden>
-                                </div></div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div id="transferModeDiv"  style="display: none">
-                            <div class="pull-left">   <label>Transfer&nbsp;Mode&nbsp;:</label></div> 
-                            <div class="pull-left">
-                                <input type="text" id="tempTransferMode" style="display:none"/>
-                                <s:radio name="transferMode" id="transferMode" list="{'get','put'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="11"></s:radio>&nbsp;&nbsp;
-                                <div class="tooltip"><i class="fa fa-question-circle-o"></i>
-                                    <span class="tooltiptext">get&nbsp;:&nbsp;Partner&nbsp;Server <br>put&nbsp;:&nbsp;Your&nbsp;Server </span>
-                                </div>
+                                    </div></div>
                             </div>
                         </div>
-                        <div id="loaderdiv" class="loadingImg" style="display: none">
-                            <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
+                        <div class="container">
+                            <div id="transferModeDiv"  style="display: none">
+                                <div class="pull-left">   <label>Transfer&nbsp;Mode&nbsp;:</label></div> 
+                                <div class="pull-left">
+                                    <input type="text" id="tempTransferMode" style="display:none"/>
+                                <s:radio name="transferMode" id="transferMode" list="{'get','put'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="11"></s:radio>&nbsp;&nbsp;
+                                    <div class="tooltip"><i class="fa fa-question-circle-o"></i>
+                                        <span class="tooltiptext">get&nbsp;:&nbsp;Partner&nbsp;Server <br>put&nbsp;:&nbsp;Your&nbsp;Server </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="loaderdiv" class="loadingImg" style="display: none">
+                                <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>"   ></span>
                         </div>
                         <div id="transferModeMsg" style="display: none;position: relative;right: 226px;bottom: 11px;"></div>
                         <div id="ftpDiv" style="display: none;clear:both">
@@ -193,7 +193,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>SSH&nbsp;Public&nbsp;key </label>
-                                    <label>My&nbsp;SSH&nbsp;Public&nbsp;Key </label>
+                                   
                                     <div id="download" >
                                         <%-- <s:textfield cssClass="button" name="sftp_public_key" id="sftp_public_key" tabindex="24" value="Download"/>--%>
                                         <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
@@ -286,7 +286,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
-                                    <s:textfield cssClass="form-control" name="smtp_recv_protocol" id="smtp_recv_protocol" tabindex="38" value="SMTP"/>
+                                    <s:textfield cssClass="form-control" name="smtp_recv_protocol" id="smtp_recv_protocol" tabindex="38" value="SMTP" readonly="true"/>
                                 </div></div>
                             <div class="col-sm-3">
                                 <div class="form-group">
@@ -318,7 +318,7 @@
                                 <div class="col-sm-3">
                                     <label class="head_label">System&nbsp;Certificates :</label>
                                 </div>
-                                <div class="col-sm-6">    <label>Upload&nbsp;Your&nbsp;System&nbsp;Certificate </label><s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="44" cssClass="form-control"/>  </div>
+                                <div class="col-sm-6">    <label>Upload&nbsp;System&nbsp;Certificate </label><s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="44" cssClass="form-control"/>  </div>
 
                                 <%-- <s:file name="as2_part_cert" id= "as2_part_cert" label="as2_part_cert" tabindex="44"/>--%>
 
@@ -475,72 +475,72 @@
         <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript"> 
-            function onLoad() 
+        <script type="text/javascript">
+            function onLoad()
             {
                 $("#profiles").addClass("active");
             }
             function checkProfile(flag)
             {
-                var commnProtocol =document.getElementById('commnProtocol').value;
-                if(commnProtocol == 'FTP'){
-                    ftpValidate=validateFTP(flag);
-                    if(ftpValidate==false)
+                var commnProtocol = document.getElementById('commnProtocol').value;
+                if (commnProtocol == 'FTP') {
+                    ftpValidate = validateFTP(flag);
+                    if (ftpValidate == false)
                         return false;
-                }else if(commnProtocol == 'SFTP'){
-                    sftpValidate=validateSFTP(flag);
-                    if(sftpValidate==false)
+                } else if (commnProtocol == 'SFTP') {
+                    sftpValidate = validateSFTP(flag);
+                    if (sftpValidate == false)
                         return false;
-                }else if(commnProtocol == 'HTTP'){
-                    httpValidate=validateHTTP(flag);
-                    if(httpValidate==false)
+                } else if (commnProtocol == 'HTTP') {
+                    httpValidate = validateHTTP(flag);
+                    if (httpValidate == false)
                         return false;
-                }else if(commnProtocol == 'SMTP'){
-                    smtpValidate=validateSMTP();
-                    if(smtpValidate==false)
+                } else if (commnProtocol == 'SMTP') {
+                    smtpValidate = validateSMTP();
+                    if (smtpValidate == false)
                         return false;
-                }else if(commnProtocol == 'AS2'){
-                    as2Validate=validateAS2(flag);
-                    if(as2Validate==false)
+                } else if (commnProtocol == 'AS2') {
+                    as2Validate = validateAS2(flag);
+                    if (as2Validate == false)
                         return false;
-                }else{
+                } else {
                     document.getElementById('tpoCommMsg').innerHTML = "<font color=red>Please fill minimum one Profile</font>";
                     return false;
                 }
 
             }
-       
+
             function doOnLoad() {
                 $("#profiles").addClass("active");
-                
+
                 $('#commnProtocol').trigger("change");
                 //$('#commnProtocol').attr('disabled', true);
-                var commnProtocol=document.getElementById("commnProtocol").value;
-                if(commnProtocol=="FTP")
+                var commnProtocol = document.getElementById("commnProtocol").value;
+                if (commnProtocol == "FTP")
                 {
-                    var ftp_ssl=document.getElementById("ftp_ssl_req").value;
-                    if(ftp_ssl=="true")
+                    var ftp_ssl = document.getElementById("ftp_ssl_req").value;
+                    if (ftp_ssl == "true")
                     {
                         document.getElementById("ftp_ssl_req").onclick();
                     }
                 }
-                else if(commnProtocol=="AS2")
+                else if (commnProtocol == "AS2")
                 {
-                    var as2_ssl=document.getElementById("as2_ssl_req").value;
-                    if(as2_ssl=="true")
+                    var as2_ssl = document.getElementById("as2_ssl_req").value;
+                    if (as2_ssl == "true")
                     {
                         document.getElementById("as2_ssl_req").onclick();
                     }
                 }
-                else if(commnProtocol=="HTTP")
+                else if (commnProtocol == "HTTP")
                 {
-                    var http_ssl_req=document.getElementById("http_ssl_req").value;
-                    if(http_ssl_req=="true")
+                    var http_ssl_req = document.getElementById("http_ssl_req").value;
+                    if (http_ssl_req == "true")
                     {
                         document.getElementById("http_ssl_req").onclick();
                     }
                 }
-            } 
+            }
         </script>
 
     </body>

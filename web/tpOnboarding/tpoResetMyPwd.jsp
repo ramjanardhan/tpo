@@ -18,22 +18,22 @@
             function doOnLoad() {
                 $("#services").addClass("active");
             }
-            function checkPwd(){
+            function checkPwd() {
                 var pwd = document.getElementById("regpassword").value;
                 var cnfPwd = document.getElementById("cnfPassword").value;
-                 if(pwd == ""){
-                      document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Password</font>";
-                      return false;
-                 }else if(cnfPwd == ""){
-                      document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Confirm Password</font>";
-                      return false;
-                 }else if(pwd == cnfPwd){
+                if (pwd == "") {
+                    document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Password</font>";
+                    return false;
+                } else if (cnfPwd == "") {
+                    document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Confirm Password</font>";
+                    return false;
+                } else if (pwd == cnfPwd) {
                     document.getElementById('tpoResultMessage').innerHTML = "<font color=green>Passwords matched</font>";
                     return true;
-                }else if(pwd != cnfPwd){
+                } else if (pwd != cnfPwd) {
                     document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Passwords not matched</font>";
                     document.getElementById("regpassword").value = "";
-                    document.getElementById("cnfPassword").value ="";
+                    document.getElementById("cnfPassword").value = "";
                     return false;
                 }
             }
@@ -71,7 +71,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Password<span class="text-danger">*</span></label>
-                                    <s:password cssClass="form-control" name="regpassword" id="regpassword" placeholder="Password" onchange="fieldLengthValidator(this);"/>
+                                    <s:password cssClass="form-control" name="regpassword" id="regpassword" placeholder="New password" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                         </div>

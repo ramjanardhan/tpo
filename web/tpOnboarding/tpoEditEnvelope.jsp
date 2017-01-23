@@ -41,7 +41,7 @@
             }
         </style>
         <script>
-            function doOnLoad() 
+            function doOnLoad()
             {
                 $("#envelopes").addClass("active");
             }
@@ -58,12 +58,12 @@
             </div>
         </header>  
         <div class="container">
-             <div id="loadingImage"></div>
+            <div id="loadingImage"></div>
             <s:form action="" method="POST" enctype="multipart/form-data" name="updateEnvelope" id="updateEnvelope" theme="simple">
                 <div id="site_content" class="jumbotron">
                     <div class="container">
                         <%-- envelop --%>  
-                         <center> <div id="resultMessage"></div></center>
+                        <center> <div id="resultMessage"></div></center>
                         <div id="envelope">
                             <h3 style="color: #2d8fc8">Envelope&nbsp;:</h3>
                             <input type="hidden" name="envelopeDetails" id="envelopeDetails" value=""/>
@@ -234,8 +234,8 @@
                             </div>
                         </div>
                         <%-- envelop  End--%>
-                            
-                            <div class="row">
+
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-1 pull-right"><input type="button" value="Update" class="btn btn-primary" onclick="return envelopeUpdating();"/></div>
                             </div>

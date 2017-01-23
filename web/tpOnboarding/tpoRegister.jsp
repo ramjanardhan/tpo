@@ -17,6 +17,14 @@
         <script>
             function doOnLoad() {
                 $("#services").addClass("active");
+                document.getElementById("regcontactName").value = "";
+                document.getElementById("regcontactLName").value = "";
+                document.getElementById("regcontactEmail").value = "";
+                document.getElementById("regaddress").value = "";
+                document.getElementById("regcity").value = "";
+                document.getElementById("regstate").value = "";
+                document.getElementById("regphoneNo").value = "";
+                document.getElementById("regzipCode").value = "";
             }
         </script>
     </head>
@@ -54,38 +62,38 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>First Name<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regcontactName" id="regcontactName" placeholder="Contact Name" value="%{regcontactName}" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regcontactName" id="regcontactName" placeholder="Contact Name" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Last Name<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regcontactLName" id="regcontactLName" value="%{regcontactLName}" placeholder="Last Name" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regcontactLName" id="regcontactLName" placeholder="Last Name" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group ajax_img">
                                     <label>Email<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regcontactEmail" id="regcontactEmail" placeholder="E-mail" value="%{regcontactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('userAdd','admin');"/><i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
+                                    <s:textfield cssClass="form-control" name="regcontactEmail" id="regcontactEmail" placeholder="E-mail" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('userAdd','admin');"/><i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
                                     <i id="wrongImg1" style="display: none;" class="fa fa-times"></i><i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regaddress" id="regaddress" value="%{regaddress}" placeholder="Address" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regaddress" id="regaddress" placeholder="Address" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>City<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regcity" id="regcity" value="%{regcity}" placeholder="City" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regcity" id="regcity" placeholder="City" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regstate" id="regstate" value="%{regstate}" placeholder="State" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regstate" id="regstate" placeholder="State" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -97,13 +105,13 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Phone No.<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regphoneNo" id="regphoneNo" placeholder="Phone No" value="%{regphoneNo}" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regphoneNo" id="regphoneNo" placeholder="Phone No" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Zip Code<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="regzipCode" id="regzipCode" value="%{regzipCode}" onchange="fieldLengthValidator(this);"/>
+                                    <s:textfield cssClass="form-control" name="regzipCode" id="regzipCode" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
                         </div>

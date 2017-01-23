@@ -161,8 +161,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     }
 
     /**
-     * @param resultType
-     *            the resultType to set
+     * @param resultType the resultType to set
      */
     public void setResultType(String resultType) {
         this.resultType = resultType;
@@ -176,8 +175,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     }
 
     /**
-     * @param httpServletRequest
-     *            the httpServletRequest to set
+     * @param httpServletRequest the httpServletRequest to set
      */
     public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
         this.httpServletRequest = httpServletRequest;
@@ -191,8 +189,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     }
 
     /**
-     * @param loginId
-     *            the loginId to set
+     * @param loginId the loginId to set
      */
     public void setLoginId(String loginId) {
         this.loginId = loginId;
@@ -206,8 +203,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     }
 
     /**
-     * @param password
-     *            the password to set
+     * @param password the password to set
      */
     public void setPassword(String password) {
         this.password = password;

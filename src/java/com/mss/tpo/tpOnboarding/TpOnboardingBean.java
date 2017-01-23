@@ -6,7 +6,6 @@ package com.mss.tpo.tpOnboarding;
 
 import java.sql.Timestamp;
 
-
 public class TpOnboardingBean {
 
     private String partnerName;
@@ -1863,5 +1862,5 @@ public class TpOnboardingBean {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
 }

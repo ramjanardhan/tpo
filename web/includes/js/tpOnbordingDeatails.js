@@ -3,6 +3,15 @@
  * and open the template in the editor.
  */
 
+var ib850 = "";
+var ib855 = "";
+var ib856 = "";
+var ib810 = "";
+var ob850 = "";
+var ob855 = "";
+var ob856 = "";
+var ob810 = "";
+
 function checkPartnerInfo() {
     var contactEmail = document.getElementById("contactEmail").value;
     var phoneNo = document.getElementById("phoneNo").value;
@@ -45,10 +54,7 @@ function protocolsSelect(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         $("#transferModeDiv").hide();
-    }
-    else
-
-    if (x == 'AS2') {
+    } else if (x == 'AS2') {
         document.getElementById('protocolmsg').innerHTML = "";
         $("#ftpDiv").hide();
         $("#sftpDiv").hide();
@@ -137,7 +143,6 @@ function sslRequired(x) {
         }
     }
 }
-
 
 function sslPriorityChange(x) {
     if (x == 'NONE') {
@@ -270,7 +275,6 @@ function fieldLengthValidator(element) {
                 element.focus();
                 return false;
             }
-
             if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
@@ -304,17 +308,14 @@ function validatenumber(xxxxx) {
 }
 
 //PHONE NUMBER FORMAT SCRIPT :START   
-function formatPhone(num)
-{
-
+function formatPhone(num) {
     str = new String(document.userForm.ophno.value);
     var pattern = /^\(\d{3}\)\-\d{3}\-\d{4}$/;
     document.userForm.ophno.value = str.replace(pattern, "");
     //document.userForm.ophno.value=str.replace(/[A-Za-z\(\)\.\-\x\s,]/gpattern, "");
     num = document.userForm.ophno.value;
     var _return;
-    if (num.length == 10)
-    {
+    if (num.length == 10) {
         //  _return="(";
         var ini = num.substring(0, 3);
         _return += ini;
@@ -325,9 +326,7 @@ function formatPhone(num)
 
         document.userForm.ophno.value = "";
         document.userForm.ophno.value = _return;
-
-    } else if (num.length > 10)
-    {
+    } else if (num.length > 10) {
         //_return="(";
         var ini = num.substring(0, 3);
         _return += ini;
@@ -337,25 +336,24 @@ function formatPhone(num)
         _return += end + "x";
         var ext = num.substring(10, num.length);
         _return += ext;
-        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Phone Number should be 10 characters</font>";
+        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Phone number should be 10 characters</font>";
         document.userForm.ophno.value = _return;
         document.userForm.ophno.value = "";
         document.userForm.ophno.focus();
         return false;
-    } else if (num.length < 10)
-    {
-        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please give atleast  10 charcters in PhoneNumber</font>";
+    } else if (num.length < 10) {
+        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please give atleast 10 charcters in phone number</font>";
         document.userForm.ophno.value = "";
     }
-
     return _return;
 }
+
 //to convert given phone format to specified format((111)-111-1111) 
 function generalFormatPhone(element) {
     str = new String(element.value);
     //var str = element.value;
     if (str == "undefined") {
-        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please give atleast  10 charcters in PhoneNumber</font>";
+        document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please give atleast 10 charcters in phone number</font>";
         return false;
     } else {
         var pattern = /^\(\d{3}\)\-\d{3}\-\d{4}$/;
@@ -364,20 +362,15 @@ function generalFormatPhone(element) {
         num = element.value;
         var _return;
         if (num.length == 10) {
-            // _return="(";
             var ini = num.substring(0, 3);
             _return += ini;
             var st = num.substring(3, 6);
             _return += "-" + st + "-";
             var end = num.substring(6, 10);
             _return += end;
-
             element.value = "";
             element.value = _return;
-
-        }
-        else if (num.length > 10)
-        {
+        } else if (num.length > 10) {
             //_return="(";
             var ini = num.substring(0, 3);
             _return += ini;
@@ -387,10 +380,8 @@ function generalFormatPhone(element) {
             _return += end + "x";
             var ext = num.substring(10, num.length);
             _return += ext;
-
             element.value = "";
             element.value = _return;
-
         }
         return _return;
     }
@@ -401,8 +392,7 @@ function validateEmail(thisObj) {
     var x = thisObj.value;
     var atpos = x.indexOf("@");
     var dotpos = x.lastIndexOf(".");
-    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)
-    {
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
         thisObj.value = "";
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Not a valid e-mail address</font>";
     }
@@ -414,11 +404,13 @@ function IBsender850() {
     var n2 = document.getElementById('st850senderIdIB');
     n2.value = n1.value;
 }
+
 function IBversion850() {
     var versiongs850Ib = document.getElementById('gs850VersionIB');
     var versionst850Ib = document.getElementById('st850VersionIB');
     versionst850Ib.value = versiongs850Ib.value;
 }
+
 function IBrecId850() {
     var recIdgs850Ib = document.getElementById('gs850RecIdIB');
     var recIdst850Ib = document.getElementById('st850RecIdIB');
@@ -427,36 +419,39 @@ function IBrecId850() {
 /* 850 inbound gs and st value end*/
 
 /* 855 inbound gs and st value */
-function IBsender855()
-{
+function IBsender855() {
     var senderIdgs855Ib = document.getElementById('gs855senderIdIB');
     var senderIdst855Ib = document.getElementById('st855senderIdIB');
     senderIdst855Ib.value = senderIdgs855Ib.value;
 }
+
 function IBversion855() {
     var versiongs855Ib = document.getElementById('gs855VersionIB');
     var versionst855Ib = document.getElementById('st855VersionIB');
     versionst855Ib.value = versiongs855Ib.value;
 }
+
 function IBrecId855() {
     var recIdgs855Ib = document.getElementById('gs855RecIdIB');
     var recIdst855Ib = document.getElementById('st855RecIdIB');
     recIdst855Ib.value = recIdgs855Ib.value;
 }
+
 /* 855 inbound gs and st value end*/
 
 /* 856 inbound gs and st value */
-function IBsender856()
-{
+function IBsender856() {
     var senderIdgs856Ib = document.getElementById('gs856senderIdIB');
     var senderIdst856Ib = document.getElementById('st856senderIdIB');
     senderIdst856Ib.value = senderIdgs856Ib.value;
 }
+
 function IBversion856() {
     var versiongs856Ib = document.getElementById('gs856VersionIB');
     var versionst856Ib = document.getElementById('st856VersionIB');
     versionst856Ib.value = versiongs856Ib.value;
 }
+
 function IBrecId856() {
     var recIdgs856Ib = document.getElementById('gs856RecIdIB');
     var recIdst856Ib = document.getElementById('st856RecIdIB');
@@ -465,17 +460,18 @@ function IBrecId856() {
 /* 856 inbound gs and st value end*/
 
 /* 810 inbound gs and st value */
-function IBsender810()
-{
+function IBsender810() {
     var senderIdgs810Ib = document.getElementById('gs810senderIdIB');
     var senderIdst810Ib = document.getElementById('st810senderIdIB');
     senderIdst810Ib.value = senderIdgs810Ib.value;
 }
+
 function IBversion810() {
     var versiongs810Ib = document.getElementById('gs810VersionIB');
     var versionst810Ib = document.getElementById('st810VersionIB');
     versionst810Ib.value = versiongs810Ib.value;
 }
+
 function IBrecId810() {
     var recIdgs810Ib = document.getElementById('gs810RecIdIB');
     var recIdst810Ib = document.getElementById('st810RecIdIB');
@@ -486,36 +482,39 @@ function IBrecId810() {
 /*----------------- Outbound values copy  ------------------*/
 
 /* 850 outbound gs and st value */
-function OBsender850()
-{
+function OBsender850() {
     var senderIdgs850Ob = document.getElementById('gs850senderIdOB');
     var senderIdst850Ob = document.getElementById('st850senderIdOB');
     senderIdst850Ob.value = senderIdgs850Ob.value;
 }
+
 function OBversion850() {
     var versiongs850Ob = document.getElementById('gs850VersionOB');
     var versionst850Ob = document.getElementById('st850VersionOB');
     versionst850Ob.value = versiongs850Ob.value;
 }
+
 function OB850recId() {
     var recIdgs850Ob = document.getElementById('gs850RecIdOB');
     var recIdst850Ob = document.getElementById('st850RecIdOB');
     recIdst850Ob.value = recIdgs850Ob.value;
 }
+
 /* 850 outbound gs and st value end*/
 
 /* 855 outbound gs and st value */
-function OBsender855()
-{
+function OBsender855() {
     var senderIdgs855Ob = document.getElementById('gs855senderIdOB');
     var senderIdst855Ob = document.getElementById('st855senderIdOB');
     senderIdst855Ob.value = senderIdgs855Ob.value;
 }
+
 function OBversion855() {
     var versiongs855Ob = document.getElementById('gs855VersionOB');
     var versionst855Ob = document.getElementById('st855VersionOB');
     versionst855Ob.value = versiongs855Ob.value;
 }
+
 function OBrecId855() {
     var recIdgs855Ob = document.getElementById('gs855RecIdOB');
     var recIdst855Ob = document.getElementById('st855RecIdOB');
@@ -524,17 +523,18 @@ function OBrecId855() {
 /* 855 outbound gs and st value end*/
 
 /* 856 outbound gs and st value */
-function OBsender856()
-{
+function OBsender856() {
     var senderIdgs856Ob = document.getElementById('gs856senderIdOB');
     var senderIdst856Ob = document.getElementById('st856senderIdOB');
     senderIdst856Ob.value = senderIdgs856Ob.value;
 }
+
 function OBversion856() {
     var versiongs856Ob = document.getElementById('gs856VersionOB');
     var versionst856Ob = document.getElementById('st856VersionOB');
     versionst856Ob.value = versiongs856Ob.value;
 }
+
 function OBrecId856() {
     var recIdgs856Ob = document.getElementById('gs856RecIdOB');
     var recIdst856Ob = document.getElementById('st856RecIdOB');
@@ -543,34 +543,44 @@ function OBrecId856() {
 /* 856 outbound gs and st value end*/
 
 /* 810 outbound gs and st value */
-function OBsender810()
-{
+function OBsender810() {
     var senderIdgs810Ob = document.getElementById('gs810senderIdOB');
     var senderIdst810Ob = document.getElementById('st810senderIdOB');
     senderIdst810Ob.value = senderIdgs810Ob.value;
 }
+
 function OBversion810() {
     var versiongs810Ob = document.getElementById('gs810VersionOB');
     var versionst810Ob = document.getElementById('st810VersionOB');
     versionst810Ob.value = versiongs810Ob.value;
 }
+
 function OBrecId810() {
     var recIdgs810Ob = document.getElementById('gs810RecIdOB');
     var recIdst810Ob = document.getElementById('st810RecIdOB');
     recIdst810Ob.value = recIdgs810Ob.value;
-    /* 810 outbound gs and st value end*/
+}
+/* 810 outbound gs and st value end*/
 
+/* edit transaction gs and st value start*/
+function senderCopy() {
+    var n1 = document.getElementById('gsSenderId');
+    var n2 = document.getElementById('stSenderId');
+    n2.value = n1.value;
 }
 
+function receiverCopy() {
+    var recIdgs850Ib = document.getElementById('gsReceiverId');
+    var recIdst850Ib = document.getElementById('stReceiverId');
+    recIdst850Ib.value = recIdgs850Ib.value;
+}
 
-var ib850 = "";
-var ib855 = "";
-var ib856 = "";
-var ib810 = "";
-var ob850 = "";
-var ob855 = "";
-var ob856 = "";
-var ob810 = "";
+function versionCopy() {
+    var versiongs850Ib = document.getElementById('gsVersion');
+    var versionst850Ib = document.getElementById('stVersion');
+    versionst850Ib.value = versiongs850Ib.value;
+}
+/* edit transaction gs and st value end*/
 
 function checkib850() {
     var ibtransaction = document.getElementById("ibvalue850").value;
@@ -1226,6 +1236,7 @@ function fieldLengthValidatorEditEnvelope(element) {
         return true;
     }
 }
+
 function fieldLengthValidator850IB(element) {
     var i = 0;
     if (element.value != null && (element.value != "")) {
@@ -1375,6 +1386,7 @@ function fieldLengthValidator855OB(element) {
         return true;
     }
 }
+
 function fieldLengthValidator856OB(element) {
     var i = 0;
     if (element.value != null && (element.value != "")) {
@@ -1422,18 +1434,6 @@ function fieldLengthValidator810OB(element) {
             return false;
         }
         return true;
-    }
-}
-
-function tpRegValidation() {
-    var partnerName = document.getElementById("regpartnerName").value;
-    var contactName = document.getElementById("regcontactName").value;
-    var contactEmail = document.getElementById("regcontactEmail").value;
-    var phoneNo = document.getElementById("regphoneNo").value;
-    var country = document.getElementById("regcountry").value;
-    var pwd = document.getElementById("regpassword").value;
-    if (((partnerName == null) || (partnerName == "")) || ((contactName == null) || (contactName == "")) || ((contactEmail == null) || (contactEmail == "")) || ((phoneNo == null) || (phoneNo == "")) || ((country == null) || (country == "")) || ((pwd == null) || (pwd == ""))) {
-        document.getElementById('tpRegisteValidation').innerHTML = "<font color=red>Please Enter all mandetory fields in partner details</font>";
     }
 }
 
@@ -1807,9 +1807,10 @@ function gettransferModeSelection(x) {
         $("#sslDiv").hide();
         var transferMode = 'x';
         var protocol = document.getElementById("commnProtocol").value;
+        document.getElementById("smtp_recv_protocol").value = "SMTP";
         document.getElementById("smtp_server_protocol").readOnly = false;
         document.getElementById("smtp_server_port").readOnly = false;
-        $('#smtp_recv_protocol').attr('disabled', false);
+        $('#smtp_recv_protocol').attr('disabled', true);
         document.getElementById("smtp_server_port").readOnly = false;
         document.getElementById("smtp_from_email").readOnly = false;
         document.getElementById("smtp_to_email").readOnly = false;
@@ -1981,7 +1982,7 @@ function validateFTP(flag) {
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
     if (((ftp_method == null) || (ftp_method == "")) || ((ftp_conn_method == null) || (ftp_conn_method == "")) || ((ftp_recv_protocol == null) || (ftp_recv_protocol == "")) || ((ftp_resp_time == null) || (ftp_resp_time == "")) || ((ftp_host == null) || (ftp_host == "")) || ((ftp_port == null) || (ftp_port == "")) || ((ftp_userId == null) || (ftp_userId == "")) || ((ftp_pwd == null) || (ftp_pwd == "")) || ((ftp_directory == null) || (ftp_directory == ""))) {
-        document.getElementById('protocolmsgFtp').innerHTML = "<font color=red>Please Enter all Mandetory fields in Protocals</font>";
+        document.getElementById('protocolmsgFtp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
     if ((document.getElementById('tempTransferMode').value) == 'put') {
@@ -2021,7 +2022,7 @@ function validateSFTP(flag) {
     }
     if ((document.getElementById('tempTransferMode').value) == 'put') {
         if (((sftp_host_ip == null) || (sftp_host_ip == "")) || ((sftp_remote_port == null) || (sftp_remote_port == "")) || ((sftp_remote_userId == null) || (sftp_remote_userId == "")) || ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) || ((sftp_directory == null) || (sftp_directory == ""))) {
-            document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please Enter all Mandetory fields in Protocals</font>";
+            document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter all mandetory fields</font>";
             return false;
         }
     }
@@ -2042,7 +2043,7 @@ function validateHTTP(flag) {
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
     if (((http_recv_protocol == null) || (http_recv_protocol == "")) || ((http_resp_time == null) || (http_resp_time == "")) || ((http_endpoint == null) || (http_endpoint == "")) || ((http_port == null) || (http_port == ""))) {
-        document.getElementById('protocolmsgHttp').innerHTML = "<font color=red>Please Enter all Mandetory fields in Protocals</font>";
+        document.getElementById('protocolmsgHttp').innerHTML = "<font color=red>Please enter all mandetory fields</font>";
         return false;
     }
     if ((document.getElementById('tempTransferMode').value) == 'get') {
@@ -2081,7 +2082,7 @@ function validateAS2(flag) {
         }
     }
     if (((as2_myOrgName == null) || (as2_myOrgName == "")) || ((as2_partOrgName == null) || (as2_partOrgName == "")) || ((as2_myPartname == null) || (as2_myPartname == "")) || ((as2_yourPartname == null) || (as2_yourPartname == "")) || ((as2_myEndPoint == null) || (as2_myEndPoint == "")) || ((as2_partendpoint == null) || (as2_partendpoint == ""))) {
-        document.getElementById('protocolmsgAs2').innerHTML = "<font color=red>Please Enter all Mandetory fields in Protocals</font>";
+        document.getElementById('protocolmsgAs2').innerHTML = "<font color=red>Please enter all mandetory fields</font>";
         return false;
     }
     if (as2_ssl_req == true) {
@@ -2105,7 +2106,7 @@ function validateSMTP() {
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
     if (((smtp_server_protocol == null) || (smtp_server_protocol == "")) || ((smtp_server_port == null) || (smtp_server_port == "")) || ((smtp_from_email == null) || (smtp_from_email == "")) || ((smtp_to_email == null) || (smtp_to_email == ""))) {
-        document.getElementById('protocolmsgSmtp').innerHTML = "<font color=red>Please Enter all Mandetory fields in Protocals</font>";
+        document.getElementById('protocolmsgSmtp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
 }
@@ -2210,11 +2211,10 @@ function addPtnerLengthValidator(element) {
             validatenumber(element);
         }
         if (k == 1) {
-
             if (element.value.replace(/^\s+|\s+$/g, "").length <= 9) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
-                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Phone Number must be 10 characters</font>";
+                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Phone number must be 10 characters</font>";
                 element.value = "";
                 element.focus();
                 return false;
@@ -2222,7 +2222,7 @@ function addPtnerLengthValidator(element) {
             if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
-                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The Value must be less than " + i + " characters</font>";
+                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The value must be less than " + i + " characters</font>";
                 element.focus();
                 return false;
             }
@@ -2230,7 +2230,7 @@ function addPtnerLengthValidator(element) {
             if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
-                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The Value must be less than " + i + " characters</font>";
+                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The value must be less than " + i + " characters</font>";
                 element.focus();
                 return false;
             }
@@ -2327,20 +2327,3 @@ function resetPartnerUserAdd() {
     document.getElementById("zipCode").value = "";
 }
 
-function senderCopy() {
-    var n1 = document.getElementById('gsSenderId');
-    var n2 = document.getElementById('stSenderId');
-    n2.value = n1.value;
-}
-
-function receiverCopy() {
-    var recIdgs850Ib = document.getElementById('gsReceiverId');
-    var recIdst850Ib = document.getElementById('stReceiverId');
-    recIdst850Ib.value = recIdgs850Ib.value;
-}
-
-function versionCopy() {
-    var versiongs850Ib = document.getElementById('gsVersion');
-    var versionst850Ib = document.getElementById('stVersion');
-    versionst850Ib.value = versiongs850Ib.value;
-}
