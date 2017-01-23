@@ -32,6 +32,8 @@
             .gutter_hide{
                 padding:0;
             }
+            
+          
         </style>
     </head>
     <s:if test="%{formAction == 'doAddProfile'}">

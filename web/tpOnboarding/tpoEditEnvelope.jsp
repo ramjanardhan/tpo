@@ -14,7 +14,32 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap.min.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
+ <style>
+            .jumbotron_bg{
+                background-color:  #F7F5F4;
+            }
 
+
+
+
+            .threshold:after {
+                content: ":"
+
+            }
+
+            .threshold input{
+                border:0;
+                width:218px;
+
+
+            }
+
+
+            .threshold{
+
+                font-weight:bold;
+            }
+        </style>
         <script>
             function doOnLoad() 
             {
@@ -46,12 +71,12 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div>
-                                            <h4 style="color: black">Transaction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="transaction" id="transaction" value="%{tpOnboardingBean.transaction}" readonly="true" /></h4>
+                                            <h4 style="color: black">Transaction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="transaction" id="transaction" value="%{tpOnboardingBean.transaction}" readonly="true" cssClass="jumbotron_bg"/></h4>
                                         </div> 
                                     </div></div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <h4 style="color: black">Direction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="direction" id="direction" value="%{tpOnboardingBean.direction}" readonly="true" /></h4>
+                                        <h4 style="color: black">Direction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="direction" id="direction" value="%{tpOnboardingBean.direction}" readonly="true" cssClass="jumbotron_bg"/></h4>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +84,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div><h4><h4>SenderID:</h4></h4> </div> 
+                                         <div class="threshold" style="position: relative;top:31px">
+                                        <input type="text" value="Sender ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                    </div>
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -83,7 +110,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div><h4>Receiver ID:</h4> </div> 
+                                      <div class="threshold" style="position: relative;top:7px">
+                                        <input type="text" value="ReceiverID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                    </div>
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -105,7 +134,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div><h4>Version:</h4> </div>
+                                      <div class="threshold" style="position: relative;top:5px">
+                                        <input type="text" value="Version" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -127,7 +158,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div ><h4>Functional ID Code:</h4></div>
+                                        <div class="threshold" style="position: relative;top:5px">
+                                        <input type="text" value="Functional ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -143,7 +176,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div><h4>Responsible Agency Code:</h4></div>
+                                        <div class="threshold" style="position: relative;top:5px">
+                                        <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -159,7 +194,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div ><h4>Generate An Acknowledgement:</h4></div>
+                                       <div class="threshold" style="position: relative;top:0px">
+                                        <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                      </div>
                                     </div>                                  
                                 </div> 
                                 <div class="col-sm-3">
@@ -176,7 +213,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <div ><h4>Transaction Set ID Code:</h4></div>
+                                      <div class="threshold" style="position: relative;top:5px">
+                                        <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
