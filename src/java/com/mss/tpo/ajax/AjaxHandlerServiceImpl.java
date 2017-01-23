@@ -235,7 +235,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 callableStatement.setString(16, "");
             }
             callableStatement.setString(17, ajaxHandlerAction.getFlag());
-            int updatedRows = callableStatement.executeUpdate();
+            insertedRows = callableStatement.executeUpdate();
 
             if ("self".equalsIgnoreCase(ajaxHandlerAction.getFlag())) {
                 MailManager.tpoPartnerSelfRegistrationMail(userloginId, password, ajaxHandlerAction);
