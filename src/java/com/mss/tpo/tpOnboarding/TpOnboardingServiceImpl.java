@@ -44,7 +44,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         try {
             tpOnboardingBean = new TpOnboardingBean();
             connection = ConnectionProvider.getInstance().getConnection();
-            String partnerInfoQuery = "SELECT NAME, PHONE_NO, ADDRESS, CITY, STATE, COUNTRY, ZIPCODE, CREATED_BY, CREATED_TS, TP_FLAG FROM MSCVP.TPO_PARTNERS WHERE ID=?";
+            String partnerInfoQuery = "SELECT NAME, PHONE_NO, EMAIL, ADDRESS, CITY, STATE, COUNTRY, ZIPCODE, CREATED_BY, CREATED_TS, TP_FLAG FROM MSCVP.TPO_PARTNERS WHERE ID=?";
             preparedStatement = connection.prepareStatement(partnerInfoQuery);
             preparedStatement.setInt(1, partnerId);
             resultSet = preparedStatement.executeQuery();
@@ -56,7 +56,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 tpOnboardingBean.setState(resultSet.getString("STATE"));
                 tpOnboardingBean.setCountry(resultSet.getString("COUNTRY"));
                 tpOnboardingBean.setZipCode(resultSet.getString("ZIPCODE"));
-
+                tpOnboardingBean.setContactEmail(resultSet.getString("EMAIL"));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -207,7 +207,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             String updateTpoUserQuery = ("UPDATE MSCVP.TPO_PARTNERS SET PHONE_NO = ?,ADDRESS = ?,CITY = ?,STATE = ?,"
-                    + "COUNTRY = ?,ZIPCODE = ?,MODIFIED_BY = ?,MODIFIED_TS = ? WHERE ID =?");
+                    + "COUNTRY = ?,ZIPCODE = ?,MODIFIED_BY = ?,MODIFIED_TS = ?,EMAIL=? WHERE ID =?");
             preparedStatement = connection.prepareStatement(updateTpoUserQuery);
             preparedStatement.setString(1, tpAction.getPhoneNo());
             preparedStatement.setString(2, tpAction.getAddress1());
@@ -217,7 +217,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(6, tpAction.getZipCode());
             preparedStatement.setString(7, loginId);
             preparedStatement.setTimestamp(8, curdate);
-            preparedStatement.setInt(9, partnerId);
+            preparedStatement.setString(9, tpAction.getContactEmail());
+            preparedStatement.setInt(10, partnerId);
             istpoPartnerUpdated = istpoPartnerUpdated + preparedStatement.executeUpdate();
             if (istpoPartnerUpdated > 0) {
                 responseString = "<font color='green'>Partner updated successfully</font>";

@@ -21,11 +21,12 @@
                 $('#saveButton').attr('disabled', true);
                 $('#country').attr('disabled', true);
             }
-            function enableEdit(){
+            function enableEdit() {
                 $('#saveButton').attr('disabled', false);
                 $('#editButton').attr('disabled', true);
                 document.getElementById("phoneNo").readOnly = false;
                 document.getElementById("address1").readOnly = false;
+                document.getElementById("contactEmail").readOnly = false;
                 document.getElementById("city").readOnly = false;
                 document.getElementById("state").readOnly = false;
                 $('#country').attr('disabled', false);
@@ -38,6 +39,7 @@
             <s:include value="../includes/template/header.jsp"/>
         </div>
         <!-- Header -->
+        <!--  Header -->
         <header id="head">
             <div class="container">
                 <h3 class="thin"><b>Trading Partner Information</b></h3>
@@ -64,9 +66,15 @@
                         </center>
                         <div class="row">
                             <div class="col-sm-3">
-                                <div class="form-group ajax_img">
+                                <div class="form-group">
                                     <label>Partner Name<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{tpOnboardingBean.partnerName}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Email<span class="text-danger">*</span></label>
+                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" value="%{tpOnboardingBean.contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" readOnly="true"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -110,7 +118,7 @@
                         <s:if test="#session.tpoRoleId != 5">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-md-1 pull-right"><s:submit id="saveButton" value="Save" cssClass="btn btn-primary" onClick="return check()"/></div>
+                                    <div class="col-md-1 pull-right"><s:submit id="saveButton" value="Save" cssClass="btn btn-primary" onClick="return checkPartnerInfo()"/></div>
                                     <div class="col-md-1 pull-right"><input id="editButton" type="button" value="Edit" class="btn btn-primary" onClick="enableEdit();"/></div>
                                 </div>
                             </div>
@@ -125,41 +133,7 @@
                 <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>
-        <script type="text/javascript">
-            function check(){
-                var phoneNo=document.getElementById("phoneNo").value;
-                var address1=document.getElementById("address1").value;
-                var city=document.getElementById("city").value;
-                var state=document.getElementById("state").value;
-                var country=document.getElementById("country").value;
-                var zipCode=document.getElementById("zipCode").value;
-                if(phoneNo=="")
-                {
-                    document.getElementById("tpResultMessage").innerHTML="<font style='color:red'>Please enter phone number</font>";
-                    return false;
-                }else if(address1=="")
-                {
-                    document.getElementById("tpResultMessage").innerHTML="<font style='color:red'>Please enter address</font>";
-                    return false;
-                }
-                else if(city==""){
-                    document.getElementById("tpResultMessage").innerHTML="<font style='color:red'>Please enter city</font>";
-                    return false;
-                }
-                else if(state=="")
-                {
-                    document.getElementById("tpResultMessage").innerHTML="<font style='color:red'>Please enter state</font>";
-                    return false;
-                }
-                else if(zipCode=="")
-                {
-                    document.getElementById("tpResultMessage").innerHTML="<font style='color:red'>Please enter zip code</font>";
-                    return false;
-                }
-                else
-                    return true;
-            }
-        </script>
+        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script language="JavaScript" src='<s:url value="/includes/js/headroom.min.js"></s:url>'></script>

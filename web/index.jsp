@@ -16,7 +16,31 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>'>
         <style>
             .content_item p{
-                font-size: 18px;
+                font-size: 17px;
+            }
+
+            .modal-dialog1 {
+                width: 60%;
+                margin: 30px auto;
+            }
+
+            .contact-form {
+                margin: 0 2%;
+            }
+            .modal-header1 {
+                padding: 4px;
+                border-bottom: 1px solid #e5e5e5;
+                min-height: 16.428571429px;
+            }
+
+            .close {
+                float: right;
+                font-size: 34px;
+                font-weight: 700;
+                line-height: 1;
+                color: #000;
+                text-shadow: 0 1px 0 #fff;
+                opacity: .2;
             }
         </style>
     </head>
@@ -42,7 +66,7 @@
         <!-- Header -->
         <header id="head"  style="padding-top:63px">
             <div class="container">
-                
+                <h2 class="thin"></h2>
             </div>
         </header>
         <!-- /Header -->
@@ -56,12 +80,11 @@
                     <div class="col-sm-8">
                         <div class="content">
                             <div class="content_item">
-                                <h3 style="color:#285e8e">TP On-boarding</h3>
+                                <h3 style="color:#285e8e"><b>TP On-boarding</b></h3>
                                 <div>
-
                                     <p> Trading Partner provides a complete view of your inbound supply and outbound fulfillment activity across your supply chain network by providing and leveraging connectivity to all your supply chain trading partners, and enterprise applications.</p>
                                     <p> Supply chain visibility (SCV) is the ability of parts, components or products in transit to be tracked from the manufacturer to their final destination. The goal of SCV is to improve and strengthen the supply chain by making data readily available to all stakeholders, including the customer. Supply chain visibility technology promotes quick response to change by allowing privileged users to take action and reshape demand or redirect supply.</p>
-                                    
+                                    <p><font color="#285e8e" >For partner self registration  </font><input type="button" data-toggle="modal" data-target="#selfReg" value="Click here" class="btn btn-primary"/></p>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +112,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-xs-8">
-                                             <a href="" data-toggle="modal" data-target="#myModal">I forgot my password</a>
+                                            <a href="" data-toggle="modal" data-target="#myModal">I forgot my password</a>
                                         </div><!-- /.col -->
                                         <div class="col-xs-4">
                                             <!--                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
@@ -98,7 +121,7 @@
                                     </div>
                                 </s:form>
 
-                               
+
                                 <div class="modal fade" id="myModal" data-backdrop="static" data-keyword="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -107,88 +130,156 @@
                                                 <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
                                             </div>
                                             <div class="modal-body" style="margin-top: -15px; margin-bottom: -25px;">
-                                                <div class="form-group has-feedback">
-                                                    <s:textfield  cssClass="form-control" name="userid" id="userid" placeholder="User ID"/>
-                                                    <i class="fa fa-user" style="position:absolute;right: 11px;top: 11px"></i>
+                                                <div id="tpResultMessage">
+                                                    <div class="row">   
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>login Id<span class="text-danger">*</span></label>
+                                                                <s:textfield  cssClass="form-control" name="userid" id="userid" placeholder="User ID"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group ajax_img">
+                                                                <label>Email<span class="text-danger">*</span></label>
+                                                                <s:textfield cssClass="form-control" name="regcontactEmail" id="regcontactEmail" placeholder="Your Email" value="%{regcontactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('login','forgotPwd');"/>
+                                                                <i id="correctImg2" style="display: none;"  class="fa fa-check"></i>
+                                                                <i id="wrongImg2" style="display: none;" class="fa fa-times"></i>
+                                                                <i id="loadingImageEmailCheck2" style="display: none;" class="fa fa-spinner"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer" style="border:0;margin:0">
-                                                <div class="row">
-                                                    <!-- /.col -->
-                                                    <div class="col-xs-2">
-                                                        <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="forgotpassword()">Submit</button>
-                                                    </div><!-- /.col -->                          <div id="load" style="display: none">Processing... please wait</div>         <div class="col-xs-9">
-                                                        <div id="msg" name="msg"></div> 
+
+                                                <div class="modal-footer" style="border:0;margin:0">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="margin-bottom:8px">
+                                                            <div class="col-md-2 pull-right"><input type="button" id="pwdButton" value="Submit" class="btn btn-primary" onclick="forgotpassword();"/></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="selfReg" data-backdrop="static" data-keyword="false" tabindex="-1" role="dialog" aria-labelledby="selfRegLabel">
+                                    <div class="modal-dialog1" role="document">
+                                        <div class="modal-content" style="margin:2%">
+                                            <div class="modal-header1"  style="border:0">
+                                                <button type="button" style="color:#ff0000" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h3 class="modal-title" id="selfRegLabel" style="color:#285e8e">Partner self registration form</h3>
+                                            </div>
+                                            <hr>
+                                            <center><div id="addpartnerMsg"></div>
+                                                <div id="loadingImage"></div>
+                                                <div id="tpResultMessage"></div></center>
+                                                <s:form action="" method="post" cssClass="contact-form"  name="tpoPartnerAdd" id="tpoPartnerAdd" theme="simple">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group ajax_img">
+                                                            <label>Partner Name<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="addpartnerName" id="addpartnerName" value="%{addpartnerName}" placeholder="Partner Name" onchange="addPtnerLengthValidator(this);" onblur="isExistedPartnerName('self');"/>
+                                                            <i id="correctImg" style="display: none;"  class="fa fa-check"></i>
+                                                            <i id="wrongImg" style="display: none;" class="fa fa-times"></i>
+                                                            <i id="loadingImageAjax" style="display: none;" class="fa fa-spinner"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>First Name<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control"  name="contactPerson" id="contactPerson" value="%{contactPerson}" placeholder="First Name" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Last Name<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="contactPersonLN" id="contactPersonLN" value="%{contactPersonLN}" placeholder="Last Name" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group ajax_img">
+                                                            <label>Contact Email<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" placeholder="Contact Email" value="%{contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('partnerAdd','self');"/><i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
+                                                            <i id="wrongImg1" style="display: none;" class="fa fa-times"></i><i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Phone No.<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control"  name="addphoneNo" id="addphoneNo" value="%{addphoneNo}" placeholder="Phone no." onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Address<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="addaddress1" id="addaddress1" value="%{addaddress1}" placeholder="Address" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>City<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="addcity" id="addcity" value="%{addcity}" placeholder="City" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>State<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="addstate" id="addstate" value="%{addstate}" placeholder="State" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Country<span class="text-danger">*</span></label>
+                                                            <s:select cssClass="form-control" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="addcountry" id="addcountry" value="%{addcountry}"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Zip Code<span class="text-danger">*</span></label>
+                                                            <s:textfield cssClass="form-control" name="addzipCode" id="addzipCode" value="%{addzipCode}" placeholder="Zip Code" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>URL/Link</label>
+                                                            <s:textfield cssClass="form-control" name="url" id="url" value="%{url}" placeholder="www.example.com" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Description</label>
+                                                            <s:textarea cssClass="form-control" name="description" id="description" value="%{description}" onchange="addPtnerLengthValidator(this);"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12" style="margin-bottom:8px">
+                                                        <div class="col-md-2 pull-right"><input type="button" id="addbutton" value="Add" class="btn btn-primary" onclick="addPartner('self');"/></div>
+                                                        <div class="col-md-2 pull-right"><input type="button" value="Reset" class="btn btn-primary" onClick="resetAddPartnerValues('self');"/></div>
+                                                    </div>
+                                                </div>
+                                            </s:form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </article>
                 <!-- /Article -->
             </div>
         </div>
         <footer class="footer">
             <div class=" ">
-                <s:include value="includes/template/footer.jsp"/>
+                <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
+        <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/headroom.min.js"></s:url>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/jQuery.headroom.min.js"></s:url>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/template.js"></s:url>'></script>
-        <script type="text/javascript">
-            function forgotpassword()
-            {
-                document.getElementById("load").style.display='block';
-                request=getObject();
-                var userid=document.getElementById("userid").value;
-                var url="../ajax/forgotpassword.action?userid="+userid;
-                //  alert(url);
-                request.onreadystatechange=getInfo;
-                request.open("GET",url,true);
-                request.send();
-            }
-            function getInfo()
-            {
-                if(request.readyState==4)
-                {
-                    document.getElementById("load").style.display='none';
-                    var val1=request.responseText;
-                    if(val1=="success")
-                    {
-                        document.getElementById("msg").innerHTML="Password successfully sent.... Check your email!!!";
-                    }
-                    else if(val1=="failure")
-                    {
-                        document.getElementById("msg").innerHTML="Can't send msg to your email!!!";
-                    }
-                    else
-                    {
-                        document.getElementById("msg").innerHTML="Can't send msg !!!";
-                    }
-                }
-            }
-            function getObject()
-            {
-                if(window.XMLHttpRequest)
-                {
-                    return new XMLHttpRequest();
-                }
-                else
-                {
-                    if(window.ActiveXObject("MicroSoft.XMLHTTP"))
-
-                    {
-                        return new ActiveXObject();
-                    }                        }
-            }
-        </script>
     </body>
 </html>
