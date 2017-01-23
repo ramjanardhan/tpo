@@ -114,7 +114,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div>
-                                            <h4 style="color: black">Transaction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="ibvalue850" id="ibvalue850" value="" readonly="true" cssClass="jumbotron_bg"/></h4>
+                                            <h4 style="color: black">Transaction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="ibvalue850" id="ibvalue850" value="" readonly="true" /></h4>
                                         </div> 
                                     </div></div>
                                 <div class="col-sm-6">
