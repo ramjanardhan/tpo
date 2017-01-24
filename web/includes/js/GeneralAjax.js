@@ -220,7 +220,6 @@ function envelopeUpdating() {
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);
-
 }
 
 function envelopeUpdatingResponse(resText) {
@@ -245,7 +244,6 @@ function forgotpassword() {
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);
-
 }
 
 function forgotPwdResponse(resText) {
@@ -268,11 +266,10 @@ function acceptPartner() {
     } else {
         var url = "../ajax/acceptPartner.action?assignTo=" + loginId + "&id=" + partnerId;
     }
-    alert(url);
+    //alert(url);
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);
-
 }
 
 function acceptPartnerResponse(resText) {

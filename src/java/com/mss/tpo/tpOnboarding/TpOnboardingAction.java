@@ -178,14 +178,12 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 }
                 if ((roleId == 1) || (roleId == 2)) {
                     //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId()); 
-                    resultType = "tpoRegister";
+                    resultType = "tpoPartnerAdd";
                 } else {
                     int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);
                     if ((IsExistedUserid != 0)) {
                         setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
-                        resultType = "tpoPartnerInfo";
-                    } else {
-                        resultType = SUCCESS;
+                        resultType = "tpoManageProfiles";
                     }
                 }
             } catch (Exception ex) {
