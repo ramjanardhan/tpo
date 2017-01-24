@@ -313,10 +313,11 @@
                                         <div class="threshold" style="position: relative;top:7px">
                                             <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div> 
-                                    </div></div>
+                                        
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdIB" id="isa855RecIdIB" value="%{isa855RecIdIB}" tabindex="25" cssClass="form-control"/>
                                     </div>
                                 </div>
