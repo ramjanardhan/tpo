@@ -1660,9 +1660,8 @@ function gettransferModeSelection(x) {
             document.getElementById("ftp_userId").readOnly = true;
             document.getElementById("ftp_pwd").readOnly = true;
             document.getElementById("ftp_directory").readOnly = true;
-            document.getElementById("ssl_priority").readOnly = true;
-            //document.getElementById("ssl_passphrase").readOnly = true;
-            document.getElementById("ssl_cipher_stergth").readOnly = true;
+            $('#ssl_priority').attr('disabled', true);
+            $('#ssl_cipher_stergth').attr('disabled', true);
         }
         if (x == 'put') {
             if (formAction == 'doAddProfile') {
@@ -1685,8 +1684,8 @@ function gettransferModeSelection(x) {
             document.getElementById("ftp_pwd").readOnly = false;
             document.getElementById("ftp_directory").readOnly = false;
             $('#ftp_method').attr('disabled', false);
-            document.getElementById("ssl_priority2").readOnly = false;
-            document.getElementById("ssl_cipher_stergth2").readOnly = false;
+            $('#ssl_priority2').attr('disabled', false);
+            $('#ssl_cipher_stergth2').attr('disabled', false);
         }
     }
     if (protocol == 'SFTP') {
@@ -1832,8 +1831,8 @@ function gettransferModeSelection(x) {
             $('#http_protocol_mode').attr('disabled', false);
             document.getElementById("http_port").readOnly = false;
             document.getElementById("http_resp_time").readOnly = false;
-            document.getElementById("ssl_priority2").readOnly = false;
-            document.getElementById("ssl_cipher_stergth2").readOnly = false;
+            $('#ssl_priority2').attr('disabled', false);
+            $('#ssl_cipher_stergth2').attr('disabled', false);
             document.getElementById("http_url").readOnly = false;
         }
     }

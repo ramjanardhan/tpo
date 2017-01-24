@@ -74,7 +74,7 @@
         <div class="container">
             <div class="row">
                 <!-- Article main content -->
-                <article class="col-xs-12 maincontent jumbotron" style="padding:0;margin:0">
+                <article id="site_content" class="col-xs-12 maincontent jumbotron" style="padding:0;margin:0">
                     <header class="page-header" style="margin:2px 2px 16px">
                     </header>
                     <div class="col-sm-8">

@@ -288,37 +288,45 @@
                             <div id="protocolmsgAs2"></div>
                             <h4 style="color: #2d8fc8" class="heading_4">AS2&nbsp;Server&nbsp;Details  : </h4>
                             <div class="col-sm-12 form-group">
-                                <div class="col-sm-3">
-                                    <label class="head_label">System&nbsp;Certificates :</label>
+                               <div class="col-sm-3 gutter_hide">
+                               <div class="threshold" style="/*! position: relative; *//*! top:31px */">
+                                        <input value="System Certificates" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
+                                    </div>
                                 </div>
                                 <div class="col-sm-3">    
                                     <label>Upload&nbsp;System&nbsp;Certificate </label>
                                 </div>
-                                 <div class="col-sm-3">
+                                <div class="col-sm-3">
                                     <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="44"/>  
                                 </div>
                             </div>
                             <div class="col-sm-12">    
-                                <div class="col-sm-3">
-                                    <label class="head_label">Organization&nbsp;Profiles:</label>
+                                
+                                
+                                <div class="col-sm-3 gutter_hide">
+                               <div class="threshold" style="/*! position: relative; *//*! top:31px */">
+                                        <input value="Organization Profiles" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 gutter_hide form-group">
-                                    <div class="col-sm-6 ">
-                                        <label>Your&nbsp;Organization </label>
-                                        <s:textfield cssClass="form-control" name="as2_partOrgName" id="as2_partOrgName" tabindex="46" value="%{as2_partOrgName}" onkeyup="as2PartnerProfileNames(this);"/>
-
-                                    </div >
                                     <div class="col-sm-6">
                                         <label>My&nbsp;Organization</label>
                                         <s:textfield cssClass="form-control" name="as2_myOrgName" id="as2_myOrgName" tabindex="45" value="%{as2_myOrgName}" onkeyup="as2OrgProfileNames(this);" onblur="isExistedAS2PartnerProfileName();"/><img id="correctImg" style="display: none;" src="/<%=AppConstants.CONTEXT_PATH%>/includes/images/right.png" 
                                              width="13" height="13" border="0"><img id="wrongImg" style="display: none;" src="/<%=AppConstants.CONTEXT_PATH%>/includes/images/wrong.jpg" width="13" height="13" border="0"><img id="loadingImageAjax" style="display: none;" width="16" height="16" border="0" src="<s:url value="/includes/images/ajax-loader.gif"/>">
                                     </div>
+                                    <div class="col-sm-6 ">
+                                        <label>Your&nbsp;Organization </label>
+                                        <s:textfield cssClass="form-control" name="as2_partOrgName" id="as2_partOrgName" tabindex="46" value="%{as2_partOrgName}" onkeyup="as2PartnerProfileNames(this);"/>
+                                    </div >
                                 </div>
-
                             </div>
                             <div class="col-sm-12">  
-                                <div class="col-sm-3">
-                                    <label class="head_label">Partner&nbsp;Profiles:</label>
+                                 
+                                
+                                <div class="col-sm-3 gutter_hide">
+                               <div class="threshold" style="/*! position: relative; *//*! top:31px */">
+                                        <input value="Partner Profiles" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 gutter_hide form-group">
                                     <div class="col-sm-6"> 
@@ -332,19 +340,26 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="col-sm-12">               
-                                <div class="col-sm-3 col-sm-offset-3">
-                                    <div class="form-group">
-                                        <label>AS2&nbsp;End&nbsp;Point </label>
-                                        <label>My&nbsp;End&nbsp;Point </label>
+                            <div class="col-sm-12">  
+                               
+                                
+                                <div class="col-sm-3 gutter_hide">
+                               <div class="threshold" style="/*! position: relative; *//*! top:31px */">
+                                        <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 gutter_hide form-group">
+                                    <div class="col-sm-6"> 
+                                        <label>My&nbsp;End&nbsp;Point</label>
                                         <s:textfield cssClass="form-control" name="as2_myEndPoint" id="as2_myEndPoint" tabindex="49" value="%{as2_myEndPoint}"/>
-                                    </div></div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
+                                    </div>
+                                    <div class="col-sm-6">    
                                         <label>Your&nbsp;End&nbsp;Point </label>
                                         <s:textfield cssClass="form-control" name="as2_partendpoint" id="as2_partendpoint" tabindex="50" value="%{as2_partendpoint}"/>
-                                    </div></div>
-                            </div> 
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-sm-12">        
                                 <div class="col-sm-3 col-sm-offset-3">
                                     <div class="form-group">
