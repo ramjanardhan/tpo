@@ -61,10 +61,10 @@
                                         <div class="form-group">
                                             <label>Inbound</label>
                                             <div class="lableLeft">
-                                                <s:checkbox name="ib850" id="ib850" fieldValue="true" label="850" tabindex="59" />850&nbsp;
-                                                <s:checkbox name="ib855" id="ib855" fieldValue="true" label="855" tabindex="60" />855&nbsp; 
-                                                <s:checkbox name="ib856" id ="ib856" fieldValue="true" label="856" tabindex="61" />856&nbsp; 
-                                                <s:checkbox name="ib810" id ="ib810" fieldValue="true" label="810" tabindex="62" />810&nbsp;  
+                                                <s:checkbox name="ib850" id="ib850" fieldValue="true" label="850" tabindex="1" />850&nbsp;
+                                                <s:checkbox name="ib855" id="ib855" fieldValue="true" label="855" tabindex="2" />855&nbsp; 
+                                                <s:checkbox name="ib856" id ="ib856" fieldValue="true" label="856" tabindex="3" />856&nbsp; 
+                                                <s:checkbox name="ib810" id ="ib810" fieldValue="true" label="810" tabindex="4" />810&nbsp;  
                                             </div>
                                         </div>
                                     </div>
@@ -72,10 +72,10 @@
                                         <div class="form-group">
                                             <label>Outbound</label>
                                             <div class="lableLeft">
-                                                <s:checkbox name="ob850" id ="ob850" fieldValue="true" label="850" tabindex="63" />850&nbsp;
-                                                <s:checkbox name="ob855" id="ob855" fieldValue="true" label="855" tabindex="64" />855&nbsp;
-                                                <s:checkbox name="ob856" id="ob856" fieldValue="true" label="856" tabindex="65" />856&nbsp;
-                                                <s:checkbox name="ob810" id="ob810" fieldValue="true"  label="810" tabindex="66" />810&nbsp;
+                                                <s:checkbox name="ob850" id ="ob850" fieldValue="true" label="850" tabindex="5" />850&nbsp;
+                                                <s:checkbox name="ob855" id="ob855" fieldValue="true" label="855" tabindex="6" />855&nbsp;
+                                                <s:checkbox name="ob856" id="ob856" fieldValue="true" label="856" tabindex="7" />856&nbsp;
+                                                <s:checkbox name="ob810" id="ob810" fieldValue="true"  label="810" tabindex="8" />810&nbsp;
                                             </div>      
                                         </div>
                                     </div>
@@ -114,19 +114,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa850senderIdIB" id="isa850senderIdIB" value="%{isa850senderIdIB}" tabindex="67" onchange="fieldLengthValidator850IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa850senderIdIB" id="isa850senderIdIB" value="%{isa850senderIdIB}" tabindex="9" onchange="fieldLengthValidator850IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs850senderIdIB" id="gs850senderIdIB" value="%{gs850senderIdIB}" tabindex="68" onchange="fieldLengthValidator850IB(this);"  onkeyup="IBsender850();" />
+                                        <s:textfield cssClass="form-control" name="gs850senderIdIB" id="gs850senderIdIB" value="%{gs850senderIdIB}" tabindex="10" onchange="fieldLengthValidator850IB(this);"  onkeyup="IBsender850();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="69" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="11" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -146,17 +146,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa850RecIdIB" id="isa850RecIdIB" value="%{isa850RecIdIB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa850RecIdIB" id="isa850RecIdIB" value="%{isa850RecIdIB}" tabindex="12" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs850RecIdIB" id="gs850RecIdIB" value="%{gs850RecIdIB}" tabindex="71" cssClass="form-control" onclick="IBrecId850();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs850RecIdIB" id="gs850RecIdIB" value="%{gs850RecIdIB}" tabindex="13" cssClass="form-control" onclick="IBrecId850();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="72"  readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="14"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -170,17 +170,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa850VersionIB" id="isa850VersionIB" value="%{isa850VersionIB}" tabindex="73" onchange="fieldLengthValidator850IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa850VersionIB" id="isa850VersionIB" value="%{isa850VersionIB}" tabindex="15" onchange="fieldLengthValidator850IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs850VersionIB" id="gs850VersionIB" value="%{gs850VersionIB}" tabindex="74" onchange="fieldLengthValidator850IB(this);" onkeyup="IBversion850(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs850VersionIB" id="gs850VersionIB" value="%{gs850VersionIB}" tabindex="16" onchange="fieldLengthValidator850IB(this);" onkeyup="IBversion850(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850VersionIB" id="st850VersionIB" value="%{st850VersionIB}" tabindex="75" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st850VersionIB" id="st850VersionIB" value="%{st850VersionIB}" tabindex="17" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun850GroupIdIB" id="fun850GroupIdIB" value="%{fun850GroupIdIB}" tabindex="76" onchange="fieldLengthValidator850IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun850GroupIdIB" id="fun850GroupIdIB" value="%{fun850GroupIdIB}" tabindex="18" onchange="fieldLengthValidator850IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res850AgecodeIB" id="res850AgecodeIB" placeholder="x" value="%{res850AgecodeIB}" tabindex="77" onchange="fieldLengthValidator850IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res850AgecodeIB" id="res850AgecodeIB" placeholder="x" value="%{res850AgecodeIB}" tabindex="19" onchange="fieldLengthValidator850IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen850AckIB" id="gen850AckIB" tabindex="78" value="%{gen850AckIB}" />
+                                        <s:checkbox  name="gen850AckIB" id="gen850AckIB" tabindex="20" value="%{gen850AckIB}" />
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +256,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans850IdcodeIB" id="trans850IdcodeIB" value="%{trans850IdcodeIB}" tabindex="79" onchange="fieldLengthValidator850IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans850IdcodeIB" id="trans850IdcodeIB" value="%{trans850IdcodeIB}" tabindex="21" onchange="fieldLengthValidator850IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -291,19 +291,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa855senderIdIB" id="isa855senderIdIB" value="%{isa855senderIdIB}" tabindex="67" onchange="fieldLengthValidator855IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa855senderIdIB" id="isa855senderIdIB" value="%{isa855senderIdIB}" tabindex="22" onchange="fieldLengthValidator855IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs855senderIdIB" id="gs855senderIdIB" value="%{gs855senderIdIB}" tabindex="68" onchange="fieldLengthValidator855IB(this);" onkeyup="IBsender855();" />
+                                        <s:textfield cssClass="form-control" name="gs855senderIdIB" id="gs855senderIdIB" value="%{gs855senderIdIB}" tabindex="23" onchange="fieldLengthValidator855IB(this);" onkeyup="IBsender855();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st855senderIdIB" id="st855senderIdIB" value="%{st855senderIdIB}" tabindex="69" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st855senderIdIB" id="st855senderIdIB" value="%{st855senderIdIB}" tabindex="24" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -317,17 +317,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdIB" id="isa855RecIdIB" value="%{isa855RecIdIB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdIB" id="isa855RecIdIB" value="%{isa855RecIdIB}" tabindex="25" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs855RecIdIB" id="gs855RecIdIB" value="%{gs855RecIdIB}" tabindex="71" cssClass="form-control" onclick="IBrecId855();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs855RecIdIB" id="gs855RecIdIB" value="%{gs855RecIdIB}" tabindex="26" cssClass="form-control" onclick="IBrecId855();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855RecIdIB" id="st855RecIdIB" value="%{st855RecIdIB}" tabindex="72"  readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st855RecIdIB" id="st855RecIdIB" value="%{st855RecIdIB}" tabindex="27"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -341,17 +341,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa855VersionIB" id="isa855VersionIB" value="%{isa855VersionIB}" tabindex="73" onchange="fieldLengthValidator855IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa855VersionIB" id="isa855VersionIB" value="%{isa855VersionIB}" tabindex="28" onchange="fieldLengthValidator855IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs855VersionIB" id="gs855VersionIB" value="%{gs855VersionIB}" tabindex="74" onchange="fieldLengthValidator855IB(this);" onkeyup="IBversion855(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs855VersionIB" id="gs855VersionIB" value="%{gs855VersionIB}" tabindex="29" onchange="fieldLengthValidator855IB(this);" onkeyup="IBversion855(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855VersionIB" id="st855VersionIB" value="%{st855VersionIB}" tabindex="75" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st855VersionIB" id="st855VersionIB" value="%{st855VersionIB}" tabindex="30" onchange="fieldLengthValidator855IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -369,7 +369,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun855GroupIdIB" id="fun855GroupIdIB" value="%{fun855GroupIdIB}" tabindex="76" onchange="fieldLengthValidator855IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun855GroupIdIB" id="fun855GroupIdIB" value="%{fun855GroupIdIB}" tabindex="31" onchange="fieldLengthValidator855IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -387,7 +387,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res855AgecodeIB" id="res855AgecodeIB" placeholder="x" value="%{res855AgecodeIB}" tabindex="77" onchange="fieldLengthValidator855IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res855AgecodeIB" id="res855AgecodeIB" placeholder="x" value="%{res855AgecodeIB}" tabindex="32" onchange="fieldLengthValidator855IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -405,7 +405,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen855AckIB" id="gen855AckIB" tabindex="78" value="%{gen855AckIB}" />
+                                        <s:checkbox  name="gen855AckIB" id="gen855AckIB" tabindex="33" value="%{gen855AckIB}" />
                                     </div>
                                 </div>
                             </div>
@@ -429,7 +429,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans855IdcodeIB" id="trans855IdcodeIB" value="%{trans855IdcodeIB}" tabindex="79" onchange="fieldLengthValidator855IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans855IdcodeIB" id="trans855IdcodeIB" value="%{trans855IdcodeIB}" tabindex="34" onchange="fieldLengthValidator855IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -464,19 +464,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa856senderIdIB" id="isa856senderIdIB" value="%{isa856senderIdIB}" tabindex="67" onchange="fieldLengthValidator856IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa856senderIdIB" id="isa856senderIdIB" value="%{isa856senderIdIB}" tabindex="35" onchange="fieldLengthValidator856IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs856senderIdIB" id="gs856senderIdIB" value="%{gs856senderIdIB}" tabindex="68" onchange="fieldLengthValidator856IB(this);" onkeyup="IBsender856();" />
+                                        <s:textfield cssClass="form-control" name="gs856senderIdIB" id="gs856senderIdIB" value="%{gs856senderIdIB}" tabindex="36" onchange="fieldLengthValidator856IB(this);" onkeyup="IBsender856();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st856senderIdIB" id="st856senderIdIB" value="%{st856senderIdIB}" tabindex="69" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st856senderIdIB" id="st856senderIdIB" value="%{st856senderIdIB}" tabindex="37" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -490,17 +490,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856RecIdIB" id="isa856RecIdIB" value="%{isa856RecIdIB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856RecIdIB" id="isa856RecIdIB" value="%{isa856RecIdIB}" tabindex="38" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs856RecIdIB" id="gs856RecIdIB" value="%{gs856RecIdIB}" tabindex="71" cssClass="form-control" onclick="IBrecId856();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs856RecIdIB" id="gs856RecIdIB" value="%{gs856RecIdIB}" tabindex="39" cssClass="form-control" onclick="IBrecId856();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856RecIdIB" id="st856RecIdIB" value="%{st856RecIdIB}" tabindex="72"  readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st856RecIdIB" id="st856RecIdIB" value="%{st856RecIdIB}" tabindex="40"  readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -514,17 +514,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa856VersionIB" id="isa856VersionIB" value="%{isa856VersionIB}" tabindex="73" onchange="fieldLengthValidator856IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa856VersionIB" id="isa856VersionIB" value="%{isa856VersionIB}" tabindex="41" onchange="fieldLengthValidator856IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs856VersionIB" id="gs856VersionIB" value="%{gs856VersionIB}" tabindex="74" onchange="fieldLengthValidator856IB(this);" onkeyup="IBversion856(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs856VersionIB" id="gs856VersionIB" value="%{gs856VersionIB}" tabindex="42" onchange="fieldLengthValidator856IB(this);" onkeyup="IBversion856(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856VersionIB" id="st856VersionIB" value="%{st856VersionIB}" tabindex="75" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st856VersionIB" id="st856VersionIB" value="%{st856VersionIB}" tabindex="43" onchange="fieldLengthValidator856IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -542,7 +542,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun856GroupIdIB" id="fun856GroupIdIB" value="%{fun856GroupIdIB}" tabindex="76" onchange="fieldLengthValidator856IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun856GroupIdIB" id="fun856GroupIdIB" value="%{fun856GroupIdIB}" tabindex="44" onchange="fieldLengthValidator856IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -560,7 +560,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res856AgecodeIB" id="res856AgecodeIB" placeholder="x" value="%{res856AgecodeIB}" tabindex="77" onchange="fieldLengthValidator856IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res856AgecodeIB" id="res856AgecodeIB" placeholder="x" value="%{res856AgecodeIB}" tabindex="45" onchange="fieldLengthValidator856IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -578,7 +578,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen856AckIB" id="gen856AckIB" tabindex="78" value="%{gen856AckIB}" />
+                                        <s:checkbox  name="gen856AckIB" id="gen856AckIB" tabindex="46" value="%{gen856AckIB}" />
                                     </div>
                                 </div>
                             </div>
@@ -601,7 +601,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans856IdcodeIB" id="trans856IdcodeIB" value="%{trans856IdcodeIB}" tabindex="79" onchange="fieldLengthValidator856IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans856IdcodeIB" id="trans856IdcodeIB" value="%{trans856IdcodeIB}" tabindex="47" onchange="fieldLengthValidator856IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -636,19 +636,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa810senderIdIB" id="isa810senderIdIB" value="%{isa810senderIdIB}" tabindex="67" onchange="fieldLengthValidator810IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa810senderIdIB" id="isa810senderIdIB" value="%{isa810senderIdIB}" tabindex="48" onchange="fieldLengthValidator810IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs810senderIdIB" id="gs810senderIdIB" value="%{gs810senderIdIB}" tabindex="68" onchange="fieldLengthValidator810IB(this);" onkeyup="IBsender810();" />
+                                        <s:textfield cssClass="form-control" name="gs810senderIdIB" id="gs810senderIdIB" value="%{gs810senderIdIB}" tabindex="49" onchange="fieldLengthValidator810IB(this);" onkeyup="IBsender810();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st810senderIdIB" id="st810senderIdIB" value="%{st810senderIdIB}" tabindex="69" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st810senderIdIB" id="st810senderIdIB" value="%{st810senderIdIB}" tabindex="50" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -663,12 +663,12 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdIB" id="isa810RecIdIB" value="%{isa810RecIdIB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdIB" id="isa810RecIdIB" value="%{isa810RecIdIB}" tabindex="51" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs810RecIdIB" id="gs810RecIdIB" value="%{gs810RecIdIB}" tabindex="71" cssClass="form-control" onclick="IBrecId810();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs810RecIdIB" id="gs810RecIdIB" value="%{gs810RecIdIB}" tabindex="52" cssClass="form-control" onclick="IBrecId810();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -687,17 +687,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa810VersionIB" id="isa810VersionIB" value="%{isa810VersionIB}" tabindex="73" onchange="fieldLengthValidator810IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa810VersionIB" id="isa810VersionIB" value="%{isa810VersionIB}" tabindex="53" onchange="fieldLengthValidator810IB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs810VersionIB" id="gs810VersionIB" value="%{gs810VersionIB}" tabindex="74" onchange="fieldLengthValidator810IB(this);" onkeyup="IBversion810(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs810VersionIB" id="gs810VersionIB" value="%{gs810VersionIB}" tabindex="54" onchange="fieldLengthValidator810IB(this);" onkeyup="IBversion810(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810VersionIB" id="st810VersionIB" value="%{st810VersionIB}" tabindex="75" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st810VersionIB" id="st810VersionIB" value="%{st810VersionIB}" tabindex="55" onchange="fieldLengthValidator810IB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -715,7 +715,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun810GroupIdIB" id="fun810GroupIdIB" value="%{fun810GroupIdIB}" tabindex="76" onchange="fieldLengthValidator810IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun810GroupIdIB" id="fun810GroupIdIB" value="%{fun810GroupIdIB}" tabindex="56" onchange="fieldLengthValidator810IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -735,7 +735,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res810AgecodeIB" id="res810AgecodeIB" placeholder="x" value="%{res810AgecodeIB}" tabindex="77" onchange="fieldLengthValidator810IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res810AgecodeIB" id="res810AgecodeIB" placeholder="x" value="%{res810AgecodeIB}" tabindex="57" onchange="fieldLengthValidator810IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -753,7 +753,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen810AckIB" id="gen810AckIB" tabindex="78" value="%{gen810AckIB}" />
+                                        <s:checkbox  name="gen810AckIB" id="gen810AckIB" tabindex="58" value="%{gen810AckIB}" />
                                     </div>
                                 </div>
                             </div>
@@ -775,7 +775,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans810IdcodeIB" id="trans810IdcodeIB" value="%{trans810IdcodeIB}" tabindex="79" onchange="fieldLengthValidator810IB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans810IdcodeIB" id="trans810IdcodeIB" value="%{trans810IdcodeIB}" tabindex="59" onchange="fieldLengthValidator810IB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -810,19 +810,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa850senderIdOB" id="isa850senderIdOB" value="%{isa850senderIdOB}" tabindex="67" onchange="fieldLengthValidator850OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa850senderIdOB" id="isa850senderIdOB" value="%{isa850senderIdOB}" tabindex="60" onchange="fieldLengthValidator850OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs850senderIdOB" id="gs850senderIdOB" value="%{gs850senderIdOB}" tabindex="68" onchange="fieldLengthValidator850OB(this);"  onkeyup="OBsender850();" />
+                                        <s:textfield cssClass="form-control" name="gs850senderIdOB" id="gs850senderIdOB" value="%{gs850senderIdOB}" tabindex="61" onchange="fieldLengthValidator850OB(this);"  onkeyup="OBsender850();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st850senderIdOB" id="st850senderIdOB" value="%{st850senderIdOB}" tabindex="69" onchange="fieldLengthValidator850OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st850senderIdOB" id="st850senderIdOB" value="%{st850senderIdOB}" tabindex="62" onchange="fieldLengthValidator850OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -835,17 +835,17 @@
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa850RecIdOB" id="isa850RecIdOB" value="%{isa850RecIdOB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa850RecIdOB" id="isa850RecIdOB" value="%{isa850RecIdOB}" tabindex="63" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs850RecIdOB" id="gs850RecIdOB" value="%{gs850RecIdOB}" tabindex="71" cssClass="form-control" onclick="OB850recId(this);"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs850RecIdOB" id="gs850RecIdOB" value="%{gs850RecIdOB}" tabindex="64" cssClass="form-control" onclick="OB850recId(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850RecIdOB" id="st850RecIdOB" value="%{st850RecIdOB}" tabindex="72" readonly="true" />
+                                        <s:textfield cssClass="form-control" name="st850RecIdOB" id="st850RecIdOB" value="%{st850RecIdOB}" tabindex="65" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -859,17 +859,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa850VersionOB" id="isa850VersionOB" value="%{isa850VersionOB}" tabindex="73" onchange="fieldLengthValidator850OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa850VersionOB" id="isa850VersionOB" value="%{isa850VersionOB}" tabindex="66" onchange="fieldLengthValidator850OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs850VersionOB" id="gs850VersionOB" value="%{gs850VersionOB}" tabindex="74" onchange="fieldLengthValidator850OB(this);" onkeyup="OBversion850(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs850VersionOB" id="gs850VersionOB" value="%{gs850VersionOB}" tabindex="67" onchange="fieldLengthValidator850OB(this);" onkeyup="OBversion850(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st850VersionOB" id="st850VersionOB" value="%{st850VersionOB}" tabindex="75" onchange="fieldLengthValidator850OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st850VersionOB" id="st850VersionOB" value="%{st850VersionOB}" tabindex="68" onchange="fieldLengthValidator850OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -887,7 +887,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun850GroupIdOB" id="fun850GroupIdOB" value="%{fun850GroupIdOB}" tabindex="76" onchange="fieldLengthValidator850OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun850GroupIdOB" id="fun850GroupIdOB" value="%{fun850GroupIdOB}" tabindex="69" onchange="fieldLengthValidator850OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -905,7 +905,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res850AgecodeOB" id="res850AgecodeOB" placeholder="x" value="%{res850AgecodeOB}" tabindex="77" onchange="fieldLengthValidator850OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res850AgecodeOB" id="res850AgecodeOB" placeholder="x" value="%{res850AgecodeOB}" tabindex="70" onchange="fieldLengthValidator850OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -923,7 +923,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen850AckOB" id="gen850AckOB" tabindex="78" value="%{gen850AckOB}" />
+                                        <s:checkbox  name="gen850AckOB" id="gen850AckOB" tabindex="71" value="%{gen850AckOB}" />
                                     </div>
                                 </div>
                             </div>
@@ -946,7 +946,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans850IdcodeOB" id="trans850IdcodeOB" value="%{trans850IdcodeOB}" tabindex="79" onchange="fieldLengthValidator850OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans850IdcodeOB" id="trans850IdcodeOB" value="%{trans850IdcodeOB}" tabindex="72" onchange="fieldLengthValidator850OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -981,19 +981,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa855senderIdOB" id="isa855senderIdOB" value="%{isa855senderIdOB}" tabindex="67" onchange="fieldLengthValidator855OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa855senderIdOB" id="isa855senderIdOB" value="%{isa855senderIdOB}" tabindex="73" onchange="fieldLengthValidator855OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs855senderIdOB" id="gs855senderIdOB" value="%{gs855senderIdOB}" tabindex="68" onchange="fieldLengthValidator855OB(this);"  onkeyup="OBsender855();" />
+                                        <s:textfield cssClass="form-control" name="gs855senderIdOB" id="gs855senderIdOB" value="%{gs855senderIdOB}" tabindex="74" onchange="fieldLengthValidator855OB(this);"  onkeyup="OBsender855();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st855senderIdOB" id="st855senderIdOB" value="%{st855senderIdOB}" tabindex="69" onchange="fieldLengthValidator855OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st855senderIdOB" id="st855senderIdOB" value="%{st855senderIdOB}" tabindex="75" onchange="fieldLengthValidator855OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1007,17 +1007,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdOB" id="isa855RecIdOB" value="%{isa855RecIdOB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdOB" id="isa855RecIdOB" value="%{isa855RecIdOB}" tabindex="76" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs855RecIdOB" id="gs855RecIdOB" value="%{gs855RecIdOB}" tabindex="71" cssClass="form-control" onclick="OBrecId855();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs855RecIdOB" id="gs855RecIdOB" value="%{gs855RecIdOB}" tabindex="77" cssClass="form-control" onclick="OBrecId855();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855RecIdOB" id="st855RecIdOB" value="%{st855RecIdOB}" tabindex="72" readonly="true" />
+                                        <s:textfield cssClass="form-control" name="st855RecIdOB" id="st855RecIdOB" value="%{st855RecIdOB}" tabindex="78" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -1031,17 +1031,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa855VersionOB" id="isa855VersionOB" value="%{isa855VersionOB}" tabindex="73" onchange="fieldLengthValidator855OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa855VersionOB" id="isa855VersionOB" value="%{isa855VersionOB}" tabindex="79" onchange="fieldLengthValidator855OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs855VersionOB" id="gs855VersionOB" value="%{gs855VersionOB}" tabindex="74" onchange="fieldLengthValidator855OB(this);" onkeyup="OBversion855(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs855VersionOB" id="gs855VersionOB" value="%{gs855VersionOB}" tabindex="80" onchange="fieldLengthValidator855OB(this);" onkeyup="OBversion855(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st855VersionOB" id="st855VersionOB" value="%{st855VersionOB}" tabindex="75" onchange="fieldLengthValidator855OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st855VersionOB" id="st855VersionOB" value="%{st855VersionOB}" tabindex="81" onchange="fieldLengthValidator855OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1059,7 +1059,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun855GroupIdOB" id="fun855GroupIdOB" value="%{fun855GroupIdOB}" tabindex="76" onchange="fieldLengthValidator855OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun855GroupIdOB" id="fun855GroupIdOB" value="%{fun855GroupIdOB}" tabindex="82" onchange="fieldLengthValidator855OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1078,7 +1078,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res855AgecodeOB" id="res855AgecodeOB" placeholder="x" value="%{res855AgecodeOB}" tabindex="77" onchange="fieldLengthValidator855OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res855AgecodeOB" id="res855AgecodeOB" placeholder="x" value="%{res855AgecodeOB}" tabindex="83" onchange="fieldLengthValidator855OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1096,7 +1096,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen855AckOB" id="gen855AckOB" tabindex="78" value="%{gen855AckOB}" />
+                                        <s:checkbox  name="gen855AckOB" id="gen855AckOB" tabindex="84" value="%{gen855AckOB}" />
                                     </div>
                                 </div>
                             </div>
@@ -1120,7 +1120,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans855IdcodeOB" id="trans855IdcodeOB" value="%{trans855IdcodeOB}" tabindex="79" onchange="fieldLengthValidator855OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans855IdcodeOB" id="trans855IdcodeOB" value="%{trans855IdcodeOB}" tabindex="85" onchange="fieldLengthValidator855OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1156,19 +1156,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa856senderIdOB" id="isa856senderIdOB" value="%{isa856senderIdOB}" tabindex="67" onchange="fieldLengthValidator856OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa856senderIdOB" id="isa856senderIdOB" value="%{isa856senderIdOB}" tabindex="86" onchange="fieldLengthValidator856OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs856senderIdOB" id="gs856senderIdOB" value="%{gs856senderIdOB}" tabindex="68" onchange="fieldLengthValidator856OB(this);" onkeyup="OBsender856();" />
+                                        <s:textfield cssClass="form-control" name="gs856senderIdOB" id="gs856senderIdOB" value="%{gs856senderIdOB}" tabindex="87" onchange="fieldLengthValidator856OB(this);" onkeyup="OBsender856();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st856senderIdOB" id="st856senderIdOB" value="%{st856senderIdOB}" tabindex="69" onchange="fieldLengthValidator856OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st856senderIdOB" id="st856senderIdOB" value="%{st856senderIdOB}" tabindex="88" onchange="fieldLengthValidator856OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1182,17 +1182,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856RecIdOB" id="isa856RecIdOB" value="%{isa856RecIdOB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856RecIdOB" id="isa856RecIdOB" value="%{isa856RecIdOB}" tabindex="89" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs856RecIdOB" id="gs856RecIdOB" value="%{gs856RecIdOB}" tabindex="71" cssClass="form-control" onclick="OBrecId856();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs856RecIdOB" id="gs856RecIdOB" value="%{gs856RecIdOB}" tabindex="90" cssClass="form-control" onclick="OBrecId856();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856RecIdOB" id="st856RecIdOB" value="%{st856RecIdOB}" tabindex="72" readonly="true" />
+                                        <s:textfield cssClass="form-control" name="st856RecIdOB" id="st856RecIdOB" value="%{st856RecIdOB}" tabindex="91" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -1206,17 +1206,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa856VersionOB" id="isa856VersionOB" value="%{isa856VersionOB}" tabindex="73" onchange="fieldLengthValidator856OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa856VersionOB" id="isa856VersionOB" value="%{isa856VersionOB}" tabindex="92" onchange="fieldLengthValidator856OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs856VersionOB" id="gs856VersionOB" value="%{gs856VersionOB}" tabindex="74" onchange="fieldLengthValidator856OB(this);" onkeyup="OBversion856(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs856VersionOB" id="gs856VersionOB" value="%{gs856VersionOB}" tabindex="93" onchange="fieldLengthValidator856OB(this);" onkeyup="OBversion856(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st856VersionOB" id="st856VersionOB" value="%{st856VersionOB}" tabindex="75" onchange="fieldLengthValidator856OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st856VersionOB" id="st856VersionOB" value="%{st856VersionOB}" tabindex="94" onchange="fieldLengthValidator856OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1234,7 +1234,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun856GroupIdOB" id="fun856GroupIdOB" value="%{fun856GroupIdOB}" tabindex="76" onchange="fieldLengthValidator856OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun856GroupIdOB" id="fun856GroupIdOB" value="%{fun856GroupIdOB}" tabindex="95" onchange="fieldLengthValidator856OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1252,7 +1252,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res856AgecodeOB" id="res856AgecodeOB" placeholder="x" value="%{res856AgecodeOB}" tabindex="77" onchange="fieldLengthValidator856OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res856AgecodeOB" id="res856AgecodeOB" placeholder="x" value="%{res856AgecodeOB}" tabindex="96" onchange="fieldLengthValidator856OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1270,7 +1270,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen856AckOB" id="gen856AckOB" tabindex="78" value="%{gen856AckOB}" />
+                                        <s:checkbox  name="gen856AckOB" id="gen856AckOB" tabindex="97" value="%{gen856AckOB}" />
                                     </div>
                                 </div>
                             </div>
@@ -1293,7 +1293,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans856IdcodeOB" id="trans856IdcodeOB" value="%{trans856IdcodeOB}" tabindex="79" onchange="fieldLengthValidator856OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans856IdcodeOB" id="trans856IdcodeOB" value="%{trans856IdcodeOB}" tabindex="98" onchange="fieldLengthValidator856OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1328,19 +1328,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isa810senderIdOB" id="isa810senderIdOB" value="%{isa810senderIdOB}" tabindex="67" onchange="fieldLengthValidator810OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa810senderIdOB" id="isa810senderIdOB" value="%{isa810senderIdOB}" tabindex="99" onchange="fieldLengthValidator810OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gs810senderIdOB" id="gs810senderIdOB" value="%{gs810senderIdOB}" tabindex="68" onchange="fieldLengthValidator810OB(this);"  onkeyup="OBsender810();" />
+                                        <s:textfield cssClass="form-control" name="gs810senderIdOB" id="gs810senderIdOB" value="%{gs810senderIdOB}" tabindex="100" onchange="fieldLengthValidator810OB(this);"  onkeyup="OBsender810();" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="st810senderIdOB" id="st810senderIdOB" value="%{st810senderIdOB}" tabindex="69" onchange="fieldLengthValidator810OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st810senderIdOB" id="st810senderIdOB" value="%{st810senderIdOB}" tabindex="101" onchange="fieldLengthValidator810OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1354,17 +1354,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdOB" id="isa810RecIdOB" value="%{isa810RecIdOB}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdOB" id="isa810RecIdOB" value="%{isa810RecIdOB}" tabindex="102" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs810RecIdOB" id="gs810RecIdOB" value="%{gs810RecIdOB}" tabindex="71" cssClass="form-control" onclick="OBrecId810();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gs810RecIdOB" id="gs810RecIdOB" value="%{gs810RecIdOB}" tabindex="103" cssClass="form-control" onclick="OBrecId810();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810RecIdOB" id="st810RecIdOB" value="%{st810RecIdOB}" tabindex="72" readonly="true" />
+                                        <s:textfield cssClass="form-control" name="st810RecIdOB" id="st810RecIdOB" value="%{st810RecIdOB}" tabindex="104" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -1378,17 +1378,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isa810VersionOB" id="isa810VersionOB" value="%{isa810VersionOB}" tabindex="73" onchange="fieldLengthValidator810OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="isa810VersionOB" id="isa810VersionOB" value="%{isa810VersionOB}" tabindex="105" onchange="fieldLengthValidator810OB(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gs810VersionOB" id="gs810VersionOB" value="%{gs810VersionOB}" tabindex="74" onchange="fieldLengthValidator810OB(this);" onkeyup="OBversion810(this);"/>
+                                        <s:textfield cssClass="form-control" name="gs810VersionOB" id="gs810VersionOB" value="%{gs810VersionOB}" tabindex="106" onchange="fieldLengthValidator810OB(this);" onkeyup="OBversion810(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="st810VersionOB" id="st810VersionOB" value="%{st810VersionOB}" tabindex="75" onchange="fieldLengthValidator810OB(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="st810VersionOB" id="st810VersionOB" value="%{st810VersionOB}" tabindex="107" onchange="fieldLengthValidator810OB(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -1406,7 +1406,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="fun810GroupIdOB" id="fun810GroupIdOB" value="%{fun810GroupIdOB}" tabindex="76" onchange="fieldLengthValidator810OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="fun810GroupIdOB" id="fun810GroupIdOB" value="%{fun810GroupIdOB}" tabindex="108" onchange="fieldLengthValidator810OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1424,7 +1424,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="res810AgecodeOB" id="res810AgecodeOB" placeholder="x" value="%{res810AgecodeOB}" tabindex="77" onchange="fieldLengthValidator810OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="res810AgecodeOB" id="res810AgecodeOB" placeholder="x" value="%{res810AgecodeOB}" tabindex="109" onchange="fieldLengthValidator810OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1442,7 +1442,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="gen810AckOB" id="gen810AckOB" tabindex="78" value="%{gen810AckOB}" />
+                                        <s:checkbox  name="gen810AckOB" id="gen810AckOB" tabindex="110" value="%{gen810AckOB}" />
                                     </div>
                                 </div>
                             </div>
@@ -1465,7 +1465,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="trans810IdcodeOB" id="trans810IdcodeOB" value="%{trans810IdcodeOB}" tabindex="79" onchange="fieldLengthValidator810OB(this);"/>
+                                        <s:textfield cssClass="form-control" name="trans810IdcodeOB" id="trans810IdcodeOB" value="%{trans810IdcodeOB}" tabindex="111" onchange="fieldLengthValidator810OB(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -1473,10 +1473,10 @@
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
                             <div class="col-sm-1 pull-right">
-                                <s:submit   value="Save" cssClass="btn btn-primary pull-right" tabindex="171" onclick="return checkEnvelopes()"/>
+                                <s:submit   value="Save" cssClass="btn btn-primary pull-right" tabindex="112" onclick="return checkEnvelopes()"/>
                             </div>
                             <div class="col-sm-1  pull-right">
-                                <s:reset   value="Reset" cssClass="btn btn-primary pull-right" tabindex="172"/>
+                                <s:reset   value="Reset" cssClass="btn btn-primary pull-right" tabindex="113"/>
                             </div>
                         </div>
                     </div>

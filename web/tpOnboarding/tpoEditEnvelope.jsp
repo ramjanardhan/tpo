@@ -65,19 +65,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
-                                        <s:textfield cssClass="form-control" name="isaSenderId" id="isaSenderId" value="%{tpOnboardingBean.isaSenderId}" tabindex="67" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="isaSenderId" id="isaSenderId" value="%{tpOnboardingBean.isaSenderId}" tabindex="1" onchange="fieldLengthValidatorEditEnvelope(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>GS</label>
-                                        <s:textfield cssClass="form-control" name="gsSenderId" id="gsSenderId" value="%{tpOnboardingBean.gsSenderId}" tabindex="68" onchange="fieldLengthValidatorEditEnvelope(this);" onkeyup="senderCopy();"/>
+                                        <s:textfield cssClass="form-control" name="gsSenderId" id="gsSenderId" value="%{tpOnboardingBean.gsSenderId}" tabindex="2" onchange="fieldLengthValidatorEditEnvelope(this);" onkeyup="senderCopy();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ST</label>
-                                        <s:textfield cssClass="form-control" name="stSenderId" id="stSenderId" value="%{tpOnboardingBean.stSenderId}" tabindex="69" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="stSenderId" id="stSenderId" value="%{tpOnboardingBean.stSenderId}" tabindex="3" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -91,17 +91,17 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="70" cssClass="form-control"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="4" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gsReceiverId" id="gsReceiverId" value="%{tpOnboardingBean.gsReceiverId}" tabindex="71" cssClass="form-control" onclick="receiverCopy();"/>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gsReceiverId" id="gsReceiverId" value="%{tpOnboardingBean.gsReceiverId}" tabindex="5" cssClass="form-control" onclick="receiverCopy();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="stReceiverId" id="stReceiverId" value="%{tpOnboardingBean.stReceiverId}" tabindex="72" readonly="true" />
+                                        <s:textfield cssClass="form-control" name="stReceiverId" id="stReceiverId" value="%{tpOnboardingBean.stReceiverId}" tabindex="6" readonly="true" />
                                     </div>
                                 </div>
                             </div>
@@ -115,17 +115,17 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="isaVersion" id="isaVersion" value="%{tpOnboardingBean.isaVersion}" tabindex="73" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="isaVersion" id="isaVersion" value="%{tpOnboardingBean.isaVersion}" tabindex="7" onchange="fieldLengthValidatorEditEnvelope(this);"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="gsVersion" id="gsVersion" value="%{tpOnboardingBean.gsVersion}" tabindex="74" onchange="fieldLengthValidatorEditEnvelope(this);" onkeyup="versionCopy();"/>
+                                        <s:textfield cssClass="form-control" name="gsVersion" id="gsVersion" value="%{tpOnboardingBean.gsVersion}" tabindex="8" onchange="fieldLengthValidatorEditEnvelope(this);" onkeyup="versionCopy();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="stVersion" id="stVersion" value="%{tpOnboardingBean.stVersion}" tabindex="75" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
+                                        <s:textfield cssClass="form-control" name="stVersion" id="stVersion" value="%{tpOnboardingBean.stVersion}" tabindex="9" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="functionalGroupId" id="functionalGroupId" value="%{tpOnboardingBean.functionalGroupId}" tabindex="76" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="functionalGroupId" id="functionalGroupId" value="%{tpOnboardingBean.functionalGroupId}" tabindex="10" onchange="fieldLengthValidatorEditEnvelope(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="responsibleAgencyCode" id="responsibleAgencyCode" placeholder="x" value="%{tpOnboardingBean.responsibleAgencyCode}" tabindex="77" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="responsibleAgencyCode" id="responsibleAgencyCode" placeholder="x" value="%{tpOnboardingBean.responsibleAgencyCode}" tabindex="11" onchange="fieldLengthValidatorEditEnvelope(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:checkbox  name="generateAcknowledgement" id="generateAcknowledgement" tabindex="78" value="%{tpOnboardingBean.generateAcknowledgement}" />
+                                        <s:checkbox  name="generateAcknowledgement" id="generateAcknowledgement" tabindex="12" value="%{tpOnboardingBean.generateAcknowledgement}" />
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="transactionSetIdCode" id="transactionSetIdCode" value="%{tpOnboardingBean.transactionSetIdCode}" tabindex="79" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="transactionSetIdCode" id="transactionSetIdCode" value="%{tpOnboardingBean.transactionSetIdCode}" tabindex="13" onchange="fieldLengthValidatorEditEnvelope(this);"/>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-1 pull-right"><input type="button" value="Update" class="btn btn-primary" onclick="return envelopeUpdating();"/></div>
+                                <div class="col-md-1 pull-right"><input type="button" value="Update" class="btn btn-primary"  tabindex="14" onclick="return envelopeUpdating();"/></div>
                             </div>
                         </div>
                     </div>

@@ -46,19 +46,19 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Partner Name</label>
-                                    <s:textfield cssClass="form-control"  name="partnerName" id="partnerName" value="%{partnerName}" placeholder="Partner Name"/>
+                                    <s:textfield cssClass="form-control"  name="partnerName" id="partnerName" value="%{partnerName}" placeholder="Partner Name"  tabindex="1"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Country</label>
-                                    <s:select cssClass="form-control" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{country}" />
+                                    <s:select cssClass="form-control" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{country}"  tabindex="2"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <s:select cssClass="form-control" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'INACTIVE':'INACTIVE','ACTIVE':'ACTIVE','REJECTED':'REJECTED'}" name="status" id="status" value="%{status}" />
+                                    <s:select cssClass="form-control" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'INACTIVE':'INACTIVE','ACTIVE':'ACTIVE','REJECTED':'REJECTED'}" name="status" id="status" value="%{status}"   tabindex="3"/>
                                 </div>
                             </div>
                         </div>

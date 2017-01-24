@@ -57,7 +57,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Direction</label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="1" name="direction" id="direction" value="%{direction}"  cssClass="form-control" />         
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="2" name="direction" id="direction" value="%{direction}"  cssClass="form-control" />         
                                 </div>
                             </div>
                         </div>
@@ -65,10 +65,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-sm-1 pull-right">
-                                        <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4"/>
+                                        <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="3"/>
                                     </div>
                                     <div class="col-sm-1 pull-right">
-                                        <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="3"/>
+                                        <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="4"/>
                                     </div>
                                 </div>
                             </div>

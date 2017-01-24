@@ -103,20 +103,20 @@
                                 <s:form action="general/tpoLoginCheck" method="post" name="tpLoginForm" id="tpLoginForm" theme="simple">
                                     <div class="top-margin">
                                         <label>Username <span class="text-danger">*</span></label>
-                                        <s:textfield cssClass="form-control" name="loginId" id="loginId"/>
+                                        <s:textfield cssClass="form-control" name="loginId" id="loginId"  tabindex="1"/>
                                     </div>
                                     <div class="top-margin">
                                         <label>Password <span class="text-danger">*</span></label>
-                                        <s:password cssClass="form-control" name="password" id="password"/>
+                                        <s:password cssClass="form-control" name="password" id="password"  tabindex="2"/>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-xs-8">
-                                            <a href="" data-toggle="modal" data-target="#myModal">I forgot my password</a>
+                                            <a href="" data-toggle="modal" data-target="#myModal"  tabindex="3">I forgot my password</a>
                                         </div><!-- /.col -->
                                         <div class="col-xs-4">
                                             <!--                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
-                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" onclick="checkboxstatus()"/>
+                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" onclick="checkboxstatus()"  tabindex="4"/>
                                         </div><!-- /.col -->
                                     </div>
                                 </s:form>

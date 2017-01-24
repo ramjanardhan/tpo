@@ -71,7 +71,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Password<span class="text-danger">*</span></label>
-                                    <s:password cssClass="form-control" name="regpassword" id="regpassword" placeholder="New password" onchange="fieldLengthValidator(this);"/>
+                                    <s:password cssClass="form-control" name="regpassword" id="regpassword" placeholder="New password" onchange="fieldLengthValidator(this);" tabindex="1"/>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Confirm Password<span class="text-danger">*</span></label>
-                                    <s:password cssClass="form-control" name="cnfPassword" id="cnfPassword" placeholder="Confirm Password" onchange="checkPwd();fieldLengthValidator(this);"/>
+                                    <s:password cssClass="form-control" name="cnfPassword" id="cnfPassword" placeholder="Confirm Password" onchange="checkPwd();fieldLengthValidator(this);" tabindex="2"/>
                                 </div>
                             </div>
                         </div>
