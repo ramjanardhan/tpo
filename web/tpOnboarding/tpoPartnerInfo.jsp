@@ -68,49 +68,49 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Partner Name<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{tpOnboardingBean.partnerName}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{tpOnboardingBean.partnerName}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="1"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Email<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" value="%{tpOnboardingBean.contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" value="%{tpOnboardingBean.contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" readOnly="true"  tabindex="2"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Phone Number<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" value="%{tpOnboardingBean.phoneNo}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" value="%{tpOnboardingBean.phoneNo}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="3"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="address1" id="address1" value="%{tpOnboardingBean.address1}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="address1" id="address1" value="%{tpOnboardingBean.address1}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="4"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>City<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="city" id="city" value="%{tpOnboardingBean.city}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="city" id="city" value="%{tpOnboardingBean.city}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="5"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="state" id="state" value="%{tpOnboardingBean.state}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="state" id="state" value="%{tpOnboardingBean.state}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="6"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Country<span class="text-danger">*</span></label>
-                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{tpOnboardingBean.country}" />
+                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{tpOnboardingBean.country}"  tabindex="7"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Zip Code<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="zipCode" id="zipCode" value="%{tpOnboardingBean.zipCode}" onchange="fieldLengthValidator(this);" readOnly="true"/>
+                                    <s:textfield cssClass="form-control" name="zipCode" id="zipCode" value="%{tpOnboardingBean.zipCode}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="8"/>
                                 </div>
                             </div>
 
@@ -118,8 +118,8 @@
                         <s:if test="#session.tpoRoleId != 5">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-md-1 pull-right"><s:submit id="saveButton" value="Save" cssClass="btn btn-primary" onClick="return checkPartnerInfo()"/></div>
-                                    <div class="col-md-1 pull-right"><input id="editButton" type="button" value="Edit" class="btn btn-primary" onClick="enableEdit();"/></div>
+                                    <div class="col-md-1 pull-right"><s:submit id="saveButton" value="Save" cssClass="btn btn-primary" onClick="return checkPartnerInfo()"  tabindex="9"/></div>
+                                    <div class="col-md-1 pull-right"><input id="editButton" type="button" value="Edit" class="btn btn-primary" onClick="enableEdit();"  tabindex="10"/></div>
                                 </div>
                             </div>
                         </s:if>
