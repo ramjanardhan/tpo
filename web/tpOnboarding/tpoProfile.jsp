@@ -143,12 +143,6 @@
                                     <label>FTP&nbsp;Directory </label>
                                     <s:textfield  name="ftp_directory" id="ftp_directory" tabindex="20" value="%{ftp_directory}" cssClass="form-control"/>
                                 </div></div>
-                                <%--                                            <div class="col-sm-3">
-                                                                                <div class="form-group"> <label>SSL&nbsp;Required </label>
-                                                                                
-                                                                                    <s:checkbox  name="ftp_ssl_req" id="ftp_ssl_req" tabindex="21" value="%{ftp_ssl_req}" onclick="sslRequired('ftp')" cssClass="form-control"/>
-                                                                                </div>
-                                                                            </div>--%>
                             <div class="col-sm-3">
                                 <div class="" style="margin-top:30px">
                                     <label for="ftp_ssl_req">
@@ -175,16 +169,14 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>SSH&nbsp;Public&nbsp;key </label>
-
                                     <div id="download" >
-                                        <%-- <s:textfield cssClass="button" name="sftp_public_key" id="sftp_public_key" tabindex="24" value="Download"/>--%>
                                         <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                     </div>
                                     <div id="upload">
-                                        <%-- <s:file name="sftp_upload_public_key" id= "sftp_upload_public_key" label="sftp_upload_public_key" tabindex="25"/>--%>
                                         <s:file name="upload" id= "attachmentFileNameSftp" label="sftp_upload_public_key" tabindex="25"/>
                                     </div>
-                                </div></div>
+                                </div>
+                            </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Remote&nbsp;Host&nbsp;IP&nbsp;Address </label>
@@ -299,16 +291,16 @@
                                 <div class="col-sm-3">
                                     <label class="head_label">System&nbsp;Certificates :</label>
                                 </div>
-                                <div class="col-sm-6">    <label>Upload&nbsp;System&nbsp;Certificate </label><s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="44" cssClass="form-control"/>  </div>
-
-                                <%-- <s:file name="as2_part_cert" id= "as2_part_cert" label="as2_part_cert" tabindex="44"/>--%>
-
+                                <div class="col-sm-3">    
+                                    <label>Upload&nbsp;System&nbsp;Certificate </label>
+                                </div>
+                                 <div class="col-sm-3">
+                                    <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="44"/>  
+                                </div>
                             </div>
                             <div class="col-sm-12">    
                                 <div class="col-sm-3">
-
                                     <label class="head_label">Organization&nbsp;Profiles:</label>
-
                                 </div>
                                 <div class="col-sm-6 gutter_hide form-group">
                                     <div class="col-sm-6 ">
@@ -324,25 +316,20 @@
                                 </div>
 
                             </div>
-
                             <div class="col-sm-12">  
                                 <div class="col-sm-3">
-
                                     <label class="head_label">Partner&nbsp;Profiles:</label>
-
                                 </div>
                                 <div class="col-sm-6 gutter_hide form-group">
                                     <div class="col-sm-6"> 
                                         <label>My&nbsp;Partner&nbsp;Profile&nbsp;Name</label>
                                         <s:textfield cssClass="form-control" name="as2_myPartname" id="as2_myPartname" tabindex="47" value="%{as2_myPartname}"/>
-
                                     </div>
                                     <div class="col-sm-6">    
                                         <label>Your&nbsp;Partner&nbsp;Profile&nbsp;Name </label>
                                         <s:textfield cssClass="form-control" name="as2_yourPartname" id="as2_yourPartname" tabindex="48" value="%{as2_yourPartname}" readonly="true"/>
                                     </div>
                                 </div>
-
                             </div>
                             <hr>
                             <div class="col-sm-12">               
@@ -358,8 +345,6 @@
                                         <s:textfield cssClass="form-control" name="as2_partendpoint" id="as2_partendpoint" tabindex="50" value="%{as2_partendpoint}"/>
                                     </div></div>
                             </div> 
-
-
                             <div class="col-sm-12">        
                                 <div class="col-sm-3 col-sm-offset-3">
                                     <div class="form-group">
@@ -388,7 +373,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div></div>
                 <div id="site_content" class="jumbotron">
@@ -430,7 +414,7 @@
                                 <div class="form-group">
                                     <label>CA&nbsp;Certificates&nbsp;(Certificate&nbsp;Groups):</label>
                                     <%--  <s:file name="certGroups" id="certGroups" label="certGroups" tabindex="58"/>--%>
-                                    <s:file name="upload1" id= "attachmentFileName" label="certGroups" tabindex="58" cssClass="form-control"/> 
+                                    <s:file name="upload1" id= "attachmentFileName" label="certGroups" tabindex="58"/> 
 
                                 </div>
                             </div>
