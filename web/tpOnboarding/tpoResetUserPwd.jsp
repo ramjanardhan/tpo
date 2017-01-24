@@ -76,7 +76,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>User Name<span class="text-danger">*</span></label>
-                                    <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="myUsersList" name="contactName" id="contactName" value="%{contactName}" onchange="showPwdBox()"/>
+                                    <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="myUsersList" name="contactName" id="contactName" value="%{contactName}" onchange="showPwdBox()" tabindex="1"/>
                                 </div>
                             </div>
                         </div>
@@ -84,13 +84,13 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Password<span class="text-danger">*</span></label>
-                                    <s:password cssClass="form-control" name="regpassword" id="regpassword" placeholder="Password" onchange="fieldLengthValidator(this);"/>
+                                    <s:password cssClass="form-control" name="regpassword" id="regpassword" placeholder="Password" onchange="fieldLengthValidator(this);" tabindex="2"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-1 pull-right"> <s:submit value="Update" cssClass="btn btn-primary" onclick="return checkUserPwd();"/></div>
+                                <div class="col-md-1 pull-right"> <s:submit value="Update" cssClass="btn btn-primary" onclick="return checkUserPwd();" tabindex="3"/></div>
                             </div>
                         </div>
                     </s:form>

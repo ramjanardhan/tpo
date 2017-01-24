@@ -91,7 +91,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Status</label>
-                                    <s:select name="status" id="status" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE','REJECTED':'REJECTED'}" tabindex="1" value="%{status}"  cssClass="form-control"/>         
+                                    <s:select name="status" id="status" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE','REJECTED':'REJECTED'}" tabindex="3" value="%{status}"  cssClass="form-control"/>         
                                 </div>
                             </div>
                             <div class="row">
@@ -100,7 +100,7 @@
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4" />
                                     </div>
                                     <div class="col-sm-1 pull-right">
-                                        <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="3"/>
+                                        <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="5"/>
                                     </div>
                                 </div>
                             </div>
