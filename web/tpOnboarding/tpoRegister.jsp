@@ -43,7 +43,7 @@
         <div class="container">
             <!--  <h3>Trading Partner</h3> -->		
             <!-- Highlights - jumbotron -->
-            <div class="jumbotron">
+            <div id="site_content" class="jumbotron">
                 <div class="container">
                     <center>
                         <%

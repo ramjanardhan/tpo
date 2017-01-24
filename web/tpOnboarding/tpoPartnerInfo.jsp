@@ -50,7 +50,7 @@
         <div class="container">
             <!-- <h3>Trading Partner</h3> -->		
             <!-- Highlights - jumbotron -->
-            <div class="jumbotron">
+            <div id="site_content" class="jumbotron">
                 <div class="container">
                     <div id="loadingImage"></div>
                     <s:form action="updatePartnerInfo" method="post" cssClass="contact-form"  name="partnerInfo" id="partnerInfo" theme="simple">
