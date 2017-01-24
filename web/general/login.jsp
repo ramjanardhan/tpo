@@ -112,11 +112,11 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-xs-8">
-                                            <a href="" data-toggle="modal" data-target="#myModal"  tabindex="3">I forgot my password</a>
+                                            <a href="" data-toggle="modal" data-target="#myModal"  tabindex="4">I forgot my password</a>
                                         </div><!-- /.col -->
                                         <div class="col-xs-4">
                                             <!--                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
-                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" onclick="checkboxstatus()"  tabindex="4"/>
+                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" onclick="checkboxstatus()"  tabindex="3"/>
                                         </div><!-- /.col -->
                                     </div>
                                 </s:form>
