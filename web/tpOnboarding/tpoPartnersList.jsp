@@ -68,7 +68,7 @@
                                     <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4"/>
                                 </div>
                                 <div class="col-sm-1 pull-right">
-                                    <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="3"/>
+                                    <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="5"/>
                                 </div>
                             </div>
                         </div>

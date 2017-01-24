@@ -100,7 +100,8 @@
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4" />
                                     </div>
                                     <div class="col-sm-1 pull-right">
-                                        <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="5"/>
+                                       <%-- <s:submit  tabindex="5" cssClass="btn btn-primary pull-right"/> --%>
+                                       <input type="button"  tabindex="5" class="btn btn-primary pull-right"/>
                                     </div>
                                 </div>
                             </div>
