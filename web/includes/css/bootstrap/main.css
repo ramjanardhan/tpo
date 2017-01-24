@@ -1,6 +1,4 @@
-.btn_pull{
-    margin:0 27px;
-}
+
 html {
     position: relative;
     min-height: 100%;
@@ -117,7 +115,7 @@ img.pull-left { margin-right: 10px; }
     color: #555;
     display: block;
     font-size: 13px;
-    height: 34px;
+    height: 28px;
     width: 100%;
 }
 .form-control:focus{ box-shadow:none; border-color:#2D8FC8;}
@@ -145,4 +143,48 @@ img.pull-left { margin-right: 10px; }
 }
 .fa-check{
     color: green;
+}
+
+#transferModeDiv input{
+    margin:0 1px 0 11px;
+}
+.head_label{
+    font-size: 14px;
+    /*  padding: 0px 19px 0px 0px;*/
+    color:#000;
+}
+.labl_colunm{
+    margin:2% 0;
+}
+.gutter_hide{
+    padding:0;
+}
+
+.btn_pull{
+    margin:0 27px;
+}
+
+.heading_4{
+    font-weight: 800 !important;
+    white-space:nowrap;
+}
+
+.jumbotron_bg{
+    background-color:  #F7F5F4;
+}
+.threshold:after {
+    content: ":"
+}
+.threshold input{
+    border:0;
+    width:218px;
+}
+.threshold{
+    font-weight:bold;
+}
+
+.textboxsize{
+    /*  style="width:200px;height:28px"  */
+    width:200px;
+    height:28px;
 }

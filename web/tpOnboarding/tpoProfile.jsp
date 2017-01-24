@@ -17,24 +17,6 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
 
-        <style>
-            #transferModeDiv input{
-                margin:0 1px 0 11px;
-            }
-            .head_label{
-                font-size: 16px;
-                /*  padding: 0px 19px 0px 0px;*/
-                color:#000;
-            }
-            .labl_colunm{
-                margin:2% 0;
-            }
-            .gutter_hide{
-                padding:0;
-            }
-
-
-        </style>
     </head>
     <s:if test="%{formAction == 'doAddProfile'}">
         <body onload="onLoad();" class="home">
@@ -49,10 +31,10 @@
         <header id="head">
             <div class="container">
                 <s:if test="%{formAction == 'doAddProfile'}">
-                    <h3 > <b>Profile Add</b></h3>
+                    <h3 > <b>Add Profile</b></h3>
                 </s:if>
                 <s:else>
-                    <h3 > <b>Profile Edit</b></h3>
+                    <h3 > <b>Edit Profile</b></h3>
                 </s:else>
             </div>
         </header>            
@@ -91,7 +73,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <div id="tpoCommMsg"></div>
-                                    <h4 style="color: #2d8fc8">Communication Protocols</h4>
+                                    <h4 style="color: #2d8fc8;margin-left: -15px" class="heading_4">Communication Protocols</h4>
                                     <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="10" cssClass="form-control" onchange="protocolsSelect(this.value)"/>
                                     <s:hidden name="protocolValue" id="protocolValue"></s:hidden>
                                     </div></div>
@@ -114,7 +96,7 @@
                         <div id="transferModeMsg" style="display: none;position: relative;right: 226px;bottom: 11px;"></div>
                         <div id="ftpDiv" style="display: none;clear:both">
                             <div id="protocolmsgFtp"></div>
-                            <h4 style="color: #2d8fc8">FTP Server&nbsp;Details : </h4>
+                            <h4 style="color: #2d8fc8" class="heading_4">FTP&nbsp;Server&nbsp;Details  : </h4>
                             <div id="tpResultMessage"></div>
                             <div class="col-sm-3">
                                 <div class="form-group">
@@ -179,7 +161,7 @@
 
                         <div id="sftpDiv" style="display: none;clear:both">
                             <div id="protocolmsgSftp"></div>
-                            <h3 style="color: #2d8fc8">SFTP Server&nbsp;Details  : </h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">SFTP&nbsp;Server&nbsp;Details  : </h4>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Connection&nbsp;Type </label>
@@ -238,7 +220,7 @@
 
                         <div id="httpDiv" style="display: none;clear:both">
                             <div id="protocolmsgHttp"></div>
-                            <h3 style="color: #2d8fc8">HTTP Server&nbsp;Details  : </h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">HTTP&nbsp;Server&nbsp;Details  : </h4>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
@@ -281,8 +263,7 @@
 
                         <div id="smtpDiv" style="display: none;clear:both">
                             <div id="protocolmsgSmtp"></div>
-                            <h3 style="color: #2d8fc8">SMTP Server&nbsp;Details  : </h3>
-
+                            <h4 style="color: #2d8fc8" class="heading_4">SMTP&nbsp;Server&nbsp;Details  : </h4>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
@@ -300,12 +281,12 @@
                                 </div></div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>From&nbsp;email&nbsp;address</label>
+                                    <label>From&nbsp;E-mail&nbsp;address</label>
                                     <s:textfield cssClass="form-control" name="smtp_from_email" id="smtp_from_email" tabindex="41" value="%{smtp_from_email}" onchange="validateEmail(this);"/>
                                 </div></div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>To email&nbsp;address </label>
+                                    <label>To E-mail&nbsp;address </label>
                                     <s:textfield cssClass="form-control" name="smtp_to_email" id="smtp_to_email" tabindex="42" value="%{smtp_to_email}" onchange="validateEmail(this);"/>
                                 </div></div>
                         </div>
@@ -313,7 +294,7 @@
                         <div id="loadingImage"></div>
                         <div id="as2Div" style="display: none;clear:both">
                             <div id="protocolmsgAs2"></div>
-                            <h3 style="color: #2d8fc8">AS2 Server&nbsp;Details  : </h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">AS2&nbsp;Server&nbsp;Details  : </h4>
                             <div class="col-sm-12 form-group">
                                 <div class="col-sm-3">
                                     <label class="head_label">System&nbsp;Certificates :</label>
@@ -377,43 +358,43 @@
                                         <s:textfield cssClass="form-control" name="as2_partendpoint" id="as2_partendpoint" tabindex="50" value="%{as2_partendpoint}"/>
                                     </div></div>
                             </div> 
-                                    
-                                    
-                             <div class="col-sm-12">        
-                            <div class="col-sm-3 col-sm-offset-3">
-                                <div class="form-group">
-                                    <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="51" cssClass="form-control"/>
-                                </div></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="52"  cssClass="form-control"/>
-                                </div></div>
-                             </div>
-                           <div class="col-sm-12">      
-                            <div class="col-sm-3 col-sm-offset-3">
-                                <div class="form-group"> 
-                                    <label>Payload&nbsp;Send&nbsp;Mode</label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="52" cssClass="form-control"/>
+
+
+                            <div class="col-sm-12">        
+                                <div class="col-sm-3 col-sm-offset-3">
+                                    <div class="form-group">
+                                        <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="51" cssClass="form-control"/>
+                                    </div></div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="52"  cssClass="form-control"/>
+                                    </div></div>
+                            </div>
+                            <div class="col-sm-12">      
+                                <div class="col-sm-3 col-sm-offset-3">
+                                    <div class="form-group"> 
+                                        <label>Payload&nbsp;Send&nbsp;Mode</label>
+                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="52" cssClass="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="" style="margin-top:30px">
+                                        <label for="as2_ssl_req">
+                                            SSL&nbsp;Required
+                                        </label>
+                                        <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="21" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="" style="margin-top:30px">
-                                    <label for="as2_ssl_req">
-                                        SSL&nbsp;Required
-                                    </label>
-                                    <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="21" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
-                                </div>
-                            </div>
-                           </div>
-                                
+
                         </div>
                     </div></div>
                 <div id="site_content" class="jumbotron">
                     <div class="container">
                         <div id="sslDiv" style="display: none">
-                            <h3 style="color: #2d8fc8">SSL : </h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">SSL  : </h4>
                             <div class="col-sm-3">
                                 <div class="form-group"> 
                                     <label>SSL&nbsp;Priority:</label>
@@ -434,7 +415,7 @@
                         </div>
                         <div id="sslDiv2" style="display: none">
                             <div id="protocolmsgSsl"></div>
-                            <h3 style="color: #2d8fc8">SSL : </h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">SSL  : </h4>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>SSL&nbsp;Priority:</label>

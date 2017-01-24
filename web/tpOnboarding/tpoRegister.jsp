@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Phone No.<span class="text-danger">*</span></label>
+                                    <label>Phone Number<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="regphoneNo" id="regphoneNo" placeholder="Phone No" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>

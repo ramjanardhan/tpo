@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Phone No.<span class="text-danger">*</span></label>
+                                    <label>Phone Number<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control"  name="addphoneNo" id="addphoneNo" value="%{addphoneNo}" placeholder="Phone no." onchange="addPtnerLengthValidator(this);"/>
                                 </div>
                             </div>

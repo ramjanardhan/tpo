@@ -80,7 +80,7 @@
                     <div class="col-sm-8">
                         <div class="content">
                             <div class="content_item">
-                                <h3 style="color:#285e8e"><b>TP On-boarding</b></h3>
+                                <h4 style="color: #2d8fc8" class="heading_4"><b>TP On-boarding</b></h4>
                                 <div>
                                     <p> Trading Partner provides a complete view of your inbound supply and outbound fulfillment activity across your supply chain network by providing and leveraging connectivity to all your supply chain trading partners, and enterprise applications.</p>
                                     <p> Supply chain visibility (SCV) is the ability of parts, components or products in transit to be tracked from the manufacturer to their final destination. The goal of SCV is to improve and strengthen the supply chain by making data readily available to all stakeholders, including the customer. Supply chain visibility technology promotes quick response to change by allowing privileged users to take action and reshape demand or redirect supply.</p>
@@ -93,7 +93,7 @@
                     <div class="col-md-4   col-sm-8">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <h3 class="thin text-center">Sign in to your account</h3>
+                                <h3 class="thin text-center"><b>Sign in to your account</b></h3>
                                 <center> 
                                     <%if (request.getAttribute(AppConstants.REQ_ERROR_INFO) != null) {
                                             out.println("<font size=2 color=red>" + request.getAttribute(AppConstants.REQ_ERROR_INFO).toString() + "</font>");

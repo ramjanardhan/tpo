@@ -29,33 +29,6 @@
                 document.getElementById("ob810").checked = false;
             }
         </script>
-
-        <style>
-            .jumbotron_bg{
-                background-color:  #F7F5F4;
-            }
-
-
-
-
-            .threshold:after {
-                content: ":"
-
-            }
-
-            .threshold input{
-                border:0;
-                width:218px;
-
-
-            }
-
-
-            .threshold{
-
-                font-weight:bold;
-            }
-        </style>
     </head>
     <body onload="doOnLoad();" class="home">
         <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
@@ -81,7 +54,7 @@
                             %>
                         </center>
                         <div id="TransactionsDiv" > 
-                            <h3 style="color: #2d8fc8">Transactions&nbsp;</h3>
+                             <h4 style="color: #2d8fc8" class="heading_4">Transactions</h4>
                             <div>                                     
                                 <div>
                                     <div class="col-sm-3">
@@ -115,7 +88,7 @@
                     <div class="container">
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="IB850Transaction" id="IB850Transaction" value="%{IB850Transaction}"/>
                             <div id="resultMessage"></div>
                             <div class="row">
@@ -291,7 +264,7 @@
                         <%-- 850 Inbound  End div--%>
                         <%-- 855 Inbound   Start div--%>
                         <div id="ibenvelop855" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                           <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="IB855Transaction" id="IB855Transaction" value="%{IB855Transaction}"/>
                             <div id="resultMessage855ib"></div>
                             <div class="row">
@@ -464,7 +437,7 @@
                         <%-- 855 Inbound  End div--%>
                         <%-- 856 Inbound   Start div--%>
                         <div id="ibenvelop856" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="IB856Transaction" id="IB856Transaction" value="%{IB856Transaction}"/>
                             <div id="resultMessage856ib"></div>
                             <div class="row">
@@ -636,7 +609,7 @@
                         <%-- 856 Inbound   End div--%>
                         <%-- 810 Inbound   Start div--%>
                         <div id="ibenvelop810" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="IB810Transaction" id="IB810Transaction" value="%{IB810Transaction}"/>
                             <div id="resultMessage810ib"></div>
                             <div class="row">
@@ -810,7 +783,7 @@
                         <%-- 810 Inbound   End div--%>
                         <%-- 850 outbound   End div--%>
                         <div id="obenvelop850" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="OB850Transaction" id="OB850Transaction" value="%{OB850Transaction}"/>
                             <div id="resultMessage850ob"></div>
                             <div class="row">
@@ -981,7 +954,7 @@
                         <%-- 850 Outbound   End div--%>
                         <%-- 855 Outbound   Start div--%>
                         <div id="obenvelop855" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="OB855Transaction" id="OB855Transaction" value="%{OB855Transaction}"/>
                             <div id="resultMessage855ob"></div>
                             <div class="row">
@@ -1155,7 +1128,7 @@
                         <%-- 855 Outbound   End div--%>
                         <%-- 856 Outbound   Start div--%>
                         <div id="obenvelop856" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="OB856Transaction" id="OB856Transaction" value="%{OB856Transaction}"/>
                             <div id="resultMessage856ob"></div>
                             <div class="row">
@@ -1328,7 +1301,7 @@
                         <%-- 856 Outbound   End div--%>
                         <%-- 810 Outbound   Start div--%>
                         <div id="obenvelop810" style="display: none" >
-                            <h3 style="color: #2d8fc8">Envelopes&nbsp;:</h3>
+                            <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="OB810Transaction" id="OB810Transaction" value="%{OB810Transaction}"/>
                             <div id="resultMessage810ob"></div>
                             <div class="row">

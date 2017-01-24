@@ -72,7 +72,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Phone No.<span class="text-danger">*</span></label>
+                                    <label>Phone Number<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" placeholder="Phone No" value="%{phoneNo}" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>

@@ -42,7 +42,7 @@
         <!--  Header -->
         <header id="head">
             <div class="container">
-                <h3 class="thin"><b>Trading Partner Information</b></h3>
+                <h3><b>Trading Partner Information</b></h3>
             </div>
         </header>
         <!-- /Header -->
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Phone No.<span class="text-danger">*</span></label>
+                                    <label>Phone Number<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" value="%{tpOnboardingBean.phoneNo}" onchange="fieldLengthValidator(this);" readOnly="true"/>
                                 </div>
                             </div>
