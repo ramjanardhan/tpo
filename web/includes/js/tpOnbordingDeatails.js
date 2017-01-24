@@ -520,7 +520,7 @@ function OB850recId() {
     if (recIdgs850Ob.value == '-1') {
         recIdst850Ob.value = "";
     } else {
-       recIdst850Ob.value = recIdgs850Ob.value;
+        recIdst850Ob.value = recIdgs850Ob.value;
     }
 }
 
@@ -545,7 +545,7 @@ function OBrecId855() {
     if (recIdgs855Ob.value == '-1') {
         recIdst855Ob.value = "";
     } else {
-       recIdst855Ob.value = recIdgs855Ob.value;
+        recIdst855Ob.value = recIdgs855Ob.value;
     }
 }
 /* 855 outbound gs and st value end*/
@@ -569,7 +569,7 @@ function OBrecId856() {
     if (recIdgs856Ob.value == '-1') {
         recIdst856Ob.value = "";
     } else {
-       recIdst856Ob.value = recIdgs856Ob.value;
+        recIdst856Ob.value = recIdgs856Ob.value;
     }
 }
 /* 856 outbound gs and st value end*/
@@ -593,7 +593,7 @@ function OBrecId810() {
     if (recIdgs810Ob.value == '-1') {
         recIdst810Ob.value = "";
     } else {
-       recIdst810Ob.value = recIdgs810Ob.value;
+        recIdst810Ob.value = recIdgs810Ob.value;
     }
 }
 /* 810 outbound gs and st value end*/
@@ -611,7 +611,7 @@ function receiverCopy() {
     if (recIdgs.value == '-1') {
         recIdst.value = "";
     } else {
-       recIdst.value = recIdgs.value;
+        recIdst.value = recIdgs.value;
     }
 }
 
@@ -1639,11 +1639,9 @@ function gettransferModeSelection(x) {
                     document.getElementById("ftp_directory").value = directory + '/' + partnerName;
                     if (sslReq == 'true') {
                         document.getElementById("ftp_ssl_req").checked = true;
-                        $("#sslDiv").show();
                         document.getElementById("ssl_priority").value = SSL_PRIORITY;
-                        //document.getElementById("ssl_passphrase").value = KEY_CERTIFICATE_PASSPHRASE;
                         document.getElementById("ssl_cipher_stergth").value = CIPHER_STRENGTH;
-
+                        $("#sslDiv").show();
                     } else {
                         document.getElementById("ftp_ssl_req").checked = false;
                     }
@@ -1675,6 +1673,8 @@ function gettransferModeSelection(x) {
                 document.getElementById("ftp_pwd").value = "";
                 document.getElementById("ftp_directory").value = "";
                 document.getElementById("ftp_ssl_req").checked = false;
+                document.getElementById("ssl_priority2").value = "MUST";
+                document.getElementById("ssl_cipher_stergth2").value = "STRONG";
             }
             $('#ftp_conn_method').attr('disabled', false);
             document.getElementById("ftp_recv_protocol").readOnly = false;
@@ -1686,7 +1686,6 @@ function gettransferModeSelection(x) {
             document.getElementById("ftp_directory").readOnly = false;
             $('#ftp_method').attr('disabled', false);
             document.getElementById("ssl_priority2").readOnly = false;
-            //document.getElementById("ssl_passphrase").readOnly = false;
             document.getElementById("ssl_cipher_stergth2").readOnly = false;
         }
     }
@@ -2124,7 +2123,7 @@ function validateAS2(flag) {
             return false;
         }
     }
-    if (((as2_myOrgName == null) || (as2_myOrgName == "")) || ((as2_partOrgName == null) || (as2_partOrgName == "")) || ((as2_myPartname == null) || (as2_myPartname == "")) || ((as2_yourPartname == null) || (as2_yourPartname == "")) || ((as2_myEndPoint == null) || (as2_myEndPoint == "")) || ((as2_partendpoint == null) || (as2_partendpoint == "") || (as2_strMsg == "-1")) || ((as2_waitForSync == "-1") || (as2_payloadSendMode == "-1"))) {  
+    if (((as2_myOrgName == null) || (as2_myOrgName == "")) || ((as2_partOrgName == null) || (as2_partOrgName == "")) || ((as2_myPartname == null) || (as2_myPartname == "")) || ((as2_yourPartname == null) || (as2_yourPartname == "")) || ((as2_myEndPoint == null) || (as2_myEndPoint == "")) || ((as2_partendpoint == null) || (as2_partendpoint == "") || (as2_strMsg == "-1")) || ((as2_waitForSync == "-1") || (as2_payloadSendMode == "-1"))) {
         document.getElementById('protocolmsgAs2').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
