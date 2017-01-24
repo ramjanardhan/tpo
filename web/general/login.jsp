@@ -8,7 +8,7 @@
         <meta name="viewport"    content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author"      content="TP On-boarding">
-        <title>TP On-boarding</title>
+        <title>Miracle TP On-boarding</title>
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css"/>' media="screen" >
@@ -23,7 +23,6 @@
                 width: 60%;
                 margin: 30px auto;
             }
-
             .contact-form {
                 margin: 0 2%;
             }
@@ -32,7 +31,6 @@
                 border-bottom: 1px solid #e5e5e5;
                 min-height: 16.428571429px;
             }
-
             .close {
                 float: right;
                 font-size: 34px;
@@ -88,7 +86,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-4   col-sm-8">
                         <div class="panel panel-default">
@@ -120,8 +117,6 @@
                                         </div><!-- /.col -->
                                     </div>
                                 </s:form>
-
-
                                 <div class="modal fade" id="myModal" data-backdrop="static" data-keyword="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -149,7 +144,6 @@
                                                         </div>
                                                     </div>  
                                                 </div>
-
                                                 <div class="modal-footer" style="border:0;margin:0">
                                                     <div class="row">
                                                         <div class="col-md-12" style="margin-bottom:8px">
@@ -195,7 +189,6 @@
                                                             <s:textfield cssClass="form-control" name="contactPersonLN" id="contactPersonLN" value="%{contactPersonLN}" placeholder="Last Name" onchange="addPtnerLengthValidator(this);"/>
                                                         </div>
                                                     </div>
-
                                                     <div class="col-sm-4">
                                                         <div class="form-group ajax_img">
                                                             <label>Contact Email<span class="text-danger">*</span></label>
@@ -203,7 +196,6 @@
                                                             <i id="wrongImg1" style="display: none;" class="fa fa-times"></i><i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
                                                         </div>
                                                     </div>
-
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Phone Number<span class="text-danger">*</span></label>

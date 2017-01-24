@@ -5,7 +5,7 @@
 <%@page import="com.mss.tpo.util.AppConstants"%>
 <html>
     <head>
-        <title>Miracle TP On-boarding portal</title>
+        <title>Miracle TP On-boarding</title>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="no-cache" />
@@ -14,7 +14,6 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap.min.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
-
         <script>
             function doOnLoad()
             {
@@ -84,7 +83,6 @@
                         </div>
                     </div></div>
                 <div id="site_content" class="jumbotron">
-
                     <div class="container">
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
@@ -132,16 +130,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-
-
                                     <div class="threshold" style="position: relative;top:7px">
                                         <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
-
-
-
-
-
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -162,8 +153,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-
-
                                     <div class="threshold" style="position: relative;top:5px">
                                         <input type="text" value="Version" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
@@ -186,7 +175,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-
                                     <div class="threshold" style="position: relative;top:5px">
                                         <input type="text" value="Functional ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
@@ -203,8 +191,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-
-
                                     <div class="threshold" style="position: relative;top:5px">
                                         <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
@@ -221,8 +207,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-
-
                                     <div class="threshold" style="position: relative;top:0px">
                                         <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
@@ -237,11 +221,8 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
-
-
                                     <div class="threshold" style="position: relative;top:5px">
                                         <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                     </div>
@@ -410,14 +391,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <div class="threshold" style="position: relative;top:5px">
                                             <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -490,7 +469,6 @@
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa856RecIdIB" id="isa856RecIdIB" value="%{isa856RecIdIB}" tabindex="38" cssClass="form-control"/>
                                     </div>
                                 </div>
@@ -583,7 +561,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -659,11 +636,10 @@
                                         <div class="threshold" style="position: relative;top:7px">
                                             <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-
-                                    </div></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdIB" id="isa810RecIdIB" value="%{isa810RecIdIB}" tabindex="51" cssClass="form-control"/>
                                     </div>
                                 </div>
@@ -723,11 +699,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <div class="threshold" style="position: relative;top:5px">
                                             <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -807,7 +781,8 @@
                                         <div class="threshold" style="position: relative;top:31px">
                                             <input type="text" value="Sender ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-                                    </div></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
@@ -928,7 +903,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -978,7 +952,8 @@
                                         <div class="threshold" style="position: relative;top:31px">
                                             <input type="text" value="Sender ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-                                    </div></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
@@ -1004,10 +979,10 @@
                                         <div class="threshold" style="position: relative;top:7px">
                                             <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-                                    </div></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa855RecIdOB" id="isa855RecIdOB" value="%{isa855RecIdOB}" tabindex="76" cssClass="form-control"/>
                                     </div>
                                 </div>
@@ -1070,7 +1045,6 @@
                                         <div class="threshold" style="position: relative;top:5px">
                                             <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -1101,11 +1075,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <div class="threshold" style="position: relative;top:5px">
                                             <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
@@ -1152,8 +1124,8 @@
                                         <div class="threshold" style="position: relative;top:31px">
                                             <input type="text" value="Sender ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-
-                                    </div></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>ISA</label>
@@ -1179,7 +1151,8 @@
                                         <div class="threshold" style="position: relative;top:7px">
                                             <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                         </div>
-                                    </div></div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
 
@@ -1275,7 +1248,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -1447,7 +1419,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -1505,10 +1476,6 @@
         $(function () {
             /*  Inbound function start*/
             $("#ib850").click(function () {
-                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                // var protocol=document.getElementById("commnProtocol").value;
-                // if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
-
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue850').value = '850';
                     document.getElementById('ibdirection').value = 'Inbound';
@@ -1518,15 +1485,8 @@
                 } else {
                     $("#ibenvelop850").hide();
                 }
-                //   }else{
-                // document.getElementById("divansferModeMsg").style.display = "block";
-                //  document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //   }
             });
             $("#ib855").click(function () {
-                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                //  var protocol=document.getElementById("commnProtocol").value;
-                //  if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue855').value = '855';
                     document.getElementById('ibdirection855').value = 'Inbound';
@@ -1536,15 +1496,8 @@
                 } else {
                     $("#ibenvelop855").hide();
                 }
-                //  }else{
-                //   document.getElementById("divansferModeMsg").style.display = "block";
-                //   document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //  }
             });
             $("#ib856").click(function () {
-                //  var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                //  var protocol=document.getElementById("commnProtocol").value;
-                //  if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue856').value = '856';
                     document.getElementById('ibdirection856').value = 'Inbound';
@@ -1554,16 +1507,8 @@
                 } else {
                     $("#ibenvelop856").hide();
                 }
-                //  }else{
-                //  document.getElementById("divansferModeMsg").style.display = "block";
-                // document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //   }
-
             });
             $("#ib810").click(function () {
-                // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
-                // var protocol=document.getElementById("commnProtocol").value;
-                // if((divansferMode == 'get') || (divansferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('ibvalue810').value = '810';
                     document.getElementById('ibdirection810').value = 'Inbound';
@@ -1573,16 +1518,9 @@
                 } else {
                     $("#ibenvelop810").hide();
                 }
-                // }else{
-                //  document.getElementById("transferModeMsg").style.display = "block";
-                //   document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                // }
             });
             /*  Outbound function Start*/
             $("#ob850").click(function () {
-                //   var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //   var protocol=document.getElementById("commnProtocol").value;
-                //   if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue850').value = '850';
                     document.getElementById('trans850IdcodeOB').value = '850';
@@ -1592,15 +1530,8 @@
                 } else {
                     $("#obenvelop850").hide();
                 }
-                // }else{
-                //  document.getElementById("transferModeMsg").style.display = "block";
-                //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                // }
             });
             $("#ob855").click(function () {
-                //  var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //  var protocol=document.getElementById("commnProtocol").value;
-                // if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue855').value = '855';
                     document.getElementById('trans855IdcodeOB').value = '855';
@@ -1610,15 +1541,8 @@
                 } else {
                     $("#obenvelop855").hide();
                 }
-                //   }else{
-                //     document.getElementById("transferModeMsg").style.display = "block";
-                //     document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //  }
             });
             $("#ob856").click(function () {
-                // var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //   var protocol=document.getElementById("commnProtocol").value;
-                // if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue856').value = '856';
                     document.getElementById('trans856IdcodeOB').value = '856';
@@ -1628,15 +1552,8 @@
                 } else {
                     $("#obenvelop856").hide();
                 }
-                // }else{
-                //   document.getElementById("transferModeMsg").style.display = "block";
-                //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                // }
             });
             $("#ob810").click(function () {
-                //    var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-                //   var protocol=document.getElementById("commnProtocol").value;
-                //  if((transferMode == 'get') || (transferMode == 'put') || (protocol == 'AS2') || (protocol == 'SMTP')){
                 if ($(this).is(":checked")) {
                     document.getElementById('obvalue810').value = '810';
                     document.getElementById('trans810IdcodeOB').value = '810';
@@ -1646,74 +1563,9 @@
                 } else {
                     $("#obenvelop810").hide();
                 }
-                //  }else{
-                //   document.getElementById("transferModeMsg").style.display = "block";
-                //document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
-                //  }
             });
             /*  Outbound function End*/
         });
-
-        function checkEnvelopes() {
-            var ib850 = document.getElementById("ib850").checked;
-            var ib855 = document.getElementById("ib855").checked;
-            var ib856 = document.getElementById("ib856").checked;
-            var ib810 = document.getElementById("ib810").checked;
-            var ob850 = document.getElementById("ob850").checked;
-            var ob855 = document.getElementById("ob855").checked;
-            var ob856 = document.getElementById("ob856").checked;
-            var ob810 = document.getElementById("ob810").checked;
-            var x = true;
-            if (ib850 == true)
-            {
-                x = checkib850();
-                if (x == false)
-                    return false;
-            }
-            if (ib855 == true)
-            {
-                x = checkib855();
-                if (x == false)
-                    return false;
-            }
-            if (ib856 == true)
-            {
-                x = checkib856();
-                if (x == false)
-                    return false;
-            }
-            if (ib810 == true)
-            {
-                x = checkib810();
-                if (x == false)
-                    return false;
-            }
-            if (ob850 == true)
-            {
-                x = checkob850();
-                if (x == false)
-                    return false;
-            }
-            if (ob855 == true)
-            {
-                x = checkob855();
-                if (x == false)
-                    return false;
-            }
-            if (ob856 == true)
-            {
-                x = checkob856();
-                if (x == false)
-                    return false;
-            }
-            if (ob810 == true)
-            {
-                x = checkob810();
-                if (x == false)
-                    return false;
-            }
-            return x;
-        }
 </script>
 </body>
 </html>

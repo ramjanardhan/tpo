@@ -5,7 +5,7 @@
 <%@page import="com.mss.tpo.util.AppConstants"%>
 <html>
     <head>
-        <title>Miracle TP On-boarding portal</title>
+        <title>Miracle TP On-boarding</title>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="no-cache" />
@@ -90,7 +90,6 @@
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="4" cssClass="form-control"/>
                                     </div>
                                 </div>
@@ -183,7 +182,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -208,7 +206,6 @@
                             </div>
                         </div>
                         <%-- envelop  End--%>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-1 pull-right"><input type="button" value="Update" class="btn btn-primary"  tabindex="14" onclick="return envelopeUpdating();"/></div>
@@ -218,7 +215,6 @@
                 </div>
             </s:form>
         </div>
-
         <footer class="footer">
             <div class=" ">
                 <s:include value="../includes/template/footer.jsp"/>

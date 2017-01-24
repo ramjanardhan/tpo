@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Miracle TP On-boarding portal</title>
+        <title>Miracle TP On-boarding</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="no-cache" />
@@ -17,10 +17,8 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
-
         <script>
-            function doOnLoad()
-            {
+            function doOnLoad() {
                 $("#envelopes").addClass("active");
             }
         </script>
@@ -127,7 +125,6 @@
                                             <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 
                                             <s:param name="direction"><%=(tpOnboardingBean.getDirection())%></s:param> 
                                         </s:url>
-                                        <%--  <s:a href='%{#myUrl}' ><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a>--%>
                                         <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></s:a>
                                         </td>
                                         <td align="center">
@@ -136,18 +133,14 @@
                                             <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 
                                             <s:param name="direction"><%=(tpOnboardingBean.getDirection())%></s:param> 
                                         </s:url>
-                                        <%--    <s:a style="color: red;"><span class="glyphicon glyphicon-trash" onclick="return getDeleteEnvelope('<%=id%>','<%=tpOnboardingBean.getTransaction()%>','<%=tpOnboardingBean.getDirection()%>')"></s:a>
-                                    <img src="../includes/images/delete.jpg" height="20px" width="20px" onclick="return getDeleteEnvelope('<%=id%>','<%=tpOnboardingBean.getTransaction()%>','<%=tpOnboardingBean.getDirection()%>')"> --%>
                                         <s:a href='%{#myUrl1}' style="color: red;"><span class="glyphicon glyphicon-trash"></span></s:a>
                                         </td>
                                     </tr>
-                                <%}
-
+                                <%
+                                        }
                                     }%>
-
                             </tbody>
                         </table>
-
                     </s:if> 
                 </div>
             </div>
@@ -165,20 +158,20 @@
     <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
     <script>
-        $(function () {
-            $('#envelopetable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-        function resetValues()
-        {
-             document.getElementById("transaction").value="-1";
-            document.getElementById("direction").value="-1";
-        }
+                                            $(function () {
+                                                $('#envelopetable').DataTable({
+                                                    "paging": true,
+                                                    "lengthChange": true,
+                                                    "searching": true,
+                                                    "ordering": true,
+                                                    "info": true,
+                                                    "autoWidth": false
+                                                });
+                                            });
+
+                                            function resetValues() {
+                                                document.getElementById("transaction").value = "-1";
+                                                document.getElementById("direction").value = "-1";
+                                            }
     </script>
 </html>

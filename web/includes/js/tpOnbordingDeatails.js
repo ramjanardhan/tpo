@@ -45,6 +45,96 @@ function checkPartnerInfo() {
         return true;
 }
 
+function checkPwd() {
+    var pwd = document.getElementById("regpassword").value;
+    var cnfPwd = document.getElementById("cnfPassword").value;
+    if (pwd == "") {
+        document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Password</font>";
+        return false;
+    } else if (cnfPwd == "") {
+        document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Confirm Password</font>";
+        return false;
+    } else if (pwd == cnfPwd) {
+        document.getElementById('tpoResultMessage').innerHTML = "<font color=green>Passwords matched</font>";
+        return true;
+    } else if (pwd != cnfPwd) {
+        document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Passwords not matched</font>";
+        document.getElementById("regpassword").value = "";
+        document.getElementById("cnfPassword").value = "";
+        return false;
+    }
+}
+
+function checkPartnerPwd() {
+    var uservalue = document.getElementById("partnerName").value;
+    var password = document.getElementById("regpassword").value;
+    if (uservalue == "-1") {
+        document.getElementById("tpoResultMessage").innerHTML = "<font color=red> Please select partner name</font>";
+        return false;
+    }
+    if (password == "") {
+        document.getElementById("tpoResultMessage").innerHTML = "<font color=red> Please enter password</font>";
+        return false;
+    }
+}
+
+function showPartnerPwdBox() {
+    document.getElementById("pwdBox").style.display = 'block';
+    var uservalue = document.getElementById("partnerName").value;
+    if (uservalue == "-1") {
+        document.getElementById("pwdBox").style.display = 'none';
+    }
+}
+
+function checkUserPwd() {
+    var uservalue = document.getElementById("contactName").value;
+    var password = document.getElementById("regpassword").value;
+    if (uservalue == "-1") {
+        document.getElementById("tpoResultMessage").innerHTML = "<font color=red> Please select a user from the list </font>";
+        return false;
+    }
+    if (password == "") {
+        document.getElementById("tpoResultMessage").innerHTML = "<font color=red> Please enter password </font>";
+        return false;
+    }
+}
+
+function showUserPwdBox() {
+    document.getElementById("pwdBox").style.display = 'block';
+    var uservalue = document.getElementById("contactName").value;
+    if (uservalue == "-1") {
+        document.getElementById("pwdBox").style.display = 'none';
+    }
+}
+
+function checkProfile(flag) {
+    var commnProtocol = document.getElementById('commnProtocol').value;
+    if (commnProtocol == 'FTP') {
+        ftpValidate = validateFTP(flag);
+        if (ftpValidate == false)
+            return false;
+    } else if (commnProtocol == 'SFTP') {
+        sftpValidate = validateSFTP(flag);
+        if (sftpValidate == false)
+            return false;
+    } else if (commnProtocol == 'HTTP') {
+        httpValidate = validateHTTP(flag);
+        if (httpValidate == false)
+            return false;
+    } else if (commnProtocol == 'SMTP') {
+        smtpValidate = validateSMTP();
+        if (smtpValidate == false)
+            return false;
+    } else if (commnProtocol == 'AS2') {
+        as2Validate = validateAS2(flag);
+        if (as2Validate == false)
+            return false;
+    } else {
+        document.getElementById('tpoCommMsg').innerHTML = "<font color=red>Please fill minimum one Profile</font>";
+        return false;
+    }
+}
+
 function protocolsSelect(x) {
     document.getElementById("protocolValue").value = x;
     if (x == '-1') {
@@ -402,13 +492,65 @@ function validateEmail(thisObj) {
     }
 }
 
+function checkEnvelopes() {
+    var ib850 = document.getElementById("ib850").checked;
+    var ib855 = document.getElementById("ib855").checked;
+    var ib856 = document.getElementById("ib856").checked;
+    var ib810 = document.getElementById("ib810").checked;
+    var ob850 = document.getElementById("ob850").checked;
+    var ob855 = document.getElementById("ob855").checked;
+    var ob856 = document.getElementById("ob856").checked;
+    var ob810 = document.getElementById("ob810").checked;
+    var x = true;
+    if (ib850 == true) {
+        x = checkib850();
+        if (x == false)
+            return false;
+    }
+    if (ib855 == true) {
+        x = checkib855();
+        if (x == false)
+            return false;
+    }
+    if (ib856 == true) {
+        x = checkib856();
+        if (x == false)
+            return false;
+    }
+    if (ib810 == true) {
+        x = checkib810();
+        if (x == false)
+            return false;
+    }
+    if (ob850 == true) {
+        x = checkob850();
+        if (x == false)
+            return false;
+    }
+    if (ob855 == true) {
+        x = checkob855();
+        if (x == false)
+            return false;
+    }
+    if (ob856 == true) {
+        x = checkob856();
+        if (x == false)
+            return false;
+    }
+    if (ob810 == true) {
+        x = checkob810();
+        if (x == false)
+            return false;
+    }
+    return x;
+}
+
 function IBsender850() {
     /* 850 inbound gs and st value */
     var n1 = document.getElementById('gs850senderIdIB');
     var n2 = document.getElementById('st850senderIdIB');
     n2.value = n1.value;
 }
-
 function IBversion850() {
     var versiongs850Ib = document.getElementById('gs850VersionIB');
     var versionst850Ib = document.getElementById('st850VersionIB');
@@ -432,7 +574,6 @@ function IBsender855() {
     var senderIdst855Ib = document.getElementById('st855senderIdIB');
     senderIdst855Ib.value = senderIdgs855Ib.value;
 }
-
 function IBversion855() {
     var versiongs855Ib = document.getElementById('gs855VersionIB');
     var versionst855Ib = document.getElementById('st855VersionIB');
@@ -448,7 +589,6 @@ function IBrecId855() {
         recIdst855Ib.value = recIdgs855Ib.value;
     }
 }
-
 /* 855 inbound gs and st value end*/
 
 /* 856 inbound gs and st value */
@@ -481,7 +621,6 @@ function IBsender810() {
     var senderIdst810Ib = document.getElementById('st810senderIdIB');
     senderIdst810Ib.value = senderIdgs810Ib.value;
 }
-
 function IBversion810() {
     var versiongs810Ib = document.getElementById('gs810VersionIB');
     var versionst810Ib = document.getElementById('st810VersionIB');
@@ -513,7 +652,6 @@ function OBversion850() {
     var versionst850Ob = document.getElementById('st850VersionOB');
     versionst850Ob.value = versiongs850Ob.value;
 }
-
 function OB850recId() {
     var recIdgs850Ob = document.getElementById('gs850RecIdOB');
     var recIdst850Ob = document.getElementById('st850RecIdOB');
@@ -698,7 +836,7 @@ function checkib850() {
         }
     }
     document.getElementById("IB850Transaction").value = ib850;
-//alert("850 transaction "+document.getElementById("IB850Transaction").value);
+    //alert("850 transaction "+document.getElementById("IB850Transaction").value);
 }
 
 function checkib855() {
@@ -777,7 +915,7 @@ function checkib855() {
         }
     }
     document.getElementById("IB855Transaction").value = ib855;
-//alert("ib 855 transaction "+document.getElementById("IB855Transaction").value);       
+    //alert("ib 855 transaction "+document.getElementById("IB855Transaction").value);       
 }
 
 function checkib856() {
@@ -855,8 +993,7 @@ function checkib856() {
             }
         }
     }
-    document.getElementById("IB856Transaction").value = ib856;
-//alert("ib 856 transaction "+document.getElementById("IB856Transaction").value);     
+    document.getElementById("IB856Transaction").value = ib856; //alert("ib 856 transaction "+document.getElementById("IB856Transaction").value);     
 }
 
 function checkib810() {
@@ -934,8 +1071,7 @@ function checkib810() {
             }
         }
     }
-    document.getElementById("IB810Transaction").value = ib810;
-//alert("ib 810 transaction "+document.getElementById("IB810Transaction").value);  
+    document.getElementById("IB810Transaction").value = ib810; //alert("ib 810 transaction "+document.getElementById("IB810Transaction").value);  
 }
 
 function checkob850() {
@@ -1014,7 +1150,7 @@ function checkob850() {
         }
     }
     document.getElementById("OB850Transaction").value = ob850;
-//alert("ob 850 transaction "+document.getElementById("OB850Transaction").value);  
+    //alert("ob 850 transaction "+document.getElementById("OB850Transaction").value);  
 }
 
 function checkob855() {
@@ -1093,7 +1229,7 @@ function checkob855() {
         }
     }
     document.getElementById("OB855Transaction").value = ob855;
-//alert("ob 855 transaction "+document.getElementById("OB855Transaction").value);  
+    //alert("ob 855 transaction "+document.getElementById("OB855Transaction").value);  
 }
 
 function checkob856() {
@@ -1172,7 +1308,7 @@ function checkob856() {
         }
     }
     document.getElementById("OB856Transaction").value = ob856;
-//alert("ob 856 transaction "+document.getElementById("OB856Transaction").value); 
+    //alert("ob 856 transaction "+document.getElementById("OB856Transaction").value); 
 }
 
 function checkob810() {
@@ -1251,7 +1387,7 @@ function checkob810() {
         }
     }
     document.getElementById("OB810Transaction").value = ob810;
-//alert("ob 810 transaction "+document.getElementById("OB810Transaction").value); 
+    //alert("ob 810 transaction "+document.getElementById("OB810Transaction").value); 
 }
 
 function fieldLengthValidatorEditEnvelope(element) {
@@ -1290,8 +1426,7 @@ function fieldLengthValidator850IB(element) {
         if (element.id == 'fun850GroupIdIB' || element.id == 'res850AgecodeIB' || element.id == 'trans850IdcodeIB') {
             i = 3;
         }
-        /* 850 end*/
-        if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
+        /* 850 end*/         if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
             str = new String(element.value);
             element.value = str.substring(0, i);
             document.getElementById('resultMessage').innerHTML = "<font color=red>The Value must be less than " + i + " characters</font>";
@@ -1304,8 +1439,7 @@ function fieldLengthValidator850IB(element) {
 
 function fieldLengthValidator855IB(element) {
     var i = 0;
-    if (element.value != null && (element.value != "")) {
-        /* 855 IB validation */
+    if (element.value != null && (element.value != "")) {         /* 855 IB validation */
         if (element.id == 'isa855senderIdIB' || element.id == 'gs855senderIdIB' || element.id == 'st855senderIdIB' || element.id == 'gs855VersionIB' || element.id == 'st855VersionIB') {
             i = 15;
         }
@@ -1329,8 +1463,7 @@ function fieldLengthValidator855IB(element) {
 
 function fieldLengthValidator856IB(element) {
     var i = 0;
-    if (element.value != null && (element.value != "")) {
-        /* 856 IB validation */
+    if (element.value != null && (element.value != "")) {         /* 856 IB validation */
         if (element.id == 'isa856senderIdIB' || element.id == 'gs856senderIdIB' || element.id == 'st856senderIdIB' || element.id == 'gs856VersionIB' || element.id == 'st856VersionIB') {
             i = 15;
         }
@@ -1354,8 +1487,7 @@ function fieldLengthValidator856IB(element) {
 
 function fieldLengthValidator810IB(element) {
     var i = 0;
-    if (element.value != null && (element.value != "")) {
-        /* 810 IB validation */
+    if (element.value != null && (element.value != "")) {         /* 810 IB validation */
         if (element.id == 'isa810senderIdIB' || element.id == 'gs810senderIdIB' || element.id == 'st810senderIdIB' || element.id == 'gs810VersionIB' || element.id == 'st810VersionIB') {
             i = 15;
         }
@@ -1379,8 +1511,7 @@ function fieldLengthValidator810IB(element) {
 
 function fieldLengthValidator850OB(element) {
     var i = 0;
-    if (element.value != null && (element.value != "")) {
-        /* 850 OB validation */
+    if (element.value != null && (element.value != "")) {         /* 850 OB validation */
         if (element.id == 'isa850senderIdOB' || element.id == 'gs850senderIdOB' || element.id == 'st850senderIdOB' || element.id == 'gs850VersionOB' || element.id == 'st850VersionOB') {
             i = 15;
         }
@@ -1404,8 +1535,7 @@ function fieldLengthValidator850OB(element) {
 
 function fieldLengthValidator855OB(element) {
     var i = 0;
-    if (element.value != null && (element.value != "")) {
-        /* 855 OB validation */
+    if (element.value != null && (element.value != "")) {         /* 855 OB validation */
         if (element.id == 'isa855senderIdOB' || element.id == 'gs855senderIdOB' || element.id == 'st855senderIdOB' || element.id == 'gs855VersionOB' || element.id == 'st855VersionOB') {
             i = 15;
         }
@@ -1429,8 +1559,7 @@ function fieldLengthValidator855OB(element) {
 
 function fieldLengthValidator856OB(element) {
     var i = 0;
-    if (element.value != null && (element.value != "")) {
-        /* 856 OB validation */
+    if (element.value != null && (element.value != "")) {         /* 856 OB validation */
         if (element.id == 'isa856senderIdOB' || element.id == 'gs856senderIdOB' || element.id == 'st856senderIdOB' || element.id == 'gs856VersionOB' || element.id == 'st856VersionOB') {
             i = 15;
         }
@@ -1949,13 +2078,13 @@ function sslRequiredForGetDetails(x) {
             $("#sslDiv2").show();
             //            if(transferMode == 'get'){
             //                document.getElementById("ssl_priority").value = 'Must';
-            //                document.getElementById("ssl_passphrase").value = 'xxxx';
+//                document.getElementById("ssl_passphrase").value = 'xxxx';
             //                document.getElementById("ssl_cipher_stergth").value = 'xxxx';
             //            }
             //            if(transferMode == 'put'){
             //                document.getElementById("ssl_priority").value = 'Must';
             //                document.getElementById("ssl_passphrase").value = '';
-            //                document.getElementById("ssl_cipher_stergth").value = '';
+//                document.getElementById("ssl_cipher_stergth").value = '';
             //            }
         } else {
             $("#sslDiv").hide();
@@ -1975,7 +2104,6 @@ function as2PartnerProfileNames() {
     var as2_myPartname = document.getElementById('as2_myPartname');
     as2_myPartname.value = as2_partOrgName.value;
 }
-
 function isExistedAS2PartnerProfileName() {
     $("#correctImg").hide();
     $("#wrongImg").hide();
@@ -1992,7 +2120,6 @@ function isExistedAS2PartnerProfileName() {
         req.send(null);
     }
 }
-
 function isExistedAS2PartnerProfileNameResponse(resText) {
     $("#loadingImageAjax").hide();
     if (resText == 'Yes') {
@@ -2017,8 +2144,7 @@ function validateFTP(flag) {
     var ftp_directory = document.getElementById("ftp_directory").value;
     // var ftp_ssl_req = document.getElementById("ftp_ssl_req").value;
     var ftp_ssl = document.getElementById("ftp_ssl_req").checked;
-    document.getElementById('tpResultMessage').innerHTML = "";
-    //var commnProtocol =document.getElementById('commnProtocol').value;
+    document.getElementById('tpResultMessage').innerHTML = "";     //var commnProtocol =document.getElementById('commnProtocol').value;
     if (((ftp_method == null) || (ftp_method == "")) || ((ftp_conn_method == null) || (ftp_conn_method == "")) || ((ftp_recv_protocol == null) || (ftp_recv_protocol == "")) || ((ftp_resp_time == null) || (ftp_resp_time == "")) || ((ftp_host == null) || (ftp_host == "")) || ((ftp_port == null) || (ftp_port == "")) || ((ftp_userId == null) || (ftp_userId == "")) || ((ftp_pwd == null) || (ftp_pwd == "")) || ((ftp_directory == null) || (ftp_directory == ""))) {
         document.getElementById('protocolmsgFtp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
@@ -2038,8 +2164,7 @@ function validateFTP(flag) {
     }
 }
 
-function validateSFTP(flag) {
-    // var sftp_conn_method = document.getElementById("sftp_conn_method").value;
+function validateSFTP(flag) {     // var sftp_conn_method = document.getElementById("sftp_conn_method").value;
     //  var sftp_auth_method = document.getElementById("sftp_auth_method").value;
     var FileName = document.getElementById("attachmentFileNameSftp").value;
     var sftp_host_ip = document.getElementById("sftp_host_ip").value;
@@ -2065,7 +2190,6 @@ function validateSFTP(flag) {
         }
     }
 }
-
 function validateHTTP(flag) {
     // var sftp_conn_method = document.getElementById("sftp_conn_method").value;
     //  var sftp_auth_method = document.getElementById("sftp_auth_method").value;
@@ -2098,10 +2222,8 @@ function validateHTTP(flag) {
         }
     }
 }
-
 function validateAS2(flag) {
-    // var sftp_conn_method = document.getElementById("sftp_conn_method").value;
-    //  var sftp_auth_method = document.getElementById("sftp_auth_method").value;
+    // var sftp_conn_method = document.getElementById("sftp_conn_method").value;     //  var sftp_auth_method = document.getElementById("sftp_auth_method").value;
     var attachmentFileName = document.getElementById("attachmentFileNameAs2").value;
     var as2_myOrgName = document.getElementById("as2_myOrgName").value;
     var as2_partOrgName = document.getElementById("as2_partOrgName").value;
@@ -2128,7 +2250,7 @@ function validateAS2(flag) {
     }
     if (as2_ssl_req == true) {
         // var ssl_priority = document.getElementById("ssl_priority2").value;
-        // var ssl_cipher_stergth = document.getElementById("ssl_cipher_stergth2").value;
+// var ssl_cipher_stergth = document.getElementById("ssl_cipher_stergth2").value;
         var fileName = document.getElementById("attachmentFileName").value;
         if (flag == 'add') {
             if (((fileName == null) || (fileName == ""))) {
@@ -2167,7 +2289,6 @@ function addPartner1() {
         specialBox.style.display = "block";
     }
 }
-
 function resetPartnerValues() {
     document.getElementById('addbutton').disabled = false;
     document.getElementById("addpartnerMsg").value = "";
@@ -2203,7 +2324,6 @@ function resetAddPartnerValues(flag) {
     document.getElementById("correctImg").style.display = "none";
     document.getElementById("wrongImg").style.display = "none";
 }
-
 function resetRegisterUser() {
     document.getElementById("regcontactName").value = "";
     document.getElementById("regcontactLName").value = "";

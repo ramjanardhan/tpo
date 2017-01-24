@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Miracle TP On-boarding portal</title>
+        <title>Miracle TP On-boarding</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="no-cache" />
@@ -22,10 +22,8 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
-
         <script>
-            function doOnLoad()
-            {
+            function doOnLoad() {
                 $("#profiles").addClass("active");
                 showTransferDiv();
             }
@@ -38,9 +36,7 @@
                 }
             }
         </script>
-
         <style>
-
             #transferModeget{
                 margin:5px;
             }
@@ -48,7 +44,6 @@
                 margin:5px;
             }
         </style>
-
     </head>
     <body class="home" onload="doOnLoad()">
         <div>
@@ -100,8 +95,8 @@
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4" />
                                     </div>
                                     <div class="col-sm-1 pull-right">
-                                       <%-- <s:submit  tabindex="5" cssClass="btn btn-primary pull-right"/> --%>
-                                       <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
+                                        <%-- <s:submit  tabindex="5" cssClass="btn btn-primary pull-right"/> --%>
+                                        <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                     </div>
                                 </div>
                             </div>
@@ -190,11 +185,9 @@
                                                     }
                                                     if ("no".equalsIgnoreCase(disableButton)) {
                                                 %>
-                                                <%--  <s:a href='%{#myUrl}' ><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a> --%>
                                                 <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></span></s:a>
                                                 <% } else {
                                                 %>  
-                                                <%--  <s:a href='' style="disable:true;"><img src="../includes/images/Edit.gif" height="20px" width="20px"></s:a>--%>
                                                 <s:a href='' style="disable:true;" ><span class="glyphicon glyphicon-pencil"></span></s:a>
                                                 <%  }
                                                 %>
@@ -205,16 +198,12 @@
                                                     <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param> 
                                                     <s:param name="transferMode"><%=(tpOnboardingBean.getTransferMode())%></s:param> 
                                                 </s:url>
-                                                <%-- <s:a href='%{#myUrl1}' ><img src="../includes/images/delete.jpg" height="20px" width="20px"></s:a> --%>
                                                 <s:a href='%{#myUrl1}' style="color: red;"><span class="glyphicon glyphicon-trash"></span></s:a>
                                                 </td>
                                             </tr>
                                         <%
                                             }
                                         } else {
-                                        %>
-
-                                        <%
                                             if (list.size() != 0) {
                                         %>
                                         <tr >
@@ -222,8 +211,10 @@
                                             </td>
                                         </tr> 
                                     </tbody>
-                                    <% }
-                                        }%>
+                                    <%
+                                            }
+                                        }
+                                    %>
                                 </table>
                             </s:if> 
                         </s:form>
@@ -243,25 +234,21 @@
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>  
         <script>
-        $(function () {
-            $('#profiletable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-        function resetValues()
-        {
- 
-            document.getElementById("commnProtocol").value="-1";
-            document.getElementById("status").value="-1";
-            document.getElementById("transferMode").checked=false;
-            
-        }
-        
+                                            $(function () {
+                                                $('#profiletable').DataTable({
+                                                    "paging": true,
+                                                    "lengthChange": true,
+                                                    "searching": true,
+                                                    "ordering": true,
+                                                    "info": true,
+                                                    "autoWidth": false
+                                                });
+                                            });
+                                            function resetValues() {
+                                                document.getElementById("commnProtocol").value = "-1";
+                                                document.getElementById("status").value = "-1";
+                                                document.getElementById("transferMode").checked = false;
+                                            }
         </script>
     </body>
 </html>

@@ -8,7 +8,7 @@
         <meta name="viewport"    content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author"      content="TP On-boarding">
-        <title>TP On-boarding</title>
+        <title>Miracle TP On-boarding</title>
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css"/>' media="screen" >
