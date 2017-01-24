@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="col-sm-1 pull-right">
                                        <%-- <s:submit  tabindex="5" cssClass="btn btn-primary pull-right"/> --%>
-                                       <input type="button"  tabindex="5" class="btn btn-primary pull-right"/>
+                                       <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                     </div>
                                 </div>
                             </div>
@@ -253,6 +253,15 @@
                 "autoWidth": false
             });
         });
+        function resetValues()
+        {
+ 
+            document.getElementById("commnProtocol").value="-1";
+            document.getElementById("status").value="-1";
+            document.getElementById("transferMode").checked=false;
+            
+        }
+        
         </script>
     </body>
 </html>

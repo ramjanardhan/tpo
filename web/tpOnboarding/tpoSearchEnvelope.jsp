@@ -68,7 +68,7 @@
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="3"/>
                                     </div>
                                     <div class="col-sm-1 pull-right">
-                                        <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="4"/>
+                                        <input type="button" value="Reset" tabindex="4" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                     </div>
                                 </div>
                             </div>
@@ -175,5 +175,10 @@
                 "autoWidth": false
             });
         });
+        function resetValues()
+        {
+             document.getElementById("transaction").value="-1";
+            document.getElementById("direction").value="-1";
+        }
     </script>
 </html>

@@ -68,7 +68,7 @@
                                     <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4"/>
                                 </div>
                                 <div class="col-sm-1 pull-right">
-                                    <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="5"/>
+                                    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
             <div id="site_content" class="jumbotron">
                 <div class="container">
                     <center><div id="resultMsg"></div></center>
-                        <s:if test="#session.tpoSearchPartnersList != null"> 
+                    <s:if test="#session.tpoSearchPartnersList != null"> 
                         <table id="partnersTable" name="partnersTable" class="table table-bordered table-hover">
                             <thead>
                             <th>NAME</th>
@@ -139,29 +139,29 @@
                                                 out.println("<font color='orange'>" + tpOnboardingBean.getStatus() + "</font>");
                                             }
                                             //out.println(tpOnboardingBean.getStatus());
-                                        %>
+%>
                                     </td>
                                     <td align="center">
                                         <%
                                             if (tpOnboardingBean.getStatus().equalsIgnoreCase("ACTIVE")) {
                                         %>
                                         <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-ok-sign"></span></a>
-                                            <% } else {
-                                            %>  
+                                        <% } else {
+                                        %>  
                                         <a style="color: green;" href='javascript:getPartnerName("<%=loginId%>","<%=roleId%>","<%=id%>","<%=(tpOnboardingBean.getPartnerName())%>")' id="acceptButton" ><span class="glyphicon glyphicon-ok-sign"></span></a>
-                                            <%  }
-                                            %>
+                                        <%  }
+                                        %>
                                     </td>
                                     <td align="center">
                                         <%
                                             if (tpOnboardingBean.getStatus().equalsIgnoreCase("REJECTED")) {
                                         %>
                                         <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-remove-sign"></span></a>
-                                            <% } else {
-                                            %>  
+                                        <% } else {
+                                        %>  
                                         <a style="color: red" href='javascript:partnerReject("<%=id%>","<%=(tpOnboardingBean.getPartnerName())%>")'><span class="glyphicon glyphicon-remove-sign"></span></a>
-                                            <%  }
-                                            %>
+                                        <%  }
+                                        %>
                                     </td>
 
                                     </td>
@@ -230,31 +230,40 @@
     <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
     <script>
-                                        $(function () {
-                                            $('#partnersTable').DataTable({
-                                                "paging": true,
-                                                "lengthChange": true,
-                                                "searching": true,
-                                                "ordering": true,
-                                                "info": true,
-                                                "autoWidth": false
-                                            });
-                                        });
+        $(function () {
+            $('#partnersTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
 
-                                        $("#acceptButton").click(function () {
-                                            $('#myModal').modal('show');
-                                        });
+        $("#acceptButton").click(function () {
+            $('#myModal').modal('show');
+        });
 
-                                        function getPartnerName(loginId, roleId, pId, pName) {
-                                            document.getElementById("loginId").value = loginId;
-                                            document.getElementById("roleId").value = roleId;
-                                            document.getElementById('partnerId').value = pId;
-                                            document.getElementById("addpartnerName").value = pName;
-                                            $("#myModal").modal("show");
-                                        }
+        function getPartnerName(loginId, roleId, pId, pName) {
+            document.getElementById("loginId").value = loginId;
+            document.getElementById("roleId").value = roleId;
+            document.getElementById('partnerId').value = pId;
+            document.getElementById("addpartnerName").value = pName;
+            $("#myModal").modal("show");
+        }
 
-                                        function backToPartnerList() {
-                                            window.location = "../tpOnboarding/tpoPartnersList.action";
-                                        }
+        function backToPartnerList() {
+            window.location = "../tpOnboarding/tpoPartnersList.action";
+        }
+        function resetValues()
+        {
+              
+ 
+            document.getElementById("partnerName").value="";
+            document.getElementById("country").value="-1";
+            document.getElementById("status").value="-1";
+            
+        }
     </script>
 </html>

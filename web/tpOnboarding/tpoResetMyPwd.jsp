@@ -85,7 +85,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-1 pull-right"> <s:submit value="Update" cssClass="btn btn-primary" onclick="return checkPwd();"/></div>
+                                <div class="col-md-1 pull-right"> <s:submit value="Update" cssClass="btn btn-primary" tabindex="3" onclick="return checkPwd();"/></div>
                             </div>
                         </div>
                     </s:form>
