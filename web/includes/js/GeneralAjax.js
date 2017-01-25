@@ -294,6 +294,39 @@ function rejectPartnerResponse(resText) {
     document.getElementById("resultMsg").innerHTML = resText;
 }
 
+function testConnectionProfile(i,CommId, protocol, pName) {
+   alert(i);
+   alert("CommId = "+CommId);
+   alert("protocol = "+protocol);
+   alert("pName = "+pName);
+   document.getElementById("iValue").value=i;
+   
+        var req = getXMLHttpRequest();
+        req.onreadystatechange = readyStateHandlerLoadText(req, testConnectionProfileResponse);
+        var url = "../ajax/testProfile.action?communicationId=" + CommId+"&protocol="+protocol+"&partnerName="+pName;
+        alert(url);
+        req.open("GET", url, "true");
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.send(null);
+   
+}
+
+function testConnectionProfileResponse(resText) {
+    alert("resText==="+resText);
+    var result;
+    if(resText=='OK')
+    {
+        result = 'Success';
+    }
+    else
+    {
+        result = 'Failed';
+    }
+    var x = document.getElementById("iValue").value;
+    alert("x==="+x);
+    document.getElementById(x).innerHTML = result;
+}
+
 
 
 

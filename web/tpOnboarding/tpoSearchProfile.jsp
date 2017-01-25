@@ -3,10 +3,12 @@
     Created on : Dec 27, 2016, 4:45:23 AM
     Author     : miracle1
 --%>
+<%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
 <%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
+<%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -104,22 +106,24 @@
                     </div>
                     <div id="site_content" class="jumbotron">
                         <div class="container"> 
+                            <div id = "loadingImage"></div>
                             <s:if test="#session.tpoSearchProfileList != null"> 
                                 <table id="profiletable" class="table table-bordered table-hover">
                                     <thead>
                                     <th>COMM_ID</th>
                                     <th>PROTOCOL</th>
-                                    <th>TRANSFER&nbsp;MODE</th>
-                                    <th>STATUS</th>
+                                    <th>PARTNER&nbsp;NAME</th>
                                     <th>CREATED&nbsp;BY</th>
                                     <th>CREATED&nbsp;DATE</th>
                                     <th>TEST</th>
+                                    <th>TEST&nbsp;STATUS</th>
                                     <th>EDIT</th>
                                     <th>DELETE </th>
                                     </thead>
                                     <tbody>
                                         <%
-                                            java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchProfileList);
+                                     int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
+                                      String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);                                            java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchProfileList);
                                             if (list.size() != 0) {
                                                 TpOnboardingBean tpOnboardingBean;
                                         %>
@@ -139,21 +143,10 @@
                                             </td>
                                             <td>
                                                 <%
-                                                    out.println(tpOnboardingBean.getTransferMode());
+                                                    out.println(partnerName);
                                                 %>
                                             </td>
-                                            <td>
-                                                <%
-                                                    if (tpOnboardingBean.getStatus().equalsIgnoreCase("REJECTED")) {
-                                                        out.println("<font color='red'>" + tpOnboardingBean.getStatus() + "</font>");
-                                                    } else if (tpOnboardingBean.getStatus().equalsIgnoreCase("ACTIVE")) {
-                                                        out.println("<font color='green'>" + tpOnboardingBean.getStatus() + "</font>");
-                                                    } else {
-                                                        out.println("<font color='orange'>" + tpOnboardingBean.getStatus() + "</font>");
-                                                    }
-                                                    //out.println(tpOnboardingBean.getStatus());
-                                                %>
-                                            </td>
+                                           
                                             <td>
                                                 <%
                                                     out.println(tpOnboardingBean.getCreated_by());
@@ -166,11 +159,18 @@
                                             </td>
 
                                             <td align="center">   
-                                                <s:url var="testUrl" action="../tpOnboarding/tpoTestProfile.action">
-                                                    <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param> 
-                                                    <s:param name="transferMode"><%=(tpOnboardingBean.getTransferMode())%></s:param> 
-                                                </s:url>
-                                                <s:a href='%{#testUrl}' style="color: green;"><span class="glyphicon glyphicon-circle-arrow-right"></span></s:a>
+                                               
+                                                <s:hidden id = "iValue"/>
+                                                 <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(tpOnboardingBean.getId())%>","<%=(tpOnboardingBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                                </td>
+                                                
+                                                
+                                                <td>
+                                                    
+                                                    <div id = "<%=i%>">
+                                                        
+                                                    </div>
+                                                    
                                                 </td>
 
                                                 <td align="center">

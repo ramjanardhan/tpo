@@ -66,7 +66,7 @@
 .btn-info,    .btn-warning, .btn-danger {
 	text-shadow: 0 2px 1px rgba(0, 0, 0, .2);
 }
-
+.btn-URLConnection {color: rgba(275, 72, 172,.5); background: #FF9B92;}
 .btn { padding: 6px 12px; font-weight: bold !important; border:0 none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
 .btn-lg { padding: 15px 65px; font-size: 14px; font-weight:bold; }
 .btn-default { text-shadow: none; background:transparent; color:rgba(50,50,50,.5); -webkit-box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.5); -moz-box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.5); box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.5); }
