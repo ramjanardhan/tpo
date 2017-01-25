@@ -8,7 +8,7 @@
         <meta name="viewport"    content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author"      content="TP On-boarding">
-        <title>TP On-boarding</title>
+        <title>Miracle TP On-boarding</title>
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css"/>' media="screen" >
@@ -18,12 +18,10 @@
             .content_item p{
                 font-size: 17px;
             }
-
             .modal-dialog1 {
                 width: 60%;
                 margin: 30px auto;
             }
-
             .contact-form {
                 margin: 0 2%;
             }
@@ -32,7 +30,6 @@
                 border-bottom: 1px solid #e5e5e5;
                 min-height: 16.428571429px;
             }
-
             .close {
                 float: right;
                 font-size: 34px;
@@ -74,13 +71,13 @@
         <div class="container">
             <div class="row">
                 <!-- Article main content -->
-                <article class="col-xs-12 maincontent jumbotron" style="padding:0;margin:0">
+                <article id="site_content" class="col-xs-12 maincontent jumbotron" style="padding:0;margin:0">
                     <header class="page-header" style="margin:2px 2px 16px">
                     </header>
                     <div class="col-sm-8">
                         <div class="content">
                             <div class="content_item">
-                                <h3 style="color:#285e8e"><b>TP On-boarding</b></h3>
+                                <h4 style="color: #2d8fc8" class="heading_4"><b>TP On-boarding</b></h4>
                                 <div>
                                     <p> Trading Partner provides a complete view of your inbound supply and outbound fulfillment activity across your supply chain network by providing and leveraging connectivity to all your supply chain trading partners, and enterprise applications.</p>
                                     <p> Supply chain visibility (SCV) is the ability of parts, components or products in transit to be tracked from the manufacturer to their final destination. The goal of SCV is to improve and strengthen the supply chain by making data readily available to all stakeholders, including the customer. Supply chain visibility technology promotes quick response to change by allowing privileged users to take action and reshape demand or redirect supply.</p>
@@ -88,12 +85,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-4   col-sm-8">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <h3 class="thin text-center">Sign in to your account</h3>
+                                <h3 class="thin text-center"><b>Sign in to your account</b></h3>
                                 <center> 
                                     <%if (request.getAttribute(AppConstants.REQ_ERROR_INFO) != null) {
                                             out.println("<font size=2 color=red>" + request.getAttribute(AppConstants.REQ_ERROR_INFO).toString() + "</font>");
@@ -103,25 +99,23 @@
                                 <s:form action="general/tpoLoginCheck" method="post" name="tpLoginForm" id="tpLoginForm" theme="simple">
                                     <div class="top-margin">
                                         <label>Username <span class="text-danger">*</span></label>
-                                        <s:textfield cssClass="form-control" name="loginId" id="loginId"/>
+                                        <s:textfield cssClass="form-control" name="loginId" id="loginId"  tabindex="1"/>
                                     </div>
                                     <div class="top-margin">
                                         <label>Password <span class="text-danger">*</span></label>
-                                        <s:password cssClass="form-control" name="password" id="password"/>
+                                        <s:password cssClass="form-control" name="password" id="password"  tabindex="2"/>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-xs-8">
-                                            <a href="" data-toggle="modal" data-target="#myModal">I forgot my password</a>
+                                            <a href="" data-toggle="modal" data-target="#myModal"  tabindex="4">I forgot my password</a>
                                         </div><!-- /.col -->
                                         <div class="col-xs-4">
-                                            <!--                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
-                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" onclick="checkboxstatus()"/>
+                                            <!-- <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
+                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" tabindex="3"/>
                                         </div><!-- /.col -->
                                     </div>
                                 </s:form>
-
-
                                 <div class="modal fade" id="myModal" data-backdrop="static" data-keyword="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -149,7 +143,6 @@
                                                         </div>
                                                     </div>  
                                                 </div>
-
                                                 <div class="modal-footer" style="border:0;margin:0">
                                                     <div class="row">
                                                         <div class="col-md-12" style="margin-bottom:8px">
@@ -195,7 +188,6 @@
                                                             <s:textfield cssClass="form-control" name="contactPersonLN" id="contactPersonLN" value="%{contactPersonLN}" placeholder="Last Name" onchange="addPtnerLengthValidator(this);"/>
                                                         </div>
                                                     </div>
-
                                                     <div class="col-sm-4">
                                                         <div class="form-group ajax_img">
                                                             <label>Contact Email<span class="text-danger">*</span></label>
@@ -203,10 +195,9 @@
                                                             <i id="wrongImg1" style="display: none;" class="fa fa-times"></i><i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
                                                         </div>
                                                     </div>
-
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <label>Phone No.<span class="text-danger">*</span></label>
+                                                            <label>Phone Number<span class="text-danger">*</span></label>
                                                             <s:textfield cssClass="form-control"  name="addphoneNo" id="addphoneNo" value="%{addphoneNo}" placeholder="Phone no." onchange="addPtnerLengthValidator(this);"/>
                                                         </div>
                                                     </div>

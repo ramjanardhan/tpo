@@ -113,6 +113,7 @@
                                     <th>STATUS</th>
                                     <th>CREATED&nbsp;BY</th>
                                     <th>CREATED&nbsp;DATE</th>
+                                    <th>TEST</th>
                                     <th>EDIT</th>
                                     <th>DELETE </th>
                                     </thead>
@@ -163,7 +164,16 @@
                                                     out.println(tpOnboardingBean.getCreated_ts().toString().substring(0, tpOnboardingBean.getCreated_ts().toString().lastIndexOf(":")));
                                                 %>
                                             </td>
-                                            <td align="center">
+
+                                            <td align="center">   
+                                                <s:url var="testUrl" action="../tpOnboarding/tpoTestProfile.action">
+                                                    <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param> 
+                                                    <s:param name="transferMode"><%=(tpOnboardingBean.getTransferMode())%></s:param> 
+                                                </s:url>
+                                                <s:a href='%{#testUrl}' style="color: green;"><span class="glyphicon glyphicon-circle-arrow-right"></span></s:a>
+                                                </td>
+
+                                                <td align="center">
                                                 <s:url var="myUrl" action="../tpOnboarding/tpogetProfile.action">
                                                     <s:param name="communicationId"><%=(tpOnboardingBean.getId())%></s:param>
                                                     <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param>

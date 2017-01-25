@@ -5,9 +5,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <meta name="author"      content="TP On-boarding">
+        <meta name="author" content="TP On-boarding">
         <title>Miracle TP On-boarding</title>
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +18,6 @@
             .content_item p{
                 font-size: 17px;
             }
-
             .modal-dialog1 {
                 width: 60%;
                 margin: 30px auto;
@@ -112,8 +111,8 @@
                                             <a href="" data-toggle="modal" data-target="#myModal"  tabindex="4">I forgot my password</a>
                                         </div><!-- /.col -->
                                         <div class="col-xs-4">
-                                            <!--                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
-                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" onclick="checkboxstatus()"  tabindex="3"/>
+                                            <!-- <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
+                                            <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" tabindex="3"/>
                                         </div><!-- /.col -->
                                     </div>
                                 </s:form>
