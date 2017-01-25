@@ -771,259 +771,299 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return tpOnboardingAction;
     }
 
-    public String tpoUpdateProfile(int partnerId, int Id, String commonprotocol, String Email, TpOnboardingAction tpOnboardingAction) {
+    public String tpoUpdateProfile(int partnerId, int communicationId, String commonprotocol, String Email, TpOnboardingAction tpOnboardingAction) {
+        int isCommunicationUpdated = 0;
         int isProtocolUpdated = 0;
         try {
             Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
             connection = ConnectionProvider.getInstance().getConnection();
-            if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("put")) {
-                String ftpUpdateQuery = "UPDATE MSCVP.TPO_FTP SET FTP_METHOD = ?, FTP_HOST = ?, FTP_PORT = ?, "
-                        + "FTP_USER_ID = ?, FTP_PASSWORD = ?, FTP_DIRECTORY = ?, CONNECTION_METHOD = ?, RESPONSE_TIMEOUT_SEC = ?,"
-                        + " SSL_FLAG = ?, TP_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ?, STATUS = ? WHERE COMMUNICATION_ID=" + Id;
-                preparedStatement = connection.prepareStatement(ftpUpdateQuery);
-                preparedStatement.setString(1, tpOnboardingAction.getFtp_method());
-                preparedStatement.setString(2, tpOnboardingAction.getFtp_host());
-                preparedStatement.setString(3, tpOnboardingAction.getFtp_port());
-                preparedStatement.setString(4, tpOnboardingAction.getFtp_userId());
-                preparedStatement.setString(5, tpOnboardingAction.getFtp_pwd());
-                preparedStatement.setString(6, tpOnboardingAction.getFtp_directory());
-                preparedStatement.setString(7, tpOnboardingAction.getFtp_conn_method());
-                preparedStatement.setInt(8, tpOnboardingAction.getFtp_resp_time());
-                preparedStatement.setString(9, tpOnboardingAction.getFtp_ssl_req());
-                preparedStatement.setString(10, "N");
-                preparedStatement.setString(11, tpOnboardingAction.getCreated_by());
-                preparedStatement.setTimestamp(12, curdate);
-                preparedStatement.setString(13, "INACTIVE");
-                isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
-                if ((isProtocolUpdated > 0) && ("true".equalsIgnoreCase(tpOnboardingAction.getFtp_ssl_req()))) {
-                    String selectQuery = "SELECT count(ID)  FROM MSCVP.TPO_SSL where COMMUNICATION_ID=? and PROTOCOL=?";
-                    preparedStatement = connection.prepareStatement(selectQuery);
-                    preparedStatement.setInt(1, Id);
-                    preparedStatement.setString(2, commonprotocol);
-                    resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
-                        StringBuffer ftpSslUpdateQuery = new StringBuffer();
-                        if (resultSet.getInt(1) > 0) {
-                            ftpSslUpdateQuery.append("Update MSCVP.TPO_SSL set SSL_PRIORITY=?,CIPHER_STRENGTH=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=? ");
-                            if (tpOnboardingAction.getCertGroups() != null) {
-                                ftpSslUpdateQuery.append(",CA_CERTIFICATES=? ,SSL_CERT_DATA=? ");
-                            }
-                            ftpSslUpdateQuery.append(" WHERE COMMUNICATION_ID= " + Id + "");
-                            preparedStatement = connection.prepareStatement(ftpSslUpdateQuery.toString());
-                            preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
-                            preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                            preparedStatement.setString(3, "N");
-                            preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
-                            preparedStatement.setTimestamp(5, curdate);
-                            if (tpOnboardingAction.getCertGroups() != null) {
-                                preparedStatement.setString(6, tpOnboardingAction.getCertGroups());
-                                preparedStatement.setString(7, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
-                            }
-                            preparedStatement.executeUpdate();
-                        } else {
-                            ftpSslUpdateQuery.append("INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,CIPHER_STRENGTH, TP_FLAG, CREATED_BY, CREATED_TS ");
-                            if (tpOnboardingAction.getCertGroups() != null) {
-                                ftpSslUpdateQuery.append(" , CA_CERTIFICATES ,SSL_CERT_DATA ");
-                            }
-                            ftpSslUpdateQuery.append("  ) VALUES(?,?,?,?,?,?,?,?,? ");
-                            if (tpOnboardingAction.getCertGroups() != null) {
-                                ftpSslUpdateQuery.append("  ,?,?) ");
+
+            String communicationQuery = "UPDATE MSCVP.TPO_COMMUNICATION SET TP_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ?, STATUS = ? WHERE ID=" + communicationId;
+            preparedStatement = connection.prepareStatement(communicationQuery);
+            preparedStatement.setString(1, "N");
+            preparedStatement.setString(2, tpOnboardingAction.getCreated_by());
+            preparedStatement.setTimestamp(3, curdate);
+            preparedStatement.setString(4, "INACTIVE");
+            isCommunicationUpdated = isCommunicationUpdated + preparedStatement.executeUpdate();
+            
+            if (isCommunicationUpdated > 0) {
+                if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+                    String ftpUpdateQuery = "UPDATE MSCVP.TPO_FTP SET FTP_METHOD = ?, FTP_HOST = ?, FTP_PORT = ?, "
+                            + "FTP_USER_ID = ?, FTP_PASSWORD = ?, FTP_DIRECTORY = ?, CONNECTION_METHOD = ?, RESPONSE_TIMEOUT_SEC = ?,"
+                            + " SSL_FLAG = ?, TP_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ?, STATUS = ? WHERE COMMUNICATION_ID=" + communicationId;
+                    preparedStatement = connection.prepareStatement(ftpUpdateQuery);
+                    preparedStatement.setString(1, tpOnboardingAction.getFtp_method());
+                    preparedStatement.setString(2, tpOnboardingAction.getFtp_host());
+                    preparedStatement.setString(3, tpOnboardingAction.getFtp_port());
+                    preparedStatement.setString(4, tpOnboardingAction.getFtp_userId());
+                    preparedStatement.setString(5, tpOnboardingAction.getFtp_pwd());
+                    preparedStatement.setString(6, tpOnboardingAction.getFtp_directory());
+                    preparedStatement.setString(7, tpOnboardingAction.getFtp_conn_method());
+                    preparedStatement.setInt(8, tpOnboardingAction.getFtp_resp_time());
+                    preparedStatement.setString(9, tpOnboardingAction.getFtp_ssl_req());
+                    preparedStatement.setString(10, "N");
+                    preparedStatement.setString(11, tpOnboardingAction.getCreated_by());
+                    preparedStatement.setTimestamp(12, curdate);
+                    preparedStatement.setString(13, "INACTIVE");
+                    isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
+                    if ((isProtocolUpdated > 0) && ("true".equalsIgnoreCase(tpOnboardingAction.getFtp_ssl_req()))) {
+                        String selectQuery = "SELECT count(ID)  FROM MSCVP.TPO_SSL where COMMUNICATION_ID=? and PROTOCOL=?";
+                        preparedStatement = connection.prepareStatement(selectQuery);
+                        preparedStatement.setInt(1, communicationId);
+                        preparedStatement.setString(2, commonprotocol);
+                        resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            StringBuffer ftpSslUpdateQuery = new StringBuffer();
+                            if (resultSet.getInt(1) > 0) {
+                                ftpSslUpdateQuery.append("Update MSCVP.TPO_SSL set SSL_PRIORITY=?,CIPHER_STRENGTH=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=? ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    ftpSslUpdateQuery.append(",CA_CERTIFICATES=? ,SSL_CERT_DATA=? ");
+                                }
+                                ftpSslUpdateQuery.append(" WHERE COMMUNICATION_ID= " + communicationId + "");
+                                preparedStatement = connection.prepareStatement(ftpSslUpdateQuery.toString());
+                                preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
+                                preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
+                                preparedStatement.setString(3, "N");
+                                preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
+                                preparedStatement.setTimestamp(5, curdate);
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    preparedStatement.setString(6, tpOnboardingAction.getCertGroups());
+                                    preparedStatement.setString(7, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                                }
+                                preparedStatement.executeUpdate();
                             } else {
-                                ftpSslUpdateQuery.append("  ) ");
-                            }
+                                ftpSslUpdateQuery.append("INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,CIPHER_STRENGTH, TP_FLAG, CREATED_BY, CREATED_TS ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    ftpSslUpdateQuery.append(" , CA_CERTIFICATES ,SSL_CERT_DATA ");
+                                }
+                                ftpSslUpdateQuery.append("  ) VALUES(?,?,?,?,?,?,?,?,? ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    ftpSslUpdateQuery.append("  ,?,?) ");
+                                } else {
+                                    ftpSslUpdateQuery.append("  ) ");
+                                }
 
-                            preparedStatement = connection.prepareStatement(ftpSslUpdateQuery.toString());
-                            preparedStatement.setInt(1, Id);
-                            preparedStatement.setInt(2, partnerId);
-                            preparedStatement.setString(3, tpOnboardingAction.getTransferMode());
-                            preparedStatement.setString(4, tpOnboardingAction.getCommnProtocol());
-                            preparedStatement.setString(5, tpOnboardingAction.getSsl_priority2());
-                            preparedStatement.setString(6, tpOnboardingAction.getSsl_cipher_stergth2());
-                            preparedStatement.setString(7, "N");
-                            preparedStatement.setString(8, tpOnboardingAction.getCreated_by());
-                            preparedStatement.setTimestamp(9, curdate);
-                            if (tpOnboardingAction.getCertGroups() != null) {
-                                preparedStatement.setString(10, tpOnboardingAction.getCertGroups());
-                                preparedStatement.setString(11, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
-                            }
-                            preparedStatement.executeUpdate();
+                                preparedStatement = connection.prepareStatement(ftpSslUpdateQuery.toString());
+                                preparedStatement.setInt(1, communicationId);
+                                preparedStatement.setInt(2, partnerId);
+                                preparedStatement.setString(3, tpOnboardingAction.getTransferMode());
+                                preparedStatement.setString(4, tpOnboardingAction.getCommnProtocol());
+                                preparedStatement.setString(5, tpOnboardingAction.getSsl_priority2());
+                                preparedStatement.setString(6, tpOnboardingAction.getSsl_cipher_stergth2());
+                                preparedStatement.setString(7, "N");
+                                preparedStatement.setString(8, tpOnboardingAction.getCreated_by());
+                                preparedStatement.setTimestamp(9, curdate);
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    preparedStatement.setString(10, tpOnboardingAction.getCertGroups());
+                                    preparedStatement.setString(11, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                                }
+                                preparedStatement.executeUpdate();
 
+                            }
                         }
                     }
-                }
-            } else if (commonprotocol.equalsIgnoreCase("AS2")) {
-                String as2UpdateQuery = "UPDATE MSCVP.TPO_AS2 SET MY_ORG = ?,YOUR_ORG = ?,"
-                        + "MY_PART_PRO_NAME = ?,YOUR_PART_PRO_NAME = ?,MY_END_POINT = ?,YOUR_END_POINT = ?,STR_AS2_MSG_IN = ?,"
-                        + "WAIT_FOR_SYNC_MDN_PROC = ?,UPL_YOUR_SYS_CERT=?,SSL_FLAG=?, TP_FLAG = ?,MODIFIED_BY = ?,MODIFIED_TS = ?, STATUS = ?,TRANSFER_MODE = ?,SYS_CERT_DATA=? WHERE COMMUNICATION_ID=" + Id;
-                preparedStatement = connection.prepareStatement(as2UpdateQuery);
-                preparedStatement.setString(1, tpOnboardingAction.getAs2_myOrgName());
-                preparedStatement.setString(2, tpOnboardingAction.getAs2_partOrgName());
-                preparedStatement.setString(3, tpOnboardingAction.getAs2_myPartname());
-                preparedStatement.setString(4, tpOnboardingAction.getAs2_yourPartname());
-                preparedStatement.setString(5, tpOnboardingAction.getAs2_myEndPoint());
-                preparedStatement.setString(6, tpOnboardingAction.getAs2_partendpoint());
-                preparedStatement.setString(7, tpOnboardingAction.getAs2_strMsg());
-                preparedStatement.setString(8, tpOnboardingAction.getAs2_waitForSync());
-                preparedStatement.setString(9, tpOnboardingAction.getFilepath());
-                preparedStatement.setString(10, tpOnboardingAction.getAs2_ssl_req());
-                preparedStatement.setString(11, "N");
-                preparedStatement.setString(12, tpOnboardingAction.getCreated_by());
-                preparedStatement.setTimestamp(13, curdate);
-                preparedStatement.setString(14, "INACTIVE");
-                preparedStatement.setString(15, tpOnboardingAction.getAs2_payloadSendMode());
-                if (!"".equalsIgnoreCase(tpOnboardingAction.getFilepath())) {
-                    preparedStatement.setString(16, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
-                } else {
-                    preparedStatement.setString(16, "");
-                }
-                isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
-                if ((isProtocolUpdated > 0) && tpOnboardingAction.getAs2_ssl_req().equalsIgnoreCase("true")) {
-                    String selectQuery = "SELECT count(ID)  FROM MSCVP.TPO_SSL where COMMUNICATION_ID=? and PROTOCOL=?";
-                    preparedStatement = connection.prepareStatement(selectQuery);
-                    preparedStatement.setInt(1, Id);
-                    preparedStatement.setString(2, commonprotocol);
-                    resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
-                        if (resultSet.getInt(1) > 0) {
-                            String as2SslUpdateQuery = "Update MSCVP.TPO_SSL set SSL_PRIORITY=?, "
-                                    + " CIPHER_STRENGTH=?,CA_CERTIFICATES=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=?,SSL_CERT_DATA=? WHERE COMMUNICATION_ID=" + Id;
-                            preparedStatement = connection.prepareStatement(as2SslUpdateQuery);
-                            preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
-                            preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                            preparedStatement.setString(3, tpOnboardingAction.getCertGroups());
-                            preparedStatement.setString(4, "N");
-                            preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
-                            preparedStatement.setTimestamp(6, curdate);
-                            if (!"".equalsIgnoreCase(tpOnboardingAction.getCertGroups())) {
-                                preparedStatement.setString(7, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                } else if (commonprotocol.equalsIgnoreCase("AS2")) {
+                    StringBuffer as2UpdateQuery = new StringBuffer();
+                    as2UpdateQuery.append("UPDATE MSCVP.TPO_AS2 SET MY_ORG = ?,YOUR_ORG = ?, ");
+                    as2UpdateQuery.append("MY_PART_PRO_NAME = ?,YOUR_PART_PRO_NAME = ?,MY_END_POINT = ?,YOUR_END_POINT = ?,STR_AS2_MSG_IN = ?,");
+                    as2UpdateQuery.append("WAIT_FOR_SYNC_MDN_PROC = ?,SSL_FLAG=?, TP_FLAG = ?,MODIFIED_BY = ?,MODIFIED_TS = ?, STATUS = ?,TRANSFER_MODE = ? ");
+                    if (tpOnboardingAction.getFilepath() != null) {
+                        as2UpdateQuery.append(",UPL_YOUR_SYS_CERT=?,SYS_CERT_DATA=? ");
+                    }
+                    as2UpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
+                    preparedStatement = connection.prepareStatement(as2UpdateQuery.toString());
+                    preparedStatement.setString(1, tpOnboardingAction.getAs2_myOrgName());
+                    preparedStatement.setString(2, tpOnboardingAction.getAs2_partOrgName());
+                    preparedStatement.setString(3, tpOnboardingAction.getAs2_myPartname());
+                    preparedStatement.setString(4, tpOnboardingAction.getAs2_yourPartname());
+                    preparedStatement.setString(5, tpOnboardingAction.getAs2_myEndPoint());
+                    preparedStatement.setString(6, tpOnboardingAction.getAs2_partendpoint());
+                    preparedStatement.setString(7, tpOnboardingAction.getAs2_strMsg());
+                    preparedStatement.setString(8, tpOnboardingAction.getAs2_waitForSync());
+                    preparedStatement.setString(9, tpOnboardingAction.getAs2_ssl_req());
+                    preparedStatement.setString(10, "N");
+                    preparedStatement.setString(11, tpOnboardingAction.getCreated_by());
+                    preparedStatement.setTimestamp(12, curdate);
+                    preparedStatement.setString(13, "INACTIVE");
+                    preparedStatement.setString(14, tpOnboardingAction.getAs2_payloadSendMode());
+                    if (tpOnboardingAction.getFilepath() != null) {
+                        preparedStatement.setString(15, tpOnboardingAction.getFilepath());
+                        preparedStatement.setString(16, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
+                    }
+                    isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
+                    if ((isProtocolUpdated > 0) && tpOnboardingAction.getAs2_ssl_req().equalsIgnoreCase("true")) {
+                        String selectQuery = "SELECT count(ID)  FROM MSCVP.TPO_SSL where COMMUNICATION_ID=? and PROTOCOL=?";
+                        preparedStatement = connection.prepareStatement(selectQuery);
+                        preparedStatement.setInt(1, communicationId);
+                        preparedStatement.setString(2, commonprotocol);
+                        resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            if (resultSet.getInt(1) > 0) {
+                                StringBuffer as2SslUpdateQuery = new StringBuffer();
+                                as2SslUpdateQuery.append("Update MSCVP.TPO_SSL set SSL_PRIORITY=?, CIPHER_STRENGTH=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=? ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    as2SslUpdateQuery.append(",CA_CERTIFICATES=?,SSL_CERT_DATA=? ");
+                                }
+                                as2SslUpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
+                                preparedStatement = connection.prepareStatement(as2SslUpdateQuery.toString());
+                                preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
+                                preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
+                                preparedStatement.setString(3, "N");
+                                preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
+                                preparedStatement.setTimestamp(5, curdate);
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    preparedStatement.setString(6, tpOnboardingAction.getCertGroups());
+                                    preparedStatement.setString(7, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                                }
+                                preparedStatement.executeUpdate();
                             } else {
-                                preparedStatement.setString(7, "");
-                            }
-                            preparedStatement.executeUpdate();
-                        } else {
-                            String as2SslUpdateQuery = "INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,"
-                                    + " CIPHER_STRENGTH, CA_CERTIFICATES, TP_FLAG, CREATED_BY, CREATED_TS,SSL_CERT_DATA) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                            preparedStatement = connection.prepareStatement(as2SslUpdateQuery);
-                            preparedStatement.setInt(1, Id);
-                            preparedStatement.setInt(2, partnerId);
-                            preparedStatement.setString(3, tpOnboardingAction.getTransferMode());
-                            preparedStatement.setString(4, tpOnboardingAction.getCommnProtocol());
-                            preparedStatement.setString(5, tpOnboardingAction.getSsl_priority2());
-                            preparedStatement.setString(6, tpOnboardingAction.getSsl_cipher_stergth2());
-                            preparedStatement.setString(7, tpOnboardingAction.getCertGroups());
-                            preparedStatement.setString(8, "N");
-                            preparedStatement.setString(9, tpOnboardingAction.getCreated_by());
-                            preparedStatement.setTimestamp(10, curdate);
-                            if (!"".equalsIgnoreCase(tpOnboardingAction.getCertGroups())) {
-                                preparedStatement.setString(11, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
-                            } else {
-                                preparedStatement.setString(11, "");
-                            }
-                            preparedStatement.executeUpdate();
+                                StringBuffer as2SslUpdateQuery = new StringBuffer();
+                                as2SslUpdateQuery.append("INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,");
+                                as2SslUpdateQuery.append(" CIPHER_STRENGTH, TP_FLAG, CREATED_BY, CREATED_TS ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    as2SslUpdateQuery.append(" , CA_CERTIFICATES,SSL_CERT_DATA ");
+                                }
+                                as2SslUpdateQuery.append("  ) VALUES(?,?,?,?,?,?,?,?,? ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    as2SslUpdateQuery.append("  ,?,?) ");
+                                } else {
+                                    as2SslUpdateQuery.append("  ) ");
+                                }
 
+                                preparedStatement = connection.prepareStatement(as2SslUpdateQuery.toString());
+                                preparedStatement.setInt(1, communicationId);
+                                preparedStatement.setInt(2, partnerId);
+                                preparedStatement.setString(3, tpOnboardingAction.getTransferMode());
+                                preparedStatement.setString(4, tpOnboardingAction.getCommnProtocol());
+                                preparedStatement.setString(5, tpOnboardingAction.getSsl_priority2());
+                                preparedStatement.setString(6, tpOnboardingAction.getSsl_cipher_stergth2());
+                                preparedStatement.setString(7, "N");
+                                preparedStatement.setString(8, tpOnboardingAction.getCreated_by());
+                                preparedStatement.setTimestamp(9, curdate);
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    preparedStatement.setString(10, tpOnboardingAction.getCertGroups());
+                                    preparedStatement.setString(11, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                                }
+                                preparedStatement.executeUpdate();
+                            }
                         }
                     }
-                }
-            } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("get")) {
-                String httpUpdateQuery = "UPDATE MSCVP.TPO_HTTP SET HTTP_END_POINT = ?,HTTP_MODE = ?,"
-                        + "RESPONSE_TIMEOUT_SEC = ?,HTTP_PORT = ?,MODIFIED_BY = ?,MODIFIED_TS =?,SSL_FLAG=?, URL=? ,TP_FLAG = ?, STATUS = ? WHERE COMMUNICATION_ID=" + Id;
-                preparedStatement = connection.prepareStatement(httpUpdateQuery);
-                preparedStatement.setString(1, tpOnboardingAction.getHttp_endpoint());
-                preparedStatement.setString(2, tpOnboardingAction.getHttp_protocol_mode());
-                preparedStatement.setInt(3, Integer.parseInt(tpOnboardingAction.getHttp_resp_time()));
-                preparedStatement.setInt(4, Integer.parseInt(tpOnboardingAction.getHttp_port()));
-                preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
-                preparedStatement.setTimestamp(6, curdate);
-                preparedStatement.setString(7, tpOnboardingAction.getHttp_ssl_req());
-                preparedStatement.setString(8, tpOnboardingAction.getHttp_url());
-                preparedStatement.setString(9, "N");
-                preparedStatement.setString(10, "INACTIVE");
-                isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
-                if ((isProtocolUpdated > 0) && tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true")) {
-                    String selectQuery = "SELECT count(ID)  FROM MSCVP.TPO_SSL where COMMUNICATION_ID=? and PROTOCOL=?";
-                    preparedStatement = connection.prepareStatement(selectQuery);
-                    preparedStatement.setInt(1, Id);
-                    preparedStatement.setString(2, commonprotocol);
-                    resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
-                        if (resultSet.getInt(1) > 0) {
-                            String httpSslUpdateQuery = "Update MSCVP.TPO_SSL set SSL_PRIORITY=?, "
-                                    + " CIPHER_STRENGTH=?,CA_CERTIFICATES=?, TP_FLAG = ?,  MODIFIED_BY=?, MODIFIED_TS=?,SSL_CERT_DATA WHERE COMMUNICATION_ID=" + Id;
-                            preparedStatement = connection.prepareStatement(httpSslUpdateQuery);
-                            preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
-                            preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                            preparedStatement.setString(3, tpOnboardingAction.getCertGroups());
-                            preparedStatement.setString(4, "N");
-                            preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
-                            preparedStatement.setTimestamp(6, curdate);
-                            if (!"".equalsIgnoreCase(tpOnboardingAction.getCertGroups())) {
-                                preparedStatement.setString(7, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("get")) {
+                    String httpUpdateQuery = "UPDATE MSCVP.TPO_HTTP SET HTTP_END_POINT = ?,HTTP_MODE = ?,"
+                            + "RESPONSE_TIMEOUT_SEC = ?,HTTP_PORT = ?,MODIFIED_BY = ?,MODIFIED_TS =?,SSL_FLAG=?, URL=? ,TP_FLAG = ?, STATUS = ? WHERE COMMUNICATION_ID=" + communicationId;
+                    preparedStatement = connection.prepareStatement(httpUpdateQuery);
+                    preparedStatement.setString(1, tpOnboardingAction.getHttp_endpoint());
+                    preparedStatement.setString(2, tpOnboardingAction.getHttp_protocol_mode());
+                    preparedStatement.setInt(3, Integer.parseInt(tpOnboardingAction.getHttp_resp_time()));
+                    preparedStatement.setInt(4, Integer.parseInt(tpOnboardingAction.getHttp_port()));
+                    preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
+                    preparedStatement.setTimestamp(6, curdate);
+                    preparedStatement.setString(7, tpOnboardingAction.getHttp_ssl_req());
+                    preparedStatement.setString(8, tpOnboardingAction.getHttp_url());
+                    preparedStatement.setString(9, "N");
+                    preparedStatement.setString(10, "INACTIVE");
+                    isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
+                    if ((isProtocolUpdated > 0) && tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true")) {
+                        String selectQuery = "SELECT count(ID)  FROM MSCVP.TPO_SSL where COMMUNICATION_ID=? and PROTOCOL=?";
+                        preparedStatement = connection.prepareStatement(selectQuery);
+                        preparedStatement.setInt(1, communicationId);
+                        preparedStatement.setString(2, commonprotocol);
+                        resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            if (resultSet.getInt(1) > 0) {
+                                StringBuffer httpSslUpdateQuery = new StringBuffer();
+                                httpSslUpdateQuery.append("Update MSCVP.TPO_SSL set SSL_PRIORITY=?, CIPHER_STRENGTH=?, ");
+                                httpSslUpdateQuery.append(" TP_FLAG = ?, MODIFIED_BY=?, MODIFIED_TS=? ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    httpSslUpdateQuery.append(" ,CA_CERTIFICATES=?,SSL_CERT_DATA ");
+                                }
+                                httpSslUpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
+                                preparedStatement = connection.prepareStatement(httpSslUpdateQuery.toString());
+                                preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
+                                preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
+                                preparedStatement.setString(3, "N");
+                                preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
+                                preparedStatement.setTimestamp(5, curdate);
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    preparedStatement.setString(6, tpOnboardingAction.getCertGroups());
+                                    preparedStatement.setString(7, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                                }
+                                preparedStatement.executeUpdate();
                             } else {
-                                preparedStatement.setString(7, "");
-                            }
-                            preparedStatement.executeUpdate();
-                        } else {
-                            String httpSslUpdateQuery = "INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,"
-                                    + " CIPHER_STRENGTH, CA_CERTIFICATES, TP_FLAG, CREATED_BY, CREATED_TS,SSL_CERT_DATA) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                            preparedStatement = connection.prepareStatement(httpSslUpdateQuery);
-                            preparedStatement.setInt(1, Id);
-                            preparedStatement.setInt(2, partnerId);
-                            preparedStatement.setString(3, tpOnboardingAction.getTransferMode());
-                            preparedStatement.setString(4, tpOnboardingAction.getCommnProtocol());
-                            preparedStatement.setString(5, tpOnboardingAction.getSsl_priority2());
-                            preparedStatement.setString(6, tpOnboardingAction.getSsl_cipher_stergth2());
-                            preparedStatement.setString(7, tpOnboardingAction.getCertGroups());
-                            preparedStatement.setString(8, "N");
-                            preparedStatement.setString(9, tpOnboardingAction.getCreated_by());
-                            preparedStatement.setTimestamp(10, curdate);
-                            if (!"".equalsIgnoreCase(tpOnboardingAction.getCertGroups())) {
-                                preparedStatement.setString(11, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
-                            } else {
-                                preparedStatement.setString(11, "");
-                            }
-                            preparedStatement.executeUpdate();
 
+                                StringBuffer httpSslUpdateQuery = new StringBuffer();
+                                httpSslUpdateQuery.append("INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,");
+                                httpSslUpdateQuery.append(" CIPHER_STRENGTH, TP_FLAG, CREATED_BY, CREATED_TS ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    httpSslUpdateQuery.append(" , CA_CERTIFICATES,SSL_CERT_DATA ");
+                                }
+                                httpSslUpdateQuery.append("  ) VALUES(?,?,?,?,?,?,?,?,? ");
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    httpSslUpdateQuery.append("  ,?,?) ");
+                                } else {
+                                    httpSslUpdateQuery.append("  ) ");
+                                }
+                                preparedStatement = connection.prepareStatement(httpSslUpdateQuery.toString());
+                                preparedStatement.setInt(1, communicationId);
+                                preparedStatement.setInt(2, partnerId);
+                                preparedStatement.setString(3, tpOnboardingAction.getTransferMode());
+                                preparedStatement.setString(4, tpOnboardingAction.getCommnProtocol());
+                                preparedStatement.setString(5, tpOnboardingAction.getSsl_priority2());
+                                preparedStatement.setString(6, tpOnboardingAction.getSsl_cipher_stergth2());
+                                preparedStatement.setString(7, "N");
+                                preparedStatement.setString(8, tpOnboardingAction.getCreated_by());
+                                preparedStatement.setTimestamp(9, curdate);
+                                if (tpOnboardingAction.getCertGroups() != null) {
+                                    preparedStatement.setString(10, tpOnboardingAction.getCertGroups());
+                                    preparedStatement.setString(11, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getCertGroups()));
+                                }
+                                preparedStatement.executeUpdate();
+                            }
                         }
                     }
+                } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+
+                    StringBuffer sftpUpdateQuery = new StringBuffer();
+                    sftpUpdateQuery.append("UPDATE MSCVP.TPO_SFTP SET CONN_METHOD = ?,MY_SSH_PUB_KEY = ?,REMOTE_HOST_IP_ADD = ?,REMOTE_USERID = ?");
+                    sftpUpdateQuery.append(",METHOD = ?,AUTH_METHOD = ?,REMOTE_PORT = ?,REMOTE_PWD = ?,DIRECTORY = ?,MODIFIED_BY = ?,MODIFIED_TS = ?,TP_FLAG = ?, STATUS = ?");
+                    if (tpOnboardingAction.getFilepath() != null) {
+                        sftpUpdateQuery.append(" ,UPL_YOUR_SSH_PUB_KEY = ?,SSH_CERT_DATA=? ");
+                    }
+                    sftpUpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
+
+                    preparedStatement = connection.prepareStatement(sftpUpdateQuery.toString());
+                    preparedStatement.setString(1, tpOnboardingAction.getSftp_conn_method());
+                    preparedStatement.setString(2, tpOnboardingAction.getSftp_public_key());
+                    preparedStatement.setString(3, tpOnboardingAction.getSftp_host_ip());
+                    preparedStatement.setString(4, tpOnboardingAction.getSftp_remote_userId());
+                    preparedStatement.setString(5, tpOnboardingAction.getSftp_method());
+                    preparedStatement.setString(6, tpOnboardingAction.getSftp_auth_method());
+                    preparedStatement.setString(7, tpOnboardingAction.getSftp_remote_port());
+                    preparedStatement.setString(8, tpOnboardingAction.getSftp_remote_pwd());
+                    preparedStatement.setString(9, tpOnboardingAction.getSftp_directory());
+                    preparedStatement.setString(10, tpOnboardingAction.getCreated_by());
+                    preparedStatement.setTimestamp(11, curdate);
+                    preparedStatement.setString(12, "N");
+                    preparedStatement.setString(13, "INACTIVE");
+                    if (tpOnboardingAction.getFilepath() != null) {
+                        preparedStatement.setString(14, tpOnboardingAction.getFilepath());
+                        preparedStatement.setString(15, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
+                    }
+                    isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
+                } else if (commonprotocol.equalsIgnoreCase("SMTP")) {
+                    String smtpUpdateQuery = "UPDATE MSCVP.TPO_SMTP SET SMTP_SERVER_PORT = ?,TO_EMAIL_ADDRESS = ?,"
+                            + "SMTP_SERVER_HOST = ?,FROM_EMAIL_ADDRESS = ?, MODIFIED_BY = ?,MODIFIED_TS = ?,TP_FLAG = ?, STATUS = ? WHERE COMMUNICATION_ID=" + communicationId;
+                    preparedStatement = connection.prepareStatement(smtpUpdateQuery);
+                    preparedStatement.setInt(1, Integer.parseInt(tpOnboardingAction.getSmtp_server_port()));
+                    preparedStatement.setString(2, tpOnboardingAction.getSmtp_to_email());
+                    preparedStatement.setString(3, tpOnboardingAction.getSmtp_server_protocol());
+                    preparedStatement.setString(4, tpOnboardingAction.getSmtp_from_email());
+                    preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
+                    preparedStatement.setTimestamp(6, curdate);
+                    preparedStatement.setString(7, "N");
+                    preparedStatement.setString(8, "INACTIVE");
+                    isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
                 }
-            } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("put")) {
-                String sftpUpdateQuery = "UPDATE MSCVP.TPO_SFTP SET CONN_METHOD = ?,MY_SSH_PUB_KEY = ?,UPL_YOUR_SSH_PUB_KEY = ?,"
-                        + "REMOTE_HOST_IP_ADD = ?,REMOTE_USERID = ?,METHOD = ?,AUTH_METHOD = ?,REMOTE_PORT = ?,REMOTE_PWD = ?,"
-                        + "DIRECTORY = ?,MODIFIED_BY = ?,MODIFIED_TS = ?,TP_FLAG = ?, STATUS = ?,SSH_CERT_DATA=? WHERE COMMUNICATION_ID=" + Id;
-                preparedStatement = connection.prepareStatement(sftpUpdateQuery);
-                preparedStatement.setString(1, tpOnboardingAction.getSftp_conn_method());
-                preparedStatement.setString(2, tpOnboardingAction.getSftp_public_key());
-                preparedStatement.setString(3, tpOnboardingAction.getFilepath());
-                preparedStatement.setString(4, tpOnboardingAction.getSftp_host_ip());
-                preparedStatement.setString(5, tpOnboardingAction.getSftp_remote_userId());
-                preparedStatement.setString(6, tpOnboardingAction.getSftp_method());
-                preparedStatement.setString(7, tpOnboardingAction.getSftp_auth_method());
-                preparedStatement.setString(8, tpOnboardingAction.getSftp_remote_port());
-                preparedStatement.setString(9, tpOnboardingAction.getSftp_remote_pwd());
-                preparedStatement.setString(10, tpOnboardingAction.getSftp_directory());
-                preparedStatement.setString(11, tpOnboardingAction.getCreated_by());
-                preparedStatement.setTimestamp(12, curdate);
-                preparedStatement.setString(13, "N");
-                preparedStatement.setString(14, "INACTIVE");
-                if (!"".equalsIgnoreCase(tpOnboardingAction.getFilepath())) {
-                    preparedStatement.setString(15, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
-                } else {
-                    preparedStatement.setString(15, "");
-                }
-                isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
-            } else if (commonprotocol.equalsIgnoreCase("SMTP")) {
-                String smtpUpdateQuery = "UPDATE MSCVP.TPO_SMTP SET SMTP_SERVER_PORT = ?,TO_EMAIL_ADDRESS = ?,"
-                        + "SMTP_SERVER_HOST = ?,FROM_EMAIL_ADDRESS = ?, MODIFIED_BY = ?,MODIFIED_TS = ?,TP_FLAG = ?, STATUS = ? WHERE COMMUNICATION_ID=" + Id;
-                preparedStatement = connection.prepareStatement(smtpUpdateQuery);
-                preparedStatement.setInt(1, Integer.parseInt(tpOnboardingAction.getSmtp_server_port()));
-                preparedStatement.setString(2, tpOnboardingAction.getSmtp_to_email());
-                preparedStatement.setString(3, tpOnboardingAction.getSmtp_server_protocol());
-                preparedStatement.setString(4, tpOnboardingAction.getSmtp_from_email());
-                preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
-                preparedStatement.setTimestamp(6, curdate);
-                preparedStatement.setString(7, "N");
-                preparedStatement.setString(8, "INACTIVE");
-                isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
             }
             mp = tpOnboardingAction.getMap();
             if (((isProtocolUpdated > 0))) {

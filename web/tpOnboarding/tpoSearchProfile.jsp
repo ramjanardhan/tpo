@@ -156,7 +156,7 @@
                                             </td>
                                             <td>
                                                 <%
-                                                    out.println(tpOnboardingBean.getCreated_by().toUpperCase());
+                                                    out.println(tpOnboardingBean.getCreated_by());
                                                 %>
                                             </td>  
                                             <td>
