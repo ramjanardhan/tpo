@@ -26,6 +26,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private HttpServletRequest httpServletRequest;
     private String loginId;
     private String password;
+    private String url;
 
     public String tpoLoginCheck() throws Exception {
         resultType = LOGIN;
@@ -141,7 +142,10 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
             if (httpServletRequest.getSession(false) != null) {
                 httpServletRequest.getSession(false).invalidate();
             }
-            setResultType(SUCCESS);
+
+            url = "http://localhost:8084/tpo";
+            setResultType("redirect");
+
         } catch (Exception ex) {
             httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_ERROR_INFO, ex.toString());
             setResultType(ERROR);
@@ -215,4 +219,13 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     public String getPassword() {
         return password;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }
