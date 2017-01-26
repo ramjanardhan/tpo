@@ -102,7 +102,7 @@ function addPartner(flag) {
     } else if (addstate.length == 0 || addstate == "" || addstate == null) {
         document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please enter state.</font>";
         return false;
-    }else if (addzipCode.length == 0 || addzipCode == "" || addzipCode == null) {
+    } else if (addzipCode.length == 0 || addzipCode == "" || addzipCode == null) {
         document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please enter zipcode.</font>";
         return false;
     }
@@ -294,36 +294,25 @@ function rejectPartnerResponse(resText) {
     document.getElementById("resultMsg").innerHTML = resText;
 }
 
-function testConnectionProfile(i,CommId, protocol, pName) {
-   alert(i);
-   alert("CommId = "+CommId);
-   alert("protocol = "+protocol);
-   alert("pName = "+pName);
-   document.getElementById("iValue").value=i;
-   
-        var req = getXMLHttpRequest();
-        req.onreadystatechange = readyStateHandlerLoadText(req, testConnectionProfileResponse);
-        var url = "../ajax/testProfile.action?communicationId=" + CommId+"&protocol="+protocol+"&partnerName="+pName;
-        alert(url);
-        req.open("GET", url, "true");
-        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        req.send(null);
-   
+function testConnectionProfile(i, CommId, protocol, pName) {
+    document.getElementById("iValue").value = i;
+    var req = getXMLHttpRequest();
+    req.onreadystatechange = readyStateHandlerLoadText(req, testConnectionProfileResponse);
+    var url = "../ajax/testProfile.action?communicationId=" + CommId + "&protocol=" + protocol + "&partnerName=" + pName;
+    alert(url);
+    req.open("GET", url, "true");
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send(null);
 }
 
 function testConnectionProfileResponse(resText) {
-    alert("resText==="+resText);
     var result;
-    if(resText=='OK')
-    {
-        result = 'Success';
-    }
-    else
-    {
-        result = 'Failed';
+    if (resText == 'OK') {
+        result = '<font color=red>Success</font>';
+    } else {
+        result = '<font color=red>Failed</font>';
     }
     var x = document.getElementById("iValue").value;
-    alert("x==="+x);
     document.getElementById(x).innerHTML = result;
 }
 
