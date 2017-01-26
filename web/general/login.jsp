@@ -224,7 +224,7 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Country<span class="text-danger">*</span></label>
-                                                            <s:select cssClass="form-control" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="addcountry" id="addcountry" value="%{addcountry}"/>
+                                                            <s:select headerKey="-1" headerValue="--Select--" cssClass="form-control" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="addcountry" id="addcountry" value="%{addcountry}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
