@@ -282,7 +282,7 @@ function partnerReject(pId, pName) {
         var req = getXMLHttpRequest();
         req.onreadystatechange = readyStateHandlerLoadText(req, rejectPartnerResponse);
         var url = "../ajax/rejectPartner.action?id=" + pId;
-        alert(url);
+        //alert(url);
         req.open("GET", url, "true");
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         req.send(null);

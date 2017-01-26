@@ -230,8 +230,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             callableStatement.setString(13, ajaxHandlerAction.getDescription());
             callableStatement.setString(14, createdBy);
             callableStatement.setString(15, ajaxHandlerAction.getLastName());
-            if (roleId == 1) {
-                callableStatement.setString(16, ajaxHandlerAction.getAssignTo());
+            if ((roleId == 1) && (!"-1".equals(ajaxHandlerAction.getAssignTo()))) {
+                    callableStatement.setString(16, ajaxHandlerAction.getAssignTo());
             } else {
                 callableStatement.setString(16, "");
             }
