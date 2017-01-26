@@ -23,6 +23,14 @@ import java.sql.CallableStatement;
 import java.sql.Timestamp;
 import java.util.regex.Pattern;
 import org.json.JSONObject;
+import java.net.URL;
+import java.io.*;
+import javax.net.ssl.HttpsURLConnection;
+import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
+import sun.net.www.protocol.ftp.FtpURLConnection;
+import java.io.DataOutputStream;
+import java.io.OutputStream;
 
 public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
@@ -600,6 +608,150 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             }
         }
         return responseString;
+    }
+
+    public String getTestConnecitonStatus(int communicationId, String protocol, String partnerName) {
+        String response = "";
+        String https_url = "http://192.168.1.179:12042/testConnection";
+        URL url;
+        
+        
+        try{
+        JSONObject jSONObject = new JSONObject();
+        jSONObject.put("CommId", communicationId);
+        jSONObject.put("Protocol", protocol);
+        jSONObject.put("PartnerName", partnerName);
+        
+        String s = jSONObject.toString();
+        
+        System.out.println("in simpl");
+          //  byte[] out = "{\"communicationId\":\""+communicationId+"\",\"protocol\":\""+protocol+"\",\"partnerName\":\""+partnerName+"\"}".getBytes(StandardCharsets.UTF_8);
+           // int length = out.length;
+            url = new URL(https_url);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+            con.setDoOutput(true);
+           // con.setFixedLengthStreamingMode(length);
+            // con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            con.connect();
+            
+            OutputStreamWriter os = new OutputStreamWriter(con.getOutputStream());
+            os.write(s);
+            os.flush();
+            os.close();
+           
+            response = con.getResponseMessage();
+            System.out.println("response  == " + response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public String getTestConforHTTPandHTTPS() {
+
+        String response = "";
+
+        try {
+            String urlString = "http://192.168.1.179:12042/testConnection";
+            URL url = new URL(urlString);
+
+            if ("https".equalsIgnoreCase(urlString)) {
+
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+                response = httpsURLConnection.getResponseMessage();
+
+            } else {
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                response = httpURLConnection.getResponseMessage();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public String getTestConforFTPandFTPS() {
+
+        String response = "";
+
+        try {
+            String urlString = "http://192.168.1.179:12042/testConnection";
+            URL url = new URL(urlString);
+
+            if ("ftps".equalsIgnoreCase(urlString)) {
+
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+                response = httpsURLConnection.getResponseMessage();
+
+            } else {
+
+                FtpURLConnection ftpURLConnection = (FtpURLConnection) url.openConnection();
+                response = ftpURLConnection.getInputStream().toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public String getTestConforAS2() {
+
+        String response = "";
+
+        try {
+            String urlString = "http://192.168.1.179:12042/testConnection";
+            URL url = new URL(urlString);
+
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            response = httpURLConnection.getResponseMessage();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public String getTestConforSMTP() {
+
+        String response = "";
+
+        try {
+            String urlString = "http://192.168.1.179:12042/testConnection";
+            URL url = new URL(urlString);
+
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.addRequestProperty(response, response);
+            httpURLConnection.setRequestProperty(response, response);
+            response = httpURLConnection.getResponseMessage();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public String getTestConforSFTP() {
+
+        String response = "";
+
+        try {
+            String urlString = "http://192.168.1.179:12042/testConnection";
+            URL url = new URL(urlString);
+
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            response = httpURLConnection.getResponseMessage();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
     }
 
     /**

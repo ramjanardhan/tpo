@@ -31,5 +31,19 @@
         <action name="acceptPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="acceptPartner"/>
          
         <action name="rejectPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="rejectPartner"/>
+        
+       <action name="testProfile" class = "com.mss.tpo.ajax.AjaxHandlerAction" method="testconnectionstatus"/>
+
+<!--        <action name="testConforFTPandFTPS" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforFTPandFTPS"/>
+        
+        <action name="testConforAS2" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforAS2"/>
+        
+        <action name="testConforSFTP" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforSFTP"/>
+       
+        <action name="testConforHTTPandHTTPS" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforHTTPandHTTPS"/>
+         
+        <action name="testConforSMTP" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforSMTP"/> -->
+             
+                
     </package>
 </struts>
