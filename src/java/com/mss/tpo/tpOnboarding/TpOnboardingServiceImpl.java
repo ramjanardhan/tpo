@@ -1352,7 +1352,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return responseString;
     }
 
-    public String doTpoResetUserPwd(String loginId, String contactName, String pwd) throws ServiceLocatorException {
+    public String doTpoResetUserPwd(String loginId, String userLoginId, String pwd) throws ServiceLocatorException {
         int istpoUserPwdUpdated = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         String encryptedPwd = PasswordUtil.encryptPwd(pwd);
@@ -1363,10 +1363,12 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(1, encryptedPwd);
             preparedStatement.setString(2, loginId);
             preparedStatement.setTimestamp(3, curdate);
-            preparedStatement.setString(4, contactName);
+            preparedStatement.setString(4, userLoginId);
             istpoUserPwdUpdated = istpoUserPwdUpdated + preparedStatement.executeUpdate();
             if (istpoUserPwdUpdated > 0) {
                 responseString = "<font color='green'>User password updated successfully</font>";
+                String email = DataSourceDataProvider.getInstance().getEmaiIdByloginId(userLoginId);
+                MailManager.resetUserPwd(userLoginId,email,PasswordUtil.decryptPwd(encryptedPwd));
             } else {
                 responseString = "<font color='red'>Please try again!</font>";
             }

@@ -375,4 +375,38 @@ public class DataSourceDataProvider {
         System.out.println("RESULT=========" + CertificatePath);
         return CertificatePath;
     }
+    public String getEmaiIdByloginId(String loginId) throws ServiceLocatorException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String email = "";
+        connection = ConnectionProvider.getInstance().getConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT EMAIL FROM MSCVP.TPO_USER WHERE LOGINID ='" + loginId + "'");
+            while (resultSet.next()) {
+                email = resultSet.getString("EMAIL");
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return email;
+    }
 }

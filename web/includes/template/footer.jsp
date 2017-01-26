@@ -5,7 +5,7 @@
                         <div class="col-md-12 widget">
                             <div class="widget-body">
                                 <p class="text-center" style="color:#fff">
-                                    <a>  &#169; 2017 Miracle Software Systems, Inc. All rights reserved </a> 
+                                    <a>  &#169; <%= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date()) %> Miracle Software Systems, Inc. All rights reserved </a> 
                                 </p>
                             </div>
                         </div>
