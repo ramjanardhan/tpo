@@ -29,7 +29,8 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private String url;
 
     public String tpoLoginCheck() throws Exception {
-        resultType = LOGIN;
+       // resultType = LOGIN;
+        setResultType(LOGIN);
         // HttpSession tpoUserSession = httpServletRequest.getSession(true);
         UserInfoBean userInfoBean = null;
         try {
@@ -49,24 +50,32 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_USERID, userInfoBean.getUserId());
                         //httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_PARTNER_NAME,tpOnboardingBean.getPartnerName());
                         logUserAccess();
-                        resultType = SUCCESS;
+                       // resultType = SUCCESS;
+                         setResultType(SUCCESS);
                     } else {
+                         url = "http://localhost:8084/tpo";
                         httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">You are currently not an active user.</span>");
-                        resultType = "input";
+                      //  resultType = "input";
+                         setResultType("redirect");
                     }
                 } else {
+                     url = "http://localhost:8084/tpo";
                     httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
-                    resultType = "input";
+                   // resultType = "input";
+                    setResultType("redirect");
                 }
             } else {
+                 url = "http://localhost:8084/tpo";
                 httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
-                resultType = "input";
+               // resultType = "input";
+                setResultType("redirect");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            resultType = "error";
+           // resultType = "error";
+            setResultType(ERROR);
         }
-        return resultType;
+        return getResultType();
     }
 
     public void logUserAccess() throws Exception {

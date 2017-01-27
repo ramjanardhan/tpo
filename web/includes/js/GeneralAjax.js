@@ -308,7 +308,7 @@ function testConnectionProfile(i, CommId, protocol, pName) {
 function testConnectionProfileResponse(resText) {
     var result;
     if (resText == 'OK') {
-        result = '<font color=red>Success</font>';
+        result = '<font color=green>Success</font>';
     } else {
         result = '<font color=red>Failed</font>';
     }

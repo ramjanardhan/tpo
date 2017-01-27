@@ -239,7 +239,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             callableStatement.setString(14, createdBy);
             callableStatement.setString(15, ajaxHandlerAction.getLastName());
             if ((roleId == 1) && (!"-1".equals(ajaxHandlerAction.getAssignTo()))) {
-                    callableStatement.setString(16, ajaxHandlerAction.getAssignTo());
+                callableStatement.setString(16, ajaxHandlerAction.getAssignTo());
             } else {
                 callableStatement.setString(16, "");
             }
@@ -614,32 +614,35 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         String response = "";
         String https_url = "http://192.168.1.179:12042/testConnection";
         URL url;
-        
-        
-        try{
-        JSONObject jSONObject = new JSONObject();
-        jSONObject.put("CommId", communicationId);
-        jSONObject.put("Protocol", protocol);
-        jSONObject.put("PartnerName", partnerName);
-        
-        String s = jSONObject.toString();
-        
-        System.out.println("in simpl");
-          //  byte[] out = "{\"communicationId\":\""+communicationId+"\",\"protocol\":\""+protocol+"\",\"partnerName\":\""+partnerName+"\"}".getBytes(StandardCharsets.UTF_8);
-           // int length = out.length;
-            url = new URL(https_url);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
+        try {
+            JSONObject jSONObject = new JSONObject();
+            jSONObject.put("CommId", communicationId);
+            jSONObject.put("Protocol", protocol);
+            jSONObject.put("PartnerName", partnerName);
+
+            String s = jSONObject.toString();
+
+            System.out.println("in simpl");
+          //  byte[] out = "{\"communicationId\":\""+communicationId+"\",\"protocol\":\""+protocol+"\",\"partnerName\":\""+partnerName+"\"}".getBytes(StandardCharsets.UTF_8);
+            // int length = out.length;
+            url = new URL(https_url);
+            System.out.println("in simpl");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            System.out.println("1");
             con.setDoOutput(true);
-           // con.setFixedLengthStreamingMode(length);
+            System.out.println("2");
+            // con.setFixedLengthStreamingMode(length);
             // con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             con.connect();
-            
+            System.out.println("3");
             OutputStreamWriter os = new OutputStreamWriter(con.getOutputStream());
+            System.out.println("4"+os);
+            System.out.println("4"+os.toString());
             os.write(s);
             os.flush();
             os.close();
-           
+
             response = con.getResponseMessage();
             System.out.println("response  == " + response);
         } catch (Exception e) {
