@@ -27,10 +27,7 @@ import java.net.URL;
 import java.io.*;
 import javax.net.ssl.HttpsURLConnection;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
 import sun.net.www.protocol.ftp.FtpURLConnection;
-import java.io.DataOutputStream;
-import java.io.OutputStream;
 
 public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
@@ -623,28 +620,20 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
             String s = jSONObject.toString();
 
-            System.out.println("in simpl");
           //  byte[] out = "{\"communicationId\":\""+communicationId+"\",\"protocol\":\""+protocol+"\",\"partnerName\":\""+partnerName+"\"}".getBytes(StandardCharsets.UTF_8);
             // int length = out.length;
             url = new URL(https_url);
-            System.out.println("in simpl");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            System.out.println("1");
             con.setDoOutput(true);
-            System.out.println("2");
             // con.setFixedLengthStreamingMode(length);
             // con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             con.connect();
-            System.out.println("3");
             OutputStreamWriter os = new OutputStreamWriter(con.getOutputStream());
-            System.out.println("4"+os);
-            System.out.println("4"+os.toString());
             os.write(s);
             os.flush();
             os.close();
 
             response = con.getResponseMessage();
-            System.out.println("response  == " + response);
         } catch (Exception e) {
             e.printStackTrace();
         }
