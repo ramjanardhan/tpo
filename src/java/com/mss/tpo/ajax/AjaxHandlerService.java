@@ -30,4 +30,17 @@ public interface AjaxHandlerService {
     public String doAcceptPartner(String loginId, String assignTo, int partnerId) throws ServiceLocatorException;
 
     public String doRejectPartner(String loginId, int partnerId) throws ServiceLocatorException;
+
+    public String getTestConnecitonStatus(int communicationId, String protocol, String partnerName) throws SecurityException;
+
+    public String getTestConforHTTPandHTTPS(/*String s1, String s2, String s3, String s4, String s5*/) throws ServiceLocatorException;
+
+    public String getTestConforFTPandFTPS(/*String s1, String s2, String s3, String s4, String s5*/) throws ServiceLocatorException;
+
+    public String getTestConforAS2(/*String s1, String s2, String s3, String s4, String s5*/) throws ServiceLocatorException;
+
+    public String getTestConforSMTP(/*String s1, String s2, String s3, String s4, String s5*/) throws ServiceLocatorException;
+
+    public String getTestConforSFTP(/*String s1, String s2, String s3, String s4, String s5*/) throws ServiceLocatorException;
+
 }

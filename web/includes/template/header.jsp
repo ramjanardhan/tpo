@@ -13,7 +13,8 @@
             <div class="row">
                 <ul class="nav navbar-nav pull-right">
                     <li><a><b>Welcome TPO</b></a></li>
-                    <li><a href="#"><s:if test="#session.tpoLoginId != null">
+                    <li><a href="#">
+                            <s:if test="#session.tpoLoginId != null">
                                 <b><font color="white"><s:property value="#session.tpoContactName" /></font></b>
                                 </s:if>
                                 <s:else>

@@ -1,6 +1,5 @@
 package com.mss.tpo.general;
 
-import com.mss.tpo.tpOnboarding.TpOnboardingBean;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -26,9 +25,11 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private HttpServletRequest httpServletRequest;
     private String loginId;
     private String password;
+    private String url;
 
     public String tpoLoginCheck() throws Exception {
-        resultType = LOGIN;
+       // resultType = LOGIN;
+        setResultType(LOGIN);
         // HttpSession tpoUserSession = httpServletRequest.getSession(true);
         UserInfoBean userInfoBean = null;
         try {
@@ -48,24 +49,32 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_USERID, userInfoBean.getUserId());
                         //httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_PARTNER_NAME,tpOnboardingBean.getPartnerName());
                         logUserAccess();
-                        resultType = SUCCESS;
+                       // resultType = SUCCESS;
+                         setResultType(SUCCESS);
                     } else {
+                         url = "http://192.168.1.179:8084/tpo";
                         httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">You are currently not an active user.</span>");
-                        resultType = "input";
+                      //  resultType = "input";
+                         setResultType("redirect");
                     }
                 } else {
+                     url = "http://192.168.1.179:8084/tpo";
                     httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
-                    resultType = "input";
+                   // resultType = "input";
+                    setResultType("redirect");
                 }
             } else {
+                 url = "http://192.168.1.179:8084/tpo";
                 httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
-                resultType = "input";
+               // resultType = "input";
+                setResultType("redirect");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            resultType = "error";
+           // resultType = "error";
+            setResultType(ERROR);
         }
-        return resultType;
+        return getResultType();
     }
 
     public void logUserAccess() throws Exception {
@@ -141,7 +150,10 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
             if (httpServletRequest.getSession(false) != null) {
                 httpServletRequest.getSession(false).invalidate();
             }
-            setResultType(SUCCESS);
+
+            url = "http://192.168.1.179:8084/tpo";
+            setResultType("redirect");
+
         } catch (Exception ex) {
             httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_ERROR_INFO, ex.toString());
             setResultType(ERROR);
@@ -215,4 +227,13 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     public String getPassword() {
         return password;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }

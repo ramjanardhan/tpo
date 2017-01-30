@@ -190,5 +190,6 @@
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
+        
     </package>
 </struts>

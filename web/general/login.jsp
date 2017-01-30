@@ -91,9 +91,11 @@
                             <div class="panel-body">
                                 <h3 class="thin text-center"><b>Sign in to your account</b></h3>
                                 <center> 
-                                    <%if (request.getAttribute(AppConstants.REQ_ERROR_INFO) != null) {
+                                    <%
+                                        if (request.getAttribute(AppConstants.REQ_ERROR_INFO) != null) {
                                             out.println("<font size=2 color=red>" + request.getAttribute(AppConstants.REQ_ERROR_INFO).toString() + "</font>");
-                                        }%>
+                                        }
+                                    %>
                                 </center> 
                                 <hr>
                                 <s:form action="general/tpoLoginCheck" method="post" name="tpLoginForm" id="tpLoginForm" theme="simple">
@@ -222,7 +224,7 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Country<span class="text-danger">*</span></label>
-                                                            <s:select cssClass="form-control" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="addcountry" id="addcountry" value="%{addcountry}"/>
+                                                            <s:select headerKey="-1" headerValue="--Select--" cssClass="form-control" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="addcountry" id="addcountry" value="%{addcountry}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">

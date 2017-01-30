@@ -25,7 +25,7 @@ public interface TpOnboardingService {
 
     public TpOnboardingAction tpogetProfile(int Id, String commonprotocol, TpOnboardingAction tpOnboardingAction);
 
-    public String tpoUpdateProfile(int partnerId, int Id, String commonprotocol, String Email, TpOnboardingAction tpOnboardingAction);
+    public String tpoUpdateProfile(int partnerId, int communicationId, String commonprotocol, String Email, TpOnboardingAction tpOnboardingAction);
 
     public String getDeleteProfile(int communicationId, String commnProtocol, int PartnerId, String transferMode) throws ServiceLocatorException;
 

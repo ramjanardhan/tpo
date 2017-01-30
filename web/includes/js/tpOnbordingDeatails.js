@@ -2323,6 +2323,8 @@ function resetAddPartnerValues(flag) {
     document.getElementById("description").value = "";
     document.getElementById("correctImg").style.display = "none";
     document.getElementById("wrongImg").style.display = "none";
+    document.getElementById("correctImg1").style.display = "none";
+    document.getElementById("wrongImg1").style.display = "none";
 }
 function resetRegisterUser() {
     document.getElementById("regcontactName").value = "";
@@ -2343,7 +2345,6 @@ function addPtnerLengthValidator(element) {
     var contactPerson = document.getElementById("contactPerson").value;
     var contactPersonLN = document.getElementById("contactPersonLN").value;
     var contactEmail = document.getElementById("contactEmail").value;
-    var contactPassword = document.getElementById("contactPassword").value;
     var addphoneNo = document.getElementById("addphoneNo").value;
     var addaddress1 = document.getElementById("addaddress1").value;
     var addcity = document.getElementById("addcity").value;

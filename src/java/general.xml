@@ -17,12 +17,14 @@
             <result type="redirect">/tpOnboarding/tpoSuccess.action</result>
             <result name="input">/general/login.jsp</result>
             <result type="redirect" name="login">login.action</result>
+            <result name="redirect" type="redirect">${url}</result>
             <result name="error" type="redirect">../exception/exception.action</result> 
         </action>
 
         <action name="tpoLogout" class="com.mss.tpo.general.LoginAction" method="doLogout">
             <interceptor-ref name="crudStack" />
-            <result type="redirect">./login.action</result>
+            <!--            <result type="redirect">./login.action</result>-->
+            <result name="redirect" type="redirect">${url}</result>
             <result name="error" type="redirect">./login.action</result>
         </action> 
         

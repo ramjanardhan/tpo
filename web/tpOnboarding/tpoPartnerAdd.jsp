@@ -75,8 +75,10 @@
                             <div class="col-sm-3">
                                 <div class="form-group ajax_img">
                                     <label>Contact Email<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" placeholder="Contact Email" value="%{contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('partnerAdd','admin');"  tabindex="4"/><i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
-                                    <i id="wrongImg1" style="display: none;" class="fa fa-times"></i><i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
+                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" placeholder="Contact Email" value="%{contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('partnerAdd','admin');"  tabindex="4"/>
+                                    <i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
+                                    <i id="wrongImg1" style="display: none;" class="fa fa-times"></i>
+                                    <i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
                                 </div>
                             </div>
                             <div class="col-sm-3">
