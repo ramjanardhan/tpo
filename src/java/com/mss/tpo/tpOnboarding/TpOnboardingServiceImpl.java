@@ -824,11 +824,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
                                 if (tpOnboardingAction.getUpload1() != null) {
-                                    System.out.println("SSL File is uploaded");
                                     preparedStatement.setString(3, "N");
 
                                 } else {
-                                    System.out.println("no ssl file to upload");
                                     preparedStatement.setString(3, "U");
                                 }
                                 preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
@@ -890,10 +888,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(8, tpOnboardingAction.getAs2_waitForSync());
                     preparedStatement.setString(9, tpOnboardingAction.getAs2_ssl_req());
                     if (tpOnboardingAction.getUpload() != null) {
-                        System.out.println("file is uploaded");
                         preparedStatement.setString(10, "N");
                     } else {
-                        System.out.println("no file to upload");
                         preparedStatement.setString(10, "U");
                     }
                     preparedStatement.setString(11, tpOnboardingAction.getCreated_by());
@@ -923,11 +919,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
                                 if (tpOnboardingAction.getUpload1() != null) {
-                                    System.out.println("SSL File is uploaded");
                                     preparedStatement.setString(3, "N");
 
                                 } else {
-                                    System.out.println("no ssl file to upload");
                                     preparedStatement.setString(3, "U");
                                 }
                                 preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
@@ -1003,11 +997,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
                                if (tpOnboardingAction.getUpload1()!=null) {
-                                    System.out.println("SSL File is uploaded");
                                     preparedStatement.setString(3, "N");
 
                                 } else {
-                                    System.out.println("no ssl file to upload");
                                     preparedStatement.setString(3, "U");
                                 }
                                 preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
@@ -1072,11 +1064,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(10, tpOnboardingAction.getCreated_by());
                     preparedStatement.setTimestamp(11, curdate);
                     if (tpOnboardingAction.getUpload() != null) {
-                        System.out.println("SSL File is uploaded");
                         preparedStatement.setString(12, "N");
 
                     } else {
-                        System.out.println("no ssl file to upload");
                         preparedStatement.setString(12, "U");
                     }
                     preparedStatement.setString(13, "INACTIVE");

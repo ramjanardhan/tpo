@@ -404,6 +404,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                     map.put(FTPKeys[8], getFtp_directory());
                 } else if ("AS2".equals(this.getCommnProtocol())) {
                     map = new HashMap();
+                   
                     map.put(AS2Keys[0], getAs2_part_cert());
                     map.put(AS2Keys[1], getAs2_myOrgName());
                     map.put(AS2Keys[2], getAs2_partOrgName());
