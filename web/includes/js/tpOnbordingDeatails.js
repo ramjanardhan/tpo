@@ -1732,6 +1732,7 @@ function gettransferModeSelection(x) {
         $("#sslDiv2").hide();
         if (x == 'get') {
             var transferMode = x;
+            var recvProtocol;
             var protocol = document.getElementById("commnProtocol").value;
             var partnerName = document.getElementById("partnerName").value;
             $.ajax({
@@ -1741,14 +1742,19 @@ function gettransferModeSelection(x) {
                     var json = $.parseJSON(responseText);
                     var ftpMethod = json["FTP_METHOD"];
                     var connMethod = json["CONNECTION_METHOD"];
-                    var recvProtocol = json["RECEIVING_PROTOCOL"];
+                    recvProtocol = json["RECEIVING_PROTOCOL"];
                     var respTime = json["RESPONSE_TIMEOUT_SEC"];
                     var host = json["FTP_HOST"];
                     var port = json["FTP_PORT"];
                     var userId = json["FTP_USER_ID"];
                     var pwd = json["FTP_PASSWORD"];
                     var directory = json["FTP_DIRECTORY"];
-                    var sslReq = json["SSL_REQUIRED_FLAG"];
+                    var sslReq = false;
+                    if (recvProtocol == 'FTPS') {
+                        sslReq = json["SSL_REQUIRED_FLAG"];
+                    } else {
+                        document.getElementById("ftp_ssl").style.display = 'none';
+                    }
                     var SSL_PRIORITY = '';
                     //var KEY_CERTIFICATE_PASSPHRASE = '';
                     var CIPHER_STRENGTH = '';
@@ -1782,7 +1788,7 @@ function gettransferModeSelection(x) {
             });
             $('#ftp_method').attr('disabled', true);
             $('#ftp_conn_method').attr('disabled', true);
-            document.getElementById("ftp_recv_protocol").readOnly = true;
+            $('#ftp_recv_protocol').attr('disabled', true);
             document.getElementById("ftp_resp_time").readOnly = true;
             document.getElementById("ftp_host").readOnly = true;
             document.getElementById("ftp_port").readOnly = true;
@@ -1793,6 +1799,7 @@ function gettransferModeSelection(x) {
             $('#ssl_cipher_stergth').attr('disabled', true);
         }
         if (x == 'put') {
+            var ftp_recv;
             if (formAction == 'doAddProfile') {
                 document.getElementById("ftp_resp_time").value = "";
                 document.getElementById("ftp_host").value = "";
@@ -1800,12 +1807,22 @@ function gettransferModeSelection(x) {
                 document.getElementById("ftp_userId").value = "";
                 document.getElementById("ftp_pwd").value = "";
                 document.getElementById("ftp_directory").value = "";
-                document.getElementById("ftp_ssl_req").checked = false;
+                $('#ftp_recv_protocol').attr('disabled', false);
+                ftp_recv = document.getElementById("ftp_recv_protocol").value;
+                if (ftp_recv == 'FTP') {
+                    document.getElementById("ftp_ssl_req").checked = false;
+                    document.getElementById("ftp_ssl").style.display = 'none';
+                }
                 document.getElementById("ssl_priority2").value = "MUST";
                 document.getElementById("ssl_cipher_stergth2").value = "STRONG";
             }
             $('#ftp_conn_method').attr('disabled', false);
-            document.getElementById("ftp_recv_protocol").readOnly = false;
+            $('#ftp_recv_protocol').attr('disabled', false);
+            ftp_recv = document.getElementById("ftp_recv_protocol").value;
+            if (ftp_recv == 'FTP') {
+                document.getElementById("ftp_ssl_req").checked = false;
+                document.getElementById("ftp_ssl").style.display = 'none';
+            }
             document.getElementById("ftp_resp_time").readOnly = false;
             document.getElementById("ftp_host").readOnly = false;
             document.getElementById("ftp_port").readOnly = false;
@@ -2497,3 +2514,13 @@ function resetPartnerUserAdd() {
     document.getElementById("zipCode").value = "";
 }
 
+function rxFTPchange(x) {
+    if (x == 'FTP') {
+        document.getElementById("ftp_ssl_req").checked = false;
+        $("#sslDiv2").hide();
+        document.getElementById("ftp_ssl").style.display = 'none';
+    } else if (x == 'FTPS') {
+        document.getElementById("ftp_ssl_req").checked = true;
+        $("#sslDiv2").show();
+    }
+}
