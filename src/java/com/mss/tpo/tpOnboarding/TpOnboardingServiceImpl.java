@@ -785,7 +785,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setTimestamp(3, curdate);
             preparedStatement.setString(4, "INACTIVE");
             isCommunicationUpdated = isCommunicationUpdated + preparedStatement.executeUpdate();
-            
+
             if (isCommunicationUpdated > 0) {
                 if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("put")) {
                     String ftpUpdateQuery = "UPDATE MSCVP.TPO_FTP SET FTP_METHOD = ?, FTP_HOST = ?, FTP_PORT = ?, "
@@ -823,7 +823,14 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 preparedStatement = connection.prepareStatement(ftpSslUpdateQuery.toString());
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                                preparedStatement.setString(3, "N");
+                                if (tpOnboardingAction.getUpload1() != null) {
+                                    System.out.println("SSL File is uploaded");
+                                    preparedStatement.setString(3, "N");
+
+                                } else {
+                                    System.out.println("no ssl file to upload");
+                                    preparedStatement.setString(3, "U");
+                                }
                                 preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
                                 preparedStatement.setTimestamp(5, curdate);
                                 if (tpOnboardingAction.getCertGroups() != null) {
@@ -871,6 +878,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         as2UpdateQuery.append(",UPL_YOUR_SYS_CERT=?,SYS_CERT_DATA=? ");
                     }
                     as2UpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
+                    System.out.println("certificate is " + tpOnboardingAction.getAs2_part_cert());
                     preparedStatement = connection.prepareStatement(as2UpdateQuery.toString());
                     preparedStatement.setString(1, tpOnboardingAction.getAs2_myOrgName());
                     preparedStatement.setString(2, tpOnboardingAction.getAs2_partOrgName());
@@ -881,7 +889,13 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(7, tpOnboardingAction.getAs2_strMsg());
                     preparedStatement.setString(8, tpOnboardingAction.getAs2_waitForSync());
                     preparedStatement.setString(9, tpOnboardingAction.getAs2_ssl_req());
-                    preparedStatement.setString(10, "N");
+                    if (tpOnboardingAction.getUpload() != null) {
+                        System.out.println("file is uploaded");
+                        preparedStatement.setString(10, "N");
+                    } else {
+                        System.out.println("no file to upload");
+                        preparedStatement.setString(10, "U");
+                    }
                     preparedStatement.setString(11, tpOnboardingAction.getCreated_by());
                     preparedStatement.setTimestamp(12, curdate);
                     preparedStatement.setString(13, "INACTIVE");
@@ -908,7 +922,14 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 preparedStatement = connection.prepareStatement(as2SslUpdateQuery.toString());
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                                preparedStatement.setString(3, "N");
+                                if (tpOnboardingAction.getUpload1() != null) {
+                                    System.out.println("SSL File is uploaded");
+                                    preparedStatement.setString(3, "N");
+
+                                } else {
+                                    System.out.println("no ssl file to upload");
+                                    preparedStatement.setString(3, "U");
+                                }
                                 preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
                                 preparedStatement.setTimestamp(5, curdate);
                                 if (tpOnboardingAction.getCertGroups() != null) {
@@ -975,13 +996,20 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 httpSslUpdateQuery.append("Update MSCVP.TPO_SSL set SSL_PRIORITY=?, CIPHER_STRENGTH=?, ");
                                 httpSslUpdateQuery.append(" TP_FLAG = ?, MODIFIED_BY=?, MODIFIED_TS=? ");
                                 if (tpOnboardingAction.getCertGroups() != null) {
-                                    httpSslUpdateQuery.append(" ,CA_CERTIFICATES=?,SSL_CERT_DATA ");
+                                    httpSslUpdateQuery.append(" ,CA_CERTIFICATES=?,SSL_CERT_DATA=?");
                                 }
                                 httpSslUpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
                                 preparedStatement = connection.prepareStatement(httpSslUpdateQuery.toString());
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                                preparedStatement.setString(3, "N");
+                               if (tpOnboardingAction.getUpload1()!=null) {
+                                    System.out.println("SSL File is uploaded");
+                                    preparedStatement.setString(3, "N");
+
+                                } else {
+                                    System.out.println("no ssl file to upload");
+                                    preparedStatement.setString(3, "U");
+                                }
                                 preparedStatement.setString(4, tpOnboardingAction.getCreated_by());
                                 preparedStatement.setTimestamp(5, curdate);
                                 if (tpOnboardingAction.getCertGroups() != null) {
@@ -1043,7 +1071,14 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(9, tpOnboardingAction.getSftp_directory());
                     preparedStatement.setString(10, tpOnboardingAction.getCreated_by());
                     preparedStatement.setTimestamp(11, curdate);
-                    preparedStatement.setString(12, "N");
+                    if (tpOnboardingAction.getUpload() != null) {
+                        System.out.println("SSL File is uploaded");
+                        preparedStatement.setString(12, "N");
+
+                    } else {
+                        System.out.println("no ssl file to upload");
+                        preparedStatement.setString(12, "U");
+                    }
                     preparedStatement.setString(13, "INACTIVE");
                     if (tpOnboardingAction.getFilepath() != null) {
                         preparedStatement.setString(14, tpOnboardingAction.getFilepath());
@@ -1368,7 +1403,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             if (istpoUserPwdUpdated > 0) {
                 responseString = "<font color='green'>User password updated successfully</font>";
                 String email = DataSourceDataProvider.getInstance().getEmaiIdByloginId(userLoginId);
-                MailManager.resetUserPwd(userLoginId,email,PasswordUtil.decryptPwd(encryptedPwd));
+                MailManager.resetUserPwd(userLoginId, email, PasswordUtil.decryptPwd(encryptedPwd));
             } else {
                 responseString = "<font color='red'>Please try again!</font>";
             }
