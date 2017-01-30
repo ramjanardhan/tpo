@@ -52,19 +52,20 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                        // resultType = SUCCESS;
                          setResultType(SUCCESS);
                     } else {
-                         url = "http://192.168.1.179:8084/tpo";
+                        // url = "http://192.168.1.179:8084/tpo";
+                         url = "http://localhost:8084/tpo";
                         httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">You are currently not an active user.</span>");
                       //  resultType = "input";
                          setResultType("redirect");
                     }
                 } else {
-                     url = "http://192.168.1.179:8084/tpo";
+                     url = "http://localhost:8084/tpo";
                     httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
                    // resultType = "input";
                     setResultType("redirect");
                 }
             } else {
-                 url = "http://192.168.1.179:8084/tpo";
+                url = "http://localhost:8084/tpo";
                 httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
                // resultType = "input";
                 setResultType("redirect");
@@ -151,7 +152,8 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                 httpServletRequest.getSession(false).invalidate();
             }
 
-            url = "http://192.168.1.179:8084/tpo";
+          //  url = "http://192.168.1.179:8084/tpo";
+          url = "http://localhost:8084/tpo";
             setResultType("redirect");
 
         } catch (Exception ex) {

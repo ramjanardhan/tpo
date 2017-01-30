@@ -7,7 +7,7 @@
         <div class="navbar-header">
             <!-- Button for smallest screens -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="index.html"><img src="http://www.miraclesoft.com/images/logo.png" alt="miraclesoft"></a>
+            <a class="navbar-brand" href="http://www.miraclesoft.com"><img src="http://www.miraclesoft.com/images/logo.png" alt="miraclesoft"></a>
         </div>
         <div class="navbar-collapse collapse">
             <div class="row">
