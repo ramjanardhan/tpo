@@ -1731,6 +1731,7 @@ function gettransferModeSelection(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         if (x == 'get') {
+              $("#mail_button").css("display","");
             var transferMode = x;
             var protocol = document.getElementById("commnProtocol").value;
             var partnerName = document.getElementById("partnerName").value;
@@ -1791,8 +1792,10 @@ function gettransferModeSelection(x) {
             document.getElementById("ftp_directory").readOnly = true;
             $('#ssl_priority').attr('disabled', true);
             $('#ssl_cipher_stergth').attr('disabled', true);
+
         }
         if (x == 'put') {
+             $("#mail_button").css("display","none");
             if (formAction == 'doAddProfile') {
                 document.getElementById("ftp_resp_time").value = "";
                 document.getElementById("ftp_host").value = "";
@@ -1825,6 +1828,7 @@ function gettransferModeSelection(x) {
         $("#as2Div").hide();
         $("#sslDiv").hide();
         if (x == 'get') {
+             $("#mail_button_sftp").css("display","");
             var transferMode = x;
             var protocol = document.getElementById("commnProtocol").value;
             var partnerName = document.getElementById("partnerName").value;
@@ -1869,6 +1873,7 @@ function gettransferModeSelection(x) {
             document.getElementById("sftp_directory").readOnly = true;
         }
         if (x == 'put') {
+            $("#mail_button_sftp").css("display","none");
             if (formAction == 'doAddProfile') {
                 document.getElementById("sftp_host_ip").value = "";
                 document.getElementById("sftp_remote_port").value = "";

@@ -12,10 +12,26 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>
         <link rel="stylesheet" href='<s:url value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>' type="text/css"/>
-        <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap.min.css"/>' type="text/css"/>
+        <link rel="stylesheet" href='<s:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
+
+        <style>
+            .input-group-addon i{
+                color:#2d8fc8;
+            }
+
+            .input-group-addon{
+                cursor: pointer;
+            }
+
+            #mail_button{
+
+            }
+
+        </style>
+
     </head>
     <s:if test="%{formAction == 'doAddProfile'}">
         <body onload="onLoad();" class="home">
@@ -141,7 +157,10 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>FTP&nbsp;Password  </label>
-                                    <s:textfield  name="ftp_pwd" id="ftp_pwd" tabindex="10" value="%{ftp_pwd}" cssClass="form-control"/>
+                                    <div class="input-group" style="width: 100%;">
+                                        <s:password  cssClass="form-control" name="ftp_pwd" id="ftp_pwd" tabindex="10" value="%{ftp_pwd}" />
+                                        <a style="width:0%" id="mail_button"  data-toggle="myToolTip" data-placement="top" title="Get an Email"  onclick="getPwdEamil('FTP')" class="input-group-addon tip-top"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -207,7 +226,10 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Remote&nbsp;Password</label>
-                                    <s:textfield cssClass="form-control" name="sftp_remote_pwd" id="sftp_remote_pwd" tabindex="19" value="%{sftp_remote_pwd}"/>
+                                    <div class="input-group" style="width: 100%;">
+                                        <s:password cssClass="form-control" name="sftp_remote_pwd" id="sftp_remote_pwd" tabindex="19" value="%{sftp_remote_pwd}"/>
+                                        <a style="width:0%" id="mail_button_sftp"  data-toggle="myToolTip" data-placement="top" title="Get an Email"  onclick="getPwdEamil('SFTP')" class="input-group-addon tip-top"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -483,32 +505,48 @@
         <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
+        <script type="text/javascript" src='<s:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            function onLoad() {
-                $("#profiles").addClass("active");
-            }
+                                            function onLoad() {
+                                                $("#profiles").addClass("active");
+                                            }
 
-            function doOnLoad() {
-                $("#profiles").addClass("active");
-                $('#commnProtocol').trigger("change");
-                var commnProtocol = document.getElementById("commnProtocol").value;
-                if (commnProtocol == "FTP") {
-                    var ftp_ssl = document.getElementById("ftp_ssl_req").value;
-                    if (ftp_ssl == "true") {
-                        document.getElementById("ftp_ssl_req").onclick();
-                    }
-                } else if (commnProtocol == "AS2") {
-                    var as2_ssl = document.getElementById("as2_ssl_req").value;
-                    if (as2_ssl == "true") {
-                        document.getElementById("as2_ssl_req").onclick();
-                    }
-                } else if (commnProtocol == "HTTP") {
-                    var http_ssl_req = document.getElementById("http_ssl_req").value;
-                    if (http_ssl_req == "true") {
-                        document.getElementById("http_ssl_req").onclick();
-                    }
-                }
-            }
+                                            function doOnLoad() {
+                                                $("#profiles").addClass("active");
+                                                $('#commnProtocol').trigger("change");
+                                                var commnProtocol = document.getElementById("commnProtocol").value;
+                                                if (commnProtocol == "FTP") {
+                                                    var ftp_ssl = document.getElementById("ftp_ssl_req").value;
+                                                    if (ftp_ssl == "true") {
+                                                        document.getElementById("ftp_ssl_req").onclick();
+                                                    }
+                                                } else if (commnProtocol == "AS2") {
+                                                    var as2_ssl = document.getElementById("as2_ssl_req").value;
+                                                    if (as2_ssl == "true") {
+                                                        document.getElementById("as2_ssl_req").onclick();
+                                                    }
+                                                } else if (commnProtocol == "HTTP") {
+                                                    var http_ssl_req = document.getElementById("http_ssl_req").value;
+                                                    if (http_ssl_req == "true") {
+                                                        document.getElementById("http_ssl_req").onclick();
+                                                    }
+                                                }
+                                            }
+
+                                            $(document).ready(function () {
+                                                $('[data-toggle="myToolTip"]').tooltip();
+
+                                                $('button').tooltip();
+
+                                                // options set in JS by class
+                                                $(".tip-top").tooltip({
+                                                    placement: 'top'
+                                                });
+                                            });
+
         </script>
     </body>
 </html>

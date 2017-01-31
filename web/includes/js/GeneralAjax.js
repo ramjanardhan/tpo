@@ -316,6 +316,50 @@ function testConnectionProfileResponse(resText) {
     document.getElementById(x).innerHTML = result;
 }
 
-
+function getPwdEamil(protocol) {
+    var ftpMethod = document.getElementById("ftp_method").value;
+    var ftpConnMethod = document.getElementById("ftp_conn_method").value;
+    var ftpRecvProtocol = document.getElementById("ftp_recv_protocol").value;
+    var ftpRespTime = document.getElementById("ftp_resp_time").value;
+    var ftpHost = document.getElementById("ftp_host").value;
+    var ftpPort = document.getElementById("ftp_port").value;
+    var ftpUserId = document.getElementById("ftp_userId").value;
+    var ftpPwd = document.getElementById("ftp_pwd").value;
+    var ftpDirectory = document.getElementById("ftp_directory").value;
+    
+    var sftp_conn_method = document.getElementById("sftp_conn_method").value;
+    var sftp_auth_method = document.getElementById("sftp_auth_method").value;
+    var sftp_host_ip = document.getElementById("sftp_host_ip").value;
+    var sftp_remote_port = document.getElementById("sftp_remote_port").value;
+    var sftp_remote_userId = document.getElementById("sftp_remote_userId").value;
+    var sftp_remote_pwd = document.getElementById("sftp_remote_pwd").value;
+    var sftp_method = document.getElementById("sftp_method").value;
+    var sftp_directory = document.getElementById("sftp_directory").value;
+    
+    var transferMode;
+    if (document.addTpOnboard.transferMode.value) {
+        transferMode = document.addTpOnboard.transferMode.value;
+    }
+    if (transferMode == "get") {
+        var req = getXMLHttpRequest();
+        $("#loadingImageAjax").show();
+        req.onreadystatechange = readyStateHandlerLoadText(req, isPwdSent);
+        if(protocol == "FTP"){
+        var url = "../ajax/sendPwdEmail.action?protocol="+protocol+"&transferMode"+transferMode+"&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
+        }
+        if(protocol == "SFTP"){
+        var url = "../ajax/sendPwdEmail.action?protocol="+protocol+"&transferMode"+transferMode+"&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
+        }
+        req.open("GET", url, "true");
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.send(null);
+    }
+}
+function isPwdSent(resText) {
+    $("#loadingImageAjax").hide();
+    if (resText == 'Success') {
+        alert("The Password and Server details sent successfully");
+    }
+}
 
 

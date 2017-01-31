@@ -33,6 +33,8 @@
         <action name="rejectPartner" class="com.mss.tpo.ajax.AjaxHandlerAction" method="rejectPartner"/>
         
        <action name="testProfile" class = "com.mss.tpo.ajax.AjaxHandlerAction" method="testconnectionstatus"/>
+       
+       <action name="sendPwdEmail" class = "com.mss.tpo.ajax.AjaxHandlerAction" method="sendPwdEmail"/>
 
 <!--        <action name="testConforFTPandFTPS" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforFTPandFTPS"/>
         

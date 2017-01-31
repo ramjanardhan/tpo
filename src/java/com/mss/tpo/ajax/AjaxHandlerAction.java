@@ -7,6 +7,8 @@
 package com.mss.tpo.ajax;
 
 import com.mss.tpo.util.AppConstants;
+import com.mss.tpo.util.DataSourceDataProvider;
+import com.mss.tpo.util.MailManager;
 import com.mss.tpo.util.ServiceLocator;
 import com.opensymphony.xwork2.ActionSupport;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +53,26 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     private int roleId;
     private String flag;
     private int communicationId;
-
+    private String ftp_method; 
+    private String ftp_conn_method;
+    private String ftp_recv_protocol;
+    private String ftp_resp_time;
+    private String ftp_host;
+    private String ftp_port;
+    private String ftp_userId;
+    private String ftp_pwd;
+    private String ftp_directory;
+    private String sftp_conn_method;
+    private String sftp_auth_method;
+    private String sftp_host_ip;
+    private String sftp_remote_port;
+    private String sftp_remote_userId;
+    private String sftp_remote_pwd;
+    private String sftp_method;
+    private String sftp_directory;
+            
+                          
+    
     public int getCommunicationId() {
         return communicationId;
     }
@@ -295,6 +316,142 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public AjaxHandlerAction() {
     }
 
+    public String getFtp_method() {
+        return ftp_method;
+    }
+
+    public void setFtp_method(String ftp_method) {
+        this.ftp_method = ftp_method;
+    }
+
+    public String getFtp_conn_method() {
+        return ftp_conn_method;
+    }
+
+    public void setFtp_conn_method(String ftp_conn_method) {
+        this.ftp_conn_method = ftp_conn_method;
+    }
+
+    public String getFtp_recv_protocol() {
+        return ftp_recv_protocol;
+    }
+
+    public void setFtp_recv_protocol(String ftp_recv_protocol) {
+        this.ftp_recv_protocol = ftp_recv_protocol;
+    }
+
+    public String getFtp_resp_time() {
+        return ftp_resp_time;
+    }
+
+    public void setFtp_resp_time(String ftp_resp_time) {
+        this.ftp_resp_time = ftp_resp_time;
+    }
+
+    public String getFtp_host() {
+        return ftp_host;
+    }
+
+    public void setFtp_host(String ftp_host) {
+        this.ftp_host = ftp_host;
+    }
+
+    public String getFtp_port() {
+        return ftp_port;
+    }
+
+    public void setFtp_port(String ftp_port) {
+        this.ftp_port = ftp_port;
+    }
+
+    public String getFtp_userId() {
+        return ftp_userId;
+    }
+
+    public void setFtp_userId(String ftp_userId) {
+        this.ftp_userId = ftp_userId;
+    }
+
+    public String getFtp_pwd() {
+        return ftp_pwd;
+    }
+
+    public void setFtp_pwd(String ftp_pwd) {
+        this.ftp_pwd = ftp_pwd;
+    }
+
+    public String getFtp_directory() {
+        return ftp_directory;
+    }
+
+    public void setFtp_directory(String ftp_directory) {
+        this.ftp_directory = ftp_directory;
+    }
+
+    public String getSftp_conn_method() {
+        return sftp_conn_method;
+    }
+
+    public void setSftp_conn_method(String sftp_conn_method) {
+        this.sftp_conn_method = sftp_conn_method;
+    }
+
+    public String getSftp_auth_method() {
+        return sftp_auth_method;
+    }
+
+    public void setSftp_auth_method(String sftp_auth_method) {
+        this.sftp_auth_method = sftp_auth_method;
+    }
+
+    public String getSftp_host_ip() {
+        return sftp_host_ip;
+    }
+
+    public void setSftp_host_ip(String sftp_host_ip) {
+        this.sftp_host_ip = sftp_host_ip;
+    }
+
+    public String getSftp_remote_port() {
+        return sftp_remote_port;
+    }
+
+    public void setSftp_remote_port(String sftp_remote_port) {
+        this.sftp_remote_port = sftp_remote_port;
+    }
+
+    public String getSftp_remote_userId() {
+        return sftp_remote_userId;
+    }
+
+    public void setSftp_remote_userId(String sftp_remote_userId) {
+        this.sftp_remote_userId = sftp_remote_userId;
+    }
+
+    public String getSftp_remote_pwd() {
+        return sftp_remote_pwd;
+    }
+
+    public void setSftp_remote_pwd(String sftp_remote_pwd) {
+        this.sftp_remote_pwd = sftp_remote_pwd;
+    }
+
+    public String getSftp_method() {
+        return sftp_method;
+    }
+
+    public void setSftp_method(String sftp_method) {
+        this.sftp_method = sftp_method;
+    }
+
+    public String getSftp_directory() {
+        return sftp_directory;
+    }
+
+    public void setSftp_directory(String sftp_directory) {
+        this.sftp_directory = sftp_directory;
+    }
+
     public String forgotPassword() throws Exception {
         try {
             String response = ServiceLocator.getAjaxHandlerService().forgotPassword(getUserid(), getEmail());
@@ -384,6 +541,23 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
             try {
                 responseString = ServiceLocator.getAjaxHandlerService().getProtocolDetails(getTransferMode(), getProtocol());
                 httpServletResponse.setContentType("text");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+    
+    public String sendPwdEmail() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                String email = DataSourceDataProvider.getInstance().getEmaiIdByloginId(loginId);
+                System.out.println("ajax action class loginId --"+loginId+" email -- "+email);
+                String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
+                responseString = MailManager.getModePwdEmail(loginId,email,partnerName,this);
+                httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {
                 ex.printStackTrace();
