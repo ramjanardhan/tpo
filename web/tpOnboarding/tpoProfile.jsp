@@ -127,7 +127,8 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
-                                    <s:textfield  name="ftp_recv_protocol" id="ftp_recv_protocol" tabindex="5" value="FTP"  cssClass="form-control"/>
+                                    <s:select list="#@java.util.LinkedHashMap@{'FTP':'FTP','FTPS':'FTPS'}" name="ftp_recv_protocol" id="ftp_recv_protocol" value="%{ftp_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxFTPchange(this.value);"/>
+                                    <%-- <s:textfield  name="ftp_recv_protocol" id="ftp_recv_protocol" tabindex="5"  value="%{ftp_recv_protocol}" cssClass="form-control"/> --%>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -169,7 +170,7 @@
                                     <s:textfield  name="ftp_directory" id="ftp_directory" tabindex="11" value="%{ftp_directory}" cssClass="form-control"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div id="ftp_ssl" class="col-sm-3">
                                 <div class="" style="margin-top:30px">
                                     <label for="ftp_ssl_req">
                                         SSL&nbsp;Required
@@ -341,11 +342,14 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3">    
-                                    <label>Upload&nbsp;System&nbsp;Certificate </label>
+                                    <label>Download&nbsp;System&nbsp;Certificate </label>
+                                     <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                 </div>
                                 <div class="col-sm-3">
+                                     <label>Upload&nbsp;System&nbsp;Certificate </label>
                                     <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="34"/>  
                                 </div>
+                               
                             </div>
                             <div class="col-sm-12">    
                                 <div class="col-sm-3 gutter_hide">

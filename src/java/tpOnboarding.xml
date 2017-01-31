@@ -30,6 +30,18 @@
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
+        <action name="tpoUsersList" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoUsersList">
+            <result name="success">/tpOnboarding/tpoUsersList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+       <action name="searchUser" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchUser">
+            <result name="success">/tpOnboarding/tpoUsersList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
         <!-- partner actions-->
         <action name="tpoPartnerAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerAdd">
             <result name="success">/tpOnboarding/tpoPartnerAdd.jsp</result>

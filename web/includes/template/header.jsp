@@ -7,7 +7,7 @@
         <div class="navbar-header">
             <!-- Button for smallest screens -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="index.html"><img src="http://www.miraclesoft.com/images/logo.png" alt="miraclesoft"></a>
+            <a class="navbar-brand" href="http://www.miraclesoft.com"><img src="http://www.miraclesoft.com/images/logo.png" alt="miraclesoft"></a>
         </div>
         <div class="navbar-collapse collapse">
             <div class="row">
@@ -68,6 +68,7 @@
                                     <li id="partnerUserAdd"><a href="<s:url action="tpoPartnerUserAdd"/>">Add User</a></li>
                                 </s:if>
                                 <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4}'>
+                                    <li id="users"><a href="<s:url action="tpoUsersList"/>">Users</a></li>
                                     <li id="resetUserPwd"><a href="<s:url action="tpoResetUserPwd"/>">Reset User Pwd</a></li>
                                 </s:if>
                                 <li id="resetMyPwd"><a href="<s:url action="tpoResetMyPwd"/>">Reset My Pwd</a></li>
