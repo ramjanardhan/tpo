@@ -160,6 +160,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String direction;
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
     private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
+    private ArrayList<TpOnboardingBean> tpoSearchUsersList;
     private String formAction;
     private int CommunicationId;
     private int id;
@@ -216,6 +217,40 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                resultType = SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultType;
+    }
+    
+    public String tpoUsersList() {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchUsersList);
+                tpoSearchUsersList = ServiceLocator.getTpOnboardingService().tpoSearchUsers(loginId, roleId, "initialFlag", this);
+                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchUsersList, tpoSearchUsersList);
+                resultType = SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultType;
+    }
+
+    public String searchUser() {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchUsersList);
+                tpoSearchUsersList = ServiceLocator.getTpOnboardingService().tpoSearchUsers(loginId, roleId, "searchFlag", this);
+                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchUsersList, tpoSearchUsersList);
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();

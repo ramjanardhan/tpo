@@ -39,6 +39,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
     private HttpServletRequest httpServletRequest;
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
     private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
+    private ArrayList<TpOnboardingBean> tpoSearchUsersList;
 
     public TpOnboardingBean getPartnerInfo(int partnerId, String loginId) throws ServiceLocatorException {
         try {
@@ -139,6 +140,50 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             }
         }
         return responseString;
+    }
+    
+    public ArrayList<TpOnboardingBean> tpoSearchUsers(String loginId, int roleId, String flag, TpOnboardingAction tpAction) {
+        StringBuffer userSearchQuery = new StringBuffer();
+        userSearchQuery.append("SELECT ID, LOGINID, PASSWORD, PARTNER_ID, NAME, EMAIL, PHONE_NO, COUNTRY, CREATED_BY "
+                    + ", CREATED_TS, ROLE_ID, LNAME, CITY,STATE, ZIPCODE, ADDRESS, ACTIVE FROM MSCVP.TPO_USER WHERE 1=1 ");
+        if ("searchFlag".equals(flag)) {
+            if (tpAction.getContactName() != null && !"".equals(tpAction.getContactName().trim())) {
+                userSearchQuery.append(" AND lcase(NAME) like lcase('%" + (tpAction.getContactName()) + "%') ");
+            }
+            if (tpAction.getCountry() != null && !"-1".equals(tpAction.getCountry().trim())) {
+                userSearchQuery.append(" AND COUNTRY='" + tpAction.getCountry() + "' ");
+            }
+            if (tpAction.getStatus() != null && !"-1".equals(tpAction.getStatus().trim())) {
+                userSearchQuery.append(" AND ACTIVE='" + tpAction.getStatus() + "' ");
+            }
+        }
+        if (roleId == 1 || roleId == 3 || roleId == 4) {
+            userSearchQuery.append(" AND CREATED_BY='" + loginId + "' ");
+        }
+        System.out.println("userSearchQuery>>"+userSearchQuery.toString());
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(userSearchQuery.toString());
+            tpoSearchUsersList = new ArrayList<TpOnboardingBean>();
+            while (resultSet.next()) {
+                TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
+                tpOnboardingBean.setId(resultSet.getInt("ID"));
+                tpOnboardingBean.setContactName(resultSet.getString("NAME"));
+                tpOnboardingBean.setPhoneNo(resultSet.getString("PHONE_NO"));
+                tpOnboardingBean.setStatus(resultSet.getString("ACTIVE"));
+                tpOnboardingBean.setCity(resultSet.getString("CITY"));
+                tpOnboardingBean.setState(resultSet.getString("STATE"));
+                tpOnboardingBean.setCountry(resultSet.getString("COUNTRY"));
+                tpOnboardingBean.setZipCode(resultSet.getString("ZIPCODE"));
+                tpOnboardingBean.setCreated_by(resultSet.getString("CREATED_BY"));
+                tpOnboardingBean.setCreated_ts(resultSet.getTimestamp("CREATED_TS"));
+                tpoSearchUsersList.add(tpOnboardingBean);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TpOnboardingServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tpoSearchUsersList;
     }
 
     public String doAddPartnerUser(int partnerId, int roleId, String loginId, TpOnboardingAction tpAction) throws ServiceLocatorException {
@@ -245,7 +290,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return responseString;
     }
 
-    @Override
     public ArrayList<TpOnboardingBean> tpoSearchPartners(String loginId, int roleId, String flag, TpOnboardingAction tpAction) {
         StringBuffer partnerSearchQuery = new StringBuffer();
         partnerSearchQuery.append("SELECT ID,NAME, PHONE_NO, CITY, STATUS, STATE, COUNTRY, ZIPCODE, CREATED_BY, CREATED_TS FROM MSCVP.TPO_PARTNERS WHERE 1=1 ");
@@ -288,7 +332,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return tpoSearchPartnersList;
     }
 
-    @Override
     public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int partnerId, String flag, TpOnboardingAction tpAction) {
         StringBuffer profileSearchQuery = new StringBuffer();
         profileSearchQuery.append("SELECT ID, PROTOCOL, TRANSFER_MODE, STATUS, CREATED_BY, CREATED_TS FROM MSCVP.TPO_COMMUNICATION WHERE 1=1 ");
@@ -1156,7 +1199,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return responseString;
     }
 
-    @Override
     public ArrayList<TpOnboardingBean> tpoSearchEnvelope(String loginId, int partnerId, String flag, TpOnboardingAction tpAction) {
         StringBuffer envelopeSearchQuery = new StringBuffer();
         envelopeSearchQuery.append("SELECT TRANSACTION, DIRECTION, CREATED_BY, CREATED_TS FROM MSCVP.TPO_ENVELOPES WHERE 1=1 ");

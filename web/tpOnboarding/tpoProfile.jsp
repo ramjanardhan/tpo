@@ -320,11 +320,14 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3">    
-                                    <label>Upload&nbsp;System&nbsp;Certificate </label>
+                                    <label>Download&nbsp;System&nbsp;Certificate </label>
+                                     <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                 </div>
                                 <div class="col-sm-3">
+                                     <label>Upload&nbsp;System&nbsp;Certificate </label>
                                     <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="34"/>  
                                 </div>
+                               
                             </div>
                             <div class="col-sm-12">    
                                 <div class="col-sm-3 gutter_hide">

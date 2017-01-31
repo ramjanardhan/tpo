@@ -28,6 +28,7 @@ public class AppConstants {
     public static final String TPO_SearchProfileList = "tpoSearchProfileList";
     public static final String TPO_SearchEnvelopeList = "tpoSearchEnvelopeList";
     public static final String TPO_SearchPartnersList = "tpoSearchPartnersList";
+    public static final String TPO_SearchUsersList = "tpoSearchUsersList";
 
     public static final String SES_FIRST_DB = "initialDB";
     public static final String REQ_RESULT_MSG = "resultMessage";
