@@ -39,7 +39,7 @@
         <s:else>
         <body onload="doOnLoad();" class="home">
         </s:else>
-        <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
+        
         <div>
             <s:include value="/includes/template/header.jsp"/>
         </div>    
@@ -127,7 +127,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
-                                    <s:select list="#@java.util.LinkedHashMap@{'FTP':'FTP','FTPS':'FTPS'}" name="ftp_recv_protocol" id="ftp_recv_protocol" value="%{ftp_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxFTPchange(this.value);"/>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP','FTPS':'FTPS'}" name="ftp_recv_protocol" id="ftp_recv_protocol" value="%{ftp_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxFTPchange(this.value);"/>
                                     <%-- <s:textfield  name="ftp_recv_protocol" id="ftp_recv_protocol" tabindex="5"  value="%{ftp_recv_protocol}" cssClass="form-control"/> --%>
                                 </div>
                             </div>
@@ -253,7 +253,8 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
-                                    <s:textfield cssClass="form-control" name="http_recv_protocol" id="http_recv_protocol" tabindex="22" value="HTTP"/>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'HTTP':'HTTP','HTTPS':'HTTPS'}" name="http_recv_protocol" id="http_recv_protocol" value="%{http_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxHTTPchange(this.value);"/>
+                                 <%--   <s:textfield cssClass="form-control" name="http_recv_protocol" id="http_recv_protocol" tabindex="22" value="HTTP"/> --%>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -286,7 +287,7 @@
                                     <s:textfield cssClass="form-control" name="http_url" id="http_url" tabindex="27" value="%{http_url}" />
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div id="http_ssl" class="col-sm-3">
                                 <div class="" style="margin-top:30px">
                                     <label for="http_ssl_req">
                                         SSL&nbsp;Required
@@ -511,8 +512,9 @@
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script type="text/javascript" src='<s:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>'></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
         <script type="text/javascript">
                                             function onLoad() {
                                                 $("#profiles").addClass("active");

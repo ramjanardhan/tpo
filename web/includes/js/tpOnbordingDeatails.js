@@ -1809,11 +1809,14 @@ function gettransferModeSelection(x) {
                 document.getElementById("ftp_userId").value = "";
                 document.getElementById("ftp_pwd").value = "";
                 document.getElementById("ftp_directory").value = "";
-                $('#ftp_recv_protocol').attr('disabled', false);
+                document.getElementById("ftp_recv_protocol").value = "-1";
                 ftp_recv = document.getElementById("ftp_recv_protocol").value;
-                if (ftp_recv == 'FTP') {
-                    document.getElementById("ftp_ssl_req").checked = false;
-                    document.getElementById("ftp_ssl").style.display = 'none';
+                 if (ftp_recv == 'FTPS') {
+                document.getElementById("ftp_ssl_req").checked = true;
+                document.getElementById("ftp_ssl").style.display = 'block';
+            }else{
+                      document.getElementById("ftp_ssl_req").checked = false;
+                document.getElementById("ftp_ssl").style.display = 'none';
                 }
                 document.getElementById("ssl_priority2").value = "MUST";
                 document.getElementById("ssl_cipher_stergth2").value = "STRONG";
@@ -1821,10 +1824,13 @@ function gettransferModeSelection(x) {
             $('#ftp_conn_method').attr('disabled', false);
             $('#ftp_recv_protocol').attr('disabled', false);
             ftp_recv = document.getElementById("ftp_recv_protocol").value;
-            if (ftp_recv == 'FTP') {
-                document.getElementById("ftp_ssl_req").checked = false;
+            if (ftp_recv == 'FTPS') {
+                document.getElementById("ftp_ssl_req").checked = true;
+                document.getElementById("ftp_ssl").style.display = 'block';
+            }else{
+                      document.getElementById("ftp_ssl_req").checked = false;
                 document.getElementById("ftp_ssl").style.display = 'none';
-            }
+                }
             document.getElementById("ftp_resp_time").readOnly = false;
             document.getElementById("ftp_host").readOnly = false;
             document.getElementById("ftp_port").readOnly = false;
@@ -1919,6 +1925,7 @@ function gettransferModeSelection(x) {
         $("#sslDiv2").hide();
         if (x == 'put') {
             var transferMode = x;
+            var RECEIVING_PROTOCOL;
             var protocol = document.getElementById("commnProtocol").value;
             var partnerName = document.getElementById("partnerName").value;
             $.ajax({
@@ -1926,12 +1933,17 @@ function gettransferModeSelection(x) {
                 context: document.body,
                 success: function (responseText) {
                     var json = $.parseJSON(responseText);
-                    var RECEIVING_PROTOCOL = json["RECEIVING_PROTOCOL"];
+                    RECEIVING_PROTOCOL = json["RECEIVING_PROTOCOL"];
                     var RESPONSE_TIMEOUT_SEC = json["RESPONSE_TIMEOUT_SEC"];
                     var HTTP_END_POINT = json["HTTP_END_POINT"];
                     var HTTP_PORT = json["HTTP_PORT"];
                     var HTTP_MODE = json["HTTP_MODE"];
-                    var sslReq = json["SSL_REQUIRED"];
+                    var sslReq = false;
+                    if (RECEIVING_PROTOCOL == 'HTTPS') {
+                        sslReq = json["SSL_REQUIRED"];
+                    } else {
+                        document.getElementById("http_ssl").style.display = 'none';
+                    }
                     var SSL_PRIORITY = '';
                     //var KEY_CERTIFICATE_PASSPHRASE = '';
                     var CIPHER_STRENGTH = '';
@@ -1961,7 +1973,7 @@ function gettransferModeSelection(x) {
                     alert("error-->" + e);
                 }
             });
-            document.getElementById("http_recv_protocol").readOnly = true;
+            $('#http_recv_protocol').attr('disabled', true);
             document.getElementById("http_resp_time").readOnly = true;
             document.getElementById("http_endpoint").readOnly = true;
             document.getElementById("http_port").readOnly = true;
@@ -1969,14 +1981,31 @@ function gettransferModeSelection(x) {
             $('#http_protocol_mode').attr('disabled', true);
         }
         if (x == 'get') {
+            var http_recv;
             if (formAction == 'doAddProfile') {
                 document.getElementById("http_resp_time").value = "";
                 document.getElementById("http_endpoint").value = "";
                 document.getElementById("http_port").value = "";
                 document.getElementById("http_url").value = "";
-                document.getElementById("http_ssl_req").checked = false;
+                document.getElementById("http_recv_protocol").value = "-1";
+                http_recv = document.getElementById("http_recv_protocol").value;
+                if (http_recv == 'HTTPS') {
+                   document.getElementById("http_ssl_req").checked = true;
+                    document.getElementById("http_ssl").style.display = 'block';
+                }else{
+                     document.getElementById("http_ssl_req").checked = false;
+                    document.getElementById("http_ssl").style.display = 'none';
+                }
             }
-            document.getElementById("http_recv_protocol").readOnly = false;
+             $('#http_recv_protocol').attr('disabled', false);
+            http_recv = document.getElementById("http_recv_protocol").value;
+            if (http_recv == 'HTTPS') {
+                document.getElementById("http_ssl_req").checked = true;
+                document.getElementById("http_ssl").style.display = 'block';
+            }else{
+                     document.getElementById("http_ssl_req").checked = false;
+                    document.getElementById("http_ssl").style.display = 'none';
+                }
             document.getElementById("http_endpoint").readOnly = false;
             $('#http_protocol_mode').attr('disabled', false);
             document.getElementById("http_port").readOnly = false;
@@ -2166,7 +2195,7 @@ function validateFTP(flag) {
     // var ftp_ssl_req = document.getElementById("ftp_ssl_req").value;
     var ftp_ssl = document.getElementById("ftp_ssl_req").checked;
     document.getElementById('tpResultMessage').innerHTML = "";     //var commnProtocol =document.getElementById('commnProtocol').value;
-    if (((ftp_method == null) || (ftp_method == "")) || ((ftp_conn_method == null) || (ftp_conn_method == "")) || ((ftp_recv_protocol == null) || (ftp_recv_protocol == "")) || ((ftp_resp_time == null) || (ftp_resp_time == "")) || ((ftp_host == null) || (ftp_host == "")) || ((ftp_port == null) || (ftp_port == "")) || ((ftp_userId == null) || (ftp_userId == "")) || ((ftp_pwd == null) || (ftp_pwd == "")) || ((ftp_directory == null) || (ftp_directory == ""))) {
+    if (((ftp_method == null) || (ftp_method == "")) || ((ftp_conn_method == null) || (ftp_conn_method == "")) || ((ftp_recv_protocol == null) || (ftp_recv_protocol == "-1")) || ((ftp_resp_time == null) || (ftp_resp_time == "")) || ((ftp_host == null) || (ftp_host == "")) || ((ftp_port == null) || (ftp_port == "")) || ((ftp_userId == null) || (ftp_userId == "")) || ((ftp_pwd == null) || (ftp_pwd == "")) || ((ftp_directory == null) || (ftp_directory == ""))) {
         document.getElementById('protocolmsgFtp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
@@ -2225,7 +2254,7 @@ function validateHTTP(flag) {
     //var ftp_ssl = document.getElementById("ftp_ssl_req").checked;
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
-    if (((http_recv_protocol == null) || (http_recv_protocol == "")) || ((http_resp_time == null) || (http_resp_time == "")) || ((http_endpoint == null) || (http_endpoint == "")) || ((http_port == null) || (http_port == ""))) {
+    if (((http_recv_protocol == null) || (http_recv_protocol == "-1")) || ((http_resp_time == null) || (http_resp_time == "")) || ((http_endpoint == null) || (http_endpoint == "")) || ((http_port == null) || (http_port == ""))) {
         document.getElementById('protocolmsgHttp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
         return false;
     }
@@ -2519,13 +2548,25 @@ function resetPartnerUserAdd() {
 }
 
 function rxFTPchange(x) {
-    if (x == 'FTP') {
+    if (x == 'FTP' || x == '-1') {
         document.getElementById("ftp_ssl_req").checked = false;
-        $("#sslDiv2").hide();
         document.getElementById("ftp_ssl").style.display = 'none';
+        $("#sslDiv2").hide();
     } else if (x == 'FTPS') {
         document.getElementById("ftp_ssl_req").checked = true;
+        document.getElementById("ftp_ssl").style.display = 'block';
         $("#sslDiv2").show();
     }
 }
 
+function rxHTTPchange(x) {
+    if (x == 'HTTP' || x == '-1') {
+        document.getElementById("http_ssl_req").checked = false;
+        document.getElementById("http_ssl").style.display = 'none';
+         $("#sslDiv2").hide();
+    } else if (x == 'HTTPS') {
+        document.getElementById("http_ssl_req").checked = true;
+        document.getElementById("http_ssl").style.display = 'block';
+        $("#sslDiv2").show();
+    }
+}
