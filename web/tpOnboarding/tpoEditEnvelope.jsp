@@ -194,15 +194,13 @@
                                     <div class="form-group">
                                     </div>
                                 </div>
+<!--                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                    </div>
+                                </div>-->
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                     <s:textfield cssClass="form-control" name="transactionSetIdCode" id="transactionSetIdCode" value="%{tpOnboardingBean.transactionSetIdCode}" tabindex="13" onchange="fieldLengthValidatorEditEnvelope(this);"/>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-3" style="display: none;">
-                                    <div class="form-group">
-                                        <s:textfield cssClass="form-control" name="transactionSetIdCode" id="transactionSetIdCode" value="%{tpOnboardingBean.transactionSetIdCode}" tabindex="13" onchange="fieldLengthValidatorEditEnvelope(this);"/>
+                                        <s:textfield cssClass="form-control" name="transactionSetIdCode" id="transactionSetIdCode" value="%{tpOnboardingBean.transactionSetIdCode}" tabindex="13" onchange="fieldLengthValidatorEditEnvelope(this);" readonly="true"/>
                                     </div>
                                 </div>
                             </div>
