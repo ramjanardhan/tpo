@@ -170,12 +170,12 @@
                                     <s:textfield  name="ftp_directory" id="ftp_directory" tabindex="11" value="%{ftp_directory}" cssClass="form-control"/>
                                 </div>
                             </div>
-                            <div id="ftp_ssl" class="col-sm-3">
+                                <div id="ftp_ssl" class="col-sm-3">
                                 <div class="" style="margin-top:30px">
-                                    <label for="ftp_ssl_req">
+                                    <label for="ftp_ssl_req" style="display: none">
                                         SSL&nbsp;Required
                                     </label>
-                                    <s:checkbox  name="ftp_ssl_req" id="ftp_ssl_req" tabindex="12" value="%{ftp_ssl_req}" onclick="sslRequired('ftp')" cssClass=""/>
+                                    <s:checkbox  style="display:none" name="ftp_ssl_req" id="ftp_ssl_req" tabindex="12" value="%{ftp_ssl_req}" onclick="sslRequired('ftp')" cssClass=""/>
                                 </div>
                             </div>
                         </div>
@@ -287,12 +287,12 @@
                                     <s:textfield cssClass="form-control" name="http_url" id="http_url" tabindex="27" value="%{http_url}" />
                                 </div>
                             </div>
-                            <div id="http_ssl" class="col-sm-3">
+                            <div id="http_ssl" class="col-sm-3" style="display: none">
                                 <div class="" style="margin-top:30px">
-                                    <label for="http_ssl_req">
+                                    <label for="http_ssl_req" style="display: none">
                                         SSL&nbsp;Required
                                     </label>
-                                    <s:checkbox id="http_ssl_req" name="http_ssl_req" tabindex="28" value="%{http_ssl_req}" onclick="sslRequired('http')"/>
+                                    <s:checkbox style="display: none" id="http_ssl_req" name="http_ssl_req" tabindex="28" value="%{http_ssl_req}" onclick="sslRequired('http')"/>
                                 </div>
                             </div>
                         </div>
@@ -426,7 +426,7 @@
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="43" cssClass="form-control"/>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3" style="display: none">
                                     <div class="" style="margin-top:30px">
                                         <label for="as2_ssl_req">
                                             SSL&nbsp;Required
