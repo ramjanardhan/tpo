@@ -45,6 +45,7 @@ function checkPartnerInfo() {
         return true;
 }
 
+
 function checkPwd() {
     var pwd = document.getElementById("regpassword").value;
     var cnfPwd = document.getElementById("cnfPassword").value;
