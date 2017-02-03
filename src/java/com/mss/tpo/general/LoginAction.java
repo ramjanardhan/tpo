@@ -28,8 +28,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private String url;
 
     public String tpoLoginCheck() throws Exception {
-       // resultType = LOGIN;
-        setResultType(LOGIN);
+        resultType = LOGIN;
         // HttpSession tpoUserSession = httpServletRequest.getSession(true);
         UserInfoBean userInfoBean = null;
         try {
@@ -49,33 +48,24 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_USERID, userInfoBean.getUserId());
                         //httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_PARTNER_NAME,tpOnboardingBean.getPartnerName());
                         logUserAccess();
-                       // resultType = SUCCESS;
-                         setResultType(SUCCESS);
+                        resultType = SUCCESS;
                     } else {
-                        url = "http://192.168.1.179:8084/tpo";
-                         // url = "http://localhost:8084/tpo";
                         httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">You are currently not an active user.</span>");
-                      //  resultType = "input";
-                         setResultType("redirect");
+                        resultType = "input";
                     }
                 } else {
-                     url = "http://192.168.1.179:8084/tpo";
                     httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
-                   // resultType = "input";
-                    setResultType("redirect");
+                    resultType = "input";
                 }
             } else {
-                url = "http://192.168.1.179:8084/tpo";
                 httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">Please Login with valid UserId and Password! </span>");
-               // resultType = "input";
-                setResultType("redirect");
+                resultType = "input";
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-           // resultType = "error";
-            setResultType(ERROR);
+            resultType = "error";
         }
-        return getResultType();
+        return resultType;
     }
 
     public void logUserAccess() throws Exception {

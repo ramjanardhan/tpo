@@ -17,7 +17,6 @@
             <result type="redirect">/tpOnboarding/tpoSuccess.action</result>
             <result name="input">/general/login.jsp</result>
             <result type="redirect" name="login">login.action</result>
-            <result name="redirect" type="redirect">${url}</result>
             <result name="error" type="redirect">../exception/exception.action</result> 
         </action>
 

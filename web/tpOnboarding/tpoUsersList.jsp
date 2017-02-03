@@ -25,7 +25,7 @@
         <script>
             function doOnLoad()
             {
-                $("#partnersList").addClass("active");
+                $("#services").addClass("active");
             }
         </script>
     </head>
