@@ -17,6 +17,7 @@ public class AppConstants {
     public static final String CONTEXT_PATH = "tpo";
     public static final String SES_PARTNER_LIST = "partnerList";
     public static final String TPO_LOGIN_ID = "tpoLoginId";
+    public static final String TPO_LOGIN_ACCESS = "tpoLoginAccess";
     public static final String TPO_ROLE_ID = "tpoRoleId";
     public static final String TPO_PARTNER_ID = "tpoPartnerId";
     public static final String TPO_PARTNER_NAME = "tpoPartnerName";

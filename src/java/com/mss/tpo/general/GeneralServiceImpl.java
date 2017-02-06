@@ -30,7 +30,7 @@ public class GeneralServiceImpl implements GeneralService {
     public UserInfoBean tpLoginCheck(String loginId) throws ServiceLocatorException {
         UserInfoBean userInfoBean = null;
         String tpoLoginQuery = "SELECT ID, LOGINID, PASSWORD, ROLE_ID, ACTIVE, PARTNER_ID, NAME, EMAIL, PHONE_NO, COUNTRY, "
-                + "LAST_LOGIN_TS, LAST_LOGOUT_TS FROM TPO_USER WHERE LOGINID=?";
+                + "LAST_LOGIN_TS, LAST_LOGOUT_TS,LOGIN_ACCESS FROM TPO_USER WHERE LOGINID=?";
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(tpoLoginQuery);
@@ -53,6 +53,7 @@ public class GeneralServiceImpl implements GeneralService {
                 userInfoBean.setPhoneNo(resultSet.getString("PHONE_NO"));
                 userInfoBean.setCountry(resultSet.getString("COUNTRY"));
                 userInfoBean.setActive(resultSet.getString("ACTIVE"));
+                userInfoBean.setLoginAccess(resultSet.getString("LOGIN_ACCESS"));
                 userInfoBean.setLastLoginTS(resultSet.getTimestamp("LAST_LOGIN_TS"));
                 userInfoBean.setLastLogoutTS(resultSet.getTimestamp("LAST_LOGOUT_TS"));
             }

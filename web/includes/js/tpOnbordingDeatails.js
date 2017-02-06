@@ -267,6 +267,7 @@ function fieldLengthValidator(element) {
             k = 1;
             i = 15;
             validatenumber(element);
+            generalFormatPhone(element);
         }
         /* 850 IB validation */
         if (element.id == 'isa850senderIdIB' || element.id == 'gs850senderIdIB' || element.id == 'st850senderIdIB' || element.id == 'gs850VersionIB' || element.id == 'st850VersionIB') {
@@ -451,11 +452,11 @@ function generalFormatPhone(element) {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please give atleast 10 charcters in phone number</font>";
         return false;
     } else {
-        var pattern = /^\(\d{3}\)\-\d{3}\-\d{4}$/;
-        //        element.value=str.replace(/[A-Za-z\(\)\.\-\x\s,]/g, "");
-        element.value = str.replace(pattern, "");
+       // var pattern = /^\(\d{3}\)\-\d{3}\-\d{4}$/;
+              element.value=str.replace(/^(?:\(\d{3}\)|\d{3}-)\d{3}-\d{4}$/, "");
+       // element.value = str.replace(pattern, "");
         num = element.value;
-        var _return;
+        var _return="";
         if (num.length == 10) {
             var ini = num.substring(0, 3);
             _return += ini;
@@ -1732,7 +1733,8 @@ function gettransferModeSelection(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         if (x == 'get') {
-            $("#mail_button").css("display","");
+              document.getElementById("saveButton").style.display = 'none';
+            $("#mail_button").css("display", "");
             var transferMode = x;
             var recvProtocol;
             var protocol = document.getElementById("commnProtocol").value;
@@ -1801,7 +1803,8 @@ function gettransferModeSelection(x) {
             $('#ssl_cipher_stergth').attr('disabled', true);
         }
         if (x == 'put') {
-            $("#mail_button").css("display","none");
+              document.getElementById("saveButton").style.display = 'block';
+            $("#mail_button").css("display", "none");
             var ftp_recv;
             if (formAction == 'doAddProfile') {
                 document.getElementById("ftp_resp_time").value = "";
@@ -1812,12 +1815,12 @@ function gettransferModeSelection(x) {
                 document.getElementById("ftp_directory").value = "";
                 document.getElementById("ftp_recv_protocol").value = "-1";
                 ftp_recv = document.getElementById("ftp_recv_protocol").value;
-                 if (ftp_recv == 'FTPS') {
-                document.getElementById("ftp_ssl_req").checked = true;
-                document.getElementById("ftp_ssl").style.display = 'block';
-            }else{
-                      document.getElementById("ftp_ssl_req").checked = false;
-                document.getElementById("ftp_ssl").style.display = 'none';
+                if (ftp_recv == 'FTPS') {
+                    document.getElementById("ftp_ssl_req").checked = true;
+                    document.getElementById("ftp_ssl").style.display = 'block';
+                } else {
+                    document.getElementById("ftp_ssl_req").checked = false;
+                    document.getElementById("ftp_ssl").style.display = 'none';
                 }
                 document.getElementById("ssl_priority2").value = "MUST";
                 document.getElementById("ssl_cipher_stergth2").value = "STRONG";
@@ -1828,10 +1831,10 @@ function gettransferModeSelection(x) {
             if (ftp_recv == 'FTPS') {
                 document.getElementById("ftp_ssl_req").checked = true;
                 document.getElementById("ftp_ssl").style.display = 'block';
-            }else{
-                      document.getElementById("ftp_ssl_req").checked = false;
+            } else {
+                document.getElementById("ftp_ssl_req").checked = false;
                 document.getElementById("ftp_ssl").style.display = 'none';
-                }
+            }
             document.getElementById("ftp_resp_time").readOnly = false;
             document.getElementById("ftp_host").readOnly = false;
             document.getElementById("ftp_port").readOnly = false;
@@ -1851,7 +1854,8 @@ function gettransferModeSelection(x) {
         $("#as2Div").hide();
         $("#sslDiv").hide();
         if (x == 'get') {
-            $("#mail_button_sftp").css("display","");
+            document.getElementById("saveButton").style.display = 'none';
+            $("#mail_button_sftp").css("display", "");
             var transferMode = x;
             var protocol = document.getElementById("commnProtocol").value;
             var partnerName = document.getElementById("partnerName").value;
@@ -1896,7 +1900,8 @@ function gettransferModeSelection(x) {
             document.getElementById("sftp_directory").readOnly = true;
         }
         if (x == 'put') {
-            $("#mail_button_sftp").css("display","none");
+             document.getElementById("saveButton").style.display = 'block';
+            $("#mail_button_sftp").css("display", "none");
             if (formAction == 'doAddProfile') {
                 document.getElementById("sftp_host_ip").value = "";
                 document.getElementById("sftp_remote_port").value = "";
@@ -1925,6 +1930,7 @@ function gettransferModeSelection(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         if (x == 'put') {
+             document.getElementById("saveButton").style.display = 'none';
             var transferMode = x;
             var RECEIVING_PROTOCOL;
             var protocol = document.getElementById("commnProtocol").value;
@@ -1982,6 +1988,7 @@ function gettransferModeSelection(x) {
             $('#http_protocol_mode').attr('disabled', true);
         }
         if (x == 'get') {
+              document.getElementById("saveButton").style.display = 'block';
             var http_recv;
             if (formAction == 'doAddProfile') {
                 document.getElementById("http_resp_time").value = "";
@@ -1991,22 +1998,22 @@ function gettransferModeSelection(x) {
                 document.getElementById("http_recv_protocol").value = "-1";
                 http_recv = document.getElementById("http_recv_protocol").value;
                 if (http_recv == 'HTTPS') {
-                   document.getElementById("http_ssl_req").checked = true;
+                    document.getElementById("http_ssl_req").checked = true;
                     document.getElementById("http_ssl").style.display = 'block';
-                }else{
-                     document.getElementById("http_ssl_req").checked = false;
+                } else {
+                    document.getElementById("http_ssl_req").checked = false;
                     document.getElementById("http_ssl").style.display = 'none';
                 }
             }
-             $('#http_recv_protocol').attr('disabled', false);
+            $('#http_recv_protocol').attr('disabled', false);
             http_recv = document.getElementById("http_recv_protocol").value;
             if (http_recv == 'HTTPS') {
                 document.getElementById("http_ssl_req").checked = true;
                 document.getElementById("http_ssl").style.display = 'block';
-            }else{
-                     document.getElementById("http_ssl_req").checked = false;
-                    document.getElementById("http_ssl").style.display = 'none';
-                }
+            } else {
+                document.getElementById("http_ssl_req").checked = false;
+                document.getElementById("http_ssl").style.display = 'none';
+            }
             document.getElementById("http_endpoint").readOnly = false;
             $('#http_protocol_mode').attr('disabled', false);
             document.getElementById("http_port").readOnly = false;
@@ -2023,6 +2030,7 @@ function gettransferModeSelection(x) {
         $("#smtpDiv").show();
         $("#as2Div").hide();
         $("#sslDiv").hide();
+        document.getElementById("saveButton").style.display = 'block';
         var transferMode = 'x';
         var protocol = document.getElementById("commnProtocol").value;
         document.getElementById("smtp_recv_protocol").value = "SMTP";
@@ -2041,6 +2049,7 @@ function gettransferModeSelection(x) {
         $("#as2Div").show();
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
+        document.getElementById("saveButton").style.display = 'block';
         var transferMode = "x";
         var protocol = document.getElementById("commnProtocol").value;
         document.getElementById("as2_myOrgName").readOnly = false;
@@ -2422,6 +2431,7 @@ function addPtnerLengthValidator(element) {
             k = 1;
             i = 15;
             validatenumber(element);
+            generalFormatPhone(element);
         }
         if (k == 1) {
             if (element.value.replace(/^\s+|\s+$/g, "").length <= 9) {
@@ -2564,7 +2574,7 @@ function rxHTTPchange(x) {
     if (x == 'HTTP' || x == '-1') {
         document.getElementById("http_ssl_req").checked = false;
         document.getElementById("http_ssl").style.display = 'none';
-         $("#sslDiv2").hide();
+        $("#sslDiv2").hide();
     } else if (x == 'HTTPS') {
         document.getElementById("http_ssl_req").checked = true;
         document.getElementById("http_ssl").style.display = 'block';

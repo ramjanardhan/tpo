@@ -299,7 +299,7 @@ function testConnectionProfile(i, CommId, protocol, pName) {
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerLoadText(req, testConnectionProfileResponse);
     var url = "../ajax/testProfile.action?communicationId=" + CommId + "&protocol=" + protocol + "&partnerName=" + pName;
-    alert(url);
+    //alert(url);
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);

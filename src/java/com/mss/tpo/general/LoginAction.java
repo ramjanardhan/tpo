@@ -46,6 +46,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_EMAIL, userInfoBean.getContactEmail());
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_PHONE_NO, userInfoBean.getPhoneNo());
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_USERID, userInfoBean.getUserId());
+                        httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_LOGIN_ACCESS, userInfoBean.getLoginAccess());
                         //httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_PARTNER_NAME,tpOnboardingBean.getPartnerName());
                         logUserAccess();
                         resultType = SUCCESS;
@@ -77,7 +78,6 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                 String remote = httpServletRequest.getRemoteAddr();
                 String agent = httpServletRequest.getHeader("User-Agent");
                 String location = httpServletRequest.getLocalAddr();
-
                 Timestamp accessedtime = DateUtility.getInstance().getCurrentDB2Timestamp();
                 Connection connection = null;
                 Statement stmt = null;

@@ -17,6 +17,7 @@ public class UserInfoBean {
     private String phoneNo;
     private String country;
     private String active;
+    private String loginAccess;
 
     /**
      * @return the loginId
@@ -141,6 +142,14 @@ public class UserInfoBean {
 
     public void setActive(String active) {
         this.active = active;
+    }
+
+    public String getLoginAccess() {
+        return loginAccess;
+    }
+
+    public void setLoginAccess(String loginAccess) {
+        this.loginAccess = loginAccess;
     }
 
 }

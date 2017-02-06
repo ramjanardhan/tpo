@@ -96,8 +96,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             String tpoRegisterQuery = "INSERT INTO MSCVP.TPO_USER(LOGINID, PASSWORD, PARTNER_ID, NAME, EMAIL, "
-                    + "PHONE_NO, COUNTRY, CREATED_BY, CREATED_TS,ROLE_ID,LNAME,CITY,STATE, ZIPCODE, ADDRESS,ACTIVE)"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "PHONE_NO, COUNTRY, CREATED_BY, CREATED_TS,ROLE_ID,LNAME,CITY,STATE, ZIPCODE, ADDRESS, ACTIVE, LOGIN_ACCESS)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(tpoRegisterQuery);
             preparedStatement.setString(1, userloginId);
             preparedStatement.setString(2, generatedPassword);
@@ -117,6 +117,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(14, tpAction.getRegzipCode());
             preparedStatement.setString(15, tpAction.getRegaddress());
             preparedStatement.setString(16, "A");
+            preparedStatement.setString(17, "N");
             istpoUserInserted = istpoUserInserted + preparedStatement.executeUpdate();
             if (istpoUserInserted > 0) {
                 responseString = "<font color='green'>Register successfully</font>";
@@ -198,8 +199,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             String tpoAddPartnerUserQuery = "INSERT INTO MSCVP.TPO_USER(LOGINID, PASSWORD, NAME, LNAME, EMAIL, ROLE_ID, CITY, "
-                    + "STATE, ZIPCODE, ADDRESS, PHONE_NO, COUNTRY, ACTIVE, PARTNER_ID, CREATED_BY, CREATED_TS )"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "STATE, ZIPCODE, ADDRESS, PHONE_NO, COUNTRY, ACTIVE, PARTNER_ID, CREATED_BY, CREATED_TS, LOGIN_ACCESS)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(tpoAddPartnerUserQuery);
             preparedStatement.setString(1, userLoginId);
             preparedStatement.setString(2, generatedPassword);
@@ -221,6 +222,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setInt(14, partnerId);
             preparedStatement.setString(15, loginId);
             preparedStatement.setTimestamp(16, curdate);
+            preparedStatement.setString(17, "N");
             istpoUserInserted = istpoUserInserted + preparedStatement.executeUpdate();
             if (istpoUserInserted > 0) {
                 responseString = "<font color='green'>Register successfully</font>";
@@ -400,7 +402,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(5, "N");
             preparedStatement.setString(6, tpAction.getCreated_by());
             preparedStatement.setTimestamp(7, curdate);
-            preparedStatement.setString(8, "INACTIVE");// , STATUS
+            preparedStatement.setString(8, "INACTIVE");
             isProfileCommnInserted = isProfileCommnInserted + preparedStatement.executeUpdate();
 
             String commnIdQuery = "SELECT max(ID) AS communicationId FROM MSCVP.TPO_COMMUNICATION WHERE PARTNER_ID =" + partnerId + " AND CREATED_BY='" + tpAction.getCreated_by() + "' ";
@@ -1386,16 +1388,17 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         String encryptedPwd = PasswordUtil.encryptPwd(pwd);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            String updateTpoMyPwdQuery = ("UPDATE MSCVP.TPO_USER SET PASSWORD = ?,MODIFIED_BY=?, MODIFIED_TS=? WHERE LOGINID =? AND ROLE_ID=?");
+            String updateTpoMyPwdQuery = ("UPDATE MSCVP.TPO_USER SET PASSWORD = ?,MODIFIED_BY=?, MODIFIED_TS=?, LOGIN_ACCESS=? WHERE LOGINID =? AND ROLE_ID=?");
             preparedStatement = connection.prepareStatement(updateTpoMyPwdQuery);
             preparedStatement.setString(1, encryptedPwd);
             preparedStatement.setString(2, loginId);
             preparedStatement.setTimestamp(3, curdate);
-            preparedStatement.setString(4, loginId);
-            preparedStatement.setInt(5, roleId);
+             preparedStatement.setString(4, "Y");
+            preparedStatement.setString(5, loginId);
+            preparedStatement.setInt(6, roleId);
             istpoMyPwdUpdated = istpoMyPwdUpdated + preparedStatement.executeUpdate();
             if (istpoMyPwdUpdated > 0) {
-                responseString = "<font color='green'>Your password updated successfully</font>";
+                responseString = "<font color='green'>Password updated successfully. Please logout and login again</font>";
             } else {
                 responseString = "<font color='red'>Please try again!</font>";
             }

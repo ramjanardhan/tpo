@@ -61,7 +61,7 @@
             <s:form action="searchProfiles" method="POST" enctype="multipart/form-data" name="searchTpOnboard" id="searchTpOnboard" theme="simple">
                 <div id="site_content" class="jumbotron">
                     <div class="container">
-                        <center><font style="background-color: #96d1f8;position: static;border: 0px solid white;">
+                        <center>
                             <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
                                     String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
@@ -69,7 +69,7 @@
                                     session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                                 }
                             %>
-                            </font></center>
+                            </center>
                         <div>
                             <div class="col-sm-3">
                                 <div class="form-group">

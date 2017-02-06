@@ -12,6 +12,7 @@
             <!-- <result name="tpoRegister">/tpOnboarding/tpoRegister.jsp</result>-->
             <result name="tpoPartnerAdd">/tpOnboarding/tpoPartnerAdd.jsp</result>
             <result name="tpoManageProfiles" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
+            <result name="tpoResetMyPwd" type="redirect">../tpOnboarding/tpoResetMyPwd.action</result>
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
@@ -116,7 +117,7 @@
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         <action name="doUpdateProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doUpdateProfile">
-            <result name="success" type="redirect">../tpOnboarding/tpoProfile.jsp</result>
+            <result name="success" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
             <result type="redirect" name="login">../tpOnboarding/tpoLogin.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>

@@ -21,17 +21,13 @@
             .input-group-addon i{
                 color:#2d8fc8;
             }
-
             .input-group-addon{
                 cursor: pointer;
             }
-
             #mail_button{
 
             }
-
         </style>
-
     </head>
     <s:if test="%{formAction == 'doAddProfile'}">
         <body onload="onLoad();" class="home">
@@ -487,7 +483,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                                <div class="col-sm-12" id="saveButton" style="display: none">
                             <div class="col-md-2 pull-right">  
                                 <s:if test="%{formAction == 'doAddProfile'}">
                                     <s:submit value="Save" cssClass="btn btn-info" tabindex="50" onclick="return checkProfile('add')"/>
@@ -519,9 +515,11 @@
         <script type="text/javascript">
                                             function onLoad() {
                                                 $("#profiles").addClass("active");
+                                                document.getElementById("commnProtocol").value = "-1";
                                             }
 
                                             function doOnLoad() {
+                                               // alert('hi');
                                                 $("#profiles").addClass("active");
                                                 $('#commnProtocol').trigger("change");
                                                 var commnProtocol = document.getElementById("commnProtocol").value;
@@ -540,6 +538,16 @@
                                                     if (http_ssl_req == "true") {
                                                         document.getElementById("http_ssl_req").onclick();
                                                     }
+                                                }
+                                                var formAction = document.getElementById("formAction").value;
+                                                if(formAction == 'doAddProfile'){
+                                                    document.getElementById("commnProtocol").disabled = false;
+                                                   // document.getElementById("transferMode").disabled = false;
+                                                   // document.doAddProfile.transferMode.disabled = false;
+                                                }else{
+                                                    document.getElementById("commnProtocol").disabled = true;
+                                                   // document.getElementById("transferMode").disabled = true;
+                                                   // document.doUpdateProfile.transferMode.disabled = true;
                                                 }
                                             }
 
