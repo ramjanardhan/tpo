@@ -59,8 +59,8 @@
                             <center>
                                 <%
                                     if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                        String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                        out.println(reqponseString);
+                                        String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                        out.println(responseString);
                                         session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                                     }
                                 %>
@@ -156,7 +156,7 @@
                                     <label>FTP&nbsp;Password  </label>
                                     <div class="input-group" style="width: 100%;">
                                         <s:password  cssClass="form-control" name="ftp_pwd" id="ftp_pwd" tabindex="10" value="%{ftp_pwd}" />
-                                        <a style="width:0%" id="mail_button"  data-toggle="myToolTip" data-placement="top" title="Get an Email"  onclick="getPwdEamil('FTP')" class="input-group-addon tip-top"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                        <a style="width:0%" id="mail_button"  data-toggle="myToolTip" data-placement="top" title="Get an Email"  onclick="getPwdEmail('FTP')" class="input-group-addon tip-top"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +225,7 @@
                                     <label>Remote&nbsp;Password</label>
                                     <div class="input-group" style="width: 100%;">
                                         <s:password cssClass="form-control" name="sftp_remote_pwd" id="sftp_remote_pwd" tabindex="19" value="%{sftp_remote_pwd}"/>
-                                        <a style="width:0%" id="mail_button_sftp"  data-toggle="myToolTip" data-placement="top" title="Get an Email"  onclick="getPwdEamil('SFTP')" class="input-group-addon tip-top"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                        <a style="width:0%" id="mail_button_sftp"  data-toggle="myToolTip" data-placement="top" title="Get an Email"  onclick="getPwdEmail('SFTP')" class="input-group-addon tip-top"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -539,16 +539,16 @@
                                                         document.getElementById("http_ssl_req").onclick();
                                                     }
                                                 }
-                                                var formAction = document.getElementById("formAction").value;
-                                                if(formAction == 'doAddProfile'){
-                                                    document.getElementById("commnProtocol").disabled = false;
-                                                   // document.getElementById("transferMode").disabled = false;
-                                                   // document.doAddProfile.transferMode.disabled = false;
-                                                }else{
-                                                    document.getElementById("commnProtocol").disabled = true;
-                                                   // document.getElementById("transferMode").disabled = true;
-                                                   // document.doUpdateProfile.transferMode.disabled = true;
-                                                }
+//                                                var formAction = document.getElementById("formAction").value;
+//                                                if(formAction == 'doAddProfile'){
+//                                                    document.getElementById("commnProtocol").disabled = false;
+//                                                   // document.getElementById("transferMode").disabled = false;
+//                                                   // document.doAddProfile.transferMode.disabled = false;
+//                                                }else{
+//                                                    document.getElementById("commnProtocol").disabled = true;
+//                                                   // document.getElementById("transferMode").disabled = true;
+//                                                   // document.doUpdateProfile.transferMode.disabled = true;
+//                                                }
                                             }
 
                                             $(document).ready(function () {

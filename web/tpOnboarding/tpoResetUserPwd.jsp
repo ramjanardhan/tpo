@@ -40,8 +40,8 @@
                     <center>
                         <%
                             if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                out.println(reqponseString);
+                                String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                out.println(responseString);
                                 session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                             }
                         %>

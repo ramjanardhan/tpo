@@ -19,7 +19,7 @@ public interface TpOnboardingService {
 
     public ArrayList<TpOnboardingBean> tpoSearchPartners(String loginId, int roleId, String flag, TpOnboardingAction tpAction);
 
-    public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int partnerId, String flag, TpOnboardingAction tpAction);
+    public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int roleId, int partnerId, String flag, TpOnboardingAction tpAction);
 
     public String addTpoProfile(int partnerId, String PartnerName, String loginId, String Email, TpOnboardingAction tpAction) throws ServiceLocatorException;
 

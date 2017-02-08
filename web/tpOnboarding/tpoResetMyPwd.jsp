@@ -40,8 +40,8 @@
                     <center>
                         <%
                             if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                out.println(reqponseString);
+                                String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                out.println(responseString);
                                 session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                             }
                         %>
@@ -60,7 +60,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Confirm Password<span class="text-danger">*</span></label>
-                                    <s:password cssClass="form-control" name="cnfPassword" id="cnfPassword" placeholder="Confirm Password" onchange="checkPwd();fieldLengthValidator(this);" tabindex="2"/>
+                                    <s:password cssClass="form-control" name="cnfPassword" id="cnfPassword" placeholder="Confirm Password" onchange="fieldLengthValidator(this);" tabindex="2"/>
                                 </div>
                             </div>
                         </div>

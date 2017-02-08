@@ -32,6 +32,10 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private static Logger logger = Logger.getLogger(LoginAction.class.getName());
     private HttpServletRequest httpServletRequest;
     private String resultType;
+    private String loginId;
+    private String password;
+    private int id;
+    private int roleId;
     private String partnerName;
     private String contactName;
     private String contactLastName;
@@ -106,8 +110,8 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String OB855Transaction;
     private String OB856Transaction;
     private String OB810Transaction;
-    private String loginId;
-    private String password;
+    private String formAction;
+    private int CommunicationId;
     private int regpartnerId;
     private String regpartnerName;
     private String regcontactName;
@@ -161,10 +165,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
     private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
     private ArrayList<TpOnboardingBean> tpoSearchUsersList;
-    private String formAction;
-    private int CommunicationId;
-    private int id;
-    private int roleId;
+    
 
     public String tpoSuccess() throws Exception {
         resultType = LOGIN;
@@ -392,8 +393,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchProfileList);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setCreated_by(loginId);
-                tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, partnerId, "initialFlag", this);
+                tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, roleId, partnerId, "initialFlag", this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchProfileList, tpoSearchProfileList);
                 resultType = SUCCESS;
             } catch (Exception e) {
@@ -510,8 +512,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchProfileList);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setCreated_by(loginId);
-                tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, partnerId, "searchFlag", this);
+                tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, roleId, partnerId, "searchFlag", this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchProfileList, tpoSearchProfileList);
                 resultType = SUCCESS;
             } catch (Exception e) {

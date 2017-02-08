@@ -48,8 +48,8 @@
                     <center>
                         <%
                             if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                out.println(reqponseString);
+                                String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                out.println(responseString);
                                 session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                             }
                         %>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-1 pull-right"> <s:submit value="Register" cssClass="btn btn-primary" onclick="return usrCreationValidation();" tabindex="10"/></div>
+                                <div class="col-md-1 pull-right"> <s:submit value="Save" cssClass="btn btn-primary" onclick="return usrCreationValidation();" tabindex="10"/></div>
                                 <div class="col-md-1 pull-right"> <input type="button" value="Reset" class="btn btn-primary" onclick="resetRegisterUser();" tabindex="11"/></div>
                             </div>
                         </div>

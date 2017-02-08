@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="col-sm-1 pull-right">
                                     <input type="button" class="btn btn-primary pull-right" tabindex="5" value="Reset" onClick="this.form.reset();"/>
-                            <!--    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetUserList()"/>-->
+                                    <!--    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetUserList()"/>-->
                                 </div>
                             </div>
                         </div>
@@ -80,8 +80,11 @@
         <div class="container">
             <div id="site_content" class="jumbotron">
                 <div class="container">
-                    <center><div id="resultMsg"></div></center>
-                        <s:if test="#session.tpoSearchUsersList != null"> 
+                    <center>
+                        <div id="resultMsg"></div>
+                        <div id="loadingImage"></div>
+                    </center>
+                    <s:if test="#session.tpoSearchUsersList != null"> 
                         <table id="usersTable" name="usersTable" class="table table-bordered table-hover">
                             <thead>
                             <th>NAME</th>
@@ -90,13 +93,12 @@
                             <th>CREATED_BY</th>
                             <th>CREATED_DATE</th>
                             <th>STATUS</th>
-<!--                            <th>ACTIVE</th>
-                            <th>INACTIVE</th>-->
+                            <th>ACTIVE</th>
+                            <th>INACTIVE</th>
                             </thead>
                             <tbody>
                                 <%
                                     int roleId = (Integer) session.getAttribute(AppConstants.TPO_ROLE_ID);
-                                    String loginId = session.getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                                     java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchUsersList);
                                     if (list.size() != 0) {
                                         TpOnboardingBean tpOnboardingBean;
@@ -140,12 +142,27 @@
                                             //out.println(tpOnboardingBean.getStatus());
                                         %>
                                     </td>
-<%--                                    <td align="center">
-                                         <a style="color: green;" href='javascript:getPartnerName("<%=loginId%>","<%=roleId%>","<%=id%>","<%=(tpOnboardingBean.getPartnerName())%>")' ><span class="glyphicon glyphicon-ok-sign"></span></a>
+                                    <td align="center">
+                                        <%
+                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("A")) {
+                                        %>
+                                        <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-ok-sign"></span></a>
+                                            <% } else {
+                                            %>  
+                                        <a style="color: green;" href='javascript:activateUser("<%=id%>","<%=(tpOnboardingBean.getContactName())%>")'><span class="glyphicon glyphicon-ok-sign"></span></a>
+                                            <%  }
+                                            %>
                                     </td>
                                     <td align="center">
-                                        <a style="color: green;" href='javascript:getPartnerName("<%=loginId%>","<%=roleId%>","<%=id%>","<%=(tpOnboardingBean.getPartnerName())%>")' ><span class="glyphicon glyphicon-ok-sign"></span></a>
-                                    </td>--%>
+                                        <%
+                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("I")) {
+                                        %>
+                                        <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                            <% } else {
+                                            %>  
+                                        <a style="color: red;" href='javascript:inActivateUser("<%=id%>","<%=(tpOnboardingBean.getContactName())%>")'><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                            <%  }
+                                            %>
                                     </td>
                                 </tr>
                                 <%
@@ -170,16 +187,16 @@
     <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
     <script>
-        $(function () {
-            $('#usersTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
+                                        $(function () {
+                                            $('#usersTable').DataTable({
+                                                "paging": true,
+                                                "lengthChange": true,
+                                                "searching": true,
+                                                "ordering": true,
+                                                "info": true,
+                                                "autoWidth": false
+                                            });
+                                        });
 
     </script>
 </html>

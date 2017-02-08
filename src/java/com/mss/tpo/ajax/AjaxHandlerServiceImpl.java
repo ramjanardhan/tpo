@@ -607,6 +607,94 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return responseString;
     }
 
+    public String doActivateUser(String loginId, String userId) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        String responseString = "";
+        int count = 0;
+        try {
+            queryString = "UPDATE MSCVP.TPO_USER SET ACTIVE =?, MODIFIED_BY =?, MODIFIED_TS =? WHERE ID=?";
+            connection = ConnectionProvider.getInstance().getConnection();
+            statement = connection.prepareStatement(queryString);
+            statement.setString(1, "A");
+            statement.setString(2, loginId);
+            statement.setTimestamp(3, DateUtility.getInstance().getCurrentDB2Timestamp());
+            statement.setInt(4, Integer.parseInt(userId));
+            count = statement.executeUpdate();
+            if (count > 0) {
+                responseString = "<font size='2' color='green'>User activated successfully</font>";
+                //  MailManager.tpoAcceptOrRejectPartner("rejectPartner", resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
+            } else {
+                responseString = "<font size='2' color='red'>User activation failed</font>";
+            }
+        } catch (Exception sqe) {
+            sqe.printStackTrace();
+            responseString = "<font size='2' color='red'>Please try again!</font>";
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException sqle) {
+            }
+        }
+        return responseString;
+    }
+
+    public String doInActivateUser(String loginId, String userId) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        String responseString = "";
+        int count = 0;
+        try {
+            queryString = "UPDATE MSCVP.TPO_USER SET ACTIVE =?, MODIFIED_BY =?, MODIFIED_TS =? WHERE ID=?";
+            connection = ConnectionProvider.getInstance().getConnection();
+            statement = connection.prepareStatement(queryString);
+            statement.setString(1, "I");
+            statement.setString(2, loginId);
+            statement.setTimestamp(3, DateUtility.getInstance().getCurrentDB2Timestamp());
+            statement.setInt(4, Integer.parseInt(userId));
+            count = statement.executeUpdate();
+            if (count > 0) {
+                responseString = "<font size='2' color='green'>User inactivated successfully</font>";
+                //MailManager.tpoAcceptOrRejectPartner("rejectPartner", resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
+            } else {
+                responseString = "<font size='2' color='red'>User inactivation failed</font>";
+            }
+        } catch (Exception sqe) {
+            sqe.printStackTrace();
+            responseString = "<font size='2' color='red'>Please try again!</font>";
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException sqle) {
+            }
+        }
+        return responseString;
+    }
+
     public String getTestConnecitonStatus(int communicationId, String protocol, String partnerName) {
         String response = "";
         String https_url = "http://192.168.1.179:12042/testConnection";
@@ -620,7 +708,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
             String s = jSONObject.toString();
 
-          //  byte[] out = "{\"communicationId\":\""+communicationId+"\",\"protocol\":\""+protocol+"\",\"partnerName\":\""+partnerName+"\"}".getBytes(StandardCharsets.UTF_8);
+            //  byte[] out = "{\"communicationId\":\""+communicationId+"\",\"protocol\":\""+protocol+"\",\"partnerName\":\""+partnerName+"\"}".getBytes(StandardCharsets.UTF_8);
             // int length = out.length;
             url = new URL(https_url);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();

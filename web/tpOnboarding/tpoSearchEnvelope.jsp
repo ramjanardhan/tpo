@@ -39,8 +39,8 @@
                         <center><font style="background-color: #96d1f8;position: static;border: 0px solid white;">
                             <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                    String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                    out.println(reqponseString);
+                                    String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                    out.println(responseString);
                                     session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                                 }
                             %>

@@ -40,14 +40,14 @@
                     <center>
                         <%
                             if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                out.println(reqponseString);
+                                String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                out.println(responseString);
                                 session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                             }
                         %>
                     </center>
                     <div id="tpoResultMessage"></div>
-                    <s:form action="doTpoResetPartnerPwd" method="post" cssClass="contact-form" name="doTpoResetUserPwd" id="doTpoResetUserPwd" theme="simple">
+                    <s:form action="doTpoResetPartnerPwd" method="post" cssClass="contact-form" name="doTpoResetPartnerPwd" id="doTpoResetPartnerPwd" theme="simple">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
@@ -75,7 +75,7 @@
             <!-- /Highlights -->
         </div>
         <footer class="footer">
-            <div class=" ">
+            <div>
                 <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>

@@ -58,7 +58,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Services</span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <s:if test="#session.tpoRoleId == 1">
-                                        <li id="userAdd"><a href="<s:url action="tpoUserAdd"/>">Add User</a></li>
+                                        <li id="userAdd"><a href="<s:url action="tpoUserAdd"/>">Create User</a></li>
                                             <%-- <li id="adminUsersList"><a href="<s:url action="tpoAdminUsersList"/>">Users List</a></li>--%>
                                         </s:if>
                                         <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2}'>
@@ -66,7 +66,7 @@
                                         </s:if>
                                         <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
                                         <li id="partnerInfo"><a href="<s:url action="tpoPartnerInfo"/>">Partner Info</a></li>
-                                        <li id="partnerUserAdd"><a href="<s:url action="tpoPartnerUserAdd"/>">Add User</a></li>
+                                        <li id="partnerUserAdd"><a href="<s:url action="tpoPartnerUserAdd"/>">Create User</a></li>
                                         </s:if>
                                         <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4}'>
                                         <li id="users"><a href="<s:url action="tpoUsersList"/>">Users List</a></li>
@@ -80,7 +80,7 @@
                 </s:if>
                 <s:else>
                     <ul class="nav navbar-nav pull-right menu_tab" style="border-style: solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; border-width: 4px 1px 0px; margin-right: 423px; border-radius: 2px;">
-                        <li id="resetMyPwd1"><a href="<s:url action="tpoResetMyPwd"/>"><i class="fa fa-user" aria-hidden="true"></i>Reset My Pwd</a></li>
+                        <li id="resetMyPwd1"><a href="<s:url action="tpoResetMyPwd"/>"><i class="fa fa-user" aria-hidden="true"></i>Reset Password</a></li>
                     </ul>
                 </s:else>
             </div>

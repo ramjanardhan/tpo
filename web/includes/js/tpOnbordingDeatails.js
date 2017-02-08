@@ -55,14 +55,14 @@ function checkPwd() {
     } else if (cnfPwd == "") {
         document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Please enter Confirm Password</font>";
         return false;
-    } else if (pwd == cnfPwd) {
-        document.getElementById('tpoResultMessage').innerHTML = "<font color=green>Passwords matched</font>";
-        return true;
     } else if (pwd != cnfPwd) {
         document.getElementById('tpoResultMessage').innerHTML = "<font color=red>Passwords not matched</font>";
         document.getElementById("regpassword").value = "";
         document.getElementById("cnfPassword").value = "";
         return false;
+    } else if (pwd == cnfPwd) {
+        document.getElementById('tpoResultMessage').innerHTML = "<font color=green>Passwords matched</font>";
+        return true;
     }
 }
 

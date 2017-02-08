@@ -53,7 +53,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     private int roleId;
     private String flag;
     private int communicationId;
-    private String ftp_method; 
+    private String ftp_method;
     private String ftp_conn_method;
     private String ftp_recv_protocol;
     private String ftp_resp_time;
@@ -70,9 +70,265 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     private String sftp_remote_pwd;
     private String sftp_method;
     private String sftp_directory;
-            
-                          
-    
+
+    public String forgotPassword() throws Exception {
+        try {
+            String response = ServiceLocator.getAjaxHandlerService().forgotPassword(getUserid(), getEmail());
+            httpServletResponse.setContentType("text/html");
+            if (response.equals("success")) {
+                responseString = "Password has been sent to your mail Id";
+                httpServletResponse.getWriter().write(responseString);
+            } else {
+                responseString = response;
+                httpServletResponse.getWriter().write(responseString);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String isExistedPartnerName() {
+        //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+        try {
+            responseString = ServiceLocator.getAjaxHandlerService().isExistedPartnerName(getName());
+            httpServletResponse.setContentType("text/xml");
+            httpServletResponse.getWriter().write(responseString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        // }
+        return null;
+    }
+
+    public String isExistedUserEmail() {
+        //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+        try {
+            responseString = ServiceLocator.getAjaxHandlerService().isExistedUserEmail(getEmail());
+            httpServletResponse.setContentType("text/xml");
+            httpServletResponse.getWriter().write(responseString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        // }
+        return null;
+    }
+
+    public String doAddTpoPartnerSelf() {
+        try {
+            setRoleId(0);
+            responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(), "self", this);
+            httpServletResponse.setContentType("text/xml");
+            httpServletResponse.getWriter().write(responseString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public String doAddTpoPartner() {
+        String loginId = (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
+        if (loginId != null) {
+            try {
+                responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(), loginId, this);
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String updateEnvelope() {
+        String loginId = (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
+        int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+        if (loginId != null) {
+            try {
+                responseString = ServiceLocator.getAjaxHandlerService().doUpdateEnvelope(getEnvelopeDetails(), loginId, partnerId, getTransaction(), getDirection());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String getProtocolDetails() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                responseString = ServiceLocator.getAjaxHandlerService().getProtocolDetails(getTransferMode(), getProtocol());
+                httpServletResponse.setContentType("text");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String sendPwdEmail() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                String email = DataSourceDataProvider.getInstance().getEmaiIdByloginId(loginId);
+                System.out.println("ajax action class loginId --" + loginId + " email -- " + email);
+                String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
+                responseString = MailManager.getModePwdEmail(loginId, email, partnerName, this);
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String isExistedAS2PartnerProfileName() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                responseString = ServiceLocator.getAjaxHandlerService().isExistedAS2PartnerProfileName(getName(), getPartnerName());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String acceptPartner() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().doAcceptPartner(loginId, getAssignTo(), getId());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String rejectPartner() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().doRejectPartner(loginId, getId());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String testconnectionstatus() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                System.out.println("action class");
+                responseString = ServiceLocator.getAjaxHandlerService().getTestConnecitonStatus(getCommunicationId(), getProtocol(), getPartnerName());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }
+
+    public String activateUser() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().doActivateUser(loginId, getUserid());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String inActivateUser() {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                responseString = ServiceLocator.getAjaxHandlerService().doInActivateUser(loginId, getUserid());
+                httpServletResponse.setContentType("text/xml");
+                httpServletResponse.getWriter().write(responseString);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String testConforHTTPandHTTPS() {
+
+        String connectionstatus = "";
+        try {
+            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforHTTPandHTTPS();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connectionstatus;
+    }
+
+    public String testConforAS2() {
+
+        String connectionstatus = "";
+        try {
+            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforAS2();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connectionstatus;
+    }
+
+    public String testConforFTPandFTPS() {
+
+        String connectionstatus = "";
+        try {
+            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforFTPandFTPS();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connectionstatus;
+    }
+
+    public String testConforSFTP() {
+
+        String connectionstatus = "";
+        try {
+            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforSFTP();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connectionstatus;
+    }
+
+    public String testConforSMTP() {
+
+        String connectionstatus = "";
+        try {
+            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforSMTP();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connectionstatus;
+    }
+
     public int getCommunicationId() {
         return communicationId;
     }
@@ -451,235 +707,4 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public void setSftp_directory(String sftp_directory) {
         this.sftp_directory = sftp_directory;
     }
-
-    public String forgotPassword() throws Exception {
-        try {
-            String response = ServiceLocator.getAjaxHandlerService().forgotPassword(getUserid(), getEmail());
-            httpServletResponse.setContentType("text/html");
-            if (response.equals("success")) {
-                responseString = "Password has been sent to your mail Id";
-                httpServletResponse.getWriter().write(responseString);
-            } else {
-                responseString = response;
-                httpServletResponse.getWriter().write(responseString);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String isExistedPartnerName() {
-        //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-        try {
-            responseString = ServiceLocator.getAjaxHandlerService().isExistedPartnerName(getName());
-            httpServletResponse.setContentType("text/xml");
-            httpServletResponse.getWriter().write(responseString);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        // }
-        return null;
-    }
-
-    public String isExistedUserEmail() {
-        //  if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-        try {
-            responseString = ServiceLocator.getAjaxHandlerService().isExistedUserEmail(getEmail());
-            httpServletResponse.setContentType("text/xml");
-            httpServletResponse.getWriter().write(responseString);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        // }
-        return null;
-    }
-
-    public String doAddTpoPartnerSelf() {
-        try {
-            setRoleId(0);
-            responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(), "self", this);
-            httpServletResponse.setContentType("text/xml");
-            httpServletResponse.getWriter().write(responseString);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public String doAddTpoPartner() {
-        String loginId = (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
-        if (loginId != null) {
-            try {
-                responseString = ServiceLocator.getAjaxHandlerService().doAddTpoPartner(getRoleId(), loginId, this);
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public String updateEnvelope() {
-        String loginId = (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
-        int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-        if (loginId != null) {
-            try {
-                responseString = ServiceLocator.getAjaxHandlerService().doUpdateEnvelope(getEnvelopeDetails(), loginId, partnerId, getTransaction(), getDirection());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public String getProtocolDetails() {
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                responseString = ServiceLocator.getAjaxHandlerService().getProtocolDetails(getTransferMode(), getProtocol());
-                httpServletResponse.setContentType("text");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-    
-    public String sendPwdEmail() {
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                String email = DataSourceDataProvider.getInstance().getEmaiIdByloginId(loginId);
-                System.out.println("ajax action class loginId --"+loginId+" email -- "+email);
-                String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
-                responseString = MailManager.getModePwdEmail(loginId,email,partnerName,this);
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public String isExistedAS2PartnerProfileName() {
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                responseString = ServiceLocator.getAjaxHandlerService().isExistedAS2PartnerProfileName(getName(), getPartnerName());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public String acceptPartner() {
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                responseString = ServiceLocator.getAjaxHandlerService().doAcceptPartner(loginId, getAssignTo(), getId());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public String rejectPartner() {
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                responseString = ServiceLocator.getAjaxHandlerService().doRejectPartner(loginId, getId());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public String testconnectionstatus() {
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                System.out.println("action class");
-                responseString = ServiceLocator.getAjaxHandlerService().getTestConnecitonStatus(getCommunicationId(), getProtocol(), getPartnerName());
-                httpServletResponse.setContentType("text/xml");
-                httpServletResponse.getWriter().write(responseString);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        return null;
-    }
-
-    public String testConforHTTPandHTTPS() {
-
-        String connectionstatus = "";
-        try {
-            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforHTTPandHTTPS();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connectionstatus;
-    }
-
-    public String testConforAS2() {
-
-        String connectionstatus = "";
-        try {
-            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforAS2();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connectionstatus;
-    }
-
-    public String testConforFTPandFTPS() {
-
-        String connectionstatus = "";
-        try {
-            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforFTPandFTPS();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connectionstatus;
-    }
-
-    public String testConforSFTP() {
-
-        String connectionstatus = "";
-        try {
-            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforSFTP();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connectionstatus;
-    }
-
-    public String testConforSMTP() {
-
-        String connectionstatus = "";
-        try {
-            connectionstatus = ServiceLocator.getAjaxHandlerService().getTestConforSMTP();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connectionstatus;
-    }
-
 }

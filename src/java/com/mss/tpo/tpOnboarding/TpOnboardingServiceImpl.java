@@ -334,7 +334,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return tpoSearchPartnersList;
     }
 
-    public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int partnerId, String flag, TpOnboardingAction tpAction) {
+    public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int roleId, int partnerId, String flag, TpOnboardingAction tpAction) {
         StringBuffer profileSearchQuery = new StringBuffer();
         profileSearchQuery.append("SELECT ID, PROTOCOL, TRANSFER_MODE, STATUS, CREATED_BY, CREATED_TS FROM MSCVP.TPO_COMMUNICATION WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {
@@ -350,7 +350,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
              }
              } */
         }
-        profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
+        if(roleId == 3){
+            profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " ");
+        }else{
+            profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
+        }
         profileSearchQuery.append(" order By CREATED_TS DESC");
         try {
             connection = ConnectionProvider.getInstance().getConnection();

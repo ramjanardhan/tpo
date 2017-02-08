@@ -316,7 +316,7 @@ function testConnectionProfileResponse(resText) {
     document.getElementById(x).innerHTML = result;
 }
 
-function getPwdEamil(protocol) {
+function getPwdEmail(protocol) {
     var ftpMethod = document.getElementById("ftp_method").value;
     var ftpConnMethod = document.getElementById("ftp_conn_method").value;
     var ftpRecvProtocol = document.getElementById("ftp_recv_protocol").value;
@@ -326,7 +326,7 @@ function getPwdEamil(protocol) {
     var ftpUserId = document.getElementById("ftp_userId").value;
     var ftpPwd = document.getElementById("ftp_pwd").value;
     var ftpDirectory = document.getElementById("ftp_directory").value;
-    
+
     var sftp_conn_method = document.getElementById("sftp_conn_method").value;
     var sftp_auth_method = document.getElementById("sftp_auth_method").value;
     var sftp_host_ip = document.getElementById("sftp_host_ip").value;
@@ -335,7 +335,7 @@ function getPwdEamil(protocol) {
     var sftp_remote_pwd = document.getElementById("sftp_remote_pwd").value;
     var sftp_method = document.getElementById("sftp_method").value;
     var sftp_directory = document.getElementById("sftp_directory").value;
-    
+
     var transferMode;
     if (document.addTpOnboard.transferMode.value) {
         transferMode = document.addTpOnboard.transferMode.value;
@@ -344,11 +344,11 @@ function getPwdEamil(protocol) {
         var req = getXMLHttpRequest();
         $("#loadingImageAjax").show();
         req.onreadystatechange = readyStateHandlerLoadText(req, isPwdSent);
-        if(protocol == "FTP"){
-        var url = "../ajax/sendPwdEmail.action?protocol="+protocol+"&transferMode"+transferMode+"&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
+        if (protocol == "FTP") {
+            var url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
         }
-        if(protocol == "SFTP"){
-        var url = "../ajax/sendPwdEmail.action?protocol="+protocol+"&transferMode"+transferMode+"&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
+        if (protocol == "SFTP") {
+            var url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
         }
         req.open("GET", url, "true");
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -362,4 +362,36 @@ function isPwdSent(resText) {
     }
 }
 
+function activateUser(id, name) {
+    var activate = confirm("Confirm to activate '" + name + "'");
+    if (activate == true) {
+        var req = getXMLHttpRequest();
+        req.onreadystatechange = readyStateHandlerLoadText(req, activateUserResponse);
+        var url = "../ajax/activateUser.action?userid=" + id;
+        req.open("GET", url, "true");
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.send(null);
+    }
+}
 
+function activateUserResponse(resText) {
+    window.location = "../tpOnboarding/tpoUsersList.action";
+    document.getElementById("resultMsg").innerHTML = resText;
+}
+
+function inActivateUser(id, name) {
+    var inactivate = confirm("Confirm to inactivate '" + name + "'");
+    if (inactivate == true) {
+        var req = getXMLHttpRequest();
+        req.onreadystatechange = readyStateHandlerLoadText(req, inActivateUserResponse);
+        var url = "../ajax/inActivateUser.action?userid=" + id;
+        req.open("GET", url, "true");
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.send(null);
+    }
+}
+
+function inActivateUserResponse(resText) {
+    window.location = "../tpOnboarding/tpoUsersList.action";
+    document.getElementById("resultMsg").innerHTML = resText;
+}

@@ -9,7 +9,7 @@
         </action>    
         
         <action name="login">
-            <result>/general/login.jsp</result>
+            <result>../general/login.jsp</result>
         </action> 
             
         <action name="tpoLoginCheck" class="com.mss.tpo.general.LoginAction" method="tpoLoginCheck">
