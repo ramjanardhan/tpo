@@ -142,11 +142,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         }
         return responseString;
     }
-    
+
     public ArrayList<TpOnboardingBean> tpoSearchUsers(String loginId, int roleId, String flag, TpOnboardingAction tpAction) {
         StringBuffer userSearchQuery = new StringBuffer();
         userSearchQuery.append("SELECT ID, LOGINID, PASSWORD, PARTNER_ID, NAME, EMAIL, PHONE_NO, COUNTRY, CREATED_BY "
-                    + ", CREATED_TS, ROLE_ID, LNAME, CITY,STATE, ZIPCODE, ADDRESS, ACTIVE FROM MSCVP.TPO_USER WHERE 1=1 ");
+                + ", CREATED_TS, ROLE_ID, LNAME, CITY,STATE, ZIPCODE, ADDRESS, ACTIVE FROM MSCVP.TPO_USER WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {
             if (tpAction.getContactName() != null && !"".equals(tpAction.getContactName().trim())) {
                 userSearchQuery.append(" AND lcase(NAME) like lcase('%" + (tpAction.getContactName()) + "%') ");
@@ -161,7 +161,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         if (roleId == 1 || roleId == 3 || roleId == 4) {
             userSearchQuery.append(" AND CREATED_BY='" + loginId + "' ");
         }
-        System.out.println("userSearchQuery>>"+userSearchQuery.toString());
+        System.out.println("userSearchQuery>>" + userSearchQuery.toString());
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -350,9 +350,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
              }
              } */
         }
-        if(roleId == 3){
+        if (roleId == 3) {
             profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " ");
-        }else{
+        } else {
             profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
         }
         profileSearchQuery.append(" order By CREATED_TS DESC");
@@ -829,7 +829,33 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
             String communicationQuery = "UPDATE MSCVP.TPO_COMMUNICATION SET TP_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ?, STATUS = ? WHERE ID=" + communicationId;
             preparedStatement = connection.prepareStatement(communicationQuery);
-            preparedStatement.setString(1, "N");
+            if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+                    if ((tpOnboardingAction.getUpload1() != null) || (tpOnboardingAction.getCertGroups() != null)) {
+                        preparedStatement.setString(1, "N");
+                    } else {
+                        preparedStatement.setString(1, "U");
+                    }
+            } else if (commonprotocol.equalsIgnoreCase("AS2")) {
+                if ((tpOnboardingAction.getUpload() != null) || (tpOnboardingAction.getUpload1() != null) || (tpOnboardingAction.getCertGroups() != null)) {
+                    preparedStatement.setString(1, "N");
+                } else {
+                    preparedStatement.setString(1, "U");
+                }
+            } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("get")) {
+                if ((tpOnboardingAction.getUpload1() != null) || (tpOnboardingAction.getCertGroups() != null)) {
+                    preparedStatement.setString(1, "N");
+                } else {
+                    preparedStatement.setString(1, "U");
+                }
+            } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+                if (tpOnboardingAction.getUpload() != null) {
+                    preparedStatement.setString(1, "N");
+                } else {
+                    preparedStatement.setString(1, "U");
+                }
+            } else if (commonprotocol.equalsIgnoreCase("SMTP")) {
+                preparedStatement.setString(1, "U");
+            }
             preparedStatement.setString(2, tpOnboardingAction.getCreated_by());
             preparedStatement.setTimestamp(3, curdate);
             preparedStatement.setString(4, "INACTIVE");
@@ -1045,7 +1071,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 preparedStatement = connection.prepareStatement(httpSslUpdateQuery.toString());
                                 preparedStatement.setString(1, tpOnboardingAction.getSsl_priority2());
                                 preparedStatement.setString(2, tpOnboardingAction.getSsl_cipher_stergth2());
-                               if (tpOnboardingAction.getUpload1()!=null) {
+                                if (tpOnboardingAction.getUpload1() != null) {
                                     preparedStatement.setString(3, "N");
 
                                 } else {
@@ -1099,7 +1125,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         sftpUpdateQuery.append(" ,UPL_YOUR_SSH_PUB_KEY = ?,SSH_CERT_DATA=? ");
                     }
                     sftpUpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
-
                     preparedStatement = connection.prepareStatement(sftpUpdateQuery.toString());
                     preparedStatement.setString(1, tpOnboardingAction.getSftp_conn_method());
                     preparedStatement.setString(2, tpOnboardingAction.getSftp_public_key());
@@ -1134,7 +1159,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(4, tpOnboardingAction.getSmtp_from_email());
                     preparedStatement.setString(5, tpOnboardingAction.getCreated_by());
                     preparedStatement.setTimestamp(6, curdate);
-                    preparedStatement.setString(7, "N");
+                    preparedStatement.setString(7, "U");
                     preparedStatement.setString(8, "INACTIVE");
                     isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
                 }
@@ -1397,7 +1422,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(1, encryptedPwd);
             preparedStatement.setString(2, loginId);
             preparedStatement.setTimestamp(3, curdate);
-             preparedStatement.setString(4, "Y");
+            preparedStatement.setString(4, "Y");
             preparedStatement.setString(5, loginId);
             preparedStatement.setInt(6, roleId);
             istpoMyPwdUpdated = istpoMyPwdUpdated + preparedStatement.executeUpdate();
