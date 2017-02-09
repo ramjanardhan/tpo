@@ -179,21 +179,21 @@
                                                     <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param>
                                                 </s:url>
                                                 <%
-                                                    String disableButton = "";
+                                                    String disable = "";
                                                     if ("put".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
                                                         if (("FTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) || ("SFTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol())))) {
-                                                            disableButton = "no";
+                                                            disable = "no";
                                                         }
                                                     } else if ("get".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
                                                         if ("HTTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) {
-                                                            disableButton = "no";
+                                                            disable = "no";
                                                         }
                                                     } else if (("AS2".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) || ("SMTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol())))) {
-                                                        disableButton = "no";
+                                                        disable = "no";
                                                     } else {
-                                                        disableButton = "yes";
+                                                        disable = "yes";
                                                     }
-                                                    if ("no".equalsIgnoreCase(disableButton)) {
+                                                    if ("no".equalsIgnoreCase(disable)) {
                                                 %>
                                                 <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></span></s:a>
                                                 <% } else {

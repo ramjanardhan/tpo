@@ -149,6 +149,7 @@ function protocolsSelect(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         $("#transferModeDiv").hide();
+        document.getElementById("saveButton").style.display = 'none';
     } else if (x == 'AS2') {
         document.getElementById('protocolmsg').innerHTML = "";
         $("#ftpDiv").hide();
@@ -159,6 +160,7 @@ function protocolsSelect(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         $("#transferModeDiv").hide();
+        document.getElementById("saveButton").style.display = 'block';
         //$('#transferMode').attr('disabled', true);
         //document.forms["addTpOnboard"]["transferMode"].value = 'get';
     } else if (x == 'SMTP') {
@@ -171,6 +173,7 @@ function protocolsSelect(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         $("#transferModeDiv").hide();
+        document.getElementById("saveButton").style.display = 'block';
         //$('#transferMode').attr('disabled', true);
         //document.forms["addTpOnboard"]["transferMode"].value = 'get';
     } else {
@@ -183,6 +186,7 @@ function protocolsSelect(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         $("#transferModeDiv").show();
+        document.getElementById("saveButton").style.display = 'none';
         //document.getElementById('transferMode').disabled =false;
     }
     document.getElementById("transferModeMsg").style.display = "none";
