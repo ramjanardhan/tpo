@@ -198,7 +198,7 @@
                                         <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                     </div>
                                     <div id="upload">
-                                        <s:file name="upload" id= "attachmentFileNameSftp" label="sftp_upload_public_key" tabindex="15"/>
+                                        <s:file name="upload2" id= "attachmentFileNameSftp" label="sftp_upload_public_key" tabindex="15"/>
                                     </div>
                                 </div>
                             </div>

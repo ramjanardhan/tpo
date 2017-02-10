@@ -155,6 +155,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
      */
     private String uploadFileName;
     private File upload1;
+    private File upload2;
     private String upload1ContentType;
     private String upload1FileName;
     private Map partnerNameList;
@@ -1840,4 +1841,13 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void setMyUsersList(Map myUsersList) {
         this.myUsersList = myUsersList;
     }
+
+    public File getUpload2() {
+        return upload2;
+    }
+
+    public void setUpload2(File upload2) {
+        this.upload2 = upload2;
+    }
+    
 }
