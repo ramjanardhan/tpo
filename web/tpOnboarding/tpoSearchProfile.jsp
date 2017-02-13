@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <label>Transfer Mode :</label>
                                     <div class="col-sm-12" style="padding: 0">
-                                        <s:radio name="transferMode" id="transferMode" list="{'get','put'}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
+                                        <s:radio name="transferMode" id="transferMode" list="{'pull','push'}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
                                         </div>
                                     </div>
                                 </div>

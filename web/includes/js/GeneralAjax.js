@@ -340,7 +340,7 @@ function getPwdEmail(protocol) {
     if (document.addTpOnboard.transferMode.value) {
         transferMode = document.addTpOnboard.transferMode.value;
     }
-    if (transferMode == "get") {
+    if (transferMode == "pull") {
         var req = getXMLHttpRequest();
         $("#loadingImageAjax").show();
         req.onreadystatechange = readyStateHandlerLoadText(req, isPwdSent);

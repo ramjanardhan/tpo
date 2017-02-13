@@ -415,7 +415,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 communicationId = resultSet.getInt("communicationId");
             }
 
-            if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("FTP") && tpAction.getTransferMode().equals("put")) {
+            if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("FTP") && tpAction.getTransferMode().equals("push")) {
                 String ftpInsertQuery = "INSERT INTO MSCVP.TPO_FTP(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, SSL_FLAG, FTP_METHOD, RECEIVING_PROTOCOL,"
                         + " FTP_HOST, FTP_PORT, FTP_USER_ID, FTP_PASSWORD, FTP_DIRECTORY, CONNECTION_METHOD, RESPONSE_TIMEOUT_SEC, TP_FLAG, CREATED_BY,"
                         + " CREATED_TS, STATUS) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -510,7 +510,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.executeUpdate();
 
                 }
-            } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("HTTP") && tpAction.getTransferMode().equals("get")) {
+            } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("HTTP") && tpAction.getTransferMode().equals("pull")) {
                 String httpInsertQuery = "INSERT INTO MSCVP.TPO_HTTP(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, SSL_FLAG, "
                         + "RECEIVING_PROTOCOL, HTTP_END_POINT, HTTP_MODE, RESPONSE_TIMEOUT_SEC, HTTP_PORT, TP_FLAG, "
                         + "CREATED_BY, CREATED_TS, URL, STATUS) "
@@ -552,7 +552,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     }
                     preparedStatement.executeUpdate();
                 }
-            } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("SFTP") && tpAction.getTransferMode().equals("put")) {
+            } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("SFTP") && tpAction.getTransferMode().equals("push")) {
                 String sftpInsertQuery = "INSERT INTO MSCVP.TPO_SFTP(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, "
                         + "CONN_METHOD, MY_SSH_PUB_KEY, UPL_YOUR_SSH_PUB_KEY, REMOTE_HOST_IP_ADD, REMOTE_USERID, "
                         + "METHOD, AUTH_METHOD, REMOTE_PORT, REMOTE_PWD, DIRECTORY, TP_FLAG, CREATED_BY, CREATED_TS, STATUS,SSH_CERT_DATA)"
@@ -665,11 +665,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         preparedStatement = connection.prepareStatement(sslprofileInfoQuery.toString());
                         resultSet = preparedStatement.executeQuery();
                         if (resultSet.next()) {
-                            if (transfermode.equalsIgnoreCase("get")) {
+                            if (transfermode.equalsIgnoreCase("pull")) {
                                 tpOnboardingAction.setSsl_priority(resultSet.getString("SSL_PRIORITY"));
                                 tpOnboardingAction.setSsl_cipher_stergth(resultSet.getString("CIPHER_STRENGTH"));
                                 //tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
-                            } else if (transfermode.equalsIgnoreCase("put")) {
+                            } else if (transfermode.equalsIgnoreCase("push")) {
                                 tpOnboardingAction.setSsl_priority2(resultSet.getString("SSL_PRIORITY"));
                                 tpOnboardingAction.setSsl_cipher_stergth2(resultSet.getString("CIPHER_STRENGTH"));
                                 tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
@@ -743,11 +743,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         preparedStatement = connection.prepareStatement(sslprofileInfoQuery.toString());
                         resultSet = preparedStatement.executeQuery();
                         if (resultSet.next()) {
-                            if (transfermode.equalsIgnoreCase("put")) {
+                            if (transfermode.equalsIgnoreCase("push")) {
                                 tpOnboardingAction.setSsl_priority(resultSet.getString("SSL_PRIORITY"));
                                 tpOnboardingAction.setSsl_cipher_stergth(resultSet.getString("CIPHER_STRENGTH"));
                                 //tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
-                            } else if (transfermode.equalsIgnoreCase("get")) {
+                            } else if (transfermode.equalsIgnoreCase("pull")) {
                                 tpOnboardingAction.setSsl_priority2(resultSet.getString("SSL_PRIORITY"));
                                 tpOnboardingAction.setSsl_cipher_stergth2(resultSet.getString("CIPHER_STRENGTH"));
                                 tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
@@ -829,7 +829,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
             String communicationQuery = "UPDATE MSCVP.TPO_COMMUNICATION SET TP_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ?, STATUS = ? WHERE ID=" + communicationId;
             preparedStatement = connection.prepareStatement(communicationQuery);
-            if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+            if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("push")) {
                 if (("true".equalsIgnoreCase(tpOnboardingAction.getFtp_ssl_req())) && (tpOnboardingAction.getUpload1() != null)) {
                     preparedStatement.setString(1, "N");
                 } else {
@@ -843,13 +843,13 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 } else {
                     preparedStatement.setString(1, "U");
                 }
-            } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("get")) {
+            } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("pull")) {
                 if ((tpOnboardingAction.getUpload1() != null) && (tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true"))){
                     preparedStatement.setString(1, "N");
                 } else {
                     preparedStatement.setString(1, "U");
                 }
-            } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+            } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("push")) {
                 if (tpOnboardingAction.getUpload2() != null) {
                     preparedStatement.setString(1, "N");
                 } else {
@@ -864,7 +864,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             isCommunicationUpdated = isCommunicationUpdated + preparedStatement.executeUpdate();
 
             if (isCommunicationUpdated > 0) {
-                if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+                if (commonprotocol.equalsIgnoreCase("FTP") && tpOnboardingAction.getTransferMode().equals("push")) {
                     String ftpUpdateQuery = "UPDATE MSCVP.TPO_FTP SET FTP_METHOD = ?, FTP_HOST = ?, FTP_PORT = ?, "
                             + "FTP_USER_ID = ?, FTP_PASSWORD = ?, FTP_DIRECTORY = ?, CONNECTION_METHOD = ?, RESPONSE_TIMEOUT_SEC = ?,"
                             + " SSL_FLAG = ?, TP_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ?, STATUS = ?,RECEIVING_PROTOCOL=? WHERE COMMUNICATION_ID=" + communicationId;
@@ -1048,7 +1048,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                             }
                         }
                     }
-                } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("get")) {
+                } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("pull")) {
                     String httpUpdateQuery = "UPDATE MSCVP.TPO_HTTP SET HTTP_END_POINT = ?,HTTP_MODE = ?,"
                             + "RESPONSE_TIMEOUT_SEC = ?,HTTP_PORT = ?,MODIFIED_BY = ?,MODIFIED_TS =?,SSL_FLAG=?, URL=? ,"
                             + "TP_FLAG = ?, STATUS = ?,RECEIVING_PROTOCOL=? WHERE COMMUNICATION_ID=" + communicationId;
@@ -1132,7 +1132,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                             }
                         }
                     }
-                } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("put")) {
+                } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("push")) {
 
                     StringBuffer sftpUpdateQuery = new StringBuffer();
                     sftpUpdateQuery.append("UPDATE MSCVP.TPO_SFTP SET CONN_METHOD = ?,MY_SSH_PUB_KEY = ?,REMOTE_HOST_IP_ADD = ?,REMOTE_USERID = ?");

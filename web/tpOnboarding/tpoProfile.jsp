@@ -93,7 +93,7 @@
                                 <div class="pull-left">   <label>Transfer&nbsp;Mode&nbsp;:</label></div> 
                                 <div class="pull-left">
                                     <input type="text" id="tempTransferMode" style="display:none"/>
-                                <s:radio name="transferMode" id="transferMode" list="{'get','put'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
+                                <s:radio name="transferMode" id="transferMode" list="{'pull','push'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
                                     <div class="tooltip"><i class="fa fa-question-circle-o"></i>
                                         <span class="tooltiptext">get&nbsp;:&nbsp;Partner&nbsp;Server <br>put&nbsp;:&nbsp;Your&nbsp;Server </span>
                                     </div>
