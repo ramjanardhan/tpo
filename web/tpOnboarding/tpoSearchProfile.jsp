@@ -180,11 +180,11 @@
                                                 </s:url>
                                                 <%
                                                     String disable = "";
-                                                    if ("put".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
+                                                    if ("push".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
                                                         if (("FTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) || ("SFTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol())))) {
                                                             disable = "no";
                                                         }
-                                                    } else if ("get".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
+                                                    } else if ("pull".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
                                                         if ("HTTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) {
                                                             disable = "no";
                                                         }
