@@ -850,7 +850,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(1, "U");
                 }
             } else if (commonprotocol.equalsIgnoreCase("SFTP") && tpOnboardingAction.getTransferMode().equals("push")) {
-                if (tpOnboardingAction.getUpload2() != null) {
+                if (tpOnboardingAction.getUpload() != null) {
                     preparedStatement.setString(1, "N");
                 } else {
                     preparedStatement.setString(1, "U");
@@ -1153,7 +1153,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(9, tpOnboardingAction.getSftp_directory());
                     preparedStatement.setString(10, tpOnboardingAction.getCreated_by());
                     preparedStatement.setTimestamp(11, curdate);
-                    if (tpOnboardingAction.getUpload2() != null) {
+                    if (tpOnboardingAction.getUpload() != null) {
                         preparedStatement.setString(12, "N");
 
                     } else {

@@ -95,7 +95,7 @@
                                     <input type="text" id="tempTransferMode" style="display:none"/>
                                 <s:radio name="transferMode" id="transferMode" list="{'pull','push'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
                                     <div class="tooltip"><i class="fa fa-question-circle-o"></i>
-                                        <span class="tooltiptext">get&nbsp;:&nbsp;Partner&nbsp;Server <br>put&nbsp;:&nbsp;Your&nbsp;Server </span>
+                                        <span class="tooltiptext">pull&nbsp;:&nbsp;Partner&nbsp;Server <br>push&nbsp;:&nbsp;Your&nbsp;Server </span>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                                         <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                     </div>
                                     <div id="upload">
-                                        <s:file name="upload2" id= "attachmentFileNameSftp" label="sftp_upload_public_key" tabindex="15"/>
+                                        <s:file name="upload" id= "attachmentFileNameSftp" label="sftp_upload_public_key" tabindex="15"/>
                                     </div>
                                 </div>
                             </div>
@@ -422,7 +422,7 @@
                                         <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="43" cssClass="form-control"/>
                                     </div>
                                 </div>
-                                <div class="col-sm-3" style="display: none">
+                                <div class="col-sm-3">
                                     <div class="" style="margin-top:30px">
                                         <label for="as2_ssl_req">
                                             SSL&nbsp;Required
