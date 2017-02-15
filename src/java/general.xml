@@ -4,10 +4,6 @@
 <struts>
     <package name="general" namespace="/general" extends="default">   
     
-        <action name="index">
-            <result>/index.jsp</result>
-        </action>    
-        
         <action name="login">
             <result>../general/login.jsp</result>
         </action> 
@@ -19,7 +15,7 @@
             <result type="redirect" name="login">login.action</result>
             <result name="error" type="redirect">../exception/exception.action</result> 
         </action>
-
+ 
         <action name="tpoLogout" class="com.mss.tpo.general.LoginAction" method="doLogout">
             <interceptor-ref name="crudStack" />
             <!-- <result type="redirect">./login.action</result>-->
