@@ -33,7 +33,7 @@
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div> 
-        <header id="head">
+        <header id=" ">
             <div class="container">
                 <h3><b>Users</b></h3>
             </div>
@@ -68,8 +68,8 @@
                                     <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4"/>
                                 </div>
                                 <div class="col-sm-1 pull-right">
-                                    <input type="button" class="btn btn-primary pull-right" tabindex="5" value="Reset" onClick="this.form.reset();"/>
-                                    <!--    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetUserList()"/>-->
+                                     <!--   <input type="button" class="btn btn-primary pull-right" tabindex="5" value="Reset" onClick="this.form.reset();"/>-->
+                                    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetUserList()"/>
                                 </div>
                             </div>
                         </div>

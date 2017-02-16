@@ -25,7 +25,7 @@
             <s:include value="../includes/template/header.jsp"/>
         </div>
         <!-- Header -->
-        <header id="head">
+        <header id="">
             <div class="container">
                 <h2 class="thin"><b>Trading Partner Information</b></h2>
             </div>
@@ -35,7 +35,7 @@
         <div class="container">
             <!-- <h3>Trading Partner</h3> -->		
             <!-- Highlights - jumbotron -->
-            <div id="site_content" class="jumbotron">
+            <div id="site_content" class="jumbotron" style="padding: 21px 27px">
                 <div class="container">
                     <center>
                         <%
@@ -51,7 +51,7 @@
                     <s:form action="" method="post" cssClass="contact-form"  name="tpoPartnerAdd" id="tpoPartnerAdd" theme="simple">
                         <s:hidden id="roleId" name="roleId" value="%{roleId}"/>
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group ajax_img">
                                     <label>Partner Name<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="addpartnerName" id="addpartnerName" value="%{addpartnerName}" placeholder="Partner Name" onchange="addPtnerLengthValidator(this);" onblur="isExistedPartnerName('admin');"  tabindex="1"/>
@@ -60,19 +60,19 @@
                                     <i id="loadingImageAjax" style="display: none;" class="fa fa-spinner"></i>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Contact Person First Name<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control"  name="contactPerson" id="contactPerson" value="%{contactPerson}" placeholder="First Name" onchange="addPtnerLengthValidator(this);"  tabindex="2"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Contact Person Last Name<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="contactPersonLN" id="contactPersonLN" value="%{contactPersonLN}" placeholder="Last Name" onchange="addPtnerLengthValidator(this);"  tabindex="3"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group ajax_img">
                                     <label>Contact Email<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" placeholder="Contact Email" value="%{contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('partnerAdd','admin');"  tabindex="4"/>
@@ -81,57 +81,57 @@
                                     <i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Phone Number<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control"  name="addphoneNo" id="addphoneNo" value="%{addphoneNo}" placeholder="Phone no." onchange="addPtnerLengthValidator(this);"  tabindex="5"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="addaddress1" id="addaddress1" value="%{addaddress1}" placeholder="Address" onchange="addPtnerLengthValidator(this);"  tabindex="6"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>City<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="addcity" id="addcity" value="%{addcity}" placeholder="City" onchange="addPtnerLengthValidator(this);"  tabindex="7"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="addstate" id="addstate" value="%{addstate}" placeholder="State" onchange="addPtnerLengthValidator(this);"  tabindex="8"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Country<span class="text-danger">*</span></label>
                                     <s:select cssClass="form-control" headerKey="-1" headerValue="--Select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="addcountry" id="addcountry" value="%{addcountry}"  tabindex="9"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Zip Code<span class="text-danger">*</span></label>
                                     <s:textfield cssClass="form-control" name="addzipCode" id="addzipCode" value="%{addzipCode}" placeholder="Zip Code" onchange="addPtnerLengthValidator(this);"  tabindex="10"/>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>URL/Link</label>
                                     <s:textfield cssClass="form-control" name="url" id="url" value="%{url}" placeholder="www.example.com" onchange="addPtnerLengthValidator(this);"  tabindex="11"/>
                                 </div>
                             </div>
                             <s:if test="#session.tpoRoleId == 1">
-                                <div class="col-sm-3">
+                                <div class="col-sm-4 col-md-3">
                                     <div class="form-group">
                                         <label>Assign To</label>
                                         <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="adminUsersList" name="adminUsersList" id="adminUsersList" value="%{adminUsersList}"  tabindex="12"/>
                                     </div>
                                 </div>
                             </s:if>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Description</label>
                                     <s:textarea cssClass="form-control" name="description" id="description" value="%{description}" onchange="addPtnerLengthValidator(this);"  tabindex="13"/>

@@ -26,7 +26,7 @@
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div>
-        <header id="head">
+        <header id=" ">
             <div class="container">
                 <h3 class="lableLeft1"><b>Edit&nbsp;Envelope</b></h3>   
             </div>

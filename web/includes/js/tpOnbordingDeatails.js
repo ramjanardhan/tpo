@@ -2585,3 +2585,9 @@ function rxHTTPchange(x) {
         $("#sslDiv2").show();
     }
 }
+
+function resetUserList(){
+    document.getElementById("contactName").value = "";
+    document.getElementById("country").value = "-1";
+    document.getElementById("status").value = "-1";  
+}

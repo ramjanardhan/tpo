@@ -33,7 +33,7 @@
             <s:include value="../includes/template/header.jsp"/>
         </div>
         <!-- Header -->
-        <header id="head">
+        <header id=" ">
             <div class="container">
                 <h2 class="thin"><b>User Creation</b></h2>
             </div>

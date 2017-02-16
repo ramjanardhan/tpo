@@ -33,7 +33,7 @@
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div> 
-        <header id="head">
+        <header id=" ">
             <div class="container">
                 <h3><b>Partners</b></h3>
             </div>

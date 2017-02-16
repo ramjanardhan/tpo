@@ -40,7 +40,7 @@
         </div>
         <!-- Header -->
         <!--  Header -->
-        <header id="head">
+        <header id=" ">
             <div class="container">
                 <h3><b>Trading Partner Information</b></h3>
             </div>

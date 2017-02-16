@@ -31,23 +31,24 @@
                 </ul>
             </div>
             <div class="row">
+               <div class="col-sm-6 col-sm-offset-4">
                 <s:if test='%{#session.tpoLoginAccess== "Y"}'>
                     <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
-                        <ul class="nav navbar-nav pull-right menu_tab" style="border-style: solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; border-width: 4px 1px 0px; margin-right: 423px; border-radius: 2px;">
+                         <ul class="nav navbar-nav menu_tab" style="">
                             <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2}'>
                                 <li id="partnerAdd"><a href="<s:url action="tpoPartnerAdd"/>"><i class="fa fa-briefcase" aria-hidden="true"></i>Add Partner</a></li>
                                 <li id="partnersList"><a href="<s:url action="tpoPartnersList"/>"><i class="fa fa-handshake-o" aria-hidden="true"></i>Partners List</a></li>
                                 </s:if> 
                                 <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
                                 <li class="dropdown" id="profiles">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profiles</span><b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user" aria-hidden="true"></i><span class="">Profiles</span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li id="manageProfiles"><a href="<s:url action="tpoManageProfiles"/>">Manage/Edit</a></li>
                                         <li id="addProfile"><a href="<s:url action="tpoAddProfile"/>">Add Profile</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" id="envelopes">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Envelopes</span><b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope" aria-hidden="true"></i><span class="">Envelopes</span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li id="manageEnvelopes"><a href="<s:url action="tpoManageEnvelopes"/>">Manage/Edit</a></li>
                                         <li id="addEnvelope"><a href="<s:url action="tpoAddEnvelope"/>">Add Envelope</a></li>
@@ -55,7 +56,7 @@
                                 </li>
                             </s:if>
                             <li class="dropdown" id="services">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Services</span><b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="">Services</span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <s:if test="#session.tpoRoleId == 1">
                                         <li id="userAdd"><a href="<s:url action="tpoUserAdd"/>">Create User</a></li>
@@ -78,6 +79,7 @@
                         </ul>
                     </s:if>
                 </s:if>
+            </div>
                 <s:else>
                     <ul class="nav navbar-nav pull-right menu_tab" style="border-style: solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; border-width: 4px 1px 0px; margin-right: 423px; border-radius: 2px;">
                         <li id="resetMyPwd1"><a href="<s:url action="tpoResetMyPwd"/>"><i class="fa fa-user" aria-hidden="true"></i>Reset Password</a></li>

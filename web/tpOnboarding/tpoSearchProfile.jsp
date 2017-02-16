@@ -24,6 +24,9 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
+        <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
+         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+          <link rel="stylesheet" href='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
         <script>
             function doOnLoad() {
                 $("#profiles").addClass("active");
@@ -45,13 +48,17 @@
             #transferModeput{
                 margin:5px;
             }
+            
+            .block_div{
+              overflow: hidden; 
+            }
         </style>
     </head>
     <body class="home" onload="doOnLoad()">
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div> 
-        <header id="head">
+        <header id="">
             <div class="container">
                 <h3><b>Profile Search</b></h3>
             </div>
@@ -59,8 +66,8 @@
         <div class="container">
             <div id="profileDeleteMsg"></div>
             <s:form action="searchProfiles" method="POST" enctype="multipart/form-data" name="searchTpOnboard" id="searchTpOnboard" theme="simple">
-                <div id="site_content" class="jumbotron">
-                    <div class="container">
+                <div id="site_content" class="jumbotron block_div">
+                    <div class="">
                         <center>
                             <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
@@ -91,7 +98,7 @@
                                     <s:select name="status" id="status" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'ACTIVE':'ACTIVE','INACTIVE':'INACTIVE','REJECTED':'REJECTED'}" tabindex="3" value="%{status}"  cssClass="form-control"/>         
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin:4% 0">
                                 <div class="col-sm-12">
                                     <div class="col-sm-1 pull-right">
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4" />
@@ -104,8 +111,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="site_content" class="jumbotron">
-                        <div class="container"> 
+                    <div id="site_content" class=" ">
+                        <div class=" "> 
                             <div id = "loadingImage"></div>
                             <s:if test="#session.tpoSearchProfileList != null"> 
                                 <table id="profiletable" class="table table-bordered table-hover">

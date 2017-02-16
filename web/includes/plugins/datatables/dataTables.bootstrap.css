@@ -1,3 +1,14 @@
+div.dataTables_wrapper > div.row > div,
+div.dataTables_length,
+div.dataTables_filter,
+div.dataTables_info,
+div.dataTables_paginate {
+    
+    overflow-x: auto;
+}
+
+
+
 div.dataTables_length label {
 	font-weight: normal;
 	text-align: left;
