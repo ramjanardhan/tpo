@@ -64,11 +64,11 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="col-sm-1 pull-right">
+                                <div class="col-md-1 pull-right">
                                     <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4"/>
                                 </div>
-                                <div class="col-sm-1 pull-right">
-                                    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
+                                <div class="col-sm-2 col-md-1 pull-right">
+                                    <input type="button" value="Reset" id="set_align" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
     <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
     <script>
-                                        $(function () {
+                                        $(function() {
                                             $('#partnersTable').DataTable({
                                                 "paging": true,
                                                 "lengthChange": true,
@@ -238,7 +238,7 @@
                                             });
                                         });
 
-                                        $("#acceptButton").click(function () {
+                                        $("#acceptButton").click(function() {
                                             $('#myModal').modal('show');
                                         });
 

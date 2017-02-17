@@ -69,7 +69,7 @@
                 <div class="navbar-header">
                     <!-- Button for smallest screens -->
                     <button type="button" class="navbar-toggle hidden-xs" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                    <a class="navbar-brand" href="index.html"><img src="http://www.miraclesoft.com/images/logo.png" alt="miraclesoft"></a>
+                    <a class="navbar-brand" href="www.miraclesoft.com"><img src="http://www.miraclesoft.com/images/logo.png" alt="miraclesoft"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <div class="row">
@@ -111,7 +111,7 @@
                     <div class="col-sm-4">
                         <div class="panel panel-default bx_shadow login_bx">
                             <div class="panel-body">
-                                <h3 class="thin text-center"><b>Sign in to your account</b></h3>
+                                <h3 class="thin text-center"><b>Sign in</b></h3>
                                 <center> 
                                     <%
                                         if (request.getAttribute(AppConstants.REQ_ERROR_INFO) != null) {
@@ -131,10 +131,10 @@
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-xs-8">
-                                            <a href="" data-toggle="modal" data-target="#myModal"  tabindex="4">I forgot my password</a>
+                                        <div class="col-xs-8 col-sm-7">
+                                            <a href="" data-toggle="modal" data-target="#myModal"  tabindex="4">Forgot password ?</a>
                                         </div><!-- /.col -->
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-4 col-sm-5">
                                             <!-- <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
                                             <s:submit value="Sign In" cssClass="btn btn-info btn-block btn-flat" tabindex="3"/>
                                         </div><!-- /.col -->
@@ -283,7 +283,8 @@
                     </div>
                     <div class="col-sm-12 register hidden-lg hidden-md hidden-sm">  
                         <!-- <img src="..includes/images/register.png" alt="miraclesoft" data-toggle="modal" data-target="#selfReg"/>-->
-                        For partner self registration   <img  alt="miraclesoft" data-toggle="modal" data-target="#selfReg" src='<%=path%>/includes/images/register.png'>
+                        For partner self registration   
+                        <a href="" data-toggle="modal" data-target="#selfReg"  tabindex="5"><img  alt="click here" src='<%=path%>/includes/images/register.png'></a>
                     </div>
                 </article>
                 <!-- /Article -->

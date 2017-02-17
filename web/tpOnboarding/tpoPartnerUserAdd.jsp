@@ -19,6 +19,14 @@
                 $("#services").addClass("active");
             }
         </script>
+
+        <style>
+            @media  (min-width: 992px) and (max-width: 1192px) {
+                #set_align1{
+                    margin: 0 -13px !important;
+                }
+            }
+        </style>
     </head>
     <body class="home" onload="doOnLoad()">
         <div>
@@ -110,7 +118,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-1 pull-right"> <s:submit value="Save" cssClass="btn btn-primary" onclick="return partnerUserAddValidation();" tabindex="10"/></div>
-                                <div class="col-md-1 pull-right"> <input type="button" value="Reset" class="btn btn-primary" onclick="resetPartnerUserAdd();" tabindex="11"/></div>
+                                <div class="col-sm-2 col-md-1 pull-right"> <input type="button" id="set_align1" value="Reset" class="btn btn-primary" onclick="resetPartnerUserAdd();" tabindex="11"/></div>
                             </div>
                         </div>
                     </s:form>

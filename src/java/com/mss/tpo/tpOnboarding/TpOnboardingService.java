@@ -42,6 +42,6 @@ public interface TpOnboardingService {
     public String doTpoResetUserPwd(String loginId, String contactName, String pwd) throws ServiceLocatorException;
 
     public String doTpoResetPartnerPwd(String loginId, String partnreName, String pwd) throws ServiceLocatorException;
-    
+
     public ArrayList<TpOnboardingBean> tpoSearchUsers(String loginId, int roleId, String flag, TpOnboardingAction tpAction);
 }

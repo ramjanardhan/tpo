@@ -1,3 +1,23 @@
+    @media only screen and (max-width: 465px) {
+                #Synchronous {
+                   word-wrap: break-word;
+                }
+                
+                 #site_content{
+                    padding: 3px 12px;
+                }
+            } 
+            
+               @media  (min-width: 992px) and (max-width: 1192px) {
+                  #set_align{
+                    margin: 0 16px !important;
+                  }
+            }
+
+
+
+
+
 .menu_tab{
     border-style: solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; border-width: 4px 1px 0px; border-radius: 2px;margin: 3px auto;   
 }

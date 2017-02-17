@@ -1,4 +1,4 @@
- <footer id="footer" class="top-space" style="width:100%;position:relative;top:70px">
+ <footer id="footer" class="top-space" style="width:100%;position:relative;top:133px">
             <div class="footer2">
                 <div class="container">
                     <div class="row">

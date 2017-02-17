@@ -25,8 +25,8 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
-         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
-          <link rel="stylesheet" href='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
+        <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+        <link rel="stylesheet" href='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
         <script>
             function doOnLoad() {
                 $("#profiles").addClass("active");
@@ -48,9 +48,26 @@
             #transferModeput{
                 margin:5px;
             }
-            
+
             .block_div{
-              overflow: hidden; 
+                overflow: hidden; 
+            }
+
+
+            @media only screen and (max-width: 465px) {
+                #Synchronous {
+                    word-wrap: break-word;
+                }
+
+                #site_content{
+                    padding: 3px 12px;
+                }
+            } 
+
+            @media  (min-width: 992px) and (max-width: 1192px) {
+                #set_align{
+                    margin: 0 16px;
+                }
             }
         </style>
     </head>
@@ -76,7 +93,7 @@
                                     session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                                 }
                             %>
-                            </center>
+                        </center>
                         <div>
                             <div class="col-sm-3">
                                 <div class="form-group">
@@ -100,12 +117,12 @@
                             </div>
                             <div class="row" style="margin:4% 0">
                                 <div class="col-sm-12">
-                                    <div class="col-sm-1 pull-right">
+                                    <div class="col-sm-2  col-md-1 pull-right">
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4" />
                                     </div>
                                     <div class="col-sm-1 pull-right">
                                         <%-- <s:submit  tabindex="5" cssClass="btn btn-primary pull-right"/> --%>
-                                        <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
+                                        <input type="button" value="Reset" id="set_align" tabindex="5" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                     </div>
                                 </div>
                             </div>
@@ -129,8 +146,9 @@
                                     </thead>
                                     <tbody>
                                         <%
-                                     int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
-                                      String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);                                            java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchProfileList);
+                                            int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
+                                            String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);
+                                            java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchProfileList);
                                             if (list.size() != 0) {
                                                 TpOnboardingBean tpOnboardingBean;
                                         %>
@@ -153,7 +171,7 @@
                                                     out.println(partnerName);
                                                 %>
                                             </td>
-                                           
+
                                             <td>
                                                 <%
                                                     out.println(tpOnboardingBean.getCreated_by());
@@ -166,21 +184,21 @@
                                             </td>
 
                                             <td align="center">   
-                                               
-                                                <s:hidden id = "iValue"/>
-                                                 <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(tpOnboardingBean.getId())%>","<%=(tpOnboardingBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-                                                </td>
-                                                
-                                                
-                                                <td>
-                                                    
-                                                    <div id = "<%=i%>">
-                                                        
-                                                    </div>
-                                                    
-                                                </td>
 
-                                                <td align="center">
+                                                <s:hidden id = "iValue"/>
+                                                <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(tpOnboardingBean.getId())%>","<%=(tpOnboardingBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                            </td>
+
+
+                                            <td>
+
+                                                <div id = "<%=i%>">
+
+                                                </div>
+
+                                            </td>
+
+                                            <td align="center">
                                                 <s:url var="myUrl" action="../tpOnboarding/tpogetProfile.action">
                                                     <s:param name="communicationId"><%=(tpOnboardingBean.getId())%></s:param>
                                                     <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param>
@@ -251,7 +269,7 @@
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>  
         <script>
-                                            $(function () {
+                                            $(function() {
                                                 $('#profiletable').DataTable({
                                                     "paging": true,
                                                     "lengthChange": true,

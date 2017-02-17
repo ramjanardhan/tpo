@@ -166,7 +166,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
     private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
     private ArrayList<TpOnboardingBean> tpoSearchUsersList;
-    
 
     public String tpoSuccess() throws Exception {
         resultType = LOGIN;
@@ -176,22 +175,21 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 String loginAccess = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ACCESS).toString();
-                System.out.println("loginAccess-->"+loginAccess);
                 setRoleId(roleId);
                 if (roleId == 1) {
                     setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
                 }
-                if("Y".equalsIgnoreCase(loginAccess)){
+                if ("Y".equalsIgnoreCase(loginAccess)) {
                     if ((roleId == 1) || (roleId == 2)) {
-                    //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId()); 
-                    resultType = "tpoPartnerAdd";
-                } else{
-                    int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);
-                    if ((IsExistedUserid != 0)) {
-                        setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
-                        resultType = "tpoManageProfiles";
+                        //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId()); 
+                        resultType = "tpoPartnerAdd";
+                    } else {
+                        int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);
+                        if ((IsExistedUserid != 0)) {
+                            setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
+                            resultType = "tpoManageProfiles";
+                        }
                     }
-                }
                 } else {
                     resultType = "tpoResetMyPwd";
                 }
@@ -232,7 +230,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         }
         return resultType;
     }
-    
+
     public String tpoUsersList() {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
@@ -394,7 +392,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchProfileList);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setCreated_by(loginId);
                 tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, roleId, partnerId, "initialFlag", this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchProfileList, tpoSearchProfileList);
@@ -448,7 +446,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                     map.put(FTPKeys[8], getFtp_directory());
                 } else if ("AS2".equals(this.getCommnProtocol())) {
                     map = new HashMap();
-                   
+
                     map.put(AS2Keys[0], getAs2_part_cert());
                     map.put(AS2Keys[1], getAs2_myOrgName());
                     map.put(AS2Keys[2], getAs2_partOrgName());
@@ -513,7 +511,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchProfileList);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setCreated_by(loginId);
                 tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, roleId, partnerId, "searchFlag", this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchProfileList, tpoSearchProfileList);
@@ -1849,5 +1847,5 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void setUpload2(File upload2) {
         this.upload2 = upload2;
     }
-    
+
 }

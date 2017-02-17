@@ -27,7 +27,7 @@ function getXMLHttpRequest() {
 }
 
 function readyStateHandlerText(req, responseTextHandler) {
-    return function () {
+    return function() {
         if (req.readyState == 4) {
             if (req.status == 200) {
                 (document.getElementById("loadingImage")).style.display = "none";
@@ -43,7 +43,7 @@ function readyStateHandlerText(req, responseTextHandler) {
 }
 
 function readyStateHandlerLoadText(req, responseTextHandler) {
-    return function () {
+    return function() {
         if (req.readyState == 4) {
             if (req.status == 200) {
                 (document.getElementById("loadingImage")).style.display = "none";

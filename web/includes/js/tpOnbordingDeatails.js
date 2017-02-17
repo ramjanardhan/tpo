@@ -456,11 +456,11 @@ function generalFormatPhone(element) {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please give atleast 10 charcters in phone number</font>";
         return false;
     } else {
-       // var pattern = /^\(\d{3}\)\-\d{3}\-\d{4}$/;
-              element.value=str.replace(/^(?:\(\d{3}\)|\d{3}-)\d{3}-\d{4}$/, "");
-       // element.value = str.replace(pattern, "");
+        // var pattern = /^\(\d{3}\)\-\d{3}\-\d{4}$/;
+        element.value = str.replace(/^(?:\(\d{3}\)|\d{3}-)\d{3}-\d{4}$/, "");
+        // element.value = str.replace(pattern, "");
         num = element.value;
-        var _return="";
+        var _return = "";
         if (num.length == 10) {
             var ini = num.substring(0, 3);
             _return += ini;
@@ -1737,7 +1737,7 @@ function gettransferModeSelection(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         if (x == 'pull') {
-              document.getElementById("saveButton").style.display = 'none';
+            document.getElementById("saveButton").style.display = 'none';
             $("#mail_button").css("display", "");
             var transferMode = x;
             var recvProtocol;
@@ -1746,7 +1746,7 @@ function gettransferModeSelection(x) {
             $.ajax({
                 url: '../ajax/getProtocolDetails.action?transferMode=' + transferMode + '&protocol=' + protocol,
                 context: document.body,
-                success: function (responseText) {
+                success: function(responseText) {
                     var json = $.parseJSON(responseText);
                     var ftpMethod = json["FTP_METHOD"];
                     var connMethod = json["CONNECTION_METHOD"];
@@ -1789,7 +1789,7 @@ function gettransferModeSelection(x) {
                         document.getElementById("ftp_ssl_req").checked = false;
                     }
                 },
-                error: function (e) {
+                error: function(e) {
                     document.getElementById("protocolmsg").style.display = 'none';
                     alert("error-->" + e);
                 }
@@ -1807,7 +1807,7 @@ function gettransferModeSelection(x) {
             $('#ssl_cipher_stergth').attr('disabled', true);
         }
         if (x == 'push') {
-              document.getElementById("saveButton").style.display = 'block';
+            document.getElementById("saveButton").style.display = 'block';
             $("#mail_button").css("display", "none");
             var ftp_recv;
             if (formAction == 'doAddProfile') {
@@ -1866,7 +1866,7 @@ function gettransferModeSelection(x) {
             $.ajax({
                 url: '../ajax/getProtocolDetails.action?transferMode=' + transferMode + '&protocol=' + protocol,
                 context: document.body,
-                success: function (responseText) {
+                success: function(responseText) {
                     var json = $.parseJSON(responseText);
                     var CONN_METHOD = json["CONN_METHOD"];
                     var AUTH_METHOD = json["AUTH_METHOD"];
@@ -1887,7 +1887,7 @@ function gettransferModeSelection(x) {
                     document.getElementById("sftp_method").value = METHOD;
                     document.getElementById("sftp_directory").value = DIRECTORY;
                 },
-                error: function (e) {
+                error: function(e) {
                     document.getElementById("protocolmsg").style.display = 'none';
                     alert("error-->" + e);
                 }
@@ -1904,7 +1904,7 @@ function gettransferModeSelection(x) {
             document.getElementById("sftp_directory").readOnly = true;
         }
         if (x == 'push') {
-             document.getElementById("saveButton").style.display = 'block';
+            document.getElementById("saveButton").style.display = 'block';
             $("#mail_button_sftp").css("display", "none");
             if (formAction == 'doAddProfile') {
                 document.getElementById("sftp_host_ip").value = "";
@@ -1934,7 +1934,7 @@ function gettransferModeSelection(x) {
         $("#sslDiv").hide();
         $("#sslDiv2").hide();
         if (x == 'push') {
-             document.getElementById("saveButton").style.display = 'none';
+            document.getElementById("saveButton").style.display = 'none';
             var transferMode = x;
             var RECEIVING_PROTOCOL;
             var protocol = document.getElementById("commnProtocol").value;
@@ -1942,7 +1942,7 @@ function gettransferModeSelection(x) {
             $.ajax({
                 url: '../ajax/getProtocolDetails.action?transferMode=' + transferMode + '&protocol=' + protocol,
                 context: document.body,
-                success: function (responseText) {
+                success: function(responseText) {
                     var json = $.parseJSON(responseText);
                     RECEIVING_PROTOCOL = json["RECEIVING_PROTOCOL"];
                     var RESPONSE_TIMEOUT_SEC = json["RESPONSE_TIMEOUT_SEC"];
@@ -1979,7 +1979,7 @@ function gettransferModeSelection(x) {
                         document.getElementById("http_ssl_req").checked = false;
                     }
                 },
-                error: function (e) {
+                error: function(e) {
                     document.getElementById("protocolmsg").style.display = 'none';
                     alert("error-->" + e);
                 }
@@ -1992,7 +1992,7 @@ function gettransferModeSelection(x) {
             $('#http_protocol_mode').attr('disabled', true);
         }
         if (x == 'pull') {
-              document.getElementById("saveButton").style.display = 'block';
+            document.getElementById("saveButton").style.display = 'block';
             var http_recv;
             if (formAction == 'doAddProfile') {
                 document.getElementById("http_resp_time").value = "";
@@ -2586,8 +2586,8 @@ function rxHTTPchange(x) {
     }
 }
 
-function resetUserList(){
+function resetUserList() {
     document.getElementById("contactName").value = "";
     document.getElementById("country").value = "-1";
-    document.getElementById("status").value = "-1";  
+    document.getElementById("status").value = "-1";
 }

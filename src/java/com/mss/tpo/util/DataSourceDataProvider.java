@@ -370,6 +370,7 @@ public class DataSourceDataProvider {
         }
         return CertificatePath;
     }
+
     public String getEmaiIdByloginId(String loginId) throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;

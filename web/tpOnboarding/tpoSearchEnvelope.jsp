@@ -35,7 +35,7 @@
         <div class="container">
             <s:form action="searchEnvelopes" method="POST" enctype="multipart/form-data" name="searchEnvelopes" id="searchEnvelopes" theme="simple">
                 <div id="site_content" class="jumbotron">
-                    <div class="container">
+                    <div class=" ">
                         <center><font style="background-color: #96d1f8;position: static;border: 0px solid white;">
                             <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
@@ -62,11 +62,11 @@
                         <div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-sm-1 pull-right">
+                                    <div class="col-md-1 pull-right">
                                         <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="3"/>
                                     </div>
-                                    <div class="col-sm-1 pull-right">
-                                        <input type="button" value="Reset" tabindex="4" class="btn btn-primary pull-right" onclick="resetValues();"/>
+                                    <div class="col-sm-2 col-md-1 pull-right">
+                                        <input type="button" value="Reset" id="set_align" tabindex="4" class="btn btn-primary pull-right" onclick="resetValues();"/>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
     <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
     <script>
-                                            $(function () {
+                                            $(function() {
                                                 $('#envelopetable').DataTable({
                                                     "paging": true,
                                                     "lengthChange": true,

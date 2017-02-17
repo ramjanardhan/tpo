@@ -27,6 +27,17 @@
             #mail_button{
 
             }
+
+
+            @media only screen and (max-width: 465px) {
+                #Synchronous {
+                    word-wrap: break-word;
+                }
+
+                #site_content{
+                    padding: 3px 12px;
+                }
+            }
         </style>
     </head>
     <s:if test="%{formAction == 'doAddProfile'}">
@@ -72,7 +83,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-1 pull-right"> 
                                             <s:url var="myUrl" action="../tpOnboarding/tpoManageProfiles.action"></s:url>
-                                            <s:a href='%{#myUrl}'><input type="button" style="color: #61eaf1;" value="<< Back to list" class="btn btn-primary"/></s:a> 
+                                            <s:a href='%{#myUrl}'><input type="button" style="color: #61eaf1;" value="Back to list" class="btn btn-primary"/></s:a> 
                                             <%--  <s:a href='%{#myUrl}' ><span class="glyphicon glyphicon-arrow-left"></span></s:a> --%>
                                         </div>
                                     </div>
@@ -81,7 +92,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <div id="tpoCommMsg"></div>
-                                    <h4 style="color: #2d8fc8;margin-left: -15px" class="heading_4">Communication Protocols</h4>
+                                    <h4 style="color: #2d8fc8;margin-left: -15px" class="heading_4">Communication Protocol</h4>
                                     <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="1" cssClass="form-control" onchange="protocolsSelect(this.value)"/>
                                     <s:hidden name="protocolValue" id="protocolValue"></s:hidden>
                                     </div>
@@ -338,11 +349,11 @@
                                         <input value="System Certificates" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-3">    
+                                <div class="col-sm-5 col-md-3">    
                                     <label>Download&nbsp;System&nbsp;Certificate </label>
                                     <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <label>Upload&nbsp;System&nbsp;Certificate </label>
                                     <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="34"/>  
                                 </div>
@@ -354,7 +365,7 @@
                                         <input value="Organization Profiles" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-6 gutter_hide form-group">
+                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
                                     <div class="col-sm-6">
                                         <label>My&nbsp;Organization</label>
                                         <s:textfield cssClass="form-control" name="as2_myOrgName" id="as2_myOrgName" tabindex="35" value="%{as2_myOrgName}" onkeyup="as2OrgProfileNames(this);" onblur="isExistedAS2PartnerProfileName();"/><img id="correctImg" style="display: none;" src="/<%=AppConstants.CONTEXT_PATH%>/includes/images/right.png" 
@@ -372,7 +383,7 @@
                                         <input value="Partner Profiles" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-6 gutter_hide form-group">
+                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
                                     <div class="col-sm-6"> 
                                         <label>My&nbsp;Partner&nbsp;Profile&nbsp;Name</label>
                                         <s:textfield cssClass="form-control" name="as2_myPartname" id="as2_myPartname" tabindex="37" value="%{as2_myPartname}"/>
@@ -390,7 +401,7 @@
                                         <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-6 gutter_hide form-group">
+                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
                                     <div class="col-sm-6"> 
                                         <label>My&nbsp;End&nbsp;Point</label>
                                         <s:textfield cssClass="form-control" name="as2_myEndPoint" id="as2_myEndPoint" tabindex="39" value="%{as2_myEndPoint}"/>
@@ -401,33 +412,47 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12">        
-                                <div class="col-sm-3 col-sm-offset-3">
-                                    <div class="form-group">
-                                        <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="41" cssClass="form-control"/>
+                            <div class="col-sm-12">  
+                                <div class="col-sm-3 gutter_hide">
+                                    <div class="threshold" style="display: none">
+                                        <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="42"  cssClass="form-control"/>
+                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
+                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="41" cssClass="form-control"/>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" id="Synchronous">
+                                            <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
+                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="42"  cssClass="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="col-sm-12">      
-                                <div class="col-sm-3 col-sm-offset-3">
-                                    <div class="form-group"> 
-                                        <label>Payload&nbsp;Send&nbsp;Mode</label>
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="43" cssClass="form-control"/>
+                            <div class="col-sm-12">  
+                                <div class="col-sm-3 gutter_hide">
+                                    <div class="threshold" style="display: none">
+                                        <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-3" >
-                                    <div class="" style="margin-top:30px">
-                                        <label for="as2_ssl_req">
-                                            SSL&nbsp;Required
-                                        </label>
-                                        <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="44" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
+                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
+                                    <div class="col-sm-6">
+                                        <div class="form-group"> 
+                                            <label>Payload&nbsp;Send&nbsp;Mode</label>
+                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="43" cssClass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" >
+                                        <div class="" style="margin-top:30px">
+                                            <label for="as2_ssl_req">
+                                                SSL&nbsp;Required
+                                            </label>
+                                            <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="44" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -453,7 +478,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group"> 
-                                    <label>CA&nbsp;Certificates&nbsp;(Certificate&nbsp;Groups):</label>
+                                    <label>CA&nbsp;Certificate:</label>
                                     <%--<s:textfield cssClass="button" name="ssl_sysStore" id="ssl_sysStore" tabindex="57" value="Download"/>--%>
                                     <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                 </div>
@@ -477,13 +502,13 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>CA&nbsp;Certificates&nbsp;(Certificate&nbsp;Groups):</label>
+                                    <label>CA&nbsp;Certificate:</label>
                                     <%--  <s:file name="certGroups" id="certGroups" label="certGroups" tabindex="58"/>--%>
                                     <s:file name="upload1" id= "attachmentFileName" label="certGroups" tabindex="49"/> 
                                 </div>
                             </div>
                         </div>
-                                <div class="col-sm-12" id="saveButton" style="display: none">
+                        <div class="col-sm-12" id="saveButton" style="display: none">
                             <div class="col-md-2 pull-right">  
                                 <s:if test="%{formAction == 'doAddProfile'}">
                                     <s:submit value="Save" cssClass="btn btn-info" tabindex="50" onclick="return checkProfile('add')"/>
@@ -492,7 +517,7 @@
                                     <s:submit value="Update" cssClass="btn btn-info" tabindex="50" onclick="return checkProfile('update')"/>
                                 </s:else>
                             </div>
-                            <div class="col-sm-1 pull-right">
+                            <div class="col-sm-2 col-md-1 pull-right">
                                 <s:reset   value="Reset" cssClass="btn btn-info" tabindex="51"/>
                             </div>
                         </div>
@@ -500,7 +525,7 @@
                 </div>
             </div>       
         </div>
-        <div class="row">
+        <div class=" " style="position:relative;bottom: 0;width:100%">
             <s:include value="../includes/template/footer.jsp"/>
         </div>
         <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
@@ -519,7 +544,7 @@
                                             }
 
                                             function doOnLoad() {
-                                               // alert('hi');
+                                                // alert('hi');
                                                 $("#profiles").addClass("active");
                                                 $('#commnProtocol').trigger("change");
                                                 var commnProtocol = document.getElementById("commnProtocol").value;
@@ -551,7 +576,7 @@
 //                                                }
                                             }
 
-                                            $(document).ready(function () {
+                                            $(document).ready(function() {
                                                 $('[data-toggle="myToolTip"]').tooltip();
 
                                                 $('button').tooltip();

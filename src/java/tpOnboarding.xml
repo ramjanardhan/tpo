@@ -37,7 +37,7 @@
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
-       <action name="searchUser" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchUser">
+        <action name="searchUser" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchUser">
             <result name="success">/tpOnboarding/tpoUsersList.jsp</result>
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 

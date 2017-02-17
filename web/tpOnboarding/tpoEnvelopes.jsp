@@ -39,18 +39,18 @@
             .threshold input{
                 width:197px;
             }
-     @media only screen and (max-width: 980px) {
-     .table-responsive {
-            width: 100%;
-            margin-bottom: 15px;
-            overflow-y: hidden;
-            overflow-x: scroll;
-            -ms-overflow-style: -ms-autohiding-scrollbar;
-            border: 1px solid #ddd;
-            -webkit-overflow-scrolling: touch;
-        }
-}       
-       
+            @media only screen and (max-width: 980px) {
+                .table-responsive {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    overflow-y: hidden;
+                    overflow-x: scroll;
+                    -ms-overflow-style: -ms-autohiding-scrollbar;
+                    border: 1px solid #ddd;
+                    -webkit-overflow-scrolling: touch;
+                }
+            }       
+
         </style>
     </head>
     <body onload="doOnLoad();" class="home">
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </div></div>
-                <div id="site_content" class="jumbotron">
+                <div id="site_content" class="jumbotron" style="overflow: hidden">
 
                     <div class=" ">
                         <%-- 850 Inbound   Start div--%>    
@@ -204,6 +204,11 @@
                                         </div>
 
 
+
+
+
+
+
                                         <div class="tp_sm3">
 
                                             <div class="threshold" style="position: relative;top:5px">
@@ -219,19 +224,20 @@
                                                 <s:textfield cssClass="form-control" name="fun850GroupIdIB" id="fun850GroupIdIB" value="%{fun850GroupIdIB}" tabindex="18" onchange="fieldLengthValidator850IB(this);"/>
                                             </div>
                                         </div>
-
-
-                                        <div class="tp_sm3">
-
-
-                                            <div class="threshold" style="position: relative;top:5px">
-                                                <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
-                                            </div>
-                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                             </div>
                                         </div>
+
+
+
+
+                                        <div class="tp_sm3">
+                                            <div class="threshold" style="position: relative;top:5px">
+                                                <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                            </div>
+                                        </div>
+
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res850AgecodeIB" id="res850AgecodeIB" placeholder="x" value="%{res850AgecodeIB}" tabindex="19" onchange="fieldLengthValidator850IB(this);"/>
@@ -1353,7 +1359,7 @@
                                                     <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                                 </div>
                                             </div></div>
-                                       <div class="tp_sm3">
+                                        <div class="tp_sm3">
                                             <div class="form-group">
 
                                                 <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isa810RecIdOB" id="isa810RecIdOB" value="%{isa810RecIdOB}" tabindex="102" cssClass="form-control"/>
@@ -1402,7 +1408,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                         
+
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="fun810GroupIdOB" id="fun810GroupIdOB" value="%{fun810GroupIdOB}" tabindex="108" onchange="fieldLengthValidator810OB(this);"/>
@@ -1417,7 +1423,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                         
+
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res810AgecodeOB" id="res810AgecodeOB" placeholder="x" value="%{res810AgecodeOB}" tabindex="109" onchange="fieldLengthValidator810OB(this);"/>
@@ -1432,7 +1438,7 @@
                                                 </div>
                                             </div>                                  
                                         </div> 
-                                       <div class="tp_sm3">
+                                        <div class="tp_sm3">
                                             <div class="form-group">
                                             </div>
                                         </div>
@@ -1444,14 +1450,14 @@
                                     </div>
 
                                     <div class="row">
-                                       <div class="tp_sm3">
+                                        <div class="tp_sm3">
                                             <div class="form-group">
                                                 <div class="threshold" style="position: relative;top:5px">
                                                     <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                                 </div>
                                             </div>
                                         </div>
-                                      
+
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="trans810IdcodeOB" id="trans810IdcodeOB" value="%{trans810IdcodeOB}" tabindex="111" onchange="fieldLengthValidator810OB(this);"/>
@@ -1463,13 +1469,14 @@
                         </div>
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
-                            <div class="col-sm-1 pull-right">
+                            <div class="col-md-1 pull-right">
                                 <s:submit   value="Save" cssClass="btn btn-primary pull-right" tabindex="112" onclick="return checkEnvelopes()"/>
                             </div>
-                            <div class="col-sm-1  pull-right">
+                            <div class="col-sm-2 col-md-1 pull-right">
                                 <s:reset   value="Reset" cssClass="btn btn-primary pull-right" tabindex="113"/>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </s:form>
@@ -1492,9 +1499,9 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-        $(function () {
+        $(function() {
             /*  Inbound function start*/
-            $("#ib850").click(function () {
+            $("#ib850").click(function() {
                 // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
                 // var protocol=document.getElementById("commnProtocol").value;
                 // if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1513,7 +1520,7 @@
                 //  document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
                 //   }
             });
-            $("#ib855").click(function () {
+            $("#ib855").click(function() {
                 // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
                 //  var protocol=document.getElementById("commnProtocol").value;
                 //  if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1531,7 +1538,7 @@
                 //   document.getElementById('divansferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
                 //  }
             });
-            $("#ib856").click(function () {
+            $("#ib856").click(function() {
                 //  var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
                 //  var protocol=document.getElementById("commnProtocol").value;
                 //  if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1550,7 +1557,7 @@
                 //   }
 
             });
-            $("#ib810").click(function () {
+            $("#ib810").click(function() {
                 // var divansferMode = document.forms["addTpOnboard"]["divansferMode"].value;
                 // var protocol=document.getElementById("commnProtocol").value;
                 // if((divansferMode == 'pull') || (divansferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1569,7 +1576,7 @@
                 // }
             });
             /*  Outbound function Start*/
-            $("#ob850").click(function () {
+            $("#ob850").click(function() {
                 //   var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
                 //   var protocol=document.getElementById("commnProtocol").value;
                 //   if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1587,7 +1594,7 @@
                 //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
                 // }
             });
-            $("#ob855").click(function () {
+            $("#ob855").click(function() {
                 //  var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
                 //  var protocol=document.getElementById("commnProtocol").value;
                 // if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1605,7 +1612,7 @@
                 //     document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
                 //  }
             });
-            $("#ob856").click(function () {
+            $("#ob856").click(function() {
                 // var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
                 //   var protocol=document.getElementById("commnProtocol").value;
                 // if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){
@@ -1623,7 +1630,7 @@
                 //  document.getElementById('transferModeMsg').innerHTML = "<font color=red>Please select Transfer Mode.</font>";
                 // }
             });
-            $("#ob810").click(function () {
+            $("#ob810").click(function() {
                 //    var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
                 //   var protocol=document.getElementById("commnProtocol").value;
                 //  if((transferMode == 'pull') || (transferMode == 'push') || (protocol == 'AS2') || (protocol == 'SMTP')){

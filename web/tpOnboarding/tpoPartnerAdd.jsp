@@ -134,7 +134,7 @@
                             <div class="col-sm-4 col-md-3">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <s:textarea cssClass="form-control" name="description" id="description" value="%{description}" onchange="addPtnerLengthValidator(this);"  tabindex="13"/>
+                                    <s:textarea cssClass="form-control" headerKey="-1" headerValue="--select--" name="description" id="description" value="%{description}" onchange="addPtnerLengthValidator(this);"  tabindex="13"/>
                                 </div>
                             </div>
                         </div>

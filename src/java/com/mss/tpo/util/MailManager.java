@@ -1283,7 +1283,6 @@ public class MailManager {
             Map ptotoMap = mp;
             Collection<String> keys = ptotoMap.keySet();
             Collection<String> vals = ptotoMap.values();
-            System.out.println("keys.size() " + keys.size() + " vals.size()" + vals.size());
             String[] key = keys.toArray(new String[keys.size()]);
             String[] val = vals.toArray(new String[vals.size()]);
             int i = 0;
@@ -1927,7 +1926,6 @@ public class MailManager {
         /**
          * The to is used for storing the user mail id to send details.
          */
-        System.out.println("regContactName " + regContactName + " regPartName " + regPartName + " email " + email + " loginId " + loginId + " password " + password);
         String to = email;
         /**
          * The from is used for storing the from address.
@@ -4281,7 +4279,6 @@ public class MailManager {
         /**
          * The to is used for storing the user mail id to send details.
          */
-        System.out.println("regContactName " + regContactName + " regPartName " + regPartName + " email " + email + " loginId " + loginId + " password " + password);
         String to = email;
         /**
          * The from is used for storing the from address.
@@ -4887,7 +4884,7 @@ public class MailManager {
          * The to is used for storing the user mail id to send details.
          */
         String protocol = ajaxHandlerAction.getProtocol();
-        String result ="";
+        String result = "";
         String to = email;
         /**
          * The from is used for storing the from address.
@@ -5232,33 +5229,33 @@ public class MailManager {
             htmlText.append("<td align='justify' style='padding: 5px 0 5px 0; border-top: 1px #2368a0; border-bottom: 1px #2368a0; font-size: 14px; line-height: 25px; font-family: Open Sans; color: #232527;' class='padding-copy'>");
             htmlText.append("<b style='font-size: 14px; color: #ef4048;'>");
             htmlText.append("<p><b> Server Details along with accessing credentials of Get Transfer mode on your request. You can use these following credentials. </b><br>");
-            
+
             htmlText.append("Partner Name : <b>" + partnerName + "</b><br><br>");
             htmlText.append("Protocol : <b>" + protocol + "</b><br><br>");
 //          htmlText.append("Transfer Mode : <b>" + ajaxHandlerAction.getTransferMode() + "</b><br>");
-            
-            if(protocol.equalsIgnoreCase("FTP")){
-            htmlText.append("FTP METHOD : <b>" + ajaxHandlerAction.getFtp_method() + "</b><br>");
-            htmlText.append("Connection Method : <b>" + ajaxHandlerAction.getFtp_conn_method() + "</b><br>");
-            htmlText.append("Receiving Protocol : <b>" + ajaxHandlerAction.getFtp_recv_protocol() + "</b><br>");
-            htmlText.append("Response Time Out : <b>" + ajaxHandlerAction.getFtp_resp_time() + "</b><br>");
-            htmlText.append("FTP Host : <b>" + ajaxHandlerAction.getFtp_host() + "</b><br>");
-            htmlText.append("FTP Port : <b>" + ajaxHandlerAction.getFtp_port() + "</b><br>");
-            htmlText.append("FTP User ID : <b>" + ajaxHandlerAction.getFtp_userId() + "</b><br>");
-            htmlText.append("FTP Password : <b>" + ajaxHandlerAction.getFtp_pwd() + "</b><br>");
-            htmlText.append("FTP Directory : <b>" + ajaxHandlerAction.getFtp_directory() + "</b><br><br>");
+
+            if (protocol.equalsIgnoreCase("FTP")) {
+                htmlText.append("FTP METHOD : <b>" + ajaxHandlerAction.getFtp_method() + "</b><br>");
+                htmlText.append("Connection Method : <b>" + ajaxHandlerAction.getFtp_conn_method() + "</b><br>");
+                htmlText.append("Receiving Protocol : <b>" + ajaxHandlerAction.getFtp_recv_protocol() + "</b><br>");
+                htmlText.append("Response Time Out : <b>" + ajaxHandlerAction.getFtp_resp_time() + "</b><br>");
+                htmlText.append("FTP Host : <b>" + ajaxHandlerAction.getFtp_host() + "</b><br>");
+                htmlText.append("FTP Port : <b>" + ajaxHandlerAction.getFtp_port() + "</b><br>");
+                htmlText.append("FTP User ID : <b>" + ajaxHandlerAction.getFtp_userId() + "</b><br>");
+                htmlText.append("FTP Password : <b>" + ajaxHandlerAction.getFtp_pwd() + "</b><br>");
+                htmlText.append("FTP Directory : <b>" + ajaxHandlerAction.getFtp_directory() + "</b><br><br>");
             }
-            if(protocol.equalsIgnoreCase("SFTP")){
-            htmlText.append("Connection Type : <b>" + ajaxHandlerAction.getSftp_conn_method()+ "</b><br>");
-            htmlText.append("Authentication Type : <b>" + ajaxHandlerAction.getSftp_auth_method()+ "</b><br>");
-            htmlText.append("Remote Host IP Address : <b>" + ajaxHandlerAction.getSftp_host_ip()+ "</b><br>");
-            htmlText.append("Remote Port : <b>" + ajaxHandlerAction.getSftp_remote_port()+ "</b><br>");
-            htmlText.append("Remote UserId : <b>" + ajaxHandlerAction.getSftp_remote_userId()+ "</b><br>");
-            htmlText.append("Remote Password : <b>" + ajaxHandlerAction.getSftp_remote_pwd()+ "</b><br>");
-            htmlText.append("SFTP Method Type : <b>" + ajaxHandlerAction.getSftp_method()+ "</b><br>");
-            htmlText.append("Directory : <b>" + ajaxHandlerAction.getSftp_directory()+ "</b><br>");
+            if (protocol.equalsIgnoreCase("SFTP")) {
+                htmlText.append("Connection Type : <b>" + ajaxHandlerAction.getSftp_conn_method() + "</b><br>");
+                htmlText.append("Authentication Type : <b>" + ajaxHandlerAction.getSftp_auth_method() + "</b><br>");
+                htmlText.append("Remote Host IP Address : <b>" + ajaxHandlerAction.getSftp_host_ip() + "</b><br>");
+                htmlText.append("Remote Port : <b>" + ajaxHandlerAction.getSftp_remote_port() + "</b><br>");
+                htmlText.append("Remote UserId : <b>" + ajaxHandlerAction.getSftp_remote_userId() + "</b><br>");
+                htmlText.append("Remote Password : <b>" + ajaxHandlerAction.getSftp_remote_pwd() + "</b><br>");
+                htmlText.append("SFTP Method Type : <b>" + ajaxHandlerAction.getSftp_method() + "</b><br>");
+                htmlText.append("Directory : <b>" + ajaxHandlerAction.getSftp_directory() + "</b><br>");
             }
-            
+
             htmlText.append("<br>");
             htmlText.append("</td>");
             htmlText.append("</tr>");

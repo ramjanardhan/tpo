@@ -161,7 +161,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         if (roleId == 1 || roleId == 3 || roleId == 4) {
             userSearchQuery.append(" AND CREATED_BY='" + loginId + "' ");
         }
-        System.out.println("userSearchQuery>>" + userSearchQuery.toString());
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
@@ -844,7 +843,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(1, "U");
                 }
             } else if (commonprotocol.equalsIgnoreCase("HTTP") && tpOnboardingAction.getTransferMode().equals("pull")) {
-                if ((tpOnboardingAction.getUpload1() != null) && (tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true"))){
+                if ((tpOnboardingAction.getUpload1() != null) && (tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true"))) {
                     preparedStatement.setString(1, "N");
                 } else {
                     preparedStatement.setString(1, "U");
@@ -958,7 +957,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         as2UpdateQuery.append(",UPL_YOUR_SYS_CERT=?,SYS_CERT_DATA=? ");
                     }
                     as2UpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
-                    System.out.println("certificate is " + tpOnboardingAction.getAs2_part_cert());
                     preparedStatement = connection.prepareStatement(as2UpdateQuery.toString());
                     preparedStatement.setString(1, tpOnboardingAction.getAs2_myOrgName());
                     preparedStatement.setString(2, tpOnboardingAction.getAs2_partOrgName());
@@ -1061,7 +1059,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setTimestamp(6, curdate);
                     preparedStatement.setString(7, tpOnboardingAction.getHttp_ssl_req());
                     preparedStatement.setString(8, tpOnboardingAction.getHttp_url());
-                    if ((tpOnboardingAction.getUpload1() != null) && (tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true"))){
+                    if ((tpOnboardingAction.getUpload1() != null) && (tpOnboardingAction.getHttp_ssl_req().equalsIgnoreCase("true"))) {
                         preparedStatement.setString(9, "N");
                     } else {
                         preparedStatement.setString(9, "U");

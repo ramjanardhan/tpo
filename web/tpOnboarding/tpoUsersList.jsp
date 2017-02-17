@@ -21,6 +21,22 @@
             a, a label {
                 cursor: hand;
             }
+
+            @media only screen and (max-width: 465px) {
+                #Synchronous {
+                    word-wrap: break-word;
+                }
+
+                #site_content{
+                    padding: 3px 12px;
+                }
+            } 
+
+            @media  (min-width: 992px) and (max-width: 1192px) {
+                #set_align{
+                    margin: 0 16px !important;
+                }
+            }
         </style>
         <script>
             function doOnLoad()
@@ -64,12 +80,12 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="col-sm-1 pull-right">
+                                <div class="col-sm-2  col-md-1 pull-right">
                                     <s:submit value="Search" cssClass="btn btn-primary pull-right" tabindex="4"/>
                                 </div>
                                 <div class="col-sm-1 pull-right">
-                                     <!--   <input type="button" class="btn btn-primary pull-right" tabindex="5" value="Reset" onClick="this.form.reset();"/>-->
-                                    <input type="button" value="Reset" tabindex="5" class="btn btn-primary pull-right" onclick="resetUserList()"/>
+                                    <!--   <input type="button" class="btn btn-primary pull-right" tabindex="5" value="Reset" onClick="this.form.reset();"/>-->
+                                    <input type="button" value="Reset" id="set_align" tabindex="5" class="btn btn-primary pull-right" onclick="resetUserList()"/>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +203,7 @@
     <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
     <script>
-                                        $(function () {
+                                        $(function() {
                                             $('#usersTable').DataTable({
                                                 "paging": true,
                                                 "lengthChange": true,

@@ -173,7 +173,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
             try {
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 String email = DataSourceDataProvider.getInstance().getEmaiIdByloginId(loginId);
-                System.out.println("ajax action class loginId --" + loginId + " email -- " + email);
                 String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
                 responseString = MailManager.getModePwdEmail(loginId, email, partnerName, this);
                 httpServletResponse.setContentType("text/xml");
@@ -229,7 +228,6 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String testconnectionstatus() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                System.out.println("action class");
                 responseString = ServiceLocator.getAjaxHandlerService().getTestConnecitonStatus(getCommunicationId(), getProtocol(), getPartnerName());
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
