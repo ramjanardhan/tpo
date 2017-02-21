@@ -139,20 +139,8 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String ssl_priority2;
     private String ssl_cipher_stergth2;
     private String certGroups;
-    private List<TpOnboardingBean> tpoSearchProfileList;
-    /**
-     * The upload is used for storing the upload of the tblCrmAttachments.
-     */
     private File upload;
-    /**
-     * The uploadContentType is used for storing the uploadcontenttype of the
-     * tblCrmAttachments.
-     */
     private String uploadContentType;
-    /**
-     * The uploadFileName is used for storing the uploadfilename of the
-     * tblCrmAttachments.
-     */
     private String uploadFileName;
     private File upload1;
     private File upload2;
@@ -163,6 +151,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private Map myUsersList;
     private String transaction;
     private String direction;
+    private List<TpOnboardingBean> tpoSearchProfileList;
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
     private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
     private ArrayList<TpOnboardingBean> tpoSearchUsersList;
