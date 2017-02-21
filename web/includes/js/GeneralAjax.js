@@ -114,14 +114,15 @@ function addPartner(flag) {
     document.getElementById('addbutton').disabled = true;
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse);
+    var url;
     if (flag == 'admin') {
         if (roleId == 1) {
-            var url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
+             url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
         } else {
-            var url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&flag=' + flag;
+             url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&flag=' + flag;
         }
     } else {
-        var url = './ajax/selfAddPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&flag=' + flag;
+         url = './ajax/selfAddPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&flag=' + flag;
     }
     //alert(url);
     req.open("GET", url, "true");
@@ -132,6 +133,7 @@ function addPartner(flag) {
 function addingPartnerNameResponse(resText) {
     //alert(resText);
     document.getElementById("addpartnerMsg").innerHTML = resText;
+    //$('#selfReg').modal('hide');
 }
 
 function envelopeUpdating() {
@@ -261,10 +263,11 @@ function acceptPartner() {
     }
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerLoadText(req, acceptPartnerResponse);
+    var url;
     if (roleId == 1) {
-        var url = "../ajax/acceptPartner.action?assignTo=" + assignTo + "&id=" + partnerId;
+         url = "../ajax/acceptPartner.action?assignTo=" + assignTo + "&id=" + partnerId;
     } else {
-        var url = "../ajax/acceptPartner.action?assignTo=" + loginId + "&id=" + partnerId;
+         url = "../ajax/acceptPartner.action?assignTo=" + loginId + "&id=" + partnerId;
     }
     //alert(url);
     req.open("GET", url, "true");
@@ -344,11 +347,12 @@ function getPwdEmail(protocol) {
         var req = getXMLHttpRequest();
         $("#loadingImageAjax").show();
         req.onreadystatechange = readyStateHandlerLoadText(req, isPwdSent);
+        var url;
         if (protocol == "FTP") {
-            var url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
+             url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
         }
         if (protocol == "SFTP") {
-            var url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
+             url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
         }
         req.open("GET", url, "true");
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

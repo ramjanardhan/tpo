@@ -40,4 +40,6 @@
 
     <include file="tpOnboarding.xml"/>
     
+    <include file="payload.xml"/>
+    
 </struts>

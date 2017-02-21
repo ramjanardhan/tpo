@@ -155,8 +155,6 @@
                                                 <s:textfield cssClass="form-control" name="st850senderIdIB" id="st850senderIdIB" value="%{st850senderIdIB}" tabindex="11" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                             </div>
                                         </div>
-
-
                                         <div class="tp_sm3">
                                             <div class="threshold" style="position: relative;top:7px">
                                                 <input type="text" value="Receiver ID" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
@@ -178,11 +176,7 @@
                                                 <s:textfield cssClass="form-control" name="st850RecIdIB" id="st850RecIdIB" value="%{st850RecIdIB}" tabindex="14"  readonly="true"/>
                                             </div>
                                         </div>
-
-
                                         <div class="tp_sm3">
-
-
                                             <div class="threshold" style="position: relative;top:5px">
                                                 <input type="text" value="Version" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
@@ -202,15 +196,7 @@
                                                 <s:textfield cssClass="form-control" name="st850VersionIB" id="st850VersionIB" value="%{st850VersionIB}" tabindex="17" onchange="fieldLengthValidator850IB(this);" readonly="true"/>
                                             </div>
                                         </div>
-
-
-
-
-
-
-
                                         <div class="tp_sm3">
-
                                             <div class="threshold" style="position: relative;top:5px">
                                                 <input type="text" value="Functional ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
@@ -226,15 +212,17 @@
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
+                                                <s:textfield cssClass="form-control" name=""  cssStyle="opacity:0" id="" value="" />
                                             </div>
                                         </div>
-
-
-
-
                                         <div class="tp_sm3">
                                             <div class="threshold" style="position: relative;top:5px">
                                                 <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                            </div>
+                                        </div>
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                                <s:textfield cssClass="form-control" name="" cssStyle="display:none" id="" value="" />
                                             </div>
                                         </div>
 
@@ -243,17 +231,21 @@
                                                 <s:textfield cssClass="form-control" name="res850AgecodeIB" id="res850AgecodeIB" placeholder="x" value="%{res850AgecodeIB}" tabindex="19" onchange="fieldLengthValidator850IB(this);"/>
                                             </div>
                                         </div>
-
-
-                                        <div class="tp_sm3">
-
-
-                                            <div class="threshold" style="position: relative;top:0px">
-                                                <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
-                                            </div>
-                                        </div> 
                                         <div class="tp_sm3">
                                             <div class="form-group">
+                                                <s:textfield cssClass="form-control" name=""  cssStyle="opacity:0" id="" value="" />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="tp_sm3">
+                                            <div class="form-group threshold" style="position: relative;top:0px">
+                                                <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                            </div>
+                                        </div>
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                                <s:textfield cssClass="form-control" cssStyle="display:none" name="" id="" value="" />
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
@@ -261,18 +253,14 @@
                                                 <s:checkbox  name="gen850AckIB" id="gen850AckIB" tabindex="20" value="%{gen850AckIB}" />
                                             </div>
                                         </div>
-
-
-
                                         <div class="tp_sm3">
-
-
-                                            <div class="threshold" style="position: relative;top:5px">
-                                                <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
+                                            <div class="form-group">
+                                                <s:textfield cssClass="form-control" name=""  cssStyle="opacity:0" id="" value=""  />
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
+                                        <div class="tp_sm3">
+                                            <div class="threshold" style="position: relative;top:5px">
+                                                <input type="text" value="Transaction Set ID Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
@@ -284,13 +272,17 @@
                                                 <s:textfield cssClass="form-control" name="trans850IdcodeIB" id="trans850IdcodeIB" value="%{trans850IdcodeIB}" tabindex="21" onchange="fieldLengthValidator850IB(this);"/>
                                             </div>
                                         </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <%-- 850 Inbound  End div--%>
                         <%-- 855 Inbound   Start div--%>
-                        <div id="ibenvelop855" style="display: none" >
+                        <div id="ibenvelop855" style="display: none">
                             <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="IB855Transaction" id="IB855Transaction" value="%{IB855Transaction}"/>
                             <div id="resultMessage855ib"></div>
@@ -412,7 +404,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res855AgecodeIB" id="res855AgecodeIB" placeholder="x" value="%{res855AgecodeIB}" tabindex="32" onchange="fieldLengthValidator855IB(this);"/>
@@ -583,7 +578,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res856AgecodeIB" id="res856AgecodeIB" placeholder="x" value="%{res856AgecodeIB}" tabindex="45" onchange="fieldLengthValidator856IB(this);"/>
@@ -598,7 +596,10 @@
                                                 </div>
                                             </div>                                  
                                         </div> 
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:checkbox  name="gen856AckIB" id="gen856AckIB" tabindex="46" value="%{gen856AckIB}" />
@@ -618,13 +619,13 @@
                                             <div class="form-group">
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                            </div>
-                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="trans856IdcodeIB" id="trans856IdcodeIB" value="%{trans856IdcodeIB}" tabindex="47" onchange="fieldLengthValidator856IB(this);"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
                                             </div>
                                         </div>
                                     </div>
@@ -749,14 +750,15 @@
                                     <div class="row">
                                         <div class="tp_sm3">
                                             <div class="form-group">
-
                                                 <div class="threshold" style="position: relative;top:5px">
                                                     <input type="text" value="Responsible Agency Code" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                                 </div>
-
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res810AgecodeIB" id="res810AgecodeIB" placeholder="x" value="%{res810AgecodeIB}" tabindex="57" onchange="fieldLengthValidator810IB(this);"/>
@@ -771,7 +773,10 @@
                                                 </div>
                                             </div>                                  
                                         </div> 
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:checkbox  name="gen810AckIB" id="gen810AckIB" tabindex="58" value="%{gen810AckIB}" />
@@ -792,11 +797,11 @@
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
+                                                <s:textfield cssClass="form-control" name="trans810IdcodeIB" id="trans810IdcodeIB" value="%{trans810IdcodeIB}" tabindex="59" onchange="fieldLengthValidator810IB(this);"/>
                                             </div>
                                         </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
-                                                <s:textfield cssClass="form-control" name="trans810IdcodeIB" id="trans810IdcodeIB" value="%{trans810IdcodeIB}" tabindex="59" onchange="fieldLengthValidator810IB(this);"/>
                                             </div>
                                         </div>
                                     </div>
@@ -906,7 +911,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="fun850GroupIdOB" id="fun850GroupIdOB" value="%{fun850GroupIdOB}" tabindex="69" onchange="fieldLengthValidator850OB(this);"/>
@@ -958,7 +966,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="trans850IdcodeOB" id="trans850IdcodeOB" value="%{trans850IdcodeOB}" tabindex="72" onchange="fieldLengthValidator850OB(this);"/>
@@ -1072,7 +1083,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="fun855GroupIdOB" id="fun855GroupIdOB" value="%{fun855GroupIdOB}" tabindex="82" onchange="fieldLengthValidator855OB(this);"/>
@@ -1088,7 +1102,10 @@
 
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res855AgecodeOB" id="res855AgecodeOB" placeholder="x" value="%{res855AgecodeOB}" tabindex="83" onchange="fieldLengthValidator855OB(this);"/>
@@ -1127,13 +1144,13 @@
                                             <div class="form-group">
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                            </div>
-                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="trans855IdcodeOB" id="trans855IdcodeOB" value="%{trans855IdcodeOB}" tabindex="85" onchange="fieldLengthValidator855OB(this);"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
                                             </div>
                                         </div>
                                     </div>
@@ -1263,10 +1280,17 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res856AgecodeOB" id="res856AgecodeOB" placeholder="x" value="%{res856AgecodeOB}" tabindex="96" onchange="fieldLengthValidator856OB(this);"/>
+                                            </div>
+                                        </div>
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
                                             </div>
                                         </div>
                                     </div>
@@ -1278,7 +1302,10 @@
                                                 </div>
                                             </div>                                  
                                         </div> 
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:checkbox  name="gen856AckOB" id="gen856AckOB" tabindex="97" value="%{gen856AckOB}" />
@@ -1294,7 +1321,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="trans856IdcodeOB" id="trans856IdcodeOB" value="%{trans856IdcodeOB}" tabindex="98" onchange="fieldLengthValidator856OB(this);"/>
@@ -1408,7 +1438,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="fun810GroupIdOB" id="fun810GroupIdOB" value="%{fun810GroupIdOB}" tabindex="108" onchange="fieldLengthValidator810OB(this);"/>
@@ -1423,7 +1456,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="res810AgecodeOB" id="res810AgecodeOB" placeholder="x" value="%{res810AgecodeOB}" tabindex="109" onchange="fieldLengthValidator810OB(this);"/>
@@ -1457,7 +1493,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="tp_sm3">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name="trans810IdcodeOB" id="trans810IdcodeOB" value="%{trans810IdcodeOB}" tabindex="111" onchange="fieldLengthValidator810OB(this);"/>

@@ -4,6 +4,8 @@ import com.mss.tpo.ajax.AjaxHandlerService;
 import com.mss.tpo.ajax.AjaxHandlerServiceImpl;
 import com.mss.tpo.general.GeneralService;
 import com.mss.tpo.general.GeneralServiceImpl;
+import com.mss.tpo.payload.PayloadService;
+import com.mss.tpo.payload.PayloadServiceImpl;
 import com.mss.tpo.tpOnboarding.TpOnboardingService;
 import com.mss.tpo.tpOnboarding.TpOnboardingServiceImpl;
 /*
@@ -31,5 +33,10 @@ public class ServiceLocator {
     public static TpOnboardingService getTpOnboardingService() throws ServiceLocatorException {
         TpOnboardingService tpOnboardingService = new TpOnboardingServiceImpl();
         return tpOnboardingService;
+    }
+    
+    public static PayloadService getPayloadService() throws ServiceLocatorException {
+        PayloadService payloadService = new PayloadServiceImpl();
+        return payloadService;
     }
 }

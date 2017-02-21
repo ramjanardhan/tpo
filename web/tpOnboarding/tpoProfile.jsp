@@ -480,7 +480,7 @@
                                 <div class="form-group"> 
                                     <label>CA&nbsp;Certificate:</label>
                                     <%--<s:textfield cssClass="button" name="ssl_sysStore" id="ssl_sysStore" tabindex="57" value="Download"/>--%>
-                                    <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
+                                    <s:a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</s:a>
                                 </div>
                             </div>
                         </div>

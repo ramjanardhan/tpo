@@ -1613,7 +1613,7 @@ function fieldLengthValidator810OB(element) {
 }
 
 function isExistedPartnerName(x) {
-    var url = "";
+    var url;
     $("#correctImg").hide();
     $("#wrongImg").hide();
     $("#loadingImageAjax").hide();
@@ -1644,7 +1644,7 @@ function isExistedPartnerNameResponse(resText) {
 }
 
 function isExistedUserEmail(flag, x) {
-    var url = "";
+    var url;
     if (x == 'forgotPwd') {
         $("#correctImg2").hide();
         $("#wrongImg2").hide();
@@ -2405,18 +2405,6 @@ function resetRegisterUser() {
 function addPtnerLengthValidator(element) {
     var i = 0;
     var k = 0;
-    var addpartnerName = document.getElementById("addpartnerName").value;
-    var contactPerson = document.getElementById("contactPerson").value;
-    var contactPersonLN = document.getElementById("contactPersonLN").value;
-    var contactEmail = document.getElementById("contactEmail").value;
-    var addphoneNo = document.getElementById("addphoneNo").value;
-    var addaddress1 = document.getElementById("addaddress1").value;
-    var addcity = document.getElementById("addcity").value;
-    var addstate = document.getElementById("addstate").value;
-    var addcountry = document.getElementById("addcountry").value;
-    var addzipCode = document.getElementById("addzipCode").value;
-    var url = document.getElementById("url").value;
-    var description = document.getElementById("description").value;
     if (element.value != null && (element.value != "")) {
         if (element.id == 'addpartnerName' || element.id == 'contactPerson' || element.id == 'contactPersonLN' || element.id == 'contactEmail' || element.id == 'addphoneNo' || element.id == 'addaddress1' || element.id == 'addcity' || element.id == 'addstate' || element.id == 'url' || element.id == 'addzipCode') {
             i = 50;

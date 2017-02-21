@@ -167,6 +167,18 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
     private ArrayList<TpOnboardingBean> tpoSearchUsersList;
 
+    public String execute() throws Exception {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID) != null) {
+            int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
+            int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+            String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+            String loginAccess = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ACCESS).toString();
+            resultType = SUCCESS;
+        }
+        return resultType;
+    }
+
     public String tpoSuccess() throws Exception {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {

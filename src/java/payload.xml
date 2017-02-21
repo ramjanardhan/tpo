@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="payload" namespace="/payload" extends="default">
+        
+        <default-interceptor-ref name="crudStack"/>     
+        
+        <action name="payloadTransfer" class="com.mss.tpo.payload.PayloadAction" method="payloadTransfer">
+            <result>/payload/payloadTransfer.jsp</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="accessFailed" type="redirect" >../exception/accessFailed.action</result> 
+        </action>
+        
+        <action name="payloadHistory" class="com.mss.tpo.payload.PayloadAction" method="payloadHistory">
+            <result name="success">/payload/payloadHistory.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+    </package>
+</struts>
