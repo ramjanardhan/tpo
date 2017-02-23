@@ -6,17 +6,28 @@
         
         <default-interceptor-ref name="crudStack"/>     
         
-        <action name="payloadTransfer" class="com.mss.tpo.payload.PayloadAction" method="payloadTransfer">
-            <result>/payload/payloadTransfer.jsp</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
+       <action name="payloadUpload" class="com.mss.tpo.payload.PayloadAction" method="payloadUpload">
+            <result name="success">/payload/tpoPayloadupload.jsp</result>
             <result type="redirect" name="login">../general/login.action</result>
-            <result name="accessFailed" type="redirect" >../exception/accessFailed.action</result> 
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+       <action name="doPayloadUpload" class="com.mss.tpo.payload.PayloadAction" method="doPayloadUpload">
+            <result name="success">/payload/tpoPayloadupload.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="payloadHistory" class="com.mss.tpo.payload.PayloadAction" method="payloadHistory">
-            <result name="success">/payload/payloadHistory.jsp</result>
+            <result name="success">/payload/tpoPayloadHistory.jsp</result>
             <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+        <action name="payloadSearch" class="com.mss.tpo.payload.PayloadAction" method="payloadSearch">
+            <result name = "success">/payload/tpoPayloadHistory.jsp</result>
+            <result name = "redirect">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
     </package>

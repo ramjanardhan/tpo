@@ -227,7 +227,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Remote&nbsp;UserId</label>
+                                    <label>Remote&nbsp;User Id</label>
                                     <s:textfield cssClass="form-control" name="sftp_remote_userId" id="sftp_remote_userId" tabindex="18" value="%{sftp_remote_userId}"/>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>HTTP&nbsp;End&nbsp;Point</label>
+                                    <label>HTTP&nbsp;Endpoint</label>
                                     <s:textfield cssClass="form-control" name="http_endpoint" id="http_endpoint" tabindex="24" value="%{http_endpoint}"/>
                                 </div>
                             </div>
@@ -327,13 +327,13 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>From&nbsp;E-mail&nbsp;address</label>
+                                    <label>From&nbsp;Email&nbsp;address</label>
                                     <s:textfield cssClass="form-control" name="smtp_from_email" id="smtp_from_email" tabindex="32" value="%{smtp_from_email}" onchange="validateEmail(this);"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>To E-mail&nbsp;address </label>
+                                    <label>To Email&nbsp;address </label>
                                     <s:textfield cssClass="form-control" name="smtp_to_email" id="smtp_to_email" tabindex="33" value="%{smtp_to_email}" onchange="validateEmail(this);"/>
                                 </div>
                             </div>
@@ -403,11 +403,11 @@
                                 </div>
                                 <div class="col-sm-9 col-md-6 gutter_hide form-group">
                                     <div class="col-sm-6"> 
-                                        <label>My&nbsp;End&nbsp;Point</label>
+                                        <label>My&nbsp;Endpoint</label>
                                         <s:textfield cssClass="form-control" name="as2_myEndPoint" id="as2_myEndPoint" tabindex="39" value="%{as2_myEndPoint}"/>
                                     </div>
                                     <div class="col-sm-6">    
-                                        <label>Your&nbsp;End&nbsp;Point </label>
+                                        <label>Your&nbsp;Endpoint </label>
                                         <s:textfield cssClass="form-control" name="as2_partendpoint" id="as2_partendpoint" tabindex="40" value="%{as2_partendpoint}"/>
                                     </div>
                                 </div>
@@ -422,7 +422,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
-                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'MailBox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="41" cssClass="form-control"/>
+                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'Mailbox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="41" cssClass="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -405,4 +407,47 @@ public class DataSourceDataProvider {
         }
         return email;
     }
+    
+    public static List<String> getTxList()throws ServiceLocatorException{
+             
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getConnection();
+        List<String> list = new ArrayList<String>();
+        try {
+            queryString = "SELECT TRANSACTION_TYPE FROM TPO_LOOK_TX";
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(resultSet.getString("TRANSACTION_TYPE"));
+                //PartnerNameMap.put(resultSet.getInt("ID"), resultSet.getString("TRANSACTION_TYPE"));
+               // System.out.println("resultSet.getInt(\"ID\")=="+resultSet.getInt("ID"));
+                System.out.println("resultSet.getString(\"TRANSACTION_TYPE\")=="+resultSet.getString("TRANSACTION_TYPE"));
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return list;
+    }
+
+    
 }

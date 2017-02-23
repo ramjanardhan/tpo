@@ -127,7 +127,7 @@
                                 <div class="col-sm-4 col-md-3">
                                     <div class="form-group">
                                         <label>Assign To</label>
-                                        <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="adminUsersList" name="adminUsersList" id="adminUsersList" value="%{adminUsersList}"  tabindex="12"/>
+                                        <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="adminUsersList" name="adminUsersList" id="adminUsersList" value=""  tabindex="12"/>
                                     </div>
                                 </div>
                             </s:if>

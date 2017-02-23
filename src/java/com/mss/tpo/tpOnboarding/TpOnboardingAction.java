@@ -182,7 +182,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 }
                 if ("Y".equalsIgnoreCase(loginAccess)) {
                     if ((roleId == 1) || (roleId == 2)) {
-                        //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId()); 
+                        //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId());
                         resultType = "tpoPartnerAdd";
                     } else {
                         int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);

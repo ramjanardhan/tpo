@@ -6,9 +6,11 @@
 package com.mss.tpo.payload;
 
 import com.mss.tpo.util.ServiceLocatorException;
+import java.util.ArrayList;
 
 public interface PayloadService {
 
-    public String doPayloadTransfer(PayloadAction payloadAction) throws ServiceLocatorException;
+    public ArrayList<PayloadBean> payloadSearch(String loginId, int partnerId);
+     public String doPayloadUpload(int partnerId, String loginId, PayloadAction payloadAction) throws ServiceLocatorException;
 
    }

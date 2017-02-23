@@ -137,8 +137,8 @@
                                     <th>COMM_ID</th>
                                     <th>PROTOCOL</th>
                                     <th>PARTNER&nbsp;NAME</th>
-                                    <th>CREATED&nbsp;BY</th>
-                                    <th>CREATED&nbsp;DATE</th>
+                                    <th>CREATED_BY</th>
+                                    <th>CREATED_DATE</th>
                                     <th>TEST</th>
                                     <th>TEST&nbsp;STATUS</th>
                                     <th>EDIT</th>

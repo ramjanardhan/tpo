@@ -85,7 +85,7 @@
                             <th>TRANSACTION</th>
                             <th>DIRECTION</th>
                             <th>CREATED_BY</th>
-                            <th>CREATED_TS</th>
+                            <th>CREATED_DATE</th>
                             <th>EDIT</th>
                             <th>DELETE</th>
                             </thead>
