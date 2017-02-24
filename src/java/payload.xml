@@ -13,7 +13,7 @@
         </action>
         
        <action name="doPayloadUpload" class="com.mss.tpo.payload.PayloadAction" method="doPayloadUpload">
-            <result name="success">/payload/tpoPayloadupload.jsp</result>
+            <result name="success" type="redirect">payloadUpload.action</result>
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>

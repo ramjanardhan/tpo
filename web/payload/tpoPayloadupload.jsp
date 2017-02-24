@@ -95,15 +95,16 @@
                 <s:hidden name="transaction" id="transaction" value=""/>
                 <div id="site_content" class="jumbotron" style="padding:3px 33px">
                     <div class="container">
+                        <div class="row" id="responseString">   
                         <center>
                             <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                    String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                    out.println(reqponseString);
+                                    String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                    out.println(responseString);
                                     session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
                                 }
                             %>
-                        </center>
+                        </center> </div>
                         <div class="row">     
                             <div id="TransactionsDiv" class="col-sm-2"> 
                                 <h4 style="color: #2d8fc8" class="heading_4">DocType : </h4>
@@ -162,42 +163,74 @@
                         <br>
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input850ib" name="upload850ib"/></div>
+                            <table id="uploadTable850ib" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload850ib" theme="simple"/></td></tr>
+			</table>
+                         <input type="button" id="remove850ib" name="remove850ib" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile850ib"/>
                         </div>
                         <%-- 850 Inbound  End div--%>
                         <%-- 855 Inbound   Start div--%>
                         <div id="ibenvelop855" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input855ib" name="upload855ib"/></div>
+                             <table id="uploadTable855ib" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload855ib" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove855ib" name="remove850ib" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile855ib"/>
                         </div>
                         <%-- 855 Inbound  End div--%>
                         <%-- 856 Inbound   Start div--%>
                         <div id="ibenvelop856" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input856ib" name="upload856ib"/></div>
+                             <table id="uploadTable856ib" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload856ib" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove856ib" name="remove850ib" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile856ib"/>
                         </div>
                         <%-- 856 Inbound   End div--%>
                         <%-- 810 Inbound   Start div--%>
                         <div id="ibenvelop810" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input810ib" name="upload810ib"/></div>
+                             <table id="uploadTable810ib" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload810ib" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove810ib" name="remove850ib" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile810ib"/>
                         </div>
                         <%-- 810 Inbound   End div--%>
                         <%-- 850 outbound   End div--%>
                         <div id="obenvelop850" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input850ob" name="upload850ob"/></div>
+                            <table id="uploadTable850ob" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload850ob" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove850ob" name="remove850ib" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile850ob"/>
                         </div>
                         <%-- 850 Outbound   End div--%>
                         <%-- 855 Outbound   Start div--%>
                         <div id="obenvelop855" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input855ob" name="upload855ob"/></div>
+                            <table id="uploadTable855ob" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload855ob" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove855ob" name="remove855ob" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile855ob"/>
                         </div>
                         <%-- 855 Outbound   End div--%>
                         <%-- 856 Outbound   Start div--%>
                         <div id="obenvelop856" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input856ob" name="upload856ob"/></div>
+                             <table id="uploadTable856ob" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload856ob" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove856ob" name="remove856ob" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile856ob"/>
                         </div>
                         <%-- 856 Outbound   End div--%>
                         <%-- 810 Outbound   Start div--%>
                         <div id="obenvelop810" style="display: none" >
-                            <div style="display:block;float:none"><s:file id="file_input810ob" name="upload810ob"/></div>
+                             <table id="uploadTable810ob" border="1">
+				<tr><td><s:file label="Choose File to Upload" name="upload810ob" theme="simple"/></td></tr>
+			</table>
+                        <input type="button" id="remove810ob" name="remove810ob" value="remove"/>
+		<input type="button" label="Add more files" value="add" id="addMoreFile810ob"/>
                         </div>
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
@@ -268,11 +301,13 @@
         }
         function setdoctype()
         {
+            document.getElementById("responseString").style.display="none";
             var docType = document.getElementById("docType").value;
             document.getElementById("docTypeValue").value = docType;
         }
         function setdirection()
         {
+            document.getElementById("responseString").style.display="none";
             var direction = document.getElementById("direction").value;
             if (direction == 'Inbound') {
                 $("#inBoundTransactions").show();
@@ -450,6 +485,95 @@
                 $("#ddt").hide();
             }
         }
+
+$(document).ready(function() {
+    $('#addMoreFile850ib').click(function() {
+    	$('#uploadTable850ib').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload850ib" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove850ib').click(function(){
+        $('#uploadTable850ib tr:last').remove();
+    })
+     
+
+    $('#addMoreFile855ib').click(function() {
+    	$('#uploadTable855ib').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload855ib" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove855ib').click(function(){
+        $('#uploadTable855ib tr:last').remove();
+    })
+     
+
+    $('#addMoreFile856ib').click(function() {
+    	$('#uploadTable856ib').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload856ib" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove856ib').click(function(){
+        $('#uploadTable856ib tr:last').remove();
+    })
+
+    $('#addMoreFile810ib').click(function() {
+    	$('#uploadTable810ib').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload810ib" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove810ib').click(function(){
+        $('#uploadTable810ib tr:last').remove();
+    })
+     
+
+    $('#addMoreFile850ob').click(function() {
+    	$('#uploadTable850ob').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload850ob" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove850ob').click(function(){
+        $('#uploadTable850ob tr:last').remove();
+    })
+     
+
+    $('#addMoreFile855ob').click(function() {
+    	$('#uploadTable855ob').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload855ob" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove855ob').click(function(){
+        $('#uploadTable855ob tr:last').remove();
+    })
+     
+
+    $('#addMoreFile856ob').click(function() {
+    	$('#uploadTable856ob').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload856ob" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove856ob').click(function(){
+        $('#uploadTable856ob tr:last').remove();
+    })
+     
+
+    $('#addMoreFile810ob').click(function() {
+    	$('#uploadTable810ob').append(
+                '<tr><td><s:file label="Choose File to Upload" name="upload810ob" theme="simple"/>'+
+                '</td></tr>');
+    	return false;
+    });
+    $('#remove810ob').click(function(){
+        $('#uploadTable810ob tr:last').remove();
+    })
+     
+});
 
 </script>
 <script type="text/javascript" src='<s:url value="/includes/js/jquery.multifile.js"/>'></script>

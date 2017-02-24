@@ -67,24 +67,26 @@ public class PayloadServiceImpl implements PayloadService {
         return payloadSearchList;
     }
 
-    public String doPayloadUpload(int partnerId, String loginId, PayloadAction payloadAction) throws ServiceLocatorException {
+    public String doPayloadUpload(int partnerId, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException {
         int isPayloadInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         try {
-            System.out.println("filepath-----" + payloadAction.getFilepath());
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
 
             String payloadQuery = "INSERT INTO MSCVP.TPO_PAYLOAD (PARTNER_ID, TRANSACTION, "
-                    + "DOC_TYPE, DIRECTION, PATH, STATUS, COMMUNICATION_ID) VALUES(?,?,?,?,?,?)";
-            preparedStatement = connection.prepareStatement(payloadQuery);
+                    + "DOC_TYPE, DIRECTION, PATH, STATUS, COMMUNICATION_ID,CREATED_BY,CREATED_TS) VALUES(?,?,?,?,?,?,?,?,?)";
+                 preparedStatement = connection.prepareStatement(payloadQuery);
             preparedStatement.setInt(1, partnerId);
             preparedStatement.setString(2, payloadAction.getTransaction());
             preparedStatement.setString(3, payloadAction.getDocType());
             preparedStatement.setString(4, payloadAction.getDirection());
-            preparedStatement.setString(5, payloadAction.getFilepath());
+            preparedStatement.setString(5, filePath);
             preparedStatement.setString(6, "UPLOADED");
-            preparedStatement.setInt(6, 101010);
+            preparedStatement.setInt(7, 100);
+            preparedStatement.setString(8, loginId);
+            preparedStatement.setTimestamp(9, curdate);
+           
             isPayloadInserted = isPayloadInserted + preparedStatement.executeUpdate();
             if (isPayloadInserted > 0) {
                 responseString = "<font color='green'>Payload uploaded successfully.</font>";

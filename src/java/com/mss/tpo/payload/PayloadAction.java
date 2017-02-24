@@ -35,24 +35,31 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private String transaction;
     private String direction;
     private File upload;
-    private File upload850ib;
-    private File upload855ib;
-    private File upload856ib;
-    private File upload810ib;
-    private File upload850ob;
-    private File upload855ob;
-    private File upload856ob;
-    private File upload810ob;
-    private String uploadContentType;
-    private String uploadFileName;
-    private String upload850ibFileName;
-    private String upload855ibFileName;
-    private String upload856ibFileName;
-    private String upload810ibFileName;
-    private String upload850obFileName;
-    private String upload855obFileName;
-    private String upload856obFileName;
-    private String upload810obFileName;
+    private List<File> upload850ib;
+    private List<String> upload850ibFileName;
+    private List<String> upload850ibContentType;
+    private List<File> upload855ib;
+    private List<String> upload855ibFileName;
+    private List<String> upload855ibContentType;
+    private List<File> upload856ib;
+    private List<String> upload856ibFileName;
+    private List<String> upload856ibContentType;
+    private List<File> upload810ib;
+    private List<String> upload810ibFileName;
+    private List<String> upload810ibContentType;
+    private List<File> upload850ob;
+    private List<String> upload850obFileName;
+    private List<String> upload850obContentType;
+    private List<File> upload855ob;
+    private List<String> upload855obFileName;
+    private List<String> upload855obContentType;
+    private List<File> upload856ob;
+    private List<String> upload856obFileName;
+    private List<String> upload856obContentType;
+    private List<File> upload810ob;
+    private List<String> upload810obFileName;
+    private List<String> upload810obContentType;
+   
     private String filepath;
 
     public String payloadUpload() throws Exception {
@@ -103,7 +110,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         return resultType;
     }
 
-    public String doPayloadUpload() throws Exception {
+   public String doPayloadUpload() throws Exception {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
@@ -112,50 +119,47 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 String Email = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_EMAIL).toString();
                 setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
-
+                String filePath = "";
                 if ("Inbound".equalsIgnoreCase(getDirection())) {
-                if ("850".equalsIgnoreCase(getTransaction())) {
-                       if (getUpload850ibFileName() != null && !getUpload850ibFileName().equals(null) && getUpload850ibFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
+                    if ("850".equalsIgnoreCase(getTransaction())) {
+                        System.out.println("getUpload850ibFileName().size()>>"+getUpload850ibFileName().size());
+                        if (getUpload850ibFileName() != null && !getUpload850ibFileName().equals(null) && getUpload850ibFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    } else if ("855".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload855ibFileName() != null && !getUpload855ibFileName().equals(null) && getUpload855ibFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    } else if ("856".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload856ibFileName() != null && !getUpload856ibFileName().equals(null) && getUpload856ibFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    } else if ("810".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload810ibFileName() != null && !getUpload810ibFileName().equals(null) && getUpload810ibFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    }
+                } else if ("Outbound".equalsIgnoreCase(getDirection())) {
+                    if ("850".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload850obFileName() != null && !getUpload850obFileName().equals(null) && getUpload850obFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    } else if ("855".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload855obFileName() != null && !getUpload855obFileName().equals(null) && getUpload855obFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    } else if ("856".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload856obFileName() != null && !getUpload856obFileName().equals(null) && getUpload856obFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    } else if ("810".equalsIgnoreCase(getTransaction())) {
+                        if (getUpload810obFileName() != null && !getUpload810obFileName().equals(null) && getUpload810obFileName().size() > 0) {
+                            filePath = saveFileToDisk(partnerId, loginId);
+                        }
+                    }
                 }
-                } else if ("855".equalsIgnoreCase(getTransaction())) {
-                      if (getUpload855ibFileName() != null && !getUpload855ibFileName().equals(null) && getUpload855ibFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                } else if ("856".equalsIgnoreCase(getTransaction())) {
-                      if (getUpload856ibFileName() != null && !getUpload856ibFileName().equals(null) && getUpload856ibFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                } else if ("810".equalsIgnoreCase(getTransaction())) {
-                       if (getUpload810ibFileName() != null && !getUpload810ibFileName().equals(null) && getUpload810ibFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                }
-            } else  if ("Outbound".equalsIgnoreCase(getDirection())) {
-                if ("850".equalsIgnoreCase(getTransaction())) {
-                       if (getUpload850obFileName() != null && !getUpload850obFileName().equals(null) && getUpload850obFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                } else if ("855".equalsIgnoreCase(getTransaction())) {
-                      if (getUpload855obFileName() != null && !getUpload855obFileName().equals(null) && getUpload855obFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                } else if ("856".equalsIgnoreCase(getTransaction())) {
-                      if (getUpload856obFileName() != null && !getUpload856obFileName().equals(null) && getUpload856obFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                } else if ("810".equalsIgnoreCase(getTransaction())) {
-                       if (getUpload810obFileName() != null && !getUpload810obFileName().equals(null) && getUpload810obFileName().length() > 1) {
-                    saveFileToDisk(partnerId, loginId);
-                }
-                }
-            }
-//                
-//                if (getUploadFileName() != null && !getUploadFileName().equals(null) && getUploadFileName().length() > 1) {
-//                    saveFileToDisk(partnerId, loginId);
-//                }
 
-                String resultMessage = ServiceLocator.getPayloadService().doPayloadUpload(partnerId, loginId, this);
+                String resultMessage = ServiceLocator.getPayloadService().doPayloadUpload(partnerId, loginId, filePath, this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception ex) {
@@ -165,76 +169,75 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         return resultType;
     }
 
-    public boolean saveFileToDisk(int partnerId, String loginId) {
-        boolean isSave = false;
+    public String saveFileToDisk(int partnerId, String loginId) {
         File createPath = new File(Properties.getProperty("mscvp.TpoPayloadUpload"));
-        System.err.println("path:" + createPath);
-        String partner_contactName = partnerId + "_" + loginId;
-        /*getrequestType is used to create a directory of the object type specified in the jsp page*/
-        // createPath = new File(createPath.getAbsolutePath() + "//Payload");
-         System.out.println("aaaa");
-        createPath = new File(createPath.getAbsolutePath() + "//" + partner_contactName + "//" + getDocType()+ "//" + getDirection()+ "//" + getTransaction());
-        /*This creates a directory forcefully if the directory does not exsist*/
-        System.out.println("bbbb");
-        createPath.mkdir();
-        /*here it takes the absolute path and the name of the file that is to be uploaded*/
-        System.out.println("cccc");
-        File theFile = null;
-         if ("Inbound".equalsIgnoreCase(getDirection())) {
-                if ("850".equalsIgnoreCase(getTransaction())) {
-                     theFile = new File(createPath.getAbsolutePath() + "//" + getUpload850ibFileName());
-                } else if ("855".equalsIgnoreCase(getTransaction())) {
-                    theFile = new File(createPath.getAbsolutePath() + "//" + getUpload855ibFileName());
-                     System.out.println("theFile-->"+theFile.toString());
-                } else if ("856".equalsIgnoreCase(getTransaction())) {
-                    theFile = new File(createPath.getAbsolutePath() + "//" + getUpload856ibFileName());
-                } else if ("810".equalsIgnoreCase(getTransaction())) {
-                     theFile = new File(createPath.getAbsolutePath() + "//" + getUpload810ibFileName());
-                }
-            } else  if ("Outbound".equalsIgnoreCase(getDirection())) {
-                if ("850".equalsIgnoreCase(getTransaction())) {
-                     theFile = new File(createPath.getAbsolutePath() + "//" + getUpload850obFileName());
-                } else if ("855".equalsIgnoreCase(getTransaction())) {
-                    theFile = new File(createPath.getAbsolutePath() + "//" + getUpload855obFileName());
-                } else if ("856".equalsIgnoreCase(getTransaction())) {
-                    theFile = new File(createPath.getAbsolutePath() + "//" + getUpload856obFileName());
-                } else if ("810".equalsIgnoreCase(getTransaction())) {
-                     theFile = new File(createPath.getAbsolutePath() + "//" + getUpload810obFileName());
-                }
-            }
-      //  File theFile = new File(createPath.getAbsolutePath() + "//" + getUploadFileName());
-         System.out.println("theFile.toString()-->"+theFile.toString());
-        setFilepath(theFile.toString());
-        /*copies the file to the destination*/
         try {
-            // FileUtils.copyFile(upload, theFile);
+            String partner_contactName = partnerId + "_" + loginId;
+            /*getrequestType is used to create a directory of the object type specified in the jsp page*/
+            createPath = new File(createPath.getAbsolutePath() + "//" + partner_contactName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction());
+            /*This creates a directory forcefully if the directory does not exsist*/
+            createPath.mkdir();
+            /*here it takes the absolute path and the name of the file that is to be uploaded*/
+            File theFile = null;
+            int i = 0;
             if ("Inbound".equalsIgnoreCase(getDirection())) {
                 if ("850".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload850ib, theFile);
+                    for (File file : upload850ib) {
+                        theFile = new File(createPath.getAbsolutePath(), upload850ibFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
+                    //  theFile = new File(createPath.getAbsolutePath() + "//" + getUpload850ibFileName());
                 } else if ("855".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload855ib, theFile);
+                    for (File file : upload855ib) {
+                        theFile = new File(createPath.getAbsolutePath(), upload855ibFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 } else if ("856".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload856ib, theFile);
+                    for (File file : upload856ib) {
+                        theFile = new File(createPath.getAbsolutePath(), upload856ibFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 } else if ("810".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload810ib, theFile);
+                    for (File file : upload810ib) {
+                        theFile = new File(createPath.getAbsolutePath(), upload810ibFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 }
-            }
-            if ("Outbound".equalsIgnoreCase(getDirection())) {
+            } else if ("Outbound".equalsIgnoreCase(getDirection())) {
                 if ("850".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload850ob, theFile);
+                    for (File file : upload850ob) {
+                        theFile = new File(createPath.getAbsolutePath(), upload850obFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 } else if ("855".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload855ob, theFile);
+                     for (File file : upload855ob) {
+                        theFile = new File(createPath.getAbsolutePath(), upload855obFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 } else if ("856".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload856ob, theFile);
+                    for (File file : upload856ob) {
+                        theFile = new File(createPath.getAbsolutePath(), upload856obFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 } else if ("810".equalsIgnoreCase(getTransaction())) {
-                    FileUtils.copyFile(upload810ob, theFile);
+                    for (File file : upload810ob) {
+                        theFile = new File(createPath.getAbsolutePath(), upload810obFileName.get(i));
+                        FileUtils.copyFile(file, theFile);
+                        i++;
+                    }
                 }
             }
-            isSave = true;
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return isSave;
+        return createPath.getAbsolutePath().toString();
     }
 
     @Override
@@ -330,14 +333,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         this.httpServletResponse = httpServletResponse;
     }
 
-    public String getUploadFileName() {
-        return uploadFileName;
-    }
-
-    public void setUploadFileName(String uploadFileName) {
-        this.uploadFileName = uploadFileName;
-    }
-
+  
     public String getFilepath() {
         return filepath;
     }
@@ -354,140 +350,198 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         this.upload = upload;
     }
 
-    public String getUploadContentType() {
-        return uploadContentType;
-    }
 
-    public void setUploadContentType(String uploadContentType) {
-        this.uploadContentType = uploadContentType;
-    }
-
-    public File getUpload850ib() {
+    public List<File> getUpload850ib() {
         return upload850ib;
     }
 
-    public void setUpload850ib(File upload850ib) {
+    public void setUpload850ib(List<File> upload850ib) {
         this.upload850ib = upload850ib;
     }
 
-    public File getUpload856ib() {
-        return upload856ib;
-    }
-
-    public void setUpload856ib(File upload856ib) {
-        this.upload856ib = upload856ib;
-    }
-
-    public File getUpload810ib() {
-        return upload810ib;
-    }
-
-    public void setUpload810ib(File upload810ib) {
-        this.upload810ib = upload810ib;
-    }
-
-    public File getUpload850ob() {
-        return upload850ob;
-    }
-
-    public void setUpload850ob(File upload850ob) {
-        this.upload850ob = upload850ob;
-    }
-
-    public File getUpload855ob() {
-        return upload855ob;
-    }
-
-    public void setUpload855ob(File upload855ob) {
-        this.upload855ob = upload855ob;
-    }
-
-    public File getUpload856ob() {
-        return upload856ob;
-    }
-
-    public void setUpload856ob(File upload856ob) {
-        this.upload856ob = upload856ob;
-    }
-
-    public File getUpload810ob() {
-        return upload810ob;
-    }
-
-    public void setUpload810ob(File upload810ob) {
-        this.upload810ob = upload810ob;
-    }
-
-    public File getUpload855ib() {
-        return upload855ib;
-    }
-
-    public void setUpload855ib(File upload855ib) {
-        this.upload855ib = upload855ib;
-    }
-
-    public String getUpload850ibFileName() {
+    public List<String> getUpload850ibFileName() {
         return upload850ibFileName;
     }
 
-    public void setUpload850ibFileName(String upload850ibFileName) {
+    public void setUpload850ibFileName(List<String> upload850ibFileName) {
         this.upload850ibFileName = upload850ibFileName;
     }
 
-    public String getUpload855ibFileName() {
+    public List<String> getUpload850ibContentType() {
+        return upload850ibContentType;
+    }
+
+    public void setUpload850ibContentType(List<String> upload850ibContentType) {
+        this.upload850ibContentType = upload850ibContentType;
+    }
+
+    public List<File> getUpload855ib() {
+        return upload855ib;
+    }
+
+    public void setUpload855ib(List<File> upload855ib) {
+        this.upload855ib = upload855ib;
+    }
+
+    public List<String> getUpload855ibFileName() {
         return upload855ibFileName;
     }
 
-    public void setUpload855ibFileName(String upload855ibFileName) {
+    public void setUpload855ibFileName(List<String> upload855ibFileName) {
         this.upload855ibFileName = upload855ibFileName;
     }
 
-    public String getUpload856ibFileName() {
+    public List<String> getUpload855ibContentType() {
+        return upload855ibContentType;
+    }
+
+    public void setUpload855ibContentType(List<String> upload855ibContentType) {
+        this.upload855ibContentType = upload855ibContentType;
+    }
+
+    public List<File> getUpload856ib() {
+        return upload856ib;
+    }
+
+    public void setUpload856ib(List<File> upload856ib) {
+        this.upload856ib = upload856ib;
+    }
+
+    public List<String> getUpload856ibFileName() {
         return upload856ibFileName;
     }
 
-    public void setUpload856ibFileName(String upload856ibFileName) {
+    public void setUpload856ibFileName(List<String> upload856ibFileName) {
         this.upload856ibFileName = upload856ibFileName;
     }
 
-    public String getUpload810ibFileName() {
+    public List<String> getUpload856ibContentType() {
+        return upload856ibContentType;
+    }
+
+    public void setUpload856ibContentType(List<String> upload856ibContentType) {
+        this.upload856ibContentType = upload856ibContentType;
+    }
+
+    public List<File> getUpload810ib() {
+        return upload810ib;
+    }
+
+    public void setUpload810ib(List<File> upload810ib) {
+        this.upload810ib = upload810ib;
+    }
+
+    public List<String> getUpload810ibFileName() {
         return upload810ibFileName;
     }
 
-    public void setUpload810ibFileName(String upload810ibFileName) {
+    public void setUpload810ibFileName(List<String> upload810ibFileName) {
         this.upload810ibFileName = upload810ibFileName;
     }
 
-    public String getUpload850obFileName() {
+    public List<String> getUpload810ibContentType() {
+        return upload810ibContentType;
+    }
+
+    public void setUpload810ibContentType(List<String> upload810ibContentType) {
+        this.upload810ibContentType = upload810ibContentType;
+    }
+
+    public List<File> getUpload850ob() {
+        return upload850ob;
+    }
+
+    public void setUpload850ob(List<File> upload850ob) {
+        this.upload850ob = upload850ob;
+    }
+
+    public List<String> getUpload850obFileName() {
         return upload850obFileName;
     }
 
-    public void setUpload850obFileName(String upload850obFileName) {
+    public void setUpload850obFileName(List<String> upload850obFileName) {
         this.upload850obFileName = upload850obFileName;
     }
 
-    public String getUpload855obFileName() {
+    public List<String> getUpload850obContentType() {
+        return upload850obContentType;
+    }
+
+    public void setUpload850obContentType(List<String> upload850obContentType) {
+        this.upload850obContentType = upload850obContentType;
+    }
+
+    public List<File> getUpload855ob() {
+        return upload855ob;
+    }
+
+    public void setUpload855ob(List<File> upload855ob) {
+        this.upload855ob = upload855ob;
+    }
+
+    public List<String> getUpload855obFileName() {
         return upload855obFileName;
     }
 
-    public void setUpload855obFileName(String upload855obFileName) {
+    public void setUpload855obFileName(List<String> upload855obFileName) {
         this.upload855obFileName = upload855obFileName;
     }
 
-    public String getUpload856obFileName() {
+    public List<String> getUpload855obContentType() {
+        return upload855obContentType;
+    }
+
+    public void setUpload855obContentType(List<String> upload855obContentType) {
+        this.upload855obContentType = upload855obContentType;
+    }
+
+    public List<File> getUpload856ob() {
+        return upload856ob;
+    }
+
+    public void setUpload856ob(List<File> upload856ob) {
+        this.upload856ob = upload856ob;
+    }
+
+    public List<String> getUpload856obFileName() {
         return upload856obFileName;
     }
 
-    public void setUpload856obFileName(String upload856obFileName) {
+    public void setUpload856obFileName(List<String> upload856obFileName) {
         this.upload856obFileName = upload856obFileName;
     }
 
-    public String getUpload810obFileName() {
+    public List<String> getUpload856obContentType() {
+        return upload856obContentType;
+    }
+
+    public void setUpload856obContentType(List<String> upload856obContentType) {
+        this.upload856obContentType = upload856obContentType;
+    }
+
+    public List<File> getUpload810ob() {
+        return upload810ob;
+    }
+
+    public void setUpload810ob(List<File> upload810ob) {
+        this.upload810ob = upload810ob;
+    }
+
+    public List<String> getUpload810obFileName() {
         return upload810obFileName;
     }
 
-    public void setUpload810obFileName(String upload810obFileName) {
+    public void setUpload810obFileName(List<String> upload810obFileName) {
         this.upload810obFileName = upload810obFileName;
     }
 
+    public List<String> getUpload810obContentType() {
+        return upload810obContentType;
+    }
+
+    public void setUpload810obContentType(List<String> upload810obContentType) {
+        this.upload810obContentType = upload810obContentType;
+    }
+
+   
 }
