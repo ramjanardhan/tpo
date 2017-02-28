@@ -4,6 +4,7 @@
  */
 package com.mss.tpo.payload;
 
+import com.mss.tpo.tpOnboarding.TpOnboardingBean;
 import com.mss.tpo.util.AppConstants;
 import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.Properties;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
@@ -32,9 +34,15 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private List txlist;
     private ArrayList<PayloadBean> payloadSearchList;
     private String docType;
+    private String ibTransaction;
+    private String obTransaction;
     private String transaction;
     private String direction;
+    private String conn_type;
     private File upload;
+    private String protocol;
+    private Map protocolsList;
+    private int communicationId;
     private List<File> upload850ib;
     private List<String> upload850ibFileName;
     private List<String> upload850ibContentType;
@@ -59,6 +67,9 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private List<File> upload810ob;
     private List<String> upload810obFileName;
     private List<String> upload810obContentType;
+    
+    private List<TpOnboardingBean> tpoCommunicationsList;
+    private List<String> tpoProtocolsHeadersList;
    
     private String filepath;
 
@@ -66,7 +77,12 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                System.out.println("login : " + (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString()));
+                 int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
+                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                setProtocolsList(DataSourceDataProvider.getInstance().getPayloadProtocols(loginId, roleId,partnerId));
+                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_ProtocolsHeadersList);
+                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_CommunicationsList);
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -81,7 +97,6 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             try {
                 List list = DataSourceDataProvider.getInstance().getTxList();
                 setTxList(list);
-                System.out.println("list==================" + list);
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -100,8 +115,6 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                 setCreated_by(loginId);
                 payloadSearchList = ServiceLocator.getPayloadService().payloadSearch(loginId, partnerId);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, payloadSearchList);
-
-                System.out.println("action values in session=====" + httpServletRequest.getSession(false).getAttribute(AppConstants.PAYLOAD_SEARCH_LIST));
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,9 +133,8 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                 String Email = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_EMAIL).toString();
                 setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
                 String filePath = "";
-                if ("Inbound".equalsIgnoreCase(getDirection())) {
+             if ("Inbound".equalsIgnoreCase(getDirection())) {
                     if ("850".equalsIgnoreCase(getTransaction())) {
-                        System.out.println("getUpload850ibFileName().size()>>"+getUpload850ibFileName().size());
                         if (getUpload850ibFileName() != null && !getUpload850ibFileName().equals(null) && getUpload850ibFileName().size() > 0) {
                             filePath = saveFileToDisk(partnerId, loginId);
                         }
@@ -157,10 +169,9 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                             filePath = saveFileToDisk(partnerId, loginId);
                         }
                     }
-                }
-
+                } 
                 String resultMessage = ServiceLocator.getPayloadService().doPayloadUpload(partnerId, loginId, filePath, this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
+               httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception ex) {
                 resultType = "error";
@@ -174,7 +185,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         try {
             String partner_contactName = partnerId + "_" + loginId;
             /*getrequestType is used to create a directory of the object type specified in the jsp page*/
-            createPath = new File(createPath.getAbsolutePath() + "//" + partner_contactName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction());
+            createPath = new File(createPath.getAbsolutePath() + "//" + partner_contactName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction()+ "//" + getProtocol());
             /*This creates a directory forcefully if the directory does not exsist*/
             createPath.mkdir();
             /*here it takes the absolute path and the name of the file that is to be uploaded*/
@@ -238,6 +249,72 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             ex.printStackTrace();
         }
         return createPath.getAbsolutePath().toString();
+    }
+    
+     public String getCommunicationsList() throws Exception {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                setProtocolsList(DataSourceDataProvider.getInstance().getPayloadProtocols(loginId, roleId,partnerId));
+                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_ProtocolsHeadersList);
+                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_CommunicationsList);
+                tpoProtocolsHeadersList = new ArrayList<String>();
+                if ("FTP".equalsIgnoreCase(getProtocol())) {
+                    tpoProtocolsHeadersList.add("Comm_Id");
+                    tpoProtocolsHeadersList.add("Partner_Id");
+                    tpoProtocolsHeadersList.add("Rx_Protocol");
+                    tpoProtocolsHeadersList.add("Host");
+                    tpoProtocolsHeadersList.add("Port");
+                    tpoProtocolsHeadersList.add("Directory");
+                    tpoCommunicationsList = ServiceLocator.getPayloadService().getFTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
+                    httpServletRequest.getSession(false).setAttribute("protocol", "FTP");
+                } else if ("SFTP".equalsIgnoreCase(getProtocol())) {
+                    tpoProtocolsHeadersList.add("Comm_Id");
+                    tpoProtocolsHeadersList.add("Partner_Id");
+                    tpoProtocolsHeadersList.add("Host");
+                    tpoProtocolsHeadersList.add("Port");
+                    tpoProtocolsHeadersList.add("Directory");
+                    tpoCommunicationsList = ServiceLocator.getPayloadService().getSFTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
+                     httpServletRequest.getSession(false).setAttribute("protocol", "SFTP");
+                } else if ("HTTP".equalsIgnoreCase(getProtocol())) {
+                    tpoProtocolsHeadersList.add("Comm_Id");
+                    tpoProtocolsHeadersList.add("Partner_Id");
+                    tpoProtocolsHeadersList.add("Rx_Protocol");
+                    tpoProtocolsHeadersList.add("URL");
+                    tpoProtocolsHeadersList.add("Port");
+                    tpoProtocolsHeadersList.add("Mode");
+                    tpoCommunicationsList = ServiceLocator.getPayloadService().getHTTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
+                     httpServletRequest.getSession(false).setAttribute("protocol", "HTTP");
+                } else if ("SMTP".equalsIgnoreCase(getProtocol())) {
+                    tpoProtocolsHeadersList.add("Comm_Id");
+                    tpoProtocolsHeadersList.add("Partner_Id");
+                    tpoProtocolsHeadersList.add("Host");
+                    tpoProtocolsHeadersList.add("Port");
+                    tpoProtocolsHeadersList.add("From_Mail");
+                    tpoProtocolsHeadersList.add("To_Mail");
+                    tpoCommunicationsList = ServiceLocator.getPayloadService().getSMTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
+                     httpServletRequest.getSession(false).setAttribute("protocol", "SMTP");
+                } else if ("AS2".equalsIgnoreCase(getProtocol())) {
+                    tpoProtocolsHeadersList.add("Comm_Id");
+                    tpoProtocolsHeadersList.add("Partner_Id");
+                    tpoProtocolsHeadersList.add("My_org");
+                    tpoProtocolsHeadersList.add("Your_org");
+                    tpoProtocolsHeadersList.add("My_pro");
+                    tpoProtocolsHeadersList.add("Your_pro");
+                    tpoCommunicationsList = ServiceLocator.getPayloadService().getAS2CommunicationsList(loginId, roleId, partnerId, getProtocol());
+                     httpServletRequest.getSession(false).setAttribute("protocol", "AS2");
+                }
+                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_ProtocolsHeadersList, tpoProtocolsHeadersList);
+                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_CommunicationsList, tpoCommunicationsList);
+                resultType = SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultType;
     }
 
     @Override
@@ -311,6 +388,14 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
 
     public void setDirection(String direction) {
         this.direction = direction;
+    }
+
+    public String getConn_type() {
+        return conn_type;
+    }
+
+    public void setConn_type(String conn_type) {
+        this.conn_type = conn_type;
     }
 
     public List getTxList() {
@@ -541,6 +626,62 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
 
     public void setUpload810obContentType(List<String> upload810obContentType) {
         this.upload810obContentType = upload810obContentType;
+    }
+
+    public Map getProtocolsList() {
+        return protocolsList;
+    }
+
+    public void setProtocolsList(Map protocolsList) {
+        this.protocolsList = protocolsList;
+    }
+
+    public int getCommunicationId() {
+        return communicationId;
+    }
+
+    public void setCommunicationId(int communicationId) {
+        this.communicationId = communicationId;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public String getIbTransaction() {
+        return ibTransaction;
+    }
+
+    public void setIbTransaction(String ibTransaction) {
+        this.ibTransaction = ibTransaction;
+    }
+
+    public String getObTransaction() {
+        return obTransaction;
+    }
+
+    public void setObTransaction(String obTransaction) {
+        this.obTransaction = obTransaction;
+    }
+
+    public List<TpOnboardingBean> getTpoCommunicationsList() {
+        return tpoCommunicationsList;
+    }
+
+    public void setTpoCommunicationsList(List<TpOnboardingBean> tpoCommunicationsList) {
+        this.tpoCommunicationsList = tpoCommunicationsList;
+    }
+
+    public List<String> getTpoProtocolsHeadersList() {
+        return tpoProtocolsHeadersList;
+    }
+
+    public void setTpoProtocolsHeadersList(List<String> tpoProtocolsHeadersList) {
+        this.tpoProtocolsHeadersList = tpoProtocolsHeadersList;
     }
 
    

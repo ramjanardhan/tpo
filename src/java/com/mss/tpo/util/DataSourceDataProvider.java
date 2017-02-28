@@ -14,10 +14,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 public class DataSourceDataProvider {
 
@@ -407,9 +409,9 @@ public class DataSourceDataProvider {
         }
         return email;
     }
-    
-    public static List<String> getTxList()throws ServiceLocatorException{
-             
+
+    public static List<String> getTxList() throws ServiceLocatorException {
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -423,8 +425,8 @@ public class DataSourceDataProvider {
             while (resultSet.next()) {
                 list.add(resultSet.getString("TRANSACTION_TYPE"));
                 //PartnerNameMap.put(resultSet.getInt("ID"), resultSet.getString("TRANSACTION_TYPE"));
-               // System.out.println("resultSet.getInt(\"ID\")=="+resultSet.getInt("ID"));
-                System.out.println("resultSet.getString(\"TRANSACTION_TYPE\")=="+resultSet.getString("TRANSACTION_TYPE"));
+                // System.out.println("resultSet.getInt(\"ID\")=="+resultSet.getInt("ID"));
+                System.out.println("resultSet.getString(\"TRANSACTION_TYPE\")==" + resultSet.getString("TRANSACTION_TYPE"));
             }
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);
@@ -449,5 +451,47 @@ public class DataSourceDataProvider {
         return list;
     }
 
-    
+    public Map getPayloadProtocols(String loginId, int roleId, int partnerId) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getConnection();
+        Map protocolsMap = new TreeMap();
+        try {
+            if (roleId == 3) {
+                // queryString = "select ID,CONCAT(CONCAT(ID, '_'), PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId;
+                queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId;
+            } else {
+                // queryString = "select ID,CONCAT(CONCAT(ID, '_'), PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId + " and CREATED_BY='" + loginId + "'";
+                queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId + " and CREATED_BY='" + loginId + "'";
+            }
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                protocolsMap.put(resultSet.getString("protocol"), resultSet.getString("protocol"));
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return protocolsMap;
+    }
+
 }

@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 public class TpOnboardingBean {
 
     private String partnerName;
+    private int partnerId;
     private String pwd;
     private String loginId;
     private String contactName;
@@ -221,6 +222,14 @@ public class TpOnboardingBean {
 
     public void setAddress1(String address1) {
         this.address1 = address1;
+    }
+
+    public int getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(int partnerId) {
+        this.partnerId = partnerId;
     }
 
     public String getAs2_myEndPoint() {

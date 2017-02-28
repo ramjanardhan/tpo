@@ -29,6 +29,8 @@ public class AppConstants {
     public static final String TPO_SearchProfileList = "tpoSearchProfileList";
     public static final String TPO_SearchEnvelopeList = "tpoSearchEnvelopeList";
     public static final String TPO_SearchPartnersList = "tpoSearchPartnersList";
+    public static final String TPO_CommunicationsList = "tpoCommunicationsList";
+    public static final String TPO_ProtocolsHeadersList = "tpoProtocolsHeadersList";
     public static final String TPO_SearchUsersList = "tpoSearchUsersList";
     public static final String PAYLOAD_SEARCH_LIST = "payloadSearchList";
     public static final String TPO_txList = "tpo_txlist";

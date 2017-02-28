@@ -37,7 +37,7 @@
         <action name="activateUser" class="com.mss.tpo.ajax.AjaxHandlerAction" method="activateUser"/>
          
         <action name="inActivateUser" class="com.mss.tpo.ajax.AjaxHandlerAction" method="inActivateUser"/>
-
+        
        <action name="testProfile" class = "com.mss.tpo.ajax.AjaxHandlerAction" method="testconnectionstatus"/>
        
 <!--        <action name="testConforFTPandFTPS" class ="com.mss.tpo.ajax.AjaxHandlerAction" method="testConforFTPandFTPS"/>

@@ -1333,15 +1333,21 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(12, envelopData[10]);
                     preparedStatement.setString(13, envelopData[11]);
                     preparedStatement.setString(14, envelopData[12]);
-                    preparedStatement.setString(15, envelopData[13]);
+                    if ("true".equalsIgnoreCase(envelopData[13])) {
+                        preparedStatement.setString(15, "YES");
+                    } else if ("false".equalsIgnoreCase(envelopData[13])) {
+                        preparedStatement.setString(15, "NO");
+                    }
                     preparedStatement.setString(16, envelopData[14]);
                     preparedStatement.setString(17, "N");
                     preparedStatement.setString(18, tpAction.getCreated_by());
                     preparedStatement.setTimestamp(19, curdate);
                     isEnevelopInserted = isEnevelopInserted + preparedStatement.executeUpdate();
+                    if ("true".equalsIgnoreCase(envelopData[13])) {
+                        int a = addAcknowledgeEnvelope(transactionsSplit[i], partnerId, tpAction.getCreated_by());
+                    }
                 }
             }
-
             //       mp = tpAction.getMap();
             if (isEnevelopInserted > 0) {
                 responseString = "<font color='green'>Inserted successfully</font>";
@@ -1358,9 +1364,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             ex.printStackTrace();
         } finally {
             try {
-                if (callableStatement != null) {
-                    callableStatement.close();
-                    callableStatement = null;
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
                 }
                 if (connection != null) {
                     connection.close();
@@ -1371,6 +1377,48 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             }
         }
         return responseString;
+    }
+
+    public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
+        int isEnevelopInserted = 0;
+        Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
+        System.out.println("ackEnvelopData-->" + ackEnvelopData);
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            String envelopsInsertQuery = "INSERT INTO TPO_ENVELOPES (PARTNER_ID, TRANSACTION, DIRECTION,  SENDERID_ISA,"
+                    + " SENDERID_GS, SENDERID_ST, RECEIVERID_ISA, RECEIVERID_GS, RECEIVERID_ST, VERSION_ISA, "
+                    + "VERSION_GS, VERSION_ST, FUNCTIONAL_ID_CODE_GS, RESPONSIBLE_AGENCY_CODE_GS, GENERATE_AN_ACKNOWLEDGEMENT_GS, "
+                    + "TRANSACTION_SET_ID_CODE_ST, TP_FLAG, CREATED_BY, CREATED_TS) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            System.out.println("ackEnvelopData::" + ackEnvelopData);
+            String envelopData1[] = ackEnvelopData.substring(0, ackEnvelopData.length()).split(Pattern.quote("@"));
+            preparedStatement = connection.prepareStatement(envelopsInsertQuery);
+            preparedStatement.setInt(1, partnerId);
+            preparedStatement.setString(2, envelopData1[0]);
+            preparedStatement.setString(3, "Outbound");
+            preparedStatement.setString(4, envelopData1[5]);//reciever
+            preparedStatement.setString(5, envelopData1[6]);
+            preparedStatement.setString(6, envelopData1[7]);
+            preparedStatement.setString(7, envelopData1[2]);//sender
+            preparedStatement.setString(8, envelopData1[3]);
+            preparedStatement.setString(9, envelopData1[4]);
+            preparedStatement.setString(10, envelopData1[8]);
+            preparedStatement.setString(11, envelopData1[9]);
+            preparedStatement.setString(12, envelopData1[10]);
+            preparedStatement.setString(13, "FA");
+            preparedStatement.setString(14, envelopData1[12]);
+            preparedStatement.setString(15, "YES");
+            preparedStatement.setString(16, "997");
+            preparedStatement.setString(17, "N");
+            preparedStatement.setString(18, loginId);
+            preparedStatement.setTimestamp(19, curdate);
+            isEnevelopInserted = isEnevelopInserted + preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return isEnevelopInserted;
     }
 
     public TpOnboardingBean tpoEditEnvelope(int partnerId, String transaction, String direction) throws ServiceLocatorException {
@@ -1410,9 +1458,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             ex.printStackTrace();
         } finally {
             try {
-                if (callableStatement != null) {
-                    callableStatement.close();
-                    callableStatement = null;
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
                 }
                 if (connection != null) {
                     connection.close();

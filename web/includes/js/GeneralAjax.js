@@ -117,12 +117,12 @@ function addPartner(flag) {
     var url;
     if (flag == 'admin') {
         if (roleId == 1) {
-             url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
+            url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
         } else {
-             url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&flag=' + flag;
+            url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&flag=' + flag;
         }
     } else {
-         url = './ajax/selfAddPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&flag=' + flag;
+        url = './ajax/selfAddPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&flag=' + flag;
     }
     //alert(url);
     req.open("GET", url, "true");
@@ -265,9 +265,9 @@ function acceptPartner() {
     req.onreadystatechange = readyStateHandlerLoadText(req, acceptPartnerResponse);
     var url;
     if (roleId == 1) {
-         url = "../ajax/acceptPartner.action?assignTo=" + assignTo + "&id=" + partnerId;
+        url = "../ajax/acceptPartner.action?assignTo=" + assignTo + "&id=" + partnerId;
     } else {
-         url = "../ajax/acceptPartner.action?assignTo=" + loginId + "&id=" + partnerId;
+        url = "../ajax/acceptPartner.action?assignTo=" + loginId + "&id=" + partnerId;
     }
     //alert(url);
     req.open("GET", url, "true");
@@ -298,7 +298,7 @@ function rejectPartnerResponse(resText) {
 }
 
 function testConnectionProfile(i, CommId, protocol, pName) {
-    document.getElementById("iValue").value = i;
+    // document.getElementById("iValue").value = i;
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerLoadText(req, testConnectionProfileResponse);
     var url = "../ajax/testProfile.action?communicationId=" + CommId + "&protocol=" + protocol + "&partnerName=" + pName;
@@ -311,12 +311,13 @@ function testConnectionProfile(i, CommId, protocol, pName) {
 function testConnectionProfileResponse(resText) {
     var result;
     if (resText == 'OK') {
-        result = '<font color=green>Success</font>';
+        result = 'Success';
     } else {
-        result = '<font color=red>Failed</font>';
+        result = 'Failed';
     }
-    var x = document.getElementById("iValue").value;
-    document.getElementById(x).innerHTML = result;
+    alert(result);
+    // var x = document.getElementById("iValue").value;
+    // document.getElementById(x).innerHTML = result;
 }
 
 function getPwdEmail(protocol) {
@@ -349,10 +350,10 @@ function getPwdEmail(protocol) {
         req.onreadystatechange = readyStateHandlerLoadText(req, isPwdSent);
         var url;
         if (protocol == "FTP") {
-             url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
+            url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&ftp_method=" + ftpMethod + "&ftp_conn_method=" + ftpConnMethod + "&ftp_recv_protocol=" + ftpRecvProtocol + "&ftp_resp_time=" + ftpRespTime + "&ftp_host=" + ftpHost + "&ftp_port=" + ftpPort + "&ftp_userId=" + ftpUserId + "&ftp_pwd=" + ftpPwd + "&ftp_directory=" + ftpDirectory;
         }
         if (protocol == "SFTP") {
-             url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
+            url = "../ajax/sendPwdEmail.action?protocol=" + protocol + "&transferMode" + transferMode + "&sftp_conn_method=" + sftp_conn_method + "&sftp_auth_method=" + sftp_auth_method + "&sftp_host_ip=" + sftp_host_ip + "&sftp_remote_port=" + sftp_remote_port + "&sftp_remote_userId=" + sftp_remote_userId + "&sftp_remote_pwd=" + sftp_remote_pwd + "&sftp_method=" + sftp_method + "&sftp_directory=" + sftp_directory;
         }
         req.open("GET", url, "true");
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

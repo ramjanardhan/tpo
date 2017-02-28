@@ -29,6 +29,11 @@
             <result name = "redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
+        <action name="getCommunicationsList" class="com.mss.tpo.payload.PayloadAction" method="getCommunicationsList">
+            <result name = "success">/payload/tpoPayloadupload.jsp</result>
+            <result name = "redirect">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
         
     </package>
 </struts>

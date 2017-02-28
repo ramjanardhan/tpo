@@ -52,24 +52,20 @@
             </div>
         </header>     
         <div class="container">
-            <div id="profileDeleteMsg"></div>
-           
             <s:form action="payloadSearch" method="POST" enctype="multipart/form-data" theme="simple">
                 <div id="site_content" class="jumbotron">
                     <div class="container">
+                        <div class="row" id="responseString">   
                         <center>
-                            
                              <%
                                 if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                    String reqponseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                    out.println(reqponseString);
+                                    String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                    out.println(responseString);
                                     session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
-                                    //java.util.List list_tx = (java.util.List)session.getAttribute(AppConstants.TPO_txList);
-                                    //System.out.println("list_tx ==="+list_tx);
                                 }
                             %>
-                            
                             </center>
+                        </div>
                         <div>
                             <div class="col-sm-3">
                                 <div class="form-group">

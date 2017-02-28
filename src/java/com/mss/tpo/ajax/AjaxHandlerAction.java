@@ -6,11 +6,14 @@
  */
 package com.mss.tpo.ajax;
 
+import com.mss.tpo.tpOnboarding.TpOnboardingBean;
 import com.mss.tpo.util.AppConstants;
 import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.MailManager;
 import com.mss.tpo.util.ServiceLocator;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -70,6 +73,8 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     private String sftp_remote_pwd;
     private String sftp_method;
     private String sftp_directory;
+    private List<TpOnboardingBean> tpoCommunicationsList;
+    private List<String> tpoProtocolsHeadersList;
 
     public String forgotPassword() throws Exception {
         try {
@@ -705,4 +710,21 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public void setSftp_directory(String sftp_directory) {
         this.sftp_directory = sftp_directory;
     }
+
+    public List<TpOnboardingBean> getTpoCommunicationsList() {
+        return tpoCommunicationsList;
+    }
+
+    public void setTpoCommunicationsList(List<TpOnboardingBean> tpoCommunicationsList) {
+        this.tpoCommunicationsList = tpoCommunicationsList;
+    }
+
+    public List<String> getTpoProtocolsHeadersList() {
+        return tpoProtocolsHeadersList;
+    }
+
+    public void setTpoProtocolsHeadersList(List<String> tpoProtocolsHeadersList) {
+        this.tpoProtocolsHeadersList = tpoProtocolsHeadersList;
+    }
+
 }

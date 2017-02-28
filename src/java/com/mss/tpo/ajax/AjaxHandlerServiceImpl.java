@@ -6,6 +6,7 @@
  */
 package com.mss.tpo.ajax;
 
+import com.mss.tpo.tpOnboarding.TpOnboardingBean;
 import com.mss.tpo.util.ConnectionProvider;
 import com.mss.tpo.util.ServiceLocatorException;
 import java.sql.Connection;
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.io.*;
 import javax.net.ssl.HttpsURLConnection;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import sun.net.www.protocol.ftp.FtpURLConnection;
 
 public class AjaxHandlerServiceImpl implements AjaxHandlerService {
@@ -56,6 +58,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
      */
     private HttpServletRequest httpServletRequest;
     private Statement statement;
+    private ArrayList<TpOnboardingBean> tpoCommunicationsList;
 
     public AjaxHandlerServiceImpl() {
     }
@@ -298,7 +301,12 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(11, envelopeData[10]);
             preparedStatement.setString(12, envelopeData[11]);
             preparedStatement.setString(13, envelopeData[12]);
-            preparedStatement.setString(14, envelopeData[13]);
+          //  preparedStatement.setString(14, envelopeData[13]);
+            if ("true".equalsIgnoreCase(envelopeData[13])) {
+                        preparedStatement.setString(14, "YES");
+                    } else if ("false".equalsIgnoreCase(envelopeData[13])) {
+                        preparedStatement.setString(14, "NO");
+                    }
             preparedStatement.setString(15, envelopeData[14]);
             preparedStatement.setString(16, loginId);
             preparedStatement.setTimestamp(17, DateUtility.getInstance().getCurrentDB2Timestamp());
@@ -307,6 +315,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(20, direction);
             preparedStatement.setInt(21, partnerId);
             count = count + preparedStatement.executeUpdate();
+             if ("true".equalsIgnoreCase(envelopeData[13])) {
+                       int a = addAcknowledgeEnvelope(envelopeDetials, partnerId, loginId);
+                    }
             if (count > 0) {
                 responseString = "<font color='green'>Envelope updated sucessfully</font>";
             } else {
@@ -332,6 +343,49 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
         return responseString;
     }
+    
+     public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
+        int isEnevelopInserted = 0;
+        Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
+        System.out.println("ackEnvelopData-->" + ackEnvelopData);
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            String envelopsInsertQuery = "INSERT INTO TPO_ENVELOPES (PARTNER_ID, TRANSACTION, DIRECTION,  SENDERID_ISA,"
+                    + " SENDERID_GS, SENDERID_ST, RECEIVERID_ISA, RECEIVERID_GS, RECEIVERID_ST, VERSION_ISA, "
+                    + "VERSION_GS, VERSION_ST, FUNCTIONAL_ID_CODE_GS, RESPONSIBLE_AGENCY_CODE_GS, GENERATE_AN_ACKNOWLEDGEMENT_GS, "
+                    + "TRANSACTION_SET_ID_CODE_ST, TP_FLAG, CREATED_BY, CREATED_TS) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            System.out.println("ackEnvelopData::" + ackEnvelopData);
+            String envelopData1[] = ackEnvelopData.substring(0, ackEnvelopData.length()).split(Pattern.quote("@"));
+            preparedStatement = connection.prepareStatement(envelopsInsertQuery);
+            preparedStatement.setInt(1, partnerId);
+            preparedStatement.setString(2, envelopData1[0]);
+            preparedStatement.setString(3, "Outbound");
+            preparedStatement.setString(4, envelopData1[5]);//reciever
+            preparedStatement.setString(5, envelopData1[6]);
+            preparedStatement.setString(6, envelopData1[7]);
+            preparedStatement.setString(7, envelopData1[2]);//sender
+            preparedStatement.setString(8, envelopData1[3]);
+            preparedStatement.setString(9, envelopData1[4]);
+            preparedStatement.setString(10, envelopData1[8]);
+            preparedStatement.setString(11, envelopData1[9]);
+            preparedStatement.setString(12, envelopData1[10]);
+            preparedStatement.setString(13, "FA");
+            preparedStatement.setString(14, envelopData1[12]);
+            preparedStatement.setString(15, "YES");
+            preparedStatement.setString(16, "997");
+            preparedStatement.setString(17, "N");
+            preparedStatement.setString(18, loginId);
+            preparedStatement.setTimestamp(19, curdate);
+            isEnevelopInserted = isEnevelopInserted + preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return isEnevelopInserted;
+    }
+
 
     public String getProtocolDetails(String transferMode, String protocol) throws ServiceLocatorException {
         stringBuffer = new StringBuffer();
@@ -349,36 +403,36 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 String ftpSslQuery = "";
                 String ftp_ssl_req = "";
                 subJson = new JSONObject();
-               if ("pull".equalsIgnoreCase(transferMode)) {
-                i = 1;
-                ftpTransferModeQuery = "SELECT ID,COMMUNICATION_ID,PARTNER_ID,FTP_METHOD,RECEIVING_PROTOCOL,FTP_HOST,FTP_PORT,"
-                        + "FTP_USER_ID,FTP_PASSWORD,FTP_DIRECTORY,CONNECTION_METHOD,RESPONSE_TIMEOUT_SEC,TRANSFER_MODE,"
-                        + "SSL_FLAG,CREATED_BY,CREATED_TS,MODIFIED_BY,MODIFIED_TS "
-                        + "FROM MSCVP.TPO_FTP WHERE ID = 1 AND TRANSFER_MODE = 'pull'";
-                resultSet = statement.executeQuery(ftpTransferModeQuery);
-                if (resultSet.next()) {
-                    subJson.put("FTP_METHOD", resultSet.getString("FTP_METHOD"));
-                    subJson.put("CONNECTION_METHOD", resultSet.getString("CONNECTION_METHOD"));
-                    subJson.put("RECEIVING_PROTOCOL", resultSet.getString("RECEIVING_PROTOCOL"));
-                    subJson.put("RESPONSE_TIMEOUT_SEC", resultSet.getInt("RESPONSE_TIMEOUT_SEC"));
-                    subJson.put("FTP_HOST", resultSet.getString("FTP_HOST"));
-                    subJson.put("FTP_PORT", resultSet.getString("FTP_PORT"));
-                    subJson.put("FTP_USER_ID", resultSet.getString("FTP_USER_ID"));
-                    subJson.put("FTP_PASSWORD", resultSet.getString("FTP_PASSWORD"));
-                    subJson.put("FTP_DIRECTORY", resultSet.getString("FTP_DIRECTORY"));
-                    ftp_ssl_req = resultSet.getString("SSL_FLAG");
-                    subJson.put("SSL_REQUIRED_FLAG", ftp_ssl_req);
-                }
-                if ("true".equalsIgnoreCase(ftp_ssl_req)) {
-                    ftpSslQuery = "SELECT ID,COMMUNICATION_ID,PROTOCOL, SSL_PRIORITY, KEY_CERTIFICATE_PASSPHRASE, CIPHER_STRENGTH, KEY_CERTIFICATE, CA_CERTIFICATES, TP_FLAG,PARTNER_ID,TRANSFER_MODE FROM MSCVP.TPO_SSL WHERE TRANSFER_MODE = 'pull' AND PROTOCOL = 'FTP' AND ID = 1";
-                    resultSet = statement.executeQuery(ftpSslQuery);
+                if ("pull".equalsIgnoreCase(transferMode)) {
+                    i = 1;
+                    ftpTransferModeQuery = "SELECT ID,COMMUNICATION_ID,PARTNER_ID,FTP_METHOD,RECEIVING_PROTOCOL,FTP_HOST,FTP_PORT,"
+                            + "FTP_USER_ID,FTP_PASSWORD,FTP_DIRECTORY,CONNECTION_METHOD,RESPONSE_TIMEOUT_SEC,TRANSFER_MODE,"
+                            + "SSL_FLAG,CREATED_BY,CREATED_TS,MODIFIED_BY,MODIFIED_TS "
+                            + "FROM MSCVP.TPO_FTP WHERE ID = 1 AND TRANSFER_MODE = 'pull'";
+                    resultSet = statement.executeQuery(ftpTransferModeQuery);
                     if (resultSet.next()) {
-                        subJson.put("SSL_PRIORITY", resultSet.getString("SSL_PRIORITY"));
-                        //subJson.put("KEY_CERTIFICATE_PASSPHRASE", resultSet.getString("KEY_CERTIFICATE_PASSPHRASE"));
-                        subJson.put("CIPHER_STRENGTH", resultSet.getString("CIPHER_STRENGTH"));
+                        subJson.put("FTP_METHOD", resultSet.getString("FTP_METHOD"));
+                        subJson.put("CONNECTION_METHOD", resultSet.getString("CONNECTION_METHOD"));
+                        subJson.put("RECEIVING_PROTOCOL", resultSet.getString("RECEIVING_PROTOCOL"));
+                        subJson.put("RESPONSE_TIMEOUT_SEC", resultSet.getInt("RESPONSE_TIMEOUT_SEC"));
+                        subJson.put("FTP_HOST", resultSet.getString("FTP_HOST"));
+                        subJson.put("FTP_PORT", resultSet.getString("FTP_PORT"));
+                        subJson.put("FTP_USER_ID", resultSet.getString("FTP_USER_ID"));
+                        subJson.put("FTP_PASSWORD", resultSet.getString("FTP_PASSWORD"));
+                        subJson.put("FTP_DIRECTORY", resultSet.getString("FTP_DIRECTORY"));
+                        ftp_ssl_req = resultSet.getString("SSL_FLAG");
+                        subJson.put("SSL_REQUIRED_FLAG", ftp_ssl_req);
+                    }
+                    if ("true".equalsIgnoreCase(ftp_ssl_req)) {
+                        ftpSslQuery = "SELECT ID,COMMUNICATION_ID,PROTOCOL, SSL_PRIORITY, KEY_CERTIFICATE_PASSPHRASE, CIPHER_STRENGTH, KEY_CERTIFICATE, CA_CERTIFICATES, TP_FLAG,PARTNER_ID,TRANSFER_MODE FROM MSCVP.TPO_SSL WHERE TRANSFER_MODE = 'pull' AND PROTOCOL = 'FTP' AND ID = 1";
+                        resultSet = statement.executeQuery(ftpSslQuery);
+                        if (resultSet.next()) {
+                            subJson.put("SSL_PRIORITY", resultSet.getString("SSL_PRIORITY"));
+                            //subJson.put("KEY_CERTIFICATE_PASSPHRASE", resultSet.getString("KEY_CERTIFICATE_PASSPHRASE"));
+                            subJson.put("CIPHER_STRENGTH", resultSet.getString("CIPHER_STRENGTH"));
+                        }
                     }
                 }
-            }
             } else if ("SFTP".equalsIgnoreCase(protocol)) {
                 String sftpTransferModeQuery = "";
                 if ("pull".equalsIgnoreCase(transferMode)) {
@@ -696,6 +750,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return responseString;
     }
 
+    
     public String getTestConnecitonStatus(int communicationId, String protocol, String partnerName) {
         String response = "";
         String https_url = "http://192.168.1.179:12042/testConnection";

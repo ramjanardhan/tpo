@@ -12,6 +12,18 @@ var ob855 = "";
 var ob856 = "";
 var ob810 = "";
 
+var allowedFiles = [".cer", ".cert"];
+var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+
+function ValidateExtension(fileName) {
+    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+    if (!regex.test(fileName.value.toLowerCase())) {
+        document.getElementById('protocolmsgSsl').innerHTML = "<font color=red>Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.</font>";
+        return false;
+    }
+    return true;
+}
+
 function checkPartnerInfo() {
     var contactEmail = document.getElementById("contactEmail").value;
     var phoneNo = document.getElementById("phoneNo").value;
@@ -2578,4 +2590,54 @@ function resetUserList() {
     document.getElementById("contactName").value = "";
     document.getElementById("country").value = "-1";
     document.getElementById("status").value = "-1";
+}
+
+function checkPayload() {
+    var docType = document.getElementById("docType").value;
+    if (docType == "-1" || docType == null) {
+        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select Document type</font>";
+        return false;
+    }
+    var direction = document.getElementById("direction").value;
+    if (direction == "-1" || direction == null) {
+        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select direction</font>";
+        return false;
+    }
+//    var ibTransaction = document.getElementById("ibTransaction").value;
+//    if (ibTransaction == "" || ibTransaction == null) {
+//        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select any one inbound transaction</font>";
+//        return false;
+//    }
+//    var obTransaction = document.getElementById("obTransaction").value;
+//    if (obTransaction == "" || obTransaction == null) {
+//        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select any one outbound transaction</font>";
+//        return false;
+//    }
+
+    var conn_type = document.getElementById("conn_type").value;
+    if (conn_type == "-1" || conn_type == null) {
+        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select connection type</font>";
+        return false;
+    }
+    var communicationId = document.getElementById("communicationId").value;
+    if (communicationId == "-1" || communicationId == null) {
+        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select Communication Id</font>";
+        return false;
+    }
+}
+
+function getCommunicationsList(protocol) {
+    var docType= document.getElementById('docType').value;
+    var direction= document.getElementById('direction').value;
+    var transaction= document.getElementById('transaction').value;
+    var conn_type= document.getElementById('conn_type').value;
+    if(direction=='Inbound'){
+         var ibTransaction=  document.forms["payloadForm"]["ibTransaction"].value;
+        window.location="../payload/getCommunicationsList.action?docType=" + docType+"&direction="+direction+"&ibTransaction="+ibTransaction+"&conn_type="+conn_type+"&protocol="+protocol;
+    }
+     if(direction=='Outbound'){
+          var obTransaction= document.forms["payloadForm"]["obTransaction"].value;
+        window.location="../payload/getCommunicationsList.action?docType=" + docType+"&direction="+direction+"&obTransaction="+obTransaction+"&conn_type="+conn_type+"&protocol="+protocol;
+    }
+    
 }
