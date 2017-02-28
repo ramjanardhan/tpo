@@ -10,6 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="no-cache" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>
         <link rel="stylesheet" href='<s:url value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap.min.css"/>' type="text/css"/>
@@ -169,7 +170,7 @@
                             </div> 
                             <div class="col-sm-3"> 
                                 <div class="form-group" id="protocolDiv" style="display: none">
-                                    <label>Protocols<span class="text-danger">*</span></label>
+                                    <label>Protocol<span class="text-danger">*</span></label>
                                     <s:select headerKey="-1" headerValue="-- Select --" list="protocolsList" name="protocol" id="protocol" value="%{protocol}" cssClass="form-control" onchange="getCommunicationsList(this.value);"/>         
                                 </div> 
                             </div>
@@ -182,8 +183,10 @@
                         </div>
                         <br>
                         <div id="loadingImage"></div>
+                        
                         <s:if test="#session.tpoProtocolsHeadersList != null"> 
                             <s:if test="#session.tpoCommunicationsList != null"> 
+                                <label>Communications<span class="text-danger">*</span></label>
                                 <div class="container" id="communicationsGrid">
                                     <div id="site_content" class="jumbotron">
                                         <div class="container">
@@ -191,7 +194,7 @@
                                             <table id="payloadTable" name="payloadTable" class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>Action</th>
+                                                        <th>Select</th>
                                                         <%
                                                             int roleId = (Integer) session.getAttribute(AppConstants.TPO_ROLE_ID);
                                                             String loginId = session.getAttribute(AppConstants.TPO_LOGIN_ID).toString();

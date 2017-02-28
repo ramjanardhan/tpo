@@ -97,6 +97,13 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             try {
                 List list = DataSourceDataProvider.getInstance().getTxList();
                 setTxList(list);
+                 httpServletRequest.getSession(false).removeAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
+                  int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
+                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                setCreated_by(loginId);
+                payloadSearchList = ServiceLocator.getPayloadService().payloadSearch(loginId, roleId, partnerId,"initialFlag",this);
+                httpServletRequest.getSession(false).setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, payloadSearchList);
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,10 +117,13 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
+                 int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 setCreated_by(loginId);
-                payloadSearchList = ServiceLocator.getPayloadService().payloadSearch(loginId, partnerId);
+                List list = DataSourceDataProvider.getInstance().getTxList();
+                setTxList(list);
+                payloadSearchList = ServiceLocator.getPayloadService().payloadSearch(loginId, roleId, partnerId,"searchFlag",this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, payloadSearchList);
                 resultType = SUCCESS;
             } catch (Exception e) {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface PayloadService {
 
-    public ArrayList<PayloadBean> payloadSearch(String loginId, int partnerId);
+    public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction);
 
     public String doPayloadUpload(int partnerId, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException;
 

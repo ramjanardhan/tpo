@@ -1,18 +1,9 @@
-
-
-<%-- 
-    Document   : tpoSearchProfile
-    Created on : Dec 27, 2016, 4:45:23 AM
-    Author     : miracle1
---%>
 <%@page import="com.mss.tpo.payload.PayloadBean"%>
 <%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
 <%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
-
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
-<%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -77,7 +68,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Transaction :</label>
-                                         <s:select headerKey="-1" headerValue="-- select --" list="txList" name="txList" id="txList" value="" cssClass="form-control" />
+                                         <s:select headerKey="-1" headerValue="-- select --" list="txList" name="transaction" id="transaction" value="" cssClass="form-control" />
                                 </div>
                             </div>
                             <div class="row">
@@ -93,9 +84,9 @@
                             </div>
                         </div>
                     </div>
+                                        <div id = "loadingImage"></div>
                     <div id="site_content" class="jumbotron">
                         <div class="container"> 
-                            <div id = "loadingImage"></div>
                             <s:if test="#session.payloadSearchList != null"> 
                                 <table id="profiletable" class="table table-bordered table-hover">
                                     <thead>
@@ -149,7 +140,8 @@
                                             </td>  
                                             <td>
                                                 <%
-                                                    out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":")));
+                                                    //out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":")));
+                                                    out.println(payloadBean.getLastTestDate());
                                                 %>
                                             </td>                                           
                                             
@@ -161,7 +153,7 @@
                                             
                                              <td>
                                                 <%
-                                                    out.println(payloadBean.getCurrentTestDate().toString().substring(0, payloadBean.getCurrentTestDate().toString().lastIndexOf(":")));
+                                                    out.println(payloadBean.getCurrentTestDate());
                                                 %>
                                             </td>
                                         </tr>
@@ -187,8 +179,8 @@
         <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
-        <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>  
+       <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
+<script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script>
                                             $(function () {
                                                 $('#profiletable').DataTable({
@@ -201,9 +193,8 @@
                                                 });
                                             });
                                             function resetValues() {
-                                                document.getElementById("commnProtocol").value = "-1";
-                                                document.getElementById("status").value = "-1";
-                                                document.getElementById("transferMode").checked = false;
+                                                document.getElementById("transaction").value = "-1";
+                                                document.getElementById("direction").value = "-1";
                                             }
         </script>
     </body>

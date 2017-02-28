@@ -2603,41 +2603,98 @@ function checkPayload() {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please select direction</font>";
         return false;
     }
-//    var ibTransaction = document.getElementById("ibTransaction").value;
-//    if (ibTransaction == "" || ibTransaction == null) {
-//        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select any one inbound transaction</font>";
-//        return false;
-//    }
-//    var obTransaction = document.getElementById("obTransaction").value;
-//    if (obTransaction == "" || obTransaction == null) {
-//        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select any one outbound transaction</font>";
-//        return false;
-//    }
-
     var conn_type = document.getElementById("conn_type").value;
     if (conn_type == "-1" || conn_type == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please select connection type</font>";
         return false;
+    } else if (conn_type == 'Comm_Protocol') {
+        var protocol = document.getElementById("protocol").value;
+        if (protocol == "-1" || protocol == null) {
+            document.getElementById('resultMessage').innerHTML = "<font color=red>Please select protocol</font>";
+            return false;
+        } else if (protocol != "-1") {
+            var communicationId = document.forms["payloadForm"]["communicationId"].value;
+            if (communicationId == "-1" || communicationId == null) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please select Communication Id</font>";
+                return false;
+            }
+        }
     }
-    var communicationId = document.getElementById("communicationId").value;
-    if (communicationId == "-1" || communicationId == null) {
-        document.getElementById('resultMessage').innerHTML = "<font color=red>Please select Communication Id</font>";
-        return false;
+    var transaction = document.getElementById('transaction').value;
+    if (direction == "Inbound") {
+        if (transaction == "850") {
+            var ib850 = document.getElementsByName("upload850ib").length;
+            if (ib850 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+        if (transaction == "855") {
+            var ib855 = document.getElementsByName("upload855ib").length;
+            if (ib855 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+        if (transaction == "856") {
+            var ib856 = document.getElementsByName("upload856ib").length;
+            if (ib856 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+        if (transaction == "810") {
+            var ib810 = document.getElementsByName("upload810ib").length;
+            if (ib810 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+    }
+    if (direction == "Outbound") {
+        if (transaction == "850") {
+            var ob850 = document.getElementsByName("upload850ob").length;
+            if (ob850 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+        if (transaction == "855") {
+            var ob855 = document.getElementsByName("upload855ob").length;
+            if (ob855 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+        if (transaction == "856") {
+            var ob856 = document.getElementsByName("upload856ob").length;
+            if (ob856 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
+        if (transaction == "810") {
+            var ob810 = document.getElementsByName("upload810ob").length;
+            if (ob810 == 0) {
+                document.getElementById('resultMessage').innerHTML = "<font color=red>Please Upload atleast one file</font>";
+                return false;
+            }
+        }
     }
 }
 
 function getCommunicationsList(protocol) {
-    var docType= document.getElementById('docType').value;
-    var direction= document.getElementById('direction').value;
-    var transaction= document.getElementById('transaction').value;
-    var conn_type= document.getElementById('conn_type').value;
-    if(direction=='Inbound'){
-         var ibTransaction=  document.forms["payloadForm"]["ibTransaction"].value;
-        window.location="../payload/getCommunicationsList.action?docType=" + docType+"&direction="+direction+"&ibTransaction="+ibTransaction+"&conn_type="+conn_type+"&protocol="+protocol;
+    var docType = document.getElementById('docType').value;
+    var direction = document.getElementById('direction').value;
+    var transaction = document.getElementById('transaction').value;
+    var conn_type = document.getElementById('conn_type').value;
+    if (direction == 'Inbound') {
+        var ibTransaction = document.forms["payloadForm"]["ibTransaction"].value;
+        window.location = "../payload/getCommunicationsList.action?docType=" + docType + "&direction=" + direction + "&ibTransaction=" + ibTransaction + "&conn_type=" + conn_type + "&protocol=" + protocol;
     }
-     if(direction=='Outbound'){
-          var obTransaction= document.forms["payloadForm"]["obTransaction"].value;
-        window.location="../payload/getCommunicationsList.action?docType=" + docType+"&direction="+direction+"&obTransaction="+obTransaction+"&conn_type="+conn_type+"&protocol="+protocol;
+    if (direction == 'Outbound') {
+        var obTransaction = document.forms["payloadForm"]["obTransaction"].value;
+        window.location = "../payload/getCommunicationsList.action?docType=" + docType + "&direction=" + direction + "&obTransaction=" + obTransaction + "&conn_type=" + conn_type + "&protocol=" + protocol;
     }
-    
+
 }

@@ -38,25 +38,37 @@ public class PayloadServiceImpl implements PayloadService {
     private ArrayList<PayloadBean> payloadSearchList;
      private ArrayList<TpOnboardingBean> tpoCommunicationsList;
 
-    public ArrayList<PayloadBean> payloadSearch(String loginId, int partnerId) {
-        StringBuffer queryString = new StringBuffer();
-        queryString.append(" SELECT * FROM MSCVP.TPO_PAYLOAD WHERE PARTNER_ID =" + partnerId);
-
+    public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction) {
+        StringBuffer payloadSearchQuery = new StringBuffer();
+        payloadSearchQuery.append(" SELECT * FROM MSCVP.TPO_PAYLOAD WHERE 1=1 ");
+        if ("searchFlag".equals(flag)) {
+            if (payloadAction.getDirection()!= null && !"".equals(payloadAction.getDirection().trim())) {
+                payloadSearchQuery.append(" AND DIRECTION='" + payloadAction.getDirection() + "' ");
+            }
+            if (payloadAction.getTransaction()!= null && !"-1".equals(payloadAction.getTransaction().trim())) {
+                payloadSearchQuery.append(" AND TRANSACTION='" + payloadAction.getTransaction() + "' ");
+            }
+        }
+        if (roleId == 3) {
+            payloadSearchQuery.append(" AND PARTNER_ID=" + partnerId + " ");
+        } else {
+            payloadSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
+        }
         try {
-            Connection con = ConnectionProvider.getInstance().getConnection();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(queryString.toString());
+            connection = ConnectionProvider.getInstance().getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(payloadSearchQuery.toString());
             payloadSearchList = new ArrayList<PayloadBean>();
-            while (rs.next()) {
+            while (resultSet.next()) {
                 PayloadBean payloadBean = new PayloadBean();
-                payloadBean.setId(rs.getInt("ID"));
-                payloadBean.setCorrelationID(rs.getInt("COMMUNICATION_ID"));
-                payloadBean.setTransaction(rs.getInt("TRANSACTION"));
-                payloadBean.setDirection(rs.getString("DIRECTION"));
-                payloadBean.setLastTestStatus(rs.getString("LAST_TEST_STATUS"));
-                payloadBean.setLastTestDate(rs.getTimestamp("LAST_TEST_DATE"));
-                payloadBean.setCurrentTestStatus(rs.getString("CURRENT_TEST_STATUS"));
-                payloadBean.setCurrentTestDate(rs.getTimestamp("CURRENT_TEST_DATE"));
+                payloadBean.setId(resultSet.getInt("ID"));
+                payloadBean.setCorrelationID(resultSet.getInt("COMMUNICATION_ID"));
+                payloadBean.setTransaction(resultSet.getInt("TRANSACTION"));
+                payloadBean.setDirection(resultSet.getString("DIRECTION"));
+                payloadBean.setLastTestStatus(resultSet.getString("LAST_TEST_STATUS"));
+                payloadBean.setLastTestDate(resultSet.getTimestamp("LAST_TEST_DATE"));
+                payloadBean.setCurrentTestStatus(resultSet.getString("CURRENT_TEST_STATUS"));
+                payloadBean.setCurrentTestDate(resultSet.getTimestamp("CURRENT_TEST_DATE"));
                 payloadSearchList.add(payloadBean);
             }
         } catch (Exception ex) {
@@ -64,7 +76,7 @@ public class PayloadServiceImpl implements PayloadService {
         }
         return payloadSearchList;
     }
-
+    
     public String doPayloadUpload(int partnerId, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException {
         int isPayloadInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
