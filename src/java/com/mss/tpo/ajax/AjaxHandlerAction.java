@@ -12,7 +12,6 @@ import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.MailManager;
 import com.mss.tpo.util.ServiceLocator;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

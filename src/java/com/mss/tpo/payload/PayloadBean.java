@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * @author miracle
  */
 public class PayloadBean {
-    
+
     private int id;
     private String docType;
     private String path;
@@ -24,23 +24,21 @@ public class PayloadBean {
     private String ststusFalg;
     private String lastTestStatus;
     private Timestamp lastTestDate;
-     private String currentTestStatus;
+    private String currentTestStatus;
     private Timestamp currentTestDate;
     private String status;
     private int transaction;
     private String direction;
     private int correlationID;
-   
 
-   
-     public int getId() {
+    public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getDirection() {
         return direction;
     }
@@ -160,8 +158,5 @@ public class PayloadBean {
     public void setCurrentTestDate(Timestamp currentTestDate) {
         this.currentTestDate = currentTestDate;
     }
-    
-    
-    
-    
+
 }

@@ -165,7 +165,7 @@
                             <div class="col-sm-3"> 
                                 <div class="form-group" id="connTypeDiv" style="display: none">
                                     <label>Connection Type<span class="text-danger">*</span></label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Comm_Protocol':'Commn Protocol','File_System':'File system'}" tabindex="1" name="conn_type" id="conn_type" value="%{conn_type}"  cssClass="form-control" onchange="getPayloadProtocols();"/>         
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Communication_Protocol':'Communication Protocol','File_System':'File system'}" tabindex="1" name="conn_type" id="conn_type" value="%{conn_type}"  cssClass="form-control" onchange="getPayloadProtocols();"/>         
                                 </div> 
                             </div> 
                             <div class="col-sm-3"> 
@@ -182,8 +182,7 @@
                            </div>--%>
                         </div>
                         <br>
-                        <div id="loadingImage"></div>
-                        
+                         <center><div id="CommMsg"></div></center>
                         <s:if test="#session.tpoProtocolsHeadersList != null"> 
                             <s:if test="#session.tpoCommunicationsList != null"> 
                                 <label>Communications<span class="text-danger">*</span></label>
@@ -195,13 +194,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Select</th>
-                                                        <%
-                                                            int roleId = (Integer) session.getAttribute(AppConstants.TPO_ROLE_ID);
-                                                            String loginId = session.getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                                                            String protocol = session.getAttribute("protocol").toString();
-                                                            java.util.List headerList = (java.util.List) session.getAttribute(AppConstants.TPO_ProtocolsHeadersList);
-                                                            for (int i = 0; i < headerList.size(); i++) {
-                                                        %>
+                                                            <%
+                                                                int roleId = (Integer) session.getAttribute(AppConstants.TPO_ROLE_ID);
+                                                                String loginId = session.getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                                                                String protocol = session.getAttribute("protocol").toString();
+                                                                java.util.List headerList = (java.util.List) session.getAttribute(AppConstants.TPO_ProtocolsHeadersList);
+                                                                for (int i = 0; i < headerList.size(); i++) {
+                                                            %>
                                                         <th> <% out.println(headerList.get(i));%></th>
                                                             <%
                                                                 } %>
@@ -216,7 +215,7 @@
                                                                 tpOnboardingBean = (TpOnboardingBean) list.get(i);
                                                     %>
 
-                                                    <% if ("FTP".equalsIgnoreCase(protocol)) { %>
+                                                    <% if ("FTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
@@ -228,7 +227,7 @@
                                                     </tr>
                                                     <%  }   %>
 
-                                                    <% if ("SFTP".equalsIgnoreCase(protocol)) { %>
+                                                    <% if ("SFTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
@@ -239,7 +238,7 @@
                                                     </tr>
                                                     <%  }   %>
 
-                                                    <% if ("HTTP".equalsIgnoreCase(protocol)) { %>
+                                                    <% if ("HTTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
@@ -251,7 +250,7 @@
                                                     </tr>
                                                     <%  }   %>
 
-                                                    <% if ("SMTP".equalsIgnoreCase(protocol)) { %>
+                                                    <% if ("SMTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
@@ -263,7 +262,7 @@
                                                     </tr>
                                                     <%  }   %>
 
-                                                    <% if ("AS2".equalsIgnoreCase(protocol)) { %>
+                                                    <% if ("AS2".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
@@ -287,11 +286,11 @@
                         <br>
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
-                                        <table id="uploadTable850ib">
-                                            <tr><td><s:file name="upload850ib" theme="simple"/></td></tr>
-                                        </table>
-                                        <input type="button" id="remove850ib" name="remove850ib" value="remove"/>
-                                        <input type="button" value="add" id="addMoreFile850ib"/>
+                            <table id="uploadTable850ib">
+                                <tr><td><s:file name="upload850ib" theme="simple"/></td></tr>
+                            </table>
+                            <input type="button" id="remove850ib" name="remove850ib" value="remove"/>
+                            <input type="button" value="add" id="addMoreFile850ib"/>
                         </div>
                         <%-- 850 Inbound  End div--%>
                         <%-- 855 Inbound   Start div--%>
@@ -724,7 +723,7 @@
 
         function getPayloadProtocols() {
             var conn_type = document.getElementById("conn_type").value;
-            if (conn_type == 'Comm_Protocol') {
+            if (conn_type == 'Communication_Protocol') {
                 document.getElementById("protocolDiv").style.display = 'block';
             } else {
                 document.getElementById("protocolDiv").style.display = 'none';

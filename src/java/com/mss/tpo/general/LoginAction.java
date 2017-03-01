@@ -143,7 +143,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
             }
 
             // url = "http://192.168.1.179:8084/tpo";
-             url = "http://localhost:8084/tpo";
+            url = "http://localhost:8084/tpo";
             setResultType("redirect");
 
         } catch (Exception ex) {

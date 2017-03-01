@@ -47,14 +47,14 @@
                 <div id="site_content" class="jumbotron">
                     <div class="container">
                         <div class="row" id="responseString">   
-                        <center>
-                             <%
-                                if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                    String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                    out.println(responseString);
-                                    session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
-                                }
-                            %>
+                            <center>
+                                <%
+                                    if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
+                                        String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                        out.println(responseString);
+                                        session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
+                                    }
+                                %>
                             </center>
                         </div>
                         <div>
@@ -64,11 +64,11 @@
                                     <s:select name="direction" id="direction" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="1" value=""  cssClass="form-control"/>         
                                 </div>
                             </div>
-                            
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Transaction :</label>
-                                         <s:select headerKey="-1" headerValue="-- select --" list="txList" name="transaction" id="transaction" value="" cssClass="form-control" />
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Transaction :</label>
+                                    <s:select headerKey="-1" headerValue="-- select --" list="txList" name="transaction" id="transaction" value="" cssClass="form-control" />
                                 </div>
                             </div>
                             <div class="row">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                                        <div id = "loadingImage"></div>
+                    <div id = "loadingImage"></div>
                     <div id="site_content" class="jumbotron">
                         <div class="container"> 
                             <s:if test="#session.payloadSearchList != null"> 
@@ -99,32 +99,30 @@
                                     <th>CUR&nbsp;TEST&nbsp;DATE</th>                                    
                                     </thead>
                                     <tbody>
-                                        
+
                                         <%
-                                            
-                                     int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
-                                      String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);  
-                                      session.getAttribute(AppConstants.TPO_PARTNER_ID);                                     
-                                      java.util.List list = (java.util.List) session.getAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
-                                      System.out.println("list ==== "+list);
-                                      if (list.size() != 0) {
+                                            int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
+                                            String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);
+                                            session.getAttribute(AppConstants.TPO_PARTNER_ID);
+                                            java.util.List list = (java.util.List) session.getAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
+                                            System.out.println("list ==== " + list);
+                                            if (list.size() != 0) {
                                                 PayloadBean payloadBean;%>
-                                                
-                                            <%
-                                                for (int i = 0; i < list.size(); i++) {
+
+                                        <%
+                                            for (int i = 0; i < list.size(); i++) {
                                                 payloadBean = (PayloadBean) list.get(i);
-                                                
-                                          %>
-                                          
+
+                                        %>
+
                                         <tr>
                                             <td>
-                                                <%
-                                                     out.println(payloadBean.getCorrelationID());
+                                                <%                                                    out.println(payloadBean.getCorrelationID());
                                                 %>
                                             </td>
                                             <td>
                                                 <%
-                                                   out.println(payloadBean.getTransaction());
+                                                    out.println(payloadBean.getTransaction());
                                                 %>
                                             </td>
                                             <td>
@@ -132,7 +130,7 @@
                                                     out.println(payloadBean.getDirection());
                                                 %>
                                             </td>
-                                           
+
                                             <td>
                                                 <%
                                                     out.println(payloadBean.getLastTestStatus());
@@ -144,14 +142,14 @@
                                                     out.println(payloadBean.getLastTestDate());
                                                 %>
                                             </td>                                           
-                                            
-                                             <td>
+
+                                            <td>
                                                 <%
-                                                   out.println(payloadBean.getCurrentTestStatus());
+                                                    out.println(payloadBean.getCurrentTestStatus());
                                                 %>
                                             </td>
-                                            
-                                             <td>
+
+                                            <td>
                                                 <%
                                                     out.println(payloadBean.getCurrentTestDate());
                                                 %>
@@ -164,7 +162,7 @@
                                     %>
                                 </table>
                             </s:if> 
-                             <%        session.setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, null);   %>
+                            <%        session.setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, null);%>
                         </s:form>
                     </div>
                 </div>
@@ -179,10 +177,10 @@
         <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-       <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
-<script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+        <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
+        <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script>
-                                            $(function () {
+                                            $(function() {
                                                 $('#profiletable').DataTable({
                                                     "paging": true,
                                                     "lengthChange": true,

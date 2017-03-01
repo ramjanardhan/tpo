@@ -6,13 +6,13 @@
         
         <default-interceptor-ref name="crudStack"/>     
         
-       <action name="payloadUpload" class="com.mss.tpo.payload.PayloadAction" method="payloadUpload">
+        <action name="payloadUpload" class="com.mss.tpo.payload.PayloadAction" method="payloadUpload">
             <result name="success">/payload/tpoPayloadupload.jsp</result>
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
-       <action name="doPayloadUpload" class="com.mss.tpo.payload.PayloadAction" method="doPayloadUpload">
+        <action name="doPayloadUpload" class="com.mss.tpo.payload.PayloadAction" method="doPayloadUpload">
             <result name="success" type="redirect">payloadUpload.action</result>
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>

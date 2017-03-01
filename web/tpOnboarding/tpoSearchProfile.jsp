@@ -139,7 +139,7 @@
                                     <th>CREATED_BY</th>
                                     <th>CREATED_DATE</th>
                                     <th>TEST</th>
-<!--                                    <th>TEST&nbsp;STATUS</th>-->
+                                    <!--                                    <th>TEST&nbsp;STATUS</th>-->
                                     <th>EDIT</th>
                                     <th>DELETE </th>
                                     </thead>
@@ -150,8 +150,8 @@
                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchProfileList);
                                             if (list.size() != 0) {
                                                 TpOnboardingBean tpOnboardingBean;
-                                            for (int i = 0; i < list.size(); i++) {
-                                                tpOnboardingBean = (TpOnboardingBean) list.get(i);%>
+                                                for (int i = 0; i < list.size(); i++) {
+                                                    tpOnboardingBean = (TpOnboardingBean) list.get(i);%>
                                         <tr>
                                             <td>
                                                 <%
@@ -175,12 +175,12 @@
                                             </td>
 
                                             <td align="center">   
-                                               <%-- <s:hidden id = "iValue"/>--%>
+                                                <%-- <s:hidden id = "iValue"/>--%>
                                                 <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(tpOnboardingBean.getId())%>","<%=(tpOnboardingBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                                             </td>
-<%--                                            <td>
-                                                <div id = "<%=i%>"></div>
-                                            </td>--%>
+                                            <%--                                            <td>
+                                                                                            <div id = "<%=i%>"></div>
+                                                                                        </td>--%>
                                             <td align="center">
                                                 <s:url var="myUrl" action="../tpOnboarding/tpogetProfile.action">
                                                     <s:param name="communicationId"><%=(tpOnboardingBean.getId())%></s:param>

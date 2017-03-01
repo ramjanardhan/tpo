@@ -481,16 +481,16 @@
                                     <label>CA&nbsp;Certificate:</label>
                                     <%--<s:textfield cssClass="button" name="ssl_sysStore" id="ssl_sysStore" tabindex="57" value="Download"/>--%>
                                     <s:a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</s:a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div id="sslDiv2" style="display: none">
-                            <div id="protocolmsgSsl"></div>
-                            <h4 style="color: #2d8fc8" class="heading_4">SSL  : </h4>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>SSL&nbsp;Priority:</label>
+                            <div id="sslDiv2" style="display: none">
+                                <div id="protocolmsgSsl"></div>
+                                <h4 style="color: #2d8fc8" class="heading_4">SSL  : </h4>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>SSL&nbsp;Priority:</label>
                                     <s:select list="#@java.util.LinkedHashMap@{'MUST':'Must','NONE':'None'}" name="ssl_priority2" id="ssl_priority2" value="%{ssl_priority2}" tabindex="47" cssClass="form-control" onchange="sslPriorityChange(this.value)"/>
                                 </div>
                             </div>

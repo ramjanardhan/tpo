@@ -301,12 +301,12 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(11, envelopeData[10]);
             preparedStatement.setString(12, envelopeData[11]);
             preparedStatement.setString(13, envelopeData[12]);
-          //  preparedStatement.setString(14, envelopeData[13]);
+            //  preparedStatement.setString(14, envelopeData[13]);
             if ("true".equalsIgnoreCase(envelopeData[13])) {
-                        preparedStatement.setString(14, "YES");
-                    } else if ("false".equalsIgnoreCase(envelopeData[13])) {
-                        preparedStatement.setString(14, "NO");
-                    }
+                preparedStatement.setString(14, "YES");
+            } else if ("false".equalsIgnoreCase(envelopeData[13])) {
+                preparedStatement.setString(14, "NO");
+            }
             preparedStatement.setString(15, envelopeData[14]);
             preparedStatement.setString(16, loginId);
             preparedStatement.setTimestamp(17, DateUtility.getInstance().getCurrentDB2Timestamp());
@@ -315,9 +315,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(20, direction);
             preparedStatement.setInt(21, partnerId);
             count = count + preparedStatement.executeUpdate();
-             if ("true".equalsIgnoreCase(envelopeData[13])) {
-                       int a = addAcknowledgeEnvelope(envelopeDetials, partnerId, loginId);
-                    }
+            if ("true".equalsIgnoreCase(envelopeData[13])) {
+                int a = addAcknowledgeEnvelope(envelopeDetials, partnerId, loginId);
+            }
             if (count > 0) {
                 responseString = "<font color='green'>Envelope updated sucessfully</font>";
             } else {
@@ -343,8 +343,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
         return responseString;
     }
-    
-     public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
+
+    public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
         int isEnevelopInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         System.out.println("ackEnvelopData-->" + ackEnvelopData);
@@ -385,7 +385,6 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         }
         return isEnevelopInserted;
     }
-
 
     public String getProtocolDetails(String transferMode, String protocol) throws ServiceLocatorException {
         stringBuffer = new StringBuffer();
@@ -750,7 +749,6 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return responseString;
     }
 
-    
     public String getTestConnecitonStatus(int communicationId, String protocol, String partnerName) {
         String response = "";
         String https_url = "http://192.168.1.179:12042/testConnection";

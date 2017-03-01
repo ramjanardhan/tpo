@@ -13,7 +13,7 @@ public interface PayloadService {
 
     public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction);
 
-    public String doPayloadUpload(int partnerId, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException;
+    public String doPayloadUpload(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException;
 
     public ArrayList<TpOnboardingBean> getFTPCommunicationsList(String loginId, int roleId, int partnerId, String protocol) throws ServiceLocatorException;
 
