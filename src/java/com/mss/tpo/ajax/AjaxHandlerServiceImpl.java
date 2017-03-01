@@ -347,7 +347,6 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
     public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
         int isEnevelopInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
-        System.out.println("ackEnvelopData-->" + ackEnvelopData);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             String envelopsInsertQuery = "INSERT INTO TPO_ENVELOPES (PARTNER_ID, TRANSACTION, DIRECTION,  SENDERID_ISA,"
@@ -355,11 +354,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "VERSION_GS, VERSION_ST, FUNCTIONAL_ID_CODE_GS, RESPONSIBLE_AGENCY_CODE_GS, GENERATE_AN_ACKNOWLEDGEMENT_GS, "
                     + "TRANSACTION_SET_ID_CODE_ST, TP_FLAG, CREATED_BY, CREATED_TS) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-            System.out.println("ackEnvelopData::" + ackEnvelopData);
             String envelopData1[] = ackEnvelopData.substring(0, ackEnvelopData.length()).split(Pattern.quote("@"));
             preparedStatement = connection.prepareStatement(envelopsInsertQuery);
             preparedStatement.setInt(1, partnerId);
-            preparedStatement.setString(2, envelopData1[0]);
+            preparedStatement.setString(2, "997");
             preparedStatement.setString(3, "Outbound");
             preparedStatement.setString(4, envelopData1[5]);//reciever
             preparedStatement.setString(5, envelopData1[6]);

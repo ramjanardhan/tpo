@@ -1394,7 +1394,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             String envelopData1[] = ackEnvelopData.substring(0, ackEnvelopData.length()).split(Pattern.quote("@"));
             preparedStatement = connection.prepareStatement(envelopsInsertQuery);
             preparedStatement.setInt(1, partnerId);
-            preparedStatement.setString(2, envelopData1[0]);
+            preparedStatement.setString(2, "997");
             preparedStatement.setString(3, "Outbound");
             preparedStatement.setString(4, envelopData1[5]);//reciever
             preparedStatement.setString(5, envelopData1[6]);

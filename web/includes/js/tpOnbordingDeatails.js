@@ -2434,7 +2434,7 @@ function addPtnerLengthValidator(element) {
         }
         if (element.id == 'addphoneNo') {
             k = 1;
-            i = 15;
+            i = 10;
             validatenumber(element);
             generalFormatPhone(element);
         }
