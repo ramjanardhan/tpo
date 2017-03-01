@@ -743,20 +743,14 @@
         
         
          function fileUploadValidation(file) {
-             alert(file);
-                    
                 if (file != '')
                 {
-                   alert("in if");                   
- 
                     var extension = file.substring(file.lastIndexOf('.')+1);
                     if(extension=="cer"||extension=="cert"){
-                      alert("accepted extension");
                       document.getElementById('resultMsg').innerHTML="";
                     }
                     else 
                     {
-                        alert("in else");
                        // document.getElementById('imageUpdate').value = "";
                         document.getElementById('resultMsg').innerHTML = "<font color=red>Invalid file extension!Please select cer or cert file.</font>"
                         //$("imageErrorMsg").html("<font color='red'>Invalid file extension!<br> Please select gif or jpg or png file</font>");
@@ -764,7 +758,7 @@
                         return false;
                     }
                 }
-                $("#imageErrorMsg").html("");
+//                $("#imageErrorMsg").html("");
                 return true;
             }
 </script>

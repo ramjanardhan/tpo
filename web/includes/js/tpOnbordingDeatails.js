@@ -2635,7 +2635,6 @@ function checkPayload() {
                     var file= document.getElementsByName("upload850ib")[i].value;
                     if(file==""){
                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                         alert("please upload file"+(i+1));
                     return false;
                 }
                 
@@ -2655,7 +2654,7 @@ function checkPayload() {
                     for(i=0;i<=ib855;i++){
                     var file= document.getElementsByName("upload855ib")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
@@ -2674,7 +2673,7 @@ function checkPayload() {
                     for(i=0;i<=ib856;i++){
                     var file= document.getElementsByName("upload856ib")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
@@ -2693,7 +2692,7 @@ function checkPayload() {
                     for(i=0;i<=ib810;i++){
                     var file= document.getElementsByName("upload810ib")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
@@ -2714,7 +2713,7 @@ function checkPayload() {
                     for(i=0;i<=ob850;i++){
                     var file= document.getElementsByName("upload850ob")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
@@ -2733,7 +2732,7 @@ function checkPayload() {
                     for(i=0;i<=ob855;i++){
                     var file= document.getElementsByName("upload855ob")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
@@ -2752,7 +2751,7 @@ function checkPayload() {
                     for(i=0;i<=ob856;i++){
                     var file= document.getElementsByName("upload856ob")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
@@ -2771,7 +2770,7 @@ function checkPayload() {
                     for(i=0;i<=ob810;i++){
                     var file= document.getElementsByName("upload810ob")[i].value;
                     if(file==""){
-                         alert("please upload file"+(i+1));
+                          document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
                     return false;
                 }
                 }
