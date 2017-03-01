@@ -15,8 +15,7 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <script>
-            function doOnLoad()
-            {
+            function doOnLoad() {
                 $("#envelopes").addClass("active");
             }
         </script>

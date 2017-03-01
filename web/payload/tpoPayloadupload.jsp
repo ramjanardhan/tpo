@@ -82,7 +82,6 @@
                 margin-top: 8px; 
             }
         </style>
-
     </head>
     <body onload="doOnLoad();" class="home">
         <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
@@ -146,7 +145,7 @@
                             <div class="row" id="ddt" style="display: none">
                                 <div class="col-sm-4 continum">
                                     <div class="form-group">
-                                        <h4 style="color: black">DocumentType&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="docTypeValue" id="docTypeValue" value="" readonly="true" cssClass="jumbotron_bg"/></h4>
+                                        <h4 style="color: black">Document&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="docTypeValue" id="docTypeValue" value="" readonly="true" cssClass="jumbotron_bg"/></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4 continum">
@@ -174,17 +173,11 @@
                                     <s:select headerKey="-1" headerValue="-- Select --" list="protocolsList" name="protocol" id="protocol" value="%{protocol}" cssClass="form-control" onchange="getCommunicationsList(this.value);"/>         
                                 </div> 
                             </div>
-                            <%--<div class="col-sm-3"> 
-                           <div class="form-group" id="protocolDiv" style="display: none">
-                               <label>Comm_Id :</label>
-                                  <s:select headerKey="-1" headerValue="-- Select --" list="communicationsList" name="communicationsList" id="communicationsList" value="" cssClass="form-control"/>         
-                             </div> 
-                           </div>--%>
                         </div>
                         <br>
-                         <center><div id="CommMsg"></div></center>
-                        <s:if test="#session.tpoProtocolsHeadersList != null"> 
-                            <s:if test="#session.tpoCommunicationsList != null"> 
+                        <center><div id="CommMsg"></div></center>
+                            <s:if test="#session.tpoProtocolsHeadersList != null"> 
+                                <s:if test="#session.tpoCommunicationsList != null"> 
                                 <label>Communications<span class="text-danger">*</span></label>
                                 <div class="container" id="communicationsGrid">
                                     <div id="site_content" class="jumbotron">
@@ -196,8 +189,6 @@
                                                     <tr>
                                                         <th>Select</th>
                                                             <%
-                                                                int roleId = (Integer) session.getAttribute(AppConstants.TPO_ROLE_ID);
-                                                                String loginId = session.getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                                                                 String protocol = session.getAttribute("protocol").toString();
                                                                 java.util.List headerList = (java.util.List) session.getAttribute(AppConstants.TPO_ProtocolsHeadersList);
                                                                 for (int i = 0; i < headerList.size(); i++) {
@@ -411,28 +402,14 @@
                 //$("#obTransaction").trigger("change");
             }
             $("#conn_type").trigger("change");
-//            document.getElementById("docType").value = "-1";
-//            document.getElementById("direction").value = "-1";
-//            document.getElementById("conn_type").value = "-1";
-//            $("#inBoundTransactions").hide();
-//            $("#outBoundTransactions").hide();
-//            $("#ibenvelop850").hide();
-//            $("#ibenvelop855").hide();
-//            $("#ibenvelop856").hide();
-//            $("#ibenvelop810").hide();
-//            $("#obenvelop850").hide();
-//            $("#obenvelop855").hide();
-//            $("#obenvelop856").hide();
-//            $("#obenvelop810").hide();
-//            $("#ddt").hide();
         }
-        function setdoctype()
-        {
+
+        function setdoctype() {
             var docType = document.getElementById("docType").value;
             document.getElementById("docTypeValue").value = docType;
         }
-        function setdirection()
-        {
+
+        function setdirection() {
             var direction = document.getElementById("direction").value;
             if (direction == 'Inbound') {
                 $("#inBoundTransactions").show();
@@ -493,6 +470,7 @@
             $("#obenvelop810").hide();
             $("#ddt").hide();
         }
+
         function transactionChange(x) {
             var direction = document.getElementById('direction').value;
             document.getElementById('transaction').value = x;
@@ -644,7 +622,6 @@
                 $('#uploadTable850ib tr:last').remove();
             })
 
-
             $('#addMoreFile855ib').click(function() {
                 $('#uploadTable855ib').append(
                         '<tr><td><s:file name="upload855ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
@@ -654,7 +631,6 @@
             $('#remove855ib').click(function() {
                 $('#uploadTable855ib tr:last').remove();
             })
-
 
             $('#addMoreFile856ib').click(function() {
                 $('#uploadTable856ib').append(
@@ -676,7 +652,6 @@
                 $('#uploadTable810ib tr:last').remove();
             })
 
-
             $('#addMoreFile850ob').click(function() {
                 $('#uploadTable850ob').append(
                         '<tr><td><s:file name="upload850ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
@@ -686,7 +661,6 @@
             $('#remove850ob').click(function() {
                 $('#uploadTable850ob tr:last').remove();
             })
-
 
             $('#addMoreFile855ob').click(function() {
                 $('#uploadTable855ob').append(
@@ -698,7 +672,6 @@
                 $('#uploadTable855ob tr:last').remove();
             })
 
-
             $('#addMoreFile856ob').click(function() {
                 $('#uploadTable856ob').append(
                         '<tr><td><s:file name="upload856ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
@@ -708,7 +681,6 @@
             $('#remove856ob').click(function() {
                 $('#uploadTable856ob tr:last').remove();
             })
-
 
             $('#addMoreFile810ob').click(function() {
                 $('#uploadTable810ob').append(
@@ -730,6 +702,7 @@
                 document.getElementById("protocolDiv").style.display = 'none';
             }
         }
+
         $(function() {
             $('#payloadTable').DataTable({
                 "paging": true,
@@ -740,27 +713,19 @@
                 "autoWidth": false
             });
         });
-        
-        
-         function fileUploadValidation(file) {
-                if (file != '')
-                {
-                    var extension = file.substring(file.lastIndexOf('.')+1);
-                    if(extension=="cer"||extension=="cert"){
-                      document.getElementById('resultMsg').innerHTML="";
-                    }
-                    else 
-                    {
-                       // document.getElementById('imageUpdate').value = "";
-                        document.getElementById('resultMsg').innerHTML = "<font color=red>Invalid file extension!Please select cer or cert file.</font>"
-                        //$("imageErrorMsg").html("<font color='red'>Invalid file extension!<br> Please select gif or jpg or png file</font>");
-                        // $("#InsertContactInfo").html(" <font color=red>Invalid file extension! Please select gif or jpg or png file</font>");
-                        return false;
-                    }
+
+        function fileUploadValidation(file) {
+            if (file != '') {
+                var extension = file.substring(file.lastIndexOf('.') + 1);
+                if (extension == "cer" || extension == "cert") {
+                    document.getElementById('resultMsg').innerHTML = "";
+                } else {
+                    document.getElementById('resultMsg').innerHTML = "<font color=red>Invalid file extension!Please select cer or cert file.</font>"
+                    return false;
                 }
-//                $("#imageErrorMsg").html("");
-                return true;
             }
+            return true;
+        }
 </script>
 </body>
 </html>

@@ -19,19 +19,6 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
-        <script>
-            function doOnLoad() {
-                $("#PayLoad").addClass("active");
-            }
-        </script>
-        <style>
-            #transferModeget{
-                margin:5px;
-            }
-            #transferModeput{
-                margin:5px;
-            }
-        </style>
     </head>
     <body class="home" onload="doOnLoad()">
         <div>
@@ -99,61 +86,23 @@
                                     <th>CUR&nbsp;TEST&nbsp;DATE</th>                                    
                                     </thead>
                                     <tbody>
-
                                         <%
                                             int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
-                                            String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);
-                                            session.getAttribute(AppConstants.TPO_PARTNER_ID);
                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
-                                            System.out.println("list ==== " + list);
                                             if (list.size() != 0) {
-                                                PayloadBean payloadBean;%>
-
-                                        <%
-                                            for (int i = 0; i < list.size(); i++) {
-                                                payloadBean = (PayloadBean) list.get(i);
-
+                                                PayloadBean payloadBean;
+                                                for (int i = 0; i < list.size(); i++) {
+                                                    payloadBean = (PayloadBean) list.get(i);
                                         %>
-
                                         <tr>
-                                            <td>
-                                                <%                                                    out.println(payloadBean.getCorrelationID());
-                                                %>
-                                            </td>
-                                            <td>
-                                                <%
-                                                    out.println(payloadBean.getTransaction());
-                                                %>
-                                            </td>
-                                            <td>
-                                                <%
-                                                    out.println(payloadBean.getDirection());
-                                                %>
-                                            </td>
-
-                                            <td>
-                                                <%
-                                                    out.println(payloadBean.getLastTestStatus());
-                                                %>
-                                            </td>  
-                                            <td>
-                                                <%
-                                                    //out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":")));
-                                                    out.println(payloadBean.getLastTestDate());
-                                                %>
-                                            </td>                                           
-
-                                            <td>
-                                                <%
-                                                    out.println(payloadBean.getCurrentTestStatus());
-                                                %>
-                                            </td>
-
-                                            <td>
-                                                <%
-                                                    out.println(payloadBean.getCurrentTestDate());
-                                                %>
-                                            </td>
+                                            <td> <% out.println(payloadBean.getCorrelationID()); %> </td>
+                                            <td> <% out.println(payloadBean.getTransaction()); %> </td>
+                                            <td> <% out.println(payloadBean.getDirection()); %> </td>
+                                            <td> <% out.println(payloadBean.getLastTestStatus()); %> </td>  
+                                            <%--    <td> <% //out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":"))); %> </td> --%>
+                                            <td> <% out.println(payloadBean.getLastTestDate()); %> </td>                                           
+                                            <td> <% out.println(payloadBean.getCurrentTestStatus()); %> </td>
+                                            <td> <% out.println(payloadBean.getCurrentTestDate()); %> </td>
                                         </tr>
                                     </tbody>
                                     <%
@@ -162,7 +111,7 @@
                                     %>
                                 </table>
                             </s:if> 
-                            <%        session.setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, null);%>
+                            <% session.setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, null);%>
                         </s:form>
                     </div>
                 </div>
@@ -180,6 +129,10 @@
         <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script>
+                                            function doOnLoad() {
+                                                $("#PayLoad").addClass("active");
+                                            }
+
                                             $(function() {
                                                 $('#profiletable').DataTable({
                                                     "paging": true,
@@ -190,6 +143,7 @@
                                                     "autoWidth": false
                                                 });
                                             });
+
                                             function resetValues() {
                                                 document.getElementById("transaction").value = "-1";
                                                 document.getElementById("direction").value = "-1";

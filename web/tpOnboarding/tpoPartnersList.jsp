@@ -104,32 +104,12 @@
                                             int id = tpOnboardingBean.getId();
                                 %>
                                 <tr>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getPartnerName());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getPhoneNo());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCountry());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCreated_by());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCreated_ts());
-                                        %>
-                                    </td>
-                                    <td>
+                                    <td> <% out.println(tpOnboardingBean.getPartnerName()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getPhoneNo()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCountry()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCreated_ts()); %> </td>
+                                    <td> 
                                         <%
                                             if (tpOnboardingBean.getStatus().equalsIgnoreCase("REJECTED")) {
                                                 out.println("<font color='red'>" + tpOnboardingBean.getStatus() + "</font>");
@@ -138,7 +118,6 @@
                                             } else {
                                                 out.println("<font color='orange'>" + tpOnboardingBean.getStatus() + "</font>");
                                             }
-                                            //out.println(tpOnboardingBean.getStatus());
                                         %>
                                     </td>
                                     <td align="center">

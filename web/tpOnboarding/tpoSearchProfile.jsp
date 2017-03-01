@@ -24,8 +24,6 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/build.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
-        <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
-        <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <link rel="stylesheet" href='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
         <script>
             function doOnLoad() {
@@ -48,22 +46,17 @@
             #transferModeput{
                 margin:5px;
             }
-
             .block_div{
                 overflow: hidden; 
             }
-
-
             @media only screen and (max-width: 465px) {
                 #Synchronous {
                     word-wrap: break-word;
                 }
-
                 #site_content{
                     padding: 3px 12px;
                 }
             } 
-
             @media  (min-width: 992px) and (max-width: 1192px) {
                 #set_align{
                     margin: 0 16px;
@@ -153,34 +146,15 @@
                                                 for (int i = 0; i < list.size(); i++) {
                                                     tpOnboardingBean = (TpOnboardingBean) list.get(i);%>
                                         <tr>
-                                            <td>
-                                                <%
-                                                    out.println(tpOnboardingBean.getId());
-                                                %>
-                                            </td>
-                                            <td>
-                                                <%
-                                                    out.println(tpOnboardingBean.getCommnProtocol());
-                                                %>
-                                            </td>
-                                            <td>
-                                                <%
-                                                    out.println(tpOnboardingBean.getCreated_by());
-                                                %>
-                                            </td>  
-                                            <td>
-                                                <%
-                                                    out.println(tpOnboardingBean.getCreated_ts().toString().substring(0, tpOnboardingBean.getCreated_ts().toString().lastIndexOf(":")));
-                                                %>
-                                            </td>
-
+                                            <td> <% out.println(tpOnboardingBean.getId()); %> </td>
+                                            <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
+                                            <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>  
+                                            <td> <% out.println(tpOnboardingBean.getCreated_ts().toString().substring(0, tpOnboardingBean.getCreated_ts().toString().lastIndexOf(":")));%> </td>
                                             <td align="center">   
                                                 <%-- <s:hidden id = "iValue"/>--%>
                                                 <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(tpOnboardingBean.getId())%>","<%=(tpOnboardingBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                                             </td>
-                                            <%--                                            <td>
-                                                                                            <div id = "<%=i%>"></div>
-                                                                                        </td>--%>
+                                            <%--  <td> <div id = "<%=i%>"></div> </td>--%>
                                             <td align="center">
                                                 <s:url var="myUrl" action="../tpOnboarding/tpogetProfile.action">
                                                     <s:param name="communicationId"><%=(tpOnboardingBean.getId())%></s:param>
@@ -224,9 +198,8 @@
                                         } else {
                                             if (list.size() != 0) {
                                         %>
-                                        <tr >
-                                            <td align="right" colspan="28" style="background-color: white;">
-                                            </td>
+                                        <tr>
+                                            <td align="right" colspan="28" style="background-color: white;"> </td>
                                         </tr> 
                                     </tbody>
                                     <%

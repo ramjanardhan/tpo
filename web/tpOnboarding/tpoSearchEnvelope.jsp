@@ -91,35 +91,17 @@
                             </thead>
                             <tbody>
                                 <%
-                                    int id;
-                                    id = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
+                                    int id = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
                                     java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchEnvelopeList);
                                     if (list.size() != 0) {
                                         TpOnboardingBean tpOnboardingBean;
-
                                         for (int i = 0; i < list.size(); i++) {
                                             tpOnboardingBean = (TpOnboardingBean) list.get(i);%>
                                 <tr>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getTransaction());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getDirection());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCreated_by());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCreated_ts());
-                                        %>
-                                    </td>
+                                    <td> <% out.println(tpOnboardingBean.getTransaction()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getDirection()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCreated_ts());%> </td>
                                     <td align="center">
                                         <s:url var="myUrl" action="../tpOnboarding/tpoEditEnvelope.action">
                                             <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 

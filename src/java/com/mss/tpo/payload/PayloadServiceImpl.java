@@ -40,7 +40,7 @@ public class PayloadServiceImpl implements PayloadService {
 
     public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction) {
         StringBuffer payloadSearchQuery = new StringBuffer();
-        payloadSearchQuery.append(" SELECT PARTNER_ID, PARTNER_NAME, DOC_TYPE, DIRECTION, TRANSACTION, CONNECTION_TYPE, ");
+        payloadSearchQuery.append(" SELECT ID,PARTNER_ID, PARTNER_NAME, DOC_TYPE, DIRECTION, TRANSACTION, CONNECTION_TYPE, ");
         payloadSearchQuery.append(" COMMUNICATION_ID, PATH, STATUS, LAST_TEST_STATUS, LAST_TEST_DATE, CURRENT_TEST_STATUS, ");
         payloadSearchQuery.append(" CURRENT_TEST_DATE, STATUS_FLAG, CREATED_BY, CREATED_TS FROM MSCVP.TPO_PAYLOAD WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {

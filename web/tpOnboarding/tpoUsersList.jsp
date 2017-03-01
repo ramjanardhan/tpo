@@ -114,7 +114,6 @@
                             </thead>
                             <tbody>
                                 <%
-                                    int roleId = (Integer) session.getAttribute(AppConstants.TPO_ROLE_ID);
                                     java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchUsersList);
                                     if (list.size() != 0) {
                                         TpOnboardingBean tpOnboardingBean;
@@ -123,31 +122,11 @@
                                             int id = tpOnboardingBean.getId();
                                 %>
                                 <tr>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getContactName());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getPhoneNo());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCountry());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCreated_by());
-                                        %>
-                                    </td>
-                                    <td>
-                                        <%
-                                            out.println(tpOnboardingBean.getCreated_ts());
-                                        %>
-                                    </td>
+                                    <td> <% out.println(tpOnboardingBean.getContactName()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getPhoneNo()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCountry()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getCreated_ts()); %> </td>
                                     <td>
                                         <%
                                             if (tpOnboardingBean.getStatus().equalsIgnoreCase("I")) {
@@ -155,7 +134,6 @@
                                             } else if (tpOnboardingBean.getStatus().equalsIgnoreCase("A")) {
                                                 out.println("<font color='green'>ACTIVE</font>");
                                             }
-                                            //out.println(tpOnboardingBean.getStatus());
                                         %>
                                     </td>
                                     <td align="center">

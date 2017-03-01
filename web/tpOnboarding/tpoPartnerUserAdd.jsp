@@ -19,7 +19,6 @@
                 $("#services").addClass("active");
             }
         </script>
-
         <style>
             @media  (min-width: 992px) and (max-width: 1192px) {
                 #set_align1{
