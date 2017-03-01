@@ -119,7 +119,7 @@
                             <div class="col-sm-3"> 
                                 <div class="form-group">
                                     <label>Direction<span class="text-danger">*</span></label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="1" name="direction" id="direction" value="%{direction}"  onchange="setdirection();" cssClass="form-control" />         
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="2" name="direction" id="direction" value="%{direction}"  onchange="setdirection();" cssClass="form-control" />         
                                 </div> 
                             </div> 
                         </div>
@@ -129,7 +129,7 @@
                                 <div class="form-group">
                                     <label>Inbound Transactions<span class="text-danger">*</span></label>
                                     <div class="lableLeft">
-                                        <s:radio name="ibTransaction" id="ibTransaction" list="{'850','855','856','810'}" value="%{ibTransaction}" onchange="transactionChange(this.value)" cssClass="from-control" ></s:radio>
+                                        <s:radio name="ibTransaction" id="ibTransaction" list="{'850','855','856','810'}" value="%{ibTransaction}" onchange="transactionChange(this.value)" cssClass="from-control" tabindex="3"></s:radio>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                                     <div class="form-group">
                                         <label>Outbound Transactions<span class="text-danger">*</span></label>
                                         <div class="lableLeft">
-                                        <s:radio name="obTransaction" id="obTransaction" list="{'850','855','856','810'}" value="%{obTransaction}" onchange="transactionChange(this.value)" cssClass="from-control"></s:radio>
+                                        <s:radio name="obTransaction" id="obTransaction" list="{'850','855','856','810'}" value="%{obTransaction}" onchange="transactionChange(this.value)" cssClass="from-control" tabindex="4"></s:radio>
                                         </div>      
                                     </div>
                                 </div>
@@ -164,22 +164,23 @@
                             <div class="col-sm-3"> 
                                 <div class="form-group" id="connTypeDiv" style="display: none">
                                     <label>Connection Type<span class="text-danger">*</span></label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Communication_Protocol':'Communication Protocol','File_System':'File system'}" tabindex="1" name="conn_type" id="conn_type" value="%{conn_type}"  cssClass="form-control" onchange="getPayloadProtocols();"/>         
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Communication_Protocol':'Communication Protocol','File_System':'File system'}" tabindex="5" name="conn_type" id="conn_type" value="%{conn_type}"  cssClass="form-control" onchange="getPayloadProtocols();"/>         
                                 </div> 
                             </div> 
                             <div class="col-sm-3"> 
                                 <div class="form-group" id="protocolDiv" style="display: none">
                                     <label>Protocol<span class="text-danger">*</span></label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="protocolsList" name="protocol" id="protocol" value="%{protocol}" cssClass="form-control" onchange="getCommunicationsList(this.value);"/>         
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="protocolsList" name="protocol" id="protocol" value="%{protocol}" cssClass="form-control" onchange="getCommunicationsList(this.value);" tabindex="6"/>         
                                 </div> 
                             </div>
                         </div>
                         <br>
                         <center><div id="CommMsg"></div></center>
+                        <div class="container" id="communicationsGrid">
                             <s:if test="#session.tpoProtocolsHeadersList != null"> 
                                 <s:if test="#session.tpoCommunicationsList != null"> 
-                                <label>Communications<span class="text-danger">*</span></label>
-                                <div class="container" id="communicationsGrid">
+                                    <label>Communications<span class="text-danger">*</span></label>
+
                                     <div id="site_content" class="jumbotron">
                                         <div class="container">
                                             <center><div id="resultMsg"></div></center>
@@ -272,14 +273,14 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </s:if> 
                             </s:if> 
-                        </s:if> 
+                        </div>
                         <br>
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
                             <table id="uploadTable850ib">
-                                <tr><td><s:file name="upload850ib" id="upload850ib" theme="simple" onchange="fileUploadValidation(this.value);"/></td></tr>
+                                <tr><td><s:file name="upload850ib" id="upload850ib" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove850ib" name="remove850ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile850ib"/>
@@ -288,7 +289,7 @@
                         <%-- 855 Inbound   Start div--%>
                         <div id="ibenvelop855" style="display: none" >
                             <table id="uploadTable855ib" style="float:left">
-                                <tr><td><s:file name="upload855ib" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload855ib" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove855ib" name="remove850ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile855ib"/>
@@ -297,7 +298,7 @@
                         <%-- 856 Inbound   Start div--%>
                         <div id="ibenvelop856" style="display: none" >
                             <table id="uploadTable856ib" style="float:left">
-                                <tr><td><s:file name="upload856ib" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload856ib" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove856ib" name="remove856ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile856ib"/>
@@ -306,7 +307,7 @@
                         <%-- 810 Inbound   Start div--%>
                         <div id="ibenvelop810" style="display: none" >
                             <table id="uploadTable810ib" style="float:left">
-                                <tr><td><s:file name="upload810ib" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload810ib" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove810ib" name="remove810ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile810ib"/>
@@ -315,7 +316,7 @@
                         <%-- 850 outbound   End div--%>
                         <div id="obenvelop850" style="display: none" >
                             <table id="uploadTable850ob" style="float:left">
-                                <tr><td><s:file name="upload850ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload850ob" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove850ob" name="remove850ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile850ob"/>
@@ -324,7 +325,7 @@
                         <%-- 855 Outbound   Start div--%>
                         <div id="obenvelop855" style="display: none" >
                             <table id="uploadTable855ob" style="float:left">
-                                <tr><td><s:file name="upload855ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload855ob" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove855ob" name="remove855ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile855ob"/>
@@ -333,7 +334,7 @@
                         <%-- 856 Outbound   Start div--%>
                         <div id="obenvelop856" style="display: none" >
                             <table id="uploadTable856ob" style="float:left">
-                                <tr><td><s:file name="upload856ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload856ob" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove856ob" name="remove856ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile856ob"/>
@@ -342,7 +343,7 @@
                         <%-- 810 Outbound   Start div--%>
                         <div id="obenvelop810" style="display: none" >
                             <table id="uploadTable810ob" style="float:left">
-                                <tr><td><s:file name="upload810ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
+                                <tr><td><s:file name="upload810ob" theme="simple" /></td></tr>
                             </table>
                             <input type="button" id="remove810ob" name="remove810ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile810ob"/>
@@ -350,39 +351,32 @@
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
                             <div class="col-sm-1 pull-right" id="saveButton" style="display: none">
-                                <s:submit value="Save" cssClass="btn btn-primary pull-right" tabindex="112" onclick="return checkPayload()"/>
+                                <s:submit value="Save" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkPayload()"/>
                             </div>
                             <div class="col-sm-1  pull-right">
-                                <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="113" onclick="resetPayload()"/>
+                                <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="8" onclick="resetPayload()"/>
                             </div>
                         </div>
                     </div>
                 </div>
+            </s:form>
+        </div>
+        <footer class="footer">
+            <div class=" ">
+                <s:include value="../includes/template/footer.jsp"/>
             </div>
-        </s:form>
-    </div>
-</div>
-</div>
-</div>
-</div> 
-</div>        
-</div>  
-<footer class="footer">
-    <div class=" ">
-        <s:include value="../includes/template/footer.jsp"/>
-    </div>
-</footer>
-<script language="JavaScript" src='<s:url value="/includes/js/headroom.min.js"/>'></script>
-<script language="JavaScript" src='<s:url value="/includes/js/jQuery.headroom.min.js"/>'></script>
-<script language="JavaScript" src='<s:url value="/includes/js/template.js"/>'></script>
-<script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
-<script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src='<s:url value="/includes/js/jquery.multifile.js"/>'></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
-<script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
-<script type="text/javascript">
+        </footer>
+        <script language="JavaScript" src='<s:url value="/includes/js/headroom.min.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/jQuery.headroom.min.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/template.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src='<s:url value="/includes/js/jquery.multifile.js"/>'></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src='<s:url value="../includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
+        <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
+        <script type="text/javascript">
         function doOnLoad() {
             $("#PayLoad").addClass("active");
             var docType = document.getElementById('docType').value;
@@ -453,22 +447,24 @@
         }
 
         function resetPayload() {
-            document.getElementById("docType").value = "-1";
-            document.getElementById("direction").value = "-1";
-            document.getElementById("conn_type").value = "-1";
-            document.getElementById("protocolDiv").style.display = 'none';
-            document.getElementById("connTypeDiv").style.display = 'none';
-            $("#inBoundTransactions").hide();
-            $("#outBoundTransactions").hide();
-            $("#ibenvelop850").hide();
-            $("#ibenvelop855").hide();
-            $("#ibenvelop856").hide();
-            $("#ibenvelop810").hide();
-            $("#obenvelop850").hide();
-            $("#obenvelop855").hide();
-            $("#obenvelop856").hide();
-            $("#obenvelop810").hide();
-            $("#ddt").hide();
+            window.location = "../payload/payloadUpload.action";
+            //            document.getElementById("docType").value = "-1";
+            //            document.getElementById("direction").value = "-1";
+            //            document.getElementById("conn_type").value = "-1";
+            //            document.getElementById("protocolDiv").style.display = 'none';
+            //            document.getElementById("connTypeDiv").style.display = 'none';
+            //            $("#inBoundTransactions").hide();
+            //            $("#outBoundTransactions").hide();
+            //            $("#communicationsGrid").hide();
+            //            $("#ibenvelop850").hide();
+            //            $("#ibenvelop855").hide();
+            //            $("#ibenvelop856").hide();
+            //            $("#ibenvelop810").hide();
+            //            $("#obenvelop850").hide();
+            //            $("#obenvelop855").hide();
+            //            $("#obenvelop856").hide();
+            //            $("#obenvelop810").hide();
+            //            $("#ddt").hide();
         }
 
         function transactionChange(x) {
@@ -614,7 +610,7 @@
         $(document).ready(function() {
             $('#addMoreFile850ib').click(function() {
                 $('#uploadTable850ib').append(
-                        '<tr><td><s:file name="upload850ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload850ib" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -624,7 +620,7 @@
 
             $('#addMoreFile855ib').click(function() {
                 $('#uploadTable855ib').append(
-                        '<tr><td><s:file name="upload855ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload855ib" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -634,7 +630,7 @@
 
             $('#addMoreFile856ib').click(function() {
                 $('#uploadTable856ib').append(
-                        '<tr><td><s:file name="upload856ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload856ib" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -644,7 +640,7 @@
 
             $('#addMoreFile810ib').click(function() {
                 $('#uploadTable810ib').append(
-                        '<tr><td><s:file name="upload810ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload810ib" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -654,7 +650,7 @@
 
             $('#addMoreFile850ob').click(function() {
                 $('#uploadTable850ob').append(
-                        '<tr><td><s:file name="upload850ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload850ob" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -664,7 +660,7 @@
 
             $('#addMoreFile855ob').click(function() {
                 $('#uploadTable855ob').append(
-                        '<tr><td><s:file name="upload855ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload855ob" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -674,7 +670,7 @@
 
             $('#addMoreFile856ob').click(function() {
                 $('#uploadTable856ob').append(
-                        '<tr><td><s:file name="upload856ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload856ob" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -684,7 +680,7 @@
 
             $('#addMoreFile810ob').click(function() {
                 $('#uploadTable810ob').append(
-                        '<tr><td><s:file name="upload810ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
+                        '<tr><td><s:file name="upload810ob" theme="simple" />' +
                         '</td></tr>');
                 return false;
             });
@@ -726,7 +722,6 @@
             }
             return true;
         }
-</script>
-</body>
+        </script>
+    </body>
 </html>
-

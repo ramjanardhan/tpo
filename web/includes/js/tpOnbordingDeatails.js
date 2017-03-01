@@ -2433,8 +2433,8 @@ function addPtnerLengthValidator(element) {
             validatenumber(element);
         }
         if (element.id == 'addphoneNo') {
-            k = 1;
-            i = 10;
+            p = 1;
+            i = 12;
             validatenumber(element);
             generalFormatPhone(element);
         }
@@ -2454,7 +2454,15 @@ function addPtnerLengthValidator(element) {
                 element.focus();
                 return false;
             }
-        } else {
+        } else if (p == 1){
+            if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
+                str = new String(element.value);
+                element.value = str.substring(0, i);
+                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The value must be " + (i-2) + " characters</font>";
+                element.focus();
+                return false;
+            }
+        }else {
             if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
