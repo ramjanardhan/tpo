@@ -2628,6 +2628,20 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ib850;i++){
+                    var file= document.getElementsByName("upload850ib")[i].value;
+                    if(file==""){
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                
+                }
+              return false;
+                }
         }
         if (transaction == "855") {
             var ib855 = document.getElementsByName("upload855ib").length;
@@ -2635,6 +2649,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ib855;i++){
+                    var file= document.getElementsByName("upload855ib")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
         if (transaction == "856") {
             var ib856 = document.getElementsByName("upload856ib").length;
@@ -2642,6 +2668,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ib856;i++){
+                    var file= document.getElementsByName("upload856ib")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
         if (transaction == "810") {
             var ib810 = document.getElementsByName("upload810ib").length;
@@ -2649,6 +2687,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ib810;i++){
+                    var file= document.getElementsByName("upload810ib")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
     }
     if (direction == "Outbound") {
@@ -2658,6 +2708,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ob850;i++){
+                    var file= document.getElementsByName("upload850ob")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
         if (transaction == "855") {
             var ob855 = document.getElementsByName("upload855ob").length;
@@ -2665,6 +2727,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ob855;i++){
+                    var file= document.getElementsByName("upload855ob")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
         if (transaction == "856") {
             var ob856 = document.getElementsByName("upload856ob").length;
@@ -2672,6 +2746,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ob856;i++){
+                    var file= document.getElementsByName("upload856ob")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
         if (transaction == "810") {
             var ob810 = document.getElementsByName("upload810ob").length;
@@ -2679,6 +2765,18 @@ function checkPayload() {
                 document.getElementById('CommMsg').innerHTML = "<font color=red>Please Upload atleast one file</font>";
                 return false;
             }
+            else
+                {
+                    var i;
+                    for(i=0;i<=ob810;i++){
+                    var file= document.getElementsByName("upload810ob")[i].value;
+                    if(file==""){
+                         alert("please upload file"+(i+1));
+                    return false;
+                }
+                }
+              
+                }
         }
     }
 }

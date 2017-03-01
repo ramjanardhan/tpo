@@ -190,6 +190,7 @@
                                     <div id="site_content" class="jumbotron">
                                         <div class="container">
                                             <center><div id="resultMsg"></div></center>
+                                            <center><div id="protocolmsgSsl"></div></center>
                                             <table id="payloadTable" name="payloadTable" class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
@@ -287,7 +288,7 @@
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
                             <table id="uploadTable850ib">
-                                <tr><td><s:file name="upload850ib" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload850ib" id="upload850ib" theme="simple" onchange="fileUploadValidation(this.value);"/></td></tr>
                             </table>
                             <input type="button" id="remove850ib" name="remove850ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile850ib"/>
@@ -296,7 +297,7 @@
                         <%-- 855 Inbound   Start div--%>
                         <div id="ibenvelop855" style="display: none" >
                             <table id="uploadTable855ib" style="float:left">
-                                <tr><td><s:file name="upload855ib" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload855ib" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove855ib" name="remove850ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile855ib"/>
@@ -305,7 +306,7 @@
                         <%-- 856 Inbound   Start div--%>
                         <div id="ibenvelop856" style="display: none" >
                             <table id="uploadTable856ib" style="float:left">
-                                <tr><td><s:file name="upload856ib" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload856ib" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove856ib" name="remove856ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile856ib"/>
@@ -314,7 +315,7 @@
                         <%-- 810 Inbound   Start div--%>
                         <div id="ibenvelop810" style="display: none" >
                             <table id="uploadTable810ib" style="float:left">
-                                <tr><td><s:file name="upload810ib" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload810ib" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove810ib" name="remove810ib" value="remove"/>
                             <input type="button" value="add" id="addMoreFile810ib"/>
@@ -323,7 +324,7 @@
                         <%-- 850 outbound   End div--%>
                         <div id="obenvelop850" style="display: none" >
                             <table id="uploadTable850ob" style="float:left">
-                                <tr><td><s:file name="upload850ob" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload850ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove850ob" name="remove850ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile850ob"/>
@@ -332,7 +333,7 @@
                         <%-- 855 Outbound   Start div--%>
                         <div id="obenvelop855" style="display: none" >
                             <table id="uploadTable855ob" style="float:left">
-                                <tr><td><s:file name="upload855ob" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload855ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove855ob" name="remove855ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile855ob"/>
@@ -341,7 +342,7 @@
                         <%-- 856 Outbound   Start div--%>
                         <div id="obenvelop856" style="display: none" >
                             <table id="uploadTable856ob" style="float:left">
-                                <tr><td><s:file name="upload856ob" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload856ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove856ob" name="remove856ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile856ob"/>
@@ -350,7 +351,7 @@
                         <%-- 810 Outbound   Start div--%>
                         <div id="obenvelop810" style="display: none" >
                             <table id="uploadTable810ob" style="float:left">
-                                <tr><td><s:file name="upload810ob" theme="simple"/></td></tr>
+                                <tr><td><s:file name="upload810ob" theme="simple" onchange="fileUploadValidation(this.value)"/></td></tr>
                             </table>
                             <input type="button" id="remove810ob" name="remove810ob" value="remove"/>
                             <input type="button" value="add" id="addMoreFile810ob"/>
@@ -635,7 +636,7 @@
         $(document).ready(function() {
             $('#addMoreFile850ib').click(function() {
                 $('#uploadTable850ib').append(
-                        '<tr><td><s:file name="upload850ib" theme="simple"/>' +
+                        '<tr><td><s:file name="upload850ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -646,7 +647,7 @@
 
             $('#addMoreFile855ib').click(function() {
                 $('#uploadTable855ib').append(
-                        '<tr><td><s:file name="upload855ib" theme="simple"/>' +
+                        '<tr><td><s:file name="upload855ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -657,7 +658,7 @@
 
             $('#addMoreFile856ib').click(function() {
                 $('#uploadTable856ib').append(
-                        '<tr><td><s:file name="upload856ib" theme="simple"/>' +
+                        '<tr><td><s:file name="upload856ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -667,7 +668,7 @@
 
             $('#addMoreFile810ib').click(function() {
                 $('#uploadTable810ib').append(
-                        '<tr><td><s:file name="upload810ib" theme="simple"/>' +
+                        '<tr><td><s:file name="upload810ib" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -678,7 +679,7 @@
 
             $('#addMoreFile850ob').click(function() {
                 $('#uploadTable850ob').append(
-                        '<tr><td><s:file name="upload850ob" theme="simple"/>' +
+                        '<tr><td><s:file name="upload850ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -689,7 +690,7 @@
 
             $('#addMoreFile855ob').click(function() {
                 $('#uploadTable855ob').append(
-                        '<tr><td><s:file name="upload855ob" theme="simple"/>' +
+                        '<tr><td><s:file name="upload855ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -700,7 +701,7 @@
 
             $('#addMoreFile856ob').click(function() {
                 $('#uploadTable856ob').append(
-                        '<tr><td><s:file name="upload856ob" theme="simple"/>' +
+                        '<tr><td><s:file name="upload856ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -711,7 +712,7 @@
 
             $('#addMoreFile810ob').click(function() {
                 $('#uploadTable810ob').append(
-                        '<tr><td><s:file name="upload810ob" theme="simple"/>' +
+                        '<tr><td><s:file name="upload810ob" theme="simple" onchange="fileUploadValidation(this.value)"/>' +
                         '</td></tr>');
                 return false;
             });
@@ -739,6 +740,33 @@
                 "autoWidth": false
             });
         });
+        
+        
+         function fileUploadValidation(file) {
+             alert(file);
+                    
+                if (file != '')
+                {
+                   alert("in if");                   
+ 
+                    var extension = file.substring(file.lastIndexOf('.')+1);
+                    if(extension=="cer"||extension=="cert"){
+                      alert("accepted extension");
+                      document.getElementById('resultMsg').innerHTML="";
+                    }
+                    else 
+                    {
+                        alert("in else");
+                       // document.getElementById('imageUpdate').value = "";
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Invalid file extension!Please select cer or cert file.</font>"
+                        //$("imageErrorMsg").html("<font color='red'>Invalid file extension!<br> Please select gif or jpg or png file</font>");
+                        // $("#InsertContactInfo").html(" <font color=red>Invalid file extension! Please select gif or jpg or png file</font>");
+                        return false;
+                    }
+                }
+                $("#imageErrorMsg").html("");
+                return true;
+            }
 </script>
 </body>
 </html>
