@@ -150,6 +150,7 @@ function checkProfile(flag) {
 
 function protocolsSelect(x) {
     document.getElementById("protocolValue").value = x;
+    document.getElementById("responseString").style.display = 'none';
     if (x == '-1') {
         // document.getElementById('protocolmsg').innerHTML = "";
         document.getElementById('tpResultMessage').innerHTML = "";

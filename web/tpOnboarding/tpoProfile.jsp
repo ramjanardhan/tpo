@@ -64,20 +64,21 @@
             <s:form action="%{formAction}" method="POST" enctype="multipart/form-data" name="addTpOnboard" id="addTpOnboard" theme="simple">
                 <s:hidden id="communicationId" name="communicationId" value="%{communicationId}"/>
                 <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
-                <div id="site_content" class="jumbotron">
-                    <div class="container">
-                        <div>
-                            <center>
-                                <%
-                                    if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                        String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                        out.println(responseString);
-                                        session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
-                                    }
-                                %>
-                                <div id="protocolmsg"></div>
-                                <s:hidden name="partnerName" id="partnerName" value="%{#session.tpoPartnerName}" ></s:hidden>
-                                </center>
+                <s:hidden name="partnerName" id="partnerName" value="%{#session.tpoPartnerName}" ></s:hidden>
+                    <div id="site_content" class="jumbotron">
+                        <div class="container">
+                            <div>
+                                <center>
+                                    <div id="responseString">
+                                    <%
+                                        if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
+                                            String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                            out.println(responseString);
+                                            session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
+                                        }
+                                    %>
+                                </div> <div id="protocolmsg"></div>
+                            </center>
                             <s:if test="%{formAction == 'doUpdateProfile'}">
                                 <div class="row">
                                     <div class="col-md-12">

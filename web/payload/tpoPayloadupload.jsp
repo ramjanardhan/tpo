@@ -286,7 +286,7 @@
                         <br>
                         <%-- 850 Inbound   Start div--%>    
                         <div id="ibenvelop850" style="display: none" >
-                            <table id="uploadTable850ib">
+                            <table id="uploadTable850ib" style="float:left">
                                 <tr><td><s:file name="upload850ib" theme="simple"/></td></tr>
                             </table>
                             <input type="button" id="remove850ib" name="remove850ib" value="remove"/>

@@ -264,7 +264,7 @@ function acceptPartner() {
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerLoadText(req, acceptPartnerResponse);
     var url;
-    if (roleId == 1) {
+    if ((roleId == 1) && (assignTo != "-1")) {
         url = "../ajax/acceptPartner.action?assignTo=" + assignTo + "&id=" + partnerId;
     } else {
         url = "../ajax/acceptPartner.action?assignTo=" + loginId + "&id=" + partnerId;
