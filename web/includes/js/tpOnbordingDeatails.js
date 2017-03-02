@@ -2454,15 +2454,15 @@ function addPtnerLengthValidator(element) {
                 element.focus();
                 return false;
             }
-        } else if (p == 1){
+        } else if (p == 1) {
             if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
-                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The value must be " + (i-2) + " characters</font>";
+                document.getElementById('addpartnerMsg').innerHTML = "<font color=red>The value must be " + (i - 2) + " characters</font>";
                 element.focus();
                 return false;
             }
-        }else {
+        } else {
             if (element.value.replace(/^\s+|\s+$/g, "").length > i) {
                 str = new String(element.value);
                 element.value = str.substring(0, i);
@@ -2612,6 +2612,21 @@ function checkPayload() {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please select direction</font>";
         return false;
     }
+//    else if (direction == "Inbound") {
+//         var inBoundTransactions = document.forms["payloadForm"]["inBoundTransactions"].value;
+//         alert('inBoundTransactions:'+inBoundTransactions);
+//        if (inBoundTransactions == "") {
+//                document.getElementById('resultMessage').innerHTML = "<font color=red>Please select inbound transaction</font>";
+//                return false;
+//            }
+//    }else if (direction == "Outbound") {
+//         var outBoundTransactions = document.forms["payloadForm"]["outBoundTransactions"].value;
+//         alert('outBoundTransactions:'+outBoundTransactions);
+//       if (outBoundTransactions == "") {
+//                document.getElementById('resultMessage').innerHTML = "<font color=red>Please select outbound transaction</font>";
+//                return false;
+//            }
+//    }
     var conn_type = document.getElementById("conn_type").value;
     if (conn_type == "-1" || conn_type == null) {
         document.getElementById('resultMessage').innerHTML = "<font color=red>Please select connection type</font>";
@@ -2638,18 +2653,18 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ib850;i++){
-                    var file= document.getElementsByName("upload850ib")[i].value;
-                    if(file==""){
-                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ib850; i++) {
+                    var file = document.getElementsByName("upload850ib")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
+
                 }
-                
-                }
-              return false;
-                }
+                return false;
+            }
         }
         if (transaction == "855") {
             var ib855 = document.getElementsByName("upload855ib").length;
@@ -2658,17 +2673,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ib855;i++){
-                    var file= document.getElementsByName("upload855ib")[i].value;
-                    if(file==""){
-                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ib855; i++) {
+                    var file = document.getElementsByName("upload855ib")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
         if (transaction == "856") {
             var ib856 = document.getElementsByName("upload856ib").length;
@@ -2677,17 +2692,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ib856;i++){
-                    var file= document.getElementsByName("upload856ib")[i].value;
-                    if(file==""){
-                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ib856; i++) {
+                    var file = document.getElementsByName("upload856ib")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
         if (transaction == "810") {
             var ib810 = document.getElementsByName("upload810ib").length;
@@ -2696,17 +2711,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ib810;i++){
-                    var file= document.getElementsByName("upload810ib")[i].value;
-                    if(file==""){
-                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ib810; i++) {
+                    var file = document.getElementsByName("upload810ib")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
     }
     if (direction == "Outbound") {
@@ -2717,17 +2732,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ob850;i++){
-                    var file= document.getElementsByName("upload850ob")[i].value;
-                    if(file==""){
-                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ob850; i++) {
+                    var file = document.getElementsByName("upload850ob")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
         if (transaction == "855") {
             var ob855 = document.getElementsByName("upload855ob").length;
@@ -2736,17 +2751,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ob855;i++){
-                    var file= document.getElementsByName("upload855ob")[i].value;
-                    if(file==""){
-                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ob855; i++) {
+                    var file = document.getElementsByName("upload855ob")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
         if (transaction == "856") {
             var ob856 = document.getElementsByName("upload856ob").length;
@@ -2755,17 +2770,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ob856;i++){
-                    var file= document.getElementsByName("upload856ob")[i].value;
-                    if(file==""){
-                         document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ob856; i++) {
+                    var file = document.getElementsByName("upload856ob")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
         if (transaction == "810") {
             var ob810 = document.getElementsByName("upload810ob").length;
@@ -2774,17 +2789,17 @@ function checkPayload() {
                 return false;
             }
             else
-                {
-                    var i;
-                    for(i=0;i<=ob810;i++){
-                    var file= document.getElementsByName("upload810ob")[i].value;
-                    if(file==""){
-                          document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file"+(i+1)+"</font>";
-                    return false;
+            {
+                var i;
+                for (i = 0; i <= ob810; i++) {
+                    var file = document.getElementsByName("upload810ob")[i].value;
+                    if (file == "") {
+                        document.getElementById('resultMsg').innerHTML = "<font color=red>Please Upload file" + (i + 1) + "</font>";
+                        return false;
+                    }
                 }
-                }
-              
-                }
+
+            }
         }
     }
 }

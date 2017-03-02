@@ -24,16 +24,10 @@
             .input-group-addon{
                 cursor: pointer;
             }
-            #mail_button{
-
-            }
-
-
             @media only screen and (max-width: 465px) {
                 #Synchronous {
                     word-wrap: break-word;
                 }
-
                 #site_content{
                     padding: 3px 12px;
                 }

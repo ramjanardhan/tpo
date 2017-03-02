@@ -271,47 +271,58 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_CommunicationsList);
                 tpoProtocolsHeadersList = new ArrayList<String>();
                 if ("FTP".equalsIgnoreCase(getProtocol())) {
-                    tpoProtocolsHeadersList.add("Comm_Id");
-                    tpoProtocolsHeadersList.add("Partner_Id");
-                    tpoProtocolsHeadersList.add("Rx_Protocol");
+                    //Protocol ID   Partner ID Protocol Email Host Port UserID Password Directory
+                    tpoProtocolsHeadersList.add("Protocol ID");
+                    tpoProtocolsHeadersList.add("Partner ID");
+                    tpoProtocolsHeadersList.add("Protocol");
+                    tpoProtocolsHeadersList.add("Email");
                     tpoProtocolsHeadersList.add("Host");
                     tpoProtocolsHeadersList.add("Port");
+                    tpoProtocolsHeadersList.add("UserID");
+                    tpoProtocolsHeadersList.add("Password");
                     tpoProtocolsHeadersList.add("Directory");
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getFTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "FTP");
                 } else if ("SFTP".equalsIgnoreCase(getProtocol())) {
-                    tpoProtocolsHeadersList.add("Comm_Id");
-                    tpoProtocolsHeadersList.add("Partner_Id");
+                    tpoProtocolsHeadersList.add("Protocol ID");
+                    tpoProtocolsHeadersList.add("Partner ID");
+                    tpoProtocolsHeadersList.add("Protocol");
+                    tpoProtocolsHeadersList.add("Email");
                     tpoProtocolsHeadersList.add("Host");
                     tpoProtocolsHeadersList.add("Port");
+                    tpoProtocolsHeadersList.add("UserID");
+                    tpoProtocolsHeadersList.add("Password");
                     tpoProtocolsHeadersList.add("Directory");
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getSFTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "SFTP");
                 } else if ("HTTP".equalsIgnoreCase(getProtocol())) {
-                    tpoProtocolsHeadersList.add("Comm_Id");
-                    tpoProtocolsHeadersList.add("Partner_Id");
-                    tpoProtocolsHeadersList.add("Rx_Protocol");
-                    tpoProtocolsHeadersList.add("URL");
+                    tpoProtocolsHeadersList.add("Protocol ID");
+                    tpoProtocolsHeadersList.add("Partner ID");
+                    tpoProtocolsHeadersList.add("Protocol");
+                    tpoProtocolsHeadersList.add("END Point");
                     tpoProtocolsHeadersList.add("Port");
-                    tpoProtocolsHeadersList.add("Mode");
+                    tpoProtocolsHeadersList.add("HTTP Mode");
+                    tpoProtocolsHeadersList.add("URL");
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getHTTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "HTTP");
                 } else if ("SMTP".equalsIgnoreCase(getProtocol())) {
-                    tpoProtocolsHeadersList.add("Comm_Id");
-                    tpoProtocolsHeadersList.add("Partner_Id");
+                     tpoProtocolsHeadersList.add("Protocol ID");
+                    tpoProtocolsHeadersList.add("Partner ID");
+                    tpoProtocolsHeadersList.add("Protocol");
                     tpoProtocolsHeadersList.add("Host");
                     tpoProtocolsHeadersList.add("Port");
-                    tpoProtocolsHeadersList.add("From_Mail");
-                    tpoProtocolsHeadersList.add("To_Mail");
+                    tpoProtocolsHeadersList.add("Sender Email ID");
+                    tpoProtocolsHeadersList.add("Receiver Email ID");
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getSMTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "SMTP");
                 } else if ("AS2".equalsIgnoreCase(getProtocol())) {
-                    tpoProtocolsHeadersList.add("Comm_Id");
-                    tpoProtocolsHeadersList.add("Partner_Id");
-                    tpoProtocolsHeadersList.add("My_org");
-                    tpoProtocolsHeadersList.add("Your_org");
-                    tpoProtocolsHeadersList.add("My_pro");
-                    tpoProtocolsHeadersList.add("Your_pro");
+                   tpoProtocolsHeadersList.add("Protocol ID");
+                    tpoProtocolsHeadersList.add("Partner ID");
+                    tpoProtocolsHeadersList.add("Protocol");
+                    tpoProtocolsHeadersList.add("My Organization");
+                    tpoProtocolsHeadersList.add("Your Organization");
+                    tpoProtocolsHeadersList.add("My Endpoint");
+                    tpoProtocolsHeadersList.add("As2 Messages Store");
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getAS2CommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "AS2");
                 }

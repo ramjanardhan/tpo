@@ -90,38 +90,69 @@
                                             int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
                                             if (list.size() != 0) {
+                                                System.out.println("list.size()>>" + list.size());
                                                 PayloadBean payloadBean;
                                                 for (int i = 0; i < list.size(); i++) {
                                                     payloadBean = (PayloadBean) list.get(i);
                                         %>
                                         <tr>
-                                            <td> <% out.println(payloadBean.getCorrelationID()); %> </td>
+                                            <td> <% if ((payloadBean.getCorrelationID()) == 0) {
+                                                    out.println("--");
+                                                } else {
+                                                    out.println(payloadBean.getCorrelationID());
+                                                }
+                                                %> </td> 
                                             <td> <% out.println(payloadBean.getTransaction()); %> </td>
                                             <td> <% out.println(payloadBean.getDirection()); %> </td>
-                                            <td> <% out.println(payloadBean.getLastTestStatus()); %> </td>  
-                                            <%--    <td> <% //out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":"))); %> </td> --%>
-                                            <td> <% out.println(payloadBean.getLastTestDate()); %> </td>                                           
-                                            <td> <% out.println(payloadBean.getCurrentTestStatus()); %> </td>
-                                            <td> <% out.println(payloadBean.getCurrentTestDate()); %> </td>
+                                            <td> <% if ((payloadBean.getLastTestStatus()) == null) {
+                                                    out.println("--");
+                                                } else if (payloadBean.getLastTestStatus().equalsIgnoreCase("SUCCESS")) {
+                                                    out.println("<font color='green'>" + payloadBean.getLastTestStatus() + "</font>");
+                                                } else {
+                                                    out.println("<font color='red'>" + payloadBean.getLastTestStatus() + "</font>");
+                                                }
+                                                %> </td>  
+                                            <td> <% if ((payloadBean.getLastTestDate()) == null) {
+                                                    out.println("--");
+                                                } else {
+                                                    out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":")));
+                                                }
+                                                %> </td>  
+                                            <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
+                                                    out.println("--");
+                                                } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
+                                                    out.println("<font color='green'>" + payloadBean.getCurrentTestStatus() + "</font>");
+                                                } else {
+                                                    out.println("<font color='red'>" + payloadBean.getCurrentTestStatus() + "</font>");
+                                                }
+                                                %> </td>  
+                                            <td> <% if ((payloadBean.getCurrentTestDate()) == null) {
+                                                    out.println("--");
+                                                } else {
+                                                    out.println(payloadBean.getCurrentTestDate().toString().substring(0, payloadBean.getCurrentTestDate().toString().lastIndexOf(":")));
+                                                }
+                                                %> </td>  
                                         </tr>
-                                    </tbody>
-                                    <%
+                                         <%
                                             }
                                         }
                                     %>
+                                    </tbody>
                                 </table>
                             </s:if> 
-                            <% session.setAttribute(AppConstants.PAYLOAD_SEARCH_LIST, null);%>
-                        </s:form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </s:form>
         </div>
         <footer class="footer">
             <div class=" ">
                 <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>
+        <script language="JavaScript" src='<s:url value="/includes/js/headroom.min.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/jQuery.headroom.min.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/template.js"/>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
