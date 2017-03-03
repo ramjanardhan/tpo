@@ -57,67 +57,77 @@
                     </center>
                     <div id="loadingImage"></div>
                     <s:form action="doAddPartnerUser" method="post" cssClass="contact-form" name="doAddPartnerUser" id="doAddPartnerUser" theme="simple">
+                        <s:hidden id="roleId" name="roleId" value="%{roleId}"/>
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>First Name<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control"  name="contactName" id="contactName" value="%{contactName}" placeholder="First Name" onchange="fieldLengthValidator(this);" tabindex="1"/>
+                                    <s:textfield cssClass="form-control"  name="contactName" id="contactName" value="" placeholder="First Name" onchange="fieldLengthValidator(this);" tabindex="1"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Last Name<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="contactLastName" id="contactLastName" value="%{contactLastName}" placeholder="Last Name" onchange="fieldLengthValidator(this);" tabindex="2"/>
+                                    <s:textfield cssClass="form-control" name="contactLastName" id="contactLastName" value="" placeholder="Last Name" onchange="fieldLengthValidator(this);" tabindex="2"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group ajax_img">
                                     <label>Email<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" placeholder="E-mail" value="%{contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('partnerAdd','partner');" tabindex="3"/><i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
+                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" placeholder="E-mail" value="" onchange="validateEmail(this);fieldLengthValidator(this);" onblur="isExistedUserEmail('partnerAdd','partner');" tabindex="3"/><i id="correctImg1" style="display: none;"  class="fa fa-check"></i>
                                     <i id="wrongImg1" style="display: none;" class="fa fa-times"></i><i id="loadingImageEmailCheck" style="display: none;" class="fa fa-spinner"></i>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Phone Number<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" placeholder="Phone No" value="%{phoneNo}" onchange="fieldLengthValidator(this);" tabindex="4"/>
+                                    <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" placeholder="Phone No" value="" onchange="fieldLengthValidator(this);" tabindex="4"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="address1" id="address1" value="%{address1}" placeholder="Address" onchange="fieldLengthValidator(this);" tabindex="5"/>
+                                    <s:textfield cssClass="form-control" name="address1" id="address1" value="" placeholder="Address" onchange="fieldLengthValidator(this);" tabindex="5"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>City<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="city" id="city" value="%{city}" placeholder="City" onchange="fieldLengthValidator(this);" tabindex="6"/>
+                                    <s:textfield cssClass="form-control" name="city" id="city" value="" placeholder="City" onchange="fieldLengthValidator(this);" tabindex="6"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="state" id="state" value="%{state}" placeholder="State" onchange="fieldLengthValidator(this);" tabindex="7"/>
+                                    <s:textfield cssClass="form-control" name="state" id="state" value="" placeholder="State" onchange="fieldLengthValidator(this);" tabindex="7"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Country<span class="text-danger">*</span></label>
-                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{country}" tabindex="8"/>
+                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="" tabindex="8"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Zip Code<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="zipCode" id="zipCode" value="%{zipCode}" onchange="fieldLengthValidator(this);" tabindex="9"/>
+                                    <s:textfield cssClass="form-control" name="zipCode" id="zipCode" value="" onchange="fieldLengthValidator(this);" tabindex="9"/>
                                 </div>
                             </div>
-                        </div>
+                       
+                             <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4}'>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Role<span class="text-danger">*</span></label>
+                                    <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="partnerRolesList" name="partnerRole" id="partnerRole" value=""  tabindex="10"/>
+                                </div>
+                            </div>
+                        </s:if>
+                                 </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-1 pull-right"> <s:submit value="Save" cssClass="btn btn-primary" onclick="return partnerUserAddValidation();" tabindex="10"/></div>
-                                <div class="col-sm-2 col-md-1 pull-right"> <input type="button" id="set_align1" value="Reset" class="btn btn-primary" onclick="resetPartnerUserAdd();" tabindex="11"/></div>
+                                <div class="col-md-1 pull-right"> <s:submit value="Save" cssClass="btn btn-primary" onclick="return partnerUserAddValidation();" tabindex="11"/></div>
+                                <div class="col-sm-2 col-md-1 pull-right"> <input type="button" id="set_align1" value="Reset" class="btn btn-primary" onclick="resetPartnerUserAdd();" tabindex="12"/></div>
                             </div>
                         </div>
                     </s:form>

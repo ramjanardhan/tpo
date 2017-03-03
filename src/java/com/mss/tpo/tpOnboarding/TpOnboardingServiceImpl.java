@@ -206,11 +206,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(3, tpAction.getContactName());
             preparedStatement.setString(4, tpAction.getContactLastName());
             preparedStatement.setString(5, email);
-            if (roleId == 3) { // partner admin roleId
-                preparedStatement.setInt(6, 4);//partner main user
-            } else if (roleId == 4) { // partner main user roleId
-                preparedStatement.setInt(6, 5);//partner users
-            }
+            preparedStatement.setInt(6, tpAction.getPartnerRole());
             preparedStatement.setString(7, tpAction.getCity());
             preparedStatement.setString(8, tpAction.getState());
             preparedStatement.setString(9, tpAction.getZipCode());

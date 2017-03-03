@@ -616,6 +616,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         ResultSet resultSet = null;
         String responseString = "";
         int count = 0;
+        int count1 = 0;
         try {
             queryString = "UPDATE MSCVP.TPO_PARTNERS SET STATUS =?, MODIFIED_BY =?, MODIFIED_TS =? WHERE ID=?";
             connection = ConnectionProvider.getInstance().getConnection();
@@ -626,13 +627,26 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             statement.setInt(4, partnerId);
             count = statement.executeUpdate();
             if (count > 0) {
-                queryString = "SELECT TPO_USER.NAME AS contactName,TPO_USER.EMAIL,TPO_USER.LOGINID,TPO_USER.PASSWORD,TPO_PARTNERS.NAME AS partnerName FROM TPO_USER JOIN TPO_PARTNERS ON (TPO_USER.PARTNER_ID=TPO_PARTNERS.ID) WHERE TPO_USER.PARTNER_ID=" + partnerId;
+                queryString = "UPDATE MSCVP.TPO_USER SET ACTIVE =?, MODIFIED_BY = ?, MODIFIED_TS =? WHERE PARTNER_ID=?";
+                connection = ConnectionProvider.getInstance().getConnection();
+                statement = connection.prepareStatement(queryString);
+                statement.setString(1, "I");
+                statement.setString(2, loginId);
+                statement.setTimestamp(3, DateUtility.getInstance().getCurrentDB2Timestamp());
+                statement.setInt(4, partnerId);
+                count1 = statement.executeUpdate();
+            }
+            if (count > 0 && count1 > 0) {
+                responseString = "<font size='2' color='green'>Partner rejected successfully</font>";
+                queryString = "SELECT TPO_USER.NAME AS contactName,TPO_USER.ROLE_ID,TPO_USER.EMAIL,TPO_USER.LOGINID,TPO_USER.PASSWORD,TPO_PARTNERS.NAME AS partnerName FROM TPO_USER JOIN TPO_PARTNERS ON (TPO_USER.PARTNER_ID=TPO_PARTNERS.ID) WHERE TPO_USER.PARTNER_ID=" + partnerId;
                 connection = ConnectionProvider.getInstance().getConnection();
                 statement = connection.prepareStatement(queryString);
                 resultSet = statement.executeQuery();
-                resultSet.next();
-                responseString = "<font size='2' color='green'>Partner rejected successfully</font>";
-                MailManager.tpoAcceptOrRejectPartner("rejectPartner", resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
+                while (resultSet.next()) {
+                    if (resultSet.getInt("ROLE_ID") == 3) {
+                        MailManager.tpoAcceptOrRejectPartner("rejectPartner", resultSet.getString("contactName"), resultSet.getString("partnerName"), resultSet.getString("EMAIL"), resultSet.getString("LOGINID"), PasswordUtil.decryptPwd(resultSet.getString("PASSWORD")));
+                    }
+                }
             } else {
                 responseString = "<font size='2' color='red'>Partner reject failed</font>";
             }

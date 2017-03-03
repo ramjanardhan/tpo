@@ -958,7 +958,7 @@ function checkib810() {
             }
         }
     }
-    document.getElementById("IB810Transaction").value = ib810; 
+    document.getElementById("IB810Transaction").value = ib810;
     //alert("ib 810 transaction "+document.getElementById("IB810Transaction").value);  
 }
 
@@ -1464,7 +1464,7 @@ function fieldLengthValidator810IB(element) {
     var i = 0;
     if (element.value != null && (element.value != "")) {         /* 810 IB validation */
         if (element.id == 'isa810RecIdIB' || element.id == 'gs810RecIdIB' || element.id == 'st810RecIdIB' || element.id == 'gs810VersionIB' || element.id == 'st810VersionIB') {
-            i = 15;  
+            i = 15;
         }
         if (element.id == 'isa810VersionIB') {
             i = 5;
@@ -2483,7 +2483,11 @@ function partnerUserAddValidation() {
     var state = document.getElementById("state").value;
     var country = document.getElementById("country").value;
     var zipCode = document.getElementById("zipCode").value;
-    //contactName contactLastName contactEmail regpassword phoneNo address1 city state country zipCode
+    var roleId = document.getElementById("roleId").value;
+    var partnerRole;
+    if (roleId == '3' || roleId == "4") {
+        partnerRole = document.getElementById("partnerRole").value;
+    }
     if (contactName == "") {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter first name.</font>";
         return false;
@@ -2511,7 +2515,13 @@ function partnerUserAddValidation() {
     } else if (zipCode == "") {
         document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please enter ZIP code.</font>";
         return false;
+    } else if (roleId == "3" || roleId == "4") {
+        if (partnerRole == "-1") {
+            document.getElementById('tpResultMessage').innerHTML = "<font color=red>Please select role.</font>";
+            return false;
+        }
     }
+
     return true;
 }
 

@@ -148,6 +148,8 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String upload1FileName;
     private Map partnerNameList;
     private Map adminUsersList;
+    private Map partnerRolesList;
+    private int partnerRole;
     private Map myUsersList;
     private String transaction;
     private String direction;
@@ -270,6 +272,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                 setRoleId(roleId);
+                 setPartnerRolesList(DataSourceDataProvider.getInstance().getPartnerRolesList(roleId));
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -286,7 +291,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String resultMessage = ServiceLocator.getTpOnboardingService().doAddPartnerUser(partnerId, roleId, loginId, this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
+                 setRoleId(roleId);
+                 setPartnerRolesList(DataSourceDataProvider.getInstance().getPartnerRolesList(roleId));
+                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1847,6 +1854,22 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
 
     public void setUpload2(File upload2) {
         this.upload2 = upload2;
+    }
+
+    public Map getPartnerRolesList() {
+        return partnerRolesList;
+    }
+
+    public void setPartnerRolesList(Map partnerRolesList) {
+        this.partnerRolesList = partnerRolesList;
+    }
+
+    public int getPartnerRole() {
+        return partnerRole;
+    }
+
+    public void setPartnerRole(int partnerRole) {
+        this.partnerRole = partnerRole;
     }
 
 }

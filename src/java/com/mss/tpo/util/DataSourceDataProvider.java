@@ -142,6 +142,46 @@ public class DataSourceDataProvider {
         }
         return adminUsersMap;
     }
+    public Map getPartnerRolesList(int roleId) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getConnection();
+        Map partnerRolesMap = new TreeMap();
+        try {
+            if(roleId == 3){
+                 queryString = "SELECT ID, ROLE FROM TPO_USER_ROLES WHERE (ID = 4 OR ID = 5) ";
+            }else if(roleId == 4){
+                 queryString = "SELECT ID, ROLE FROM TPO_USER_ROLES WHERE ID = 5 ";
+            }
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                partnerRolesMap.put(resultSet.getString("ID"), resultSet.getString("ROLE"));
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return partnerRolesMap;
+    }
 
     public int getIsExistedUserId(int partnerId) throws ServiceLocatorException {
         Connection connection = null;
