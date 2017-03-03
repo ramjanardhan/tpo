@@ -307,10 +307,10 @@
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
                             <div class="col-sm-1 pull-right" id="saveButton" style="display: none">
-                                <s:submit value="Save" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkPayload()"/>
+                                <s:submit value="Upload" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkPayload()"/>
                             </div>
                             <div class="col-sm-1  pull-right">
-                                <s:reset value="Reset" cssClass="btn btn-primary pull-right" tabindex="8" onclick="resetPayload()"/>
+                                <s:reset value="Cancel" cssClass="btn btn-primary pull-right" tabindex="8" onclick="resetPayload()"/>
                             </div>
                         </div>
                     </div>

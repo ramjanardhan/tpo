@@ -188,11 +188,12 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         File createPath = new File(Properties.getProperty("mscvp.TpoPayloadUpload"));
         try {
             String partner_contactName = partnerId + "_" + loginId;
+            String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);
             /*getrequestType is used to create a directory of the object type specified in the jsp page*/
             if ("Communication_Protocol".equalsIgnoreCase(getConn_type())) {
-                createPath = new File(createPath.getAbsolutePath() + "//" + partner_contactName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction() + "//" + getConn_type() + "//" + getProtocol());
+                createPath = new File(createPath.getAbsolutePath() + "//" + partnerName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction() + "//" + getConn_type() + "//" + getProtocol());
             } else {
-                createPath = new File(createPath.getAbsolutePath() + "//" + partner_contactName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction() + "//" + getConn_type());
+                createPath = new File(createPath.getAbsolutePath() + "//" + partnerName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction() + "//" + getConn_type());
             }
             /*This creates a directory forcefully if the directory does not exsist*/
             createPath.mkdir();
