@@ -1685,6 +1685,7 @@ function isExistedUserEmailResponse2(resText) {
 }
 
 function gettransferModeSelection(x) {
+     document.getElementById("responseString").style.display = 'none';
     document.getElementById('tempTransferMode').value = x;
     document.getElementById("transferModeMsg").style.display = "none";
     var protocol = document.getElementById("commnProtocol").value;
@@ -2372,6 +2373,7 @@ function resetRegisterUser() {
 }
 
 function addPtnerLengthValidator(element) {
+    $("#responseStringMsg").hide();
     var i = 0;
     var k = 0;
     if (element.value != null && (element.value != "")) {

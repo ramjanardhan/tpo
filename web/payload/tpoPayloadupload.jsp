@@ -99,7 +99,7 @@
                 <div id="site_content" class="jumbotron">
                     <div class="container">
                         <center> <div id="resultMessage"></div>
-                            <div class="row" id="responseString">   
+                            <div class="row" id="responseStringMsg">   
                                 <%
                                     if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
                                         String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
@@ -306,7 +306,7 @@
                         </div>
                         <%-- 810 Outbound   End div--%>
                         <div class="col-sm-12">
-                            <div class="col-sm-1 pull-right" id="saveButton" style="display: none">
+                            <div class="col-sm-1 pull-right" id="saveButton">
                                 <s:submit value="Upload" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkPayload()"/>
                             </div>
                             <div class="col-sm-1  pull-right">
@@ -334,6 +334,7 @@
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script type="text/javascript">
         function doOnLoad() {
+             $("#responseStringMsg").hide();
             $("#PayLoad").addClass("active");
             var docType = document.getElementById('docType').value;
             var direction = document.getElementById('direction').value;
@@ -355,10 +356,12 @@
         }
 
         function setdoctype() {
+            $("#responseStringMsg").hide();
             var docType = document.getElementById("docType").value;
         }
 
         function setdirection() {
+             $("#responseStringMsg").hide();
             var direction = document.getElementById("direction").value;
             if (direction == 'Inbound') {
                  $('#conn_type').prop('disabled',false);
@@ -409,13 +412,13 @@
         }
 
         function transactionChange(x) {
+             $("#responseStringMsg").hide();
             var direction = document.getElementById('direction').value;
             document.getElementById('transaction').value = x;
             if (direction == 'Inbound') {
                  $('#conn_type').prop('disabled',false);
                 if (x == '850') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#ibenvelop850").show();
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
@@ -427,7 +430,6 @@
                 }
                 if (x == '855') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#ibenvelop850").hide();
                     $("#ibenvelop855").show();
                     $("#ibenvelop856").hide();
@@ -439,7 +441,6 @@
                 }
                 if (x == '856') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#ibenvelop850").hide();
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").show();
@@ -451,7 +452,6 @@
                 }
                 if (x == '810') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#ibenvelop850").hide();
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
@@ -467,7 +467,6 @@
                 $("#protocolDiv").hide();
                 if (x == '850') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#obenvelop850").show();
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
@@ -479,7 +478,6 @@
                 }
                 if (x == '855') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#obenvelop850").hide();
                     $("#obenvelop855").show();
                     $("#obenvelop856").hide();
@@ -491,7 +489,6 @@
                 }
                 if (x == '856') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#obenvelop850").hide();
                     $("#obenvelop855").hide();
                     $("#obenvelop856").show();
@@ -503,7 +500,6 @@
                 }
                 if (x == '810') {
                     document.getElementById("connTypeDiv").style.display = 'block';
-                    document.getElementById("saveButton").style.display = 'block';
                     $("#obenvelop850").hide();
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
@@ -515,7 +511,6 @@
                 }
             } else {
                 document.getElementById("connTypeDiv").style.display = 'none';
-                document.getElementById("saveButton").style.display = 'none';
                 $("#ibenvelop850").hide();
                 $("#ibenvelop855").hide();
                 $("#ibenvelop856").hide();
