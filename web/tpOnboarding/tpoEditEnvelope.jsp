@@ -37,6 +37,14 @@
                     <div class="container">
                         <%-- envelop --%>  
                         <center> <div id="resultMessage"></div></center>
+                        <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-1 pull-right"> 
+                                            <s:url var="myUrl" action="../tpOnboarding/tpoManageEnvelopes.action"></s:url>
+                                            <s:a href='%{#myUrl}'><input type="button" style="color: #61eaf1;" value="Back to list" class="btn btn-primary"/></s:a> 
+                                        </div>
+                                    </div>
+                                </div>
                         <div id="envelope">
                             <h4 style="color: #2d8fc8" class="heading_4">Envelope</h4>
                             <input type="hidden" name="envelopeDetails" id="envelopeDetails" value=""/>
@@ -89,12 +97,12 @@
                                     </div></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="4" cssClass="form-control"/>
+                                        <s:textfield name="isaReceiverId" id="isaReceiverId" value="%{tpOnboardingBean.isaReceiverId}" tabindex="4" cssClass="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'12345':'12345','123456':'123456'}" name="gsReceiverId" id="gsReceiverId" value="%{tpOnboardingBean.gsReceiverId}" tabindex="5" cssClass="form-control" onclick="receiverCopy();"/>
+                                        <s:textfield name="gsReceiverId" id="gsReceiverId" value="%{tpOnboardingBean.gsReceiverId}" tabindex="5" cssClass="form-control" onclick="receiverCopy();"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="display: none;">

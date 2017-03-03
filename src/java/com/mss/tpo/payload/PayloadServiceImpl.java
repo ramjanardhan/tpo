@@ -163,11 +163,15 @@ public class PayloadServiceImpl implements PayloadService {
 
             while (resultSet.next()) {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
+                //Protocol ID   Partner ID Protocol Email Host Port UserID Password Directory
                 tpOnboardingBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 tpOnboardingBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
                 tpOnboardingBean.setFtp_recv_protocol(resultSet.getString("RECEIVING_PROTOCOL"));
+                tpOnboardingBean.setContactEmail(DataSourceDataProvider.getInstance().getEmaiIdByloginId(resultSet.getString("CREATED_BY")));
                 tpOnboardingBean.setFtp_host(resultSet.getString("FTP_HOST"));
                 tpOnboardingBean.setFtp_port(resultSet.getString("FTP_PORT"));
+                tpOnboardingBean.setFtp_userId(resultSet.getString("FTP_USER_ID"));
+                tpOnboardingBean.setFtp_pwd(resultSet.getString("FTP_PASSWORD"));
                 tpOnboardingBean.setFtp_directory(resultSet.getString("FTP_DIRECTORY"));
                 tpoCommunicationsList.add(tpOnboardingBean);
             }
@@ -203,8 +207,12 @@ public class PayloadServiceImpl implements PayloadService {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
                 tpOnboardingBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 tpOnboardingBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
+                tpOnboardingBean.setCommnProtocol("SFTP");
+                tpOnboardingBean.setContactEmail(DataSourceDataProvider.getInstance().getEmaiIdByloginId(resultSet.getString("CREATED_BY")));
                 tpOnboardingBean.setSftp_host_ip(resultSet.getString("REMOTE_HOST_IP_ADD"));
                 tpOnboardingBean.setSftp_remote_port(resultSet.getString("REMOTE_PORT"));
+                tpOnboardingBean.setSftp_remote_userId(resultSet.getString("REMOTE_USERID"));
+                tpOnboardingBean.setSftp_remote_pwd(resultSet.getString("REMOTE_PWD"));
                 tpOnboardingBean.setSftp_directory(resultSet.getString("DIRECTORY"));
                 tpoCommunicationsList.add(tpOnboardingBean);
             }
@@ -239,9 +247,10 @@ public class PayloadServiceImpl implements PayloadService {
                 tpOnboardingBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 tpOnboardingBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
                 tpOnboardingBean.setHttp_recv_protocol(resultSet.getString("RECEIVING_PROTOCOL"));
+                tpOnboardingBean.setHttp_endpoint(resultSet.getString("HTTP_END_POINT"));
                 tpOnboardingBean.setHttp_port(resultSet.getInt("HTTP_PORT"));
-                tpOnboardingBean.setHttp_url(resultSet.getString("URL"));
                 tpOnboardingBean.setHttp_protocol_mode(resultSet.getString("HTTP_MODE"));
+                tpOnboardingBean.setHttp_url(resultSet.getString("URL"));
                 tpoCommunicationsList.add(tpOnboardingBean);
             }
         } catch (Exception ex) {
@@ -274,6 +283,7 @@ public class PayloadServiceImpl implements PayloadService {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
                 tpOnboardingBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 tpOnboardingBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
+                tpOnboardingBean.setCommnProtocol(resultSet.getString("RECEIVING_PROTOCOL"));
                 tpOnboardingBean.setSmtp_recv_protocol(resultSet.getString("SMTP_SERVER_HOST"));
                 tpOnboardingBean.setSmtp_server_port(resultSet.getInt("SMTP_SERVER_PORT"));
                 tpOnboardingBean.setSmtp_from_email(resultSet.getString("FROM_EMAIL_ADDRESS"));
@@ -312,10 +322,11 @@ public class PayloadServiceImpl implements PayloadService {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
                 tpOnboardingBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 tpOnboardingBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
+                tpOnboardingBean.setCommnProtocol("AS2");
                 tpOnboardingBean.setAs2_myOrgName(resultSet.getString("MY_ORG"));
                 tpOnboardingBean.setAs2_partOrgName(resultSet.getString("YOUR_ORG"));
-                tpOnboardingBean.setAs2_myPartname(resultSet.getString("MY_PART_PRO_NAME"));
-                tpOnboardingBean.setAs2_yourPartname(resultSet.getString("YOUR_PART_PRO_NAME"));
+                tpOnboardingBean.setAs2_myEndPoint(resultSet.getString("MY_END_POINT"));
+                tpOnboardingBean.setAs2_strMsg(resultSet.getString("STR_AS2_MSG_IN"));
                 tpoCommunicationsList.add(tpOnboardingBean);
             }
         } catch (Exception ex) {

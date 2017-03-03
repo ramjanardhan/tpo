@@ -45,17 +45,17 @@
                                 }
                             %>
                             </font></center>
-                        <div>
+                        <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Transactions</label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'850':'850','855':'855','856':'856','810':'810'}" tabindex="1" name="transaction" id="transaction" value="%{transaction}"  cssClass="form-control" />         
+                                    <label>Direction</label>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="1" name="direction" id="direction" value="%{direction}"  cssClass="form-control" />         
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Direction</label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="2" name="direction" id="direction" value="%{direction}"  cssClass="form-control" />         
+                                    <label>Transactions</label>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'850':'850','855':'855','856':'856','810':'810','997':'997'}" tabindex="2" name="transaction" id="transaction" value="%{transaction}"  cssClass="form-control" />         
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,8 @@
                             <thead>
                             <th>TRANSACTION</th>
                             <th>DIRECTION</th>
+                            <th>SENDER ID</th>
+                            <th>RECEIVER ID</th>
                             <th>CREATED_BY</th>
                             <th>CREATED_DATE</th>
                             <th>EDIT</th>
@@ -100,16 +102,27 @@
                                 <tr>
                                     <td> <% out.println(tpOnboardingBean.getTransaction()); %> </td>
                                     <td> <% out.println(tpOnboardingBean.getDirection()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getIsaSenderId()); %> </td>
+                                    <td> <% out.println(tpOnboardingBean.getIsaReceiverId()); %> </td>
                                     <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>
                                     <td> <% out.println(tpOnboardingBean.getCreated_ts());%> </td>
+                                    <td align="center"> <% if ("997".equals(tpOnboardingBean.getTransaction())) {%>
+                                        <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <% } else {%> 
+                                            <s:url var="myUrl" action="../tpOnboarding/tpoEditEnvelope.action">
+                                                <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 
+                                                <s:param name="direction"><%=(tpOnboardingBean.getDirection())%></s:param> 
+                                            </s:url>
+                                            <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></s:a>
+                                        <% }%> </td>
+                                        <%--<td align="center">
+                                                <s:url var="myUrl" action="../tpOnboarding/tpoEditEnvelope.action">
+                                                <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 
+                                                <s:param name="direction"><%=(tpOnboardingBean.getDirection())%></s:param> 
+                                                </s:url>
+                                                <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></s:a>
+                                            </td>--%>
                                     <td align="center">
-                                        <s:url var="myUrl" action="../tpOnboarding/tpoEditEnvelope.action">
-                                            <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 
-                                            <s:param name="direction"><%=(tpOnboardingBean.getDirection())%></s:param> 
-                                        </s:url>
-                                        <s:a href='%{#myUrl}' style="color: blue;"><span class="glyphicon glyphicon-pencil"></s:a>
-                                        </td>
-                                        <td align="center">
                                         <s:url var="myUrl1" action="../tpOnboarding/tpoDeleteEnvelope.action">
                                             <s:param name="regpartnerId"><%=id%></s:param> 
                                             <s:param name="transaction"><%=(tpOnboardingBean.getTransaction())%></s:param> 

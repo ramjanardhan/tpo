@@ -1246,7 +1246,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
     public ArrayList<TpOnboardingBean> tpoSearchEnvelope(String loginId, int partnerId, String flag, TpOnboardingAction tpAction) {
         StringBuffer envelopeSearchQuery = new StringBuffer();
-        envelopeSearchQuery.append("SELECT TRANSACTION, DIRECTION, CREATED_BY, CREATED_TS FROM MSCVP.TPO_ENVELOPES WHERE 1=1 ");
+        envelopeSearchQuery.append("SELECT TRANSACTION, DIRECTION, SENDERID_ISA, RECEIVERID_ISA, CREATED_BY, CREATED_TS FROM MSCVP.TPO_ENVELOPES WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {
             if (tpAction.getTransaction() != null && !"-1".equals(tpAction.getTransaction().trim())) {
                 envelopeSearchQuery.append(" AND TRANSACTION='" + tpAction.getTransaction() + "' ");
@@ -1266,6 +1266,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
                 tpOnboardingBean.setTransaction(resultSet.getString("TRANSACTION"));
                 tpOnboardingBean.setDirection(resultSet.getString("DIRECTION"));
+                tpOnboardingBean.setIsaSenderId(resultSet.getString("SENDERID_ISA"));
+                tpOnboardingBean.setIsaReceiverId(resultSet.getString("RECEIVERID_ISA"));
                 tpOnboardingBean.setCreated_by(resultSet.getString("CREATED_BY"));
                 tpOnboardingBean.setCreated_ts(resultSet.getTimestamp("CREATED_TS"));
                 tpoSearchEnvelopeList.add(tpOnboardingBean);
@@ -1382,7 +1384,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
     public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
         int isEnevelopInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
-        System.out.println("ackEnvelopData-->" + ackEnvelopData);
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             String envelopsInsertQuery = "INSERT INTO TPO_ENVELOPES (PARTNER_ID, TRANSACTION, DIRECTION,  SENDERID_ISA,"
@@ -1390,7 +1391,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     + "VERSION_GS, VERSION_ST, FUNCTIONAL_ID_CODE_GS, RESPONSIBLE_AGENCY_CODE_GS, GENERATE_AN_ACKNOWLEDGEMENT_GS, "
                     + "TRANSACTION_SET_ID_CODE_ST, TP_FLAG, CREATED_BY, CREATED_TS) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-            System.out.println("ackEnvelopData::" + ackEnvelopData);
             String envelopData1[] = ackEnvelopData.substring(0, ackEnvelopData.length()).split(Pattern.quote("@"));
             preparedStatement = connection.prepareStatement(envelopsInsertQuery);
             preparedStatement.setInt(1, partnerId);
@@ -1445,7 +1445,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 tpOnboardingBean.setStVersion(resultSet.getString("VERSION_ST"));
                 tpOnboardingBean.setFunctionalGroupId(resultSet.getString("FUNCTIONAL_ID_CODE_GS"));
                 tpOnboardingBean.setResponsibleAgencyCode(resultSet.getString("RESPONSIBLE_AGENCY_CODE_GS"));
-                if ("true".equalsIgnoreCase(resultSet.getString("GENERATE_AN_ACKNOWLEDGEMENT_GS"))) {
+                if ("YES".equalsIgnoreCase(resultSet.getString("GENERATE_AN_ACKNOWLEDGEMENT_GS"))) {
                     tpOnboardingBean.setGenerateAcknowledgement(true);
                 } else {
                     tpOnboardingBean.setGenerateAcknowledgement(false);

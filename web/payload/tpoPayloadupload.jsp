@@ -142,24 +142,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" id="ddt" style="display: none">
-                                <div class="col-sm-4 continum">
-                                    <div class="form-group">
-                                        <h4 style="color: black">Document&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="docTypeValue" id="docTypeValue" value="" readonly="true" cssClass="jumbotron_bg"/></h4>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 continum">
-                                <div class="form-group">
-                                    <h4 style="color: black">Direction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="directionValue" id="directionValue" value="" readonly="true" cssClass="jumbotron_bg"/></h4>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 continum">
-                                <div class="form-group">
-                                    <h4 style="color: black">Transaction&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield type="text" style="border: 0;cursor:default" name="transactionValue" id="transactionValue" value="" readonly="true" cssClass="jumbotron_bg"/></h4>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row" >
                             <div class="col-sm-3"> 
                                 <div class="form-group" id="connTypeDiv" style="display: none">
@@ -214,8 +196,11 @@
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getFtp_recv_protocol()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getContactEmail()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getFtp_host()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getFtp_port()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getFtp_userId()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getFtp_pwd()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getFtp_directory()); %> </td>
                                                     </tr>
                                                     <%  }   %>
@@ -225,8 +210,12 @@
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getContactEmail()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getSftp_host_ip()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getSftp_remote_port()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getSftp_remote_userId()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getSftp_remote_pwd()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getSftp_directory()); %> </td>
                                                     </tr>
                                                     <%  }   %>
@@ -237,9 +226,10 @@
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getHttp_recv_protocol()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getHttp_endpoint()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getHttp_port()); %> </td>
-                                                        <td> <% out.println(tpOnboardingBean.getHttp_url()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getHttp_protocol_mode()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getHttp_url()); %> </td>
                                                     </tr>
                                                     <%  }   %>
 
@@ -248,6 +238,7 @@
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getSmtp_recv_protocol()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getSmtp_server_port()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getSmtp_from_email()); %> </td>
@@ -260,10 +251,11 @@
                                                         <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getAs2_myOrgName()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getAs2_partOrgName()); %> </td>
-                                                        <td> <% out.println(tpOnboardingBean.getAs2_myPartname()); %> </td>
-                                                        <td> <% out.println(tpOnboardingBean.getAs2_yourPartname()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getAs2_myEndPoint()); %> </td>
+                                                        <td> <% out.println(tpOnboardingBean.getAs2_strMsg()); %> </td>
                                                     </tr>
                                                     <%  }   %>
 
@@ -400,12 +392,12 @@
 
         function setdoctype() {
             var docType = document.getElementById("docType").value;
-            document.getElementById("docTypeValue").value = docType;
         }
 
         function setdirection() {
             var direction = document.getElementById("direction").value;
             if (direction == 'Inbound') {
+                 $('#conn_type').prop('disabled',false);
                 $("#inBoundTransactions").show();
                 $("#outBoundTransactions").hide();
                 $("#ibenvelop850").hide();
@@ -416,22 +408,26 @@
                 $("#obenvelop855").hide();
                 $("#obenvelop856").hide();
                 $("#obenvelop810").hide();
-                $("#ddt").hide();
             } else if (direction == 'Outbound') {
+                document.getElementById('conn_type').value = "File_System";
+                $('#conn_type').prop('disabled',true);
                 $("#inBoundTransactions").hide();
                 $("#outBoundTransactions").show();
-                $("#ibenvelop850").hide();
-                $("#ibenvelop855").hide();
-                $("#ibenvelop856").hide();
-                $("#ibenvelop810").hide();
-                $("#obenvelop850").hide();
-                $("#obenvelop855").hide();
-                $("#obenvelop856").hide();
-                $("#obenvelop810").hide();
-                $("#ddt").hide();
+                $("#communicationsGrid").hide();
+                $("#protocolDiv").hide();
+//                $("#ibenvelop850").hide();
+//                $("#ibenvelop855").hide();
+//                $("#ibenvelop856").hide();
+//                $("#ibenvelop810").hide();
+//                $("#obenvelop850").hide();
+//                $("#obenvelop855").hide();
+//                $("#obenvelop856").hide();
+//                $("#obenvelop810").hide();
             } else {
                 $("#inBoundTransactions").hide();
                 $("#outBoundTransactions").hide();
+                $("#communicationsGrid").hide();
+                $("#protocolDiv").hide();
                 $("#ibenvelop850").hide();
                 $("#ibenvelop855").hide();
                 $("#ibenvelop856").hide();
@@ -440,42 +436,22 @@
                 $("#obenvelop855").hide();
                 $("#obenvelop856").hide();
                 $("#obenvelop810").hide();
-                $("#ddt").hide();
             }
-            document.getElementById("directionValue").value = direction;
             // document.getElementById("connTypeDiv").style.display = 'block';
         }
 
         function resetPayload() {
             window.location = "../payload/payloadUpload.action";
-            //            document.getElementById("docType").value = "-1";
-            //            document.getElementById("direction").value = "-1";
-            //            document.getElementById("conn_type").value = "-1";
-            //            document.getElementById("protocolDiv").style.display = 'none';
-            //            document.getElementById("connTypeDiv").style.display = 'none';
-            //            $("#inBoundTransactions").hide();
-            //            $("#outBoundTransactions").hide();
-            //            $("#communicationsGrid").hide();
-            //            $("#ibenvelop850").hide();
-            //            $("#ibenvelop855").hide();
-            //            $("#ibenvelop856").hide();
-            //            $("#ibenvelop810").hide();
-            //            $("#obenvelop850").hide();
-            //            $("#obenvelop855").hide();
-            //            $("#obenvelop856").hide();
-            //            $("#obenvelop810").hide();
-            //            $("#ddt").hide();
         }
 
         function transactionChange(x) {
             var direction = document.getElementById('direction').value;
             document.getElementById('transaction').value = x;
             if (direction == 'Inbound') {
+                 $('#conn_type').prop('disabled',false);
                 if (x == '850') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '850';
-                    document.getElementById('directionValue').value = 'Inbound';
                     $("#ibenvelop850").show();
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
@@ -484,13 +460,10 @@
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
                     $("#obenvelop810").hide();
-                    $("#ddt").show();
                 }
                 if (x == '855') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '855';
-                    document.getElementById('directionValue').value = 'Inbound';
                     $("#ibenvelop850").hide();
                     $("#ibenvelop855").show();
                     $("#ibenvelop856").hide();
@@ -499,13 +472,10 @@
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
                     $("#obenvelop810").hide();
-                    $("#ddt").show();
                 }
                 if (x == '856') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '856';
-                    document.getElementById('directionValue').value = 'Inbound';
                     $("#ibenvelop850").hide();
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").show();
@@ -514,13 +484,10 @@
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
                     $("#obenvelop810").hide();
-                    $("#ddt").show();
                 }
                 if (x == '810') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '810';
-                    document.getElementById('directionValue').value = 'Inbound';
                     $("#ibenvelop850").hide();
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
@@ -529,14 +496,14 @@
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
                     $("#obenvelop810").hide();
-                    $("#ddt").show();
                 }
             } else if (direction == 'Outbound') {
+                $('#conn_type').prop('disabled',true);
+                $("#communicationsGrid").hide();
+                $("#protocolDiv").hide();
                 if (x == '850') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '850';
-                    document.getElementById('directionValue').value = 'Outbound';
                     $("#obenvelop850").show();
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
@@ -545,13 +512,10 @@
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
                     $("#ibenvelop810").hide();
-                    $("#ddt").show();
                 }
                 if (x == '855') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '855';
-                    document.getElementById('directionValue').value = 'Outbound';
                     $("#obenvelop850").hide();
                     $("#obenvelop855").show();
                     $("#obenvelop856").hide();
@@ -560,13 +524,10 @@
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
                     $("#ibenvelop810").hide();
-                    $("#ddt").show();
                 }
                 if (x == '856') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '856';
-                    document.getElementById('directionValue').value = 'Outbound';
                     $("#obenvelop850").hide();
                     $("#obenvelop855").hide();
                     $("#obenvelop856").show();
@@ -575,13 +536,10 @@
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
                     $("#ibenvelop810").hide();
-                    $("#ddt").show();
                 }
                 if (x == '810') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     document.getElementById("saveButton").style.display = 'block';
-                    document.getElementById('transactionValue').value = '810';
-                    document.getElementById('directionValue').value = 'Outbound';
                     $("#obenvelop850").hide();
                     $("#obenvelop855").hide();
                     $("#obenvelop856").hide();
@@ -590,7 +548,6 @@
                     $("#ibenvelop855").hide();
                     $("#ibenvelop856").hide();
                     $("#ibenvelop810").hide();
-                    $("#ddt").show();
                 }
             } else {
                 document.getElementById("connTypeDiv").style.display = 'none';
@@ -603,7 +560,6 @@
                 $("#obenvelop855").hide();
                 $("#obenvelop856").hide();
                 $("#obenvelop810").hide();
-                $("#ddt").hide();
             }
         }
 
