@@ -134,6 +134,12 @@ function addingPartnerNameResponse(resText) {
     //alert(resText);
     document.getElementById("addpartnerMsg").innerHTML = resText;
     //$('#selfReg').modal('hide');
+    
+    
+  setTimeout(function(){
+    $('#selfReg').modal("hide");
+  }, 1500);
+
 }
 
 /* edit transaction gs and st value start*/
@@ -297,6 +303,9 @@ function acceptPartner() {
 
 function acceptPartnerResponse(resText) {
     document.getElementById("tpResultMessage").innerHTML = resText;
+    setTimeout(function(){
+    $('#myModal').modal("hide");
+  }, 1500);
 }
 
 function partnerReject(pId, pName) {
