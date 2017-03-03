@@ -269,43 +269,7 @@
                             </s:if> 
                         </div>
                         <br>
-                        <%-- 850 Inbound   Start div--%>    
-                        <div id="ibenvelop850" style="display: none" >
-                            <table id="uploadTable850ib">
-                                <tr><td><s:file name="upload850ib" id="upload850ib" theme="simple" /></td></tr>
-                            </table>
-                            <input type="button" id="remove850ib" name="remove850ib" value="remove"/>
-                            <input type="button" value="add" id="addMoreFile850ib"/>
-                        </div>
-                        <%-- 850 Inbound  End div--%>
-                        <%-- 855 Inbound   Start div--%>
-                        <div id="ibenvelop855" style="display: none" >
-                            <table id="uploadTable855ib" style="float:left">
-                                <tr><td><s:file name="upload855ib" theme="simple" /></td></tr>
-                            </table>
-                            <input type="button" id="remove855ib" name="remove850ib" value="remove"/>
-                            <input type="button" value="add" id="addMoreFile855ib"/>
-                        </div>
-                        <%-- 855 Inbound  End div--%>
-                        <%-- 856 Inbound   Start div--%>
-                        <div id="ibenvelop856" style="display: none" >
-                            <table id="uploadTable856ib" style="float:left">
-                                <tr><td><s:file name="upload856ib" theme="simple" /></td></tr>
-                            </table>
-                            <input type="button" id="remove856ib" name="remove856ib" value="remove"/>
-                            <input type="button" value="add" id="addMoreFile856ib"/>
-                        </div>
-                        <%-- 856 Inbound   End div--%>
-                        <%-- 810 Inbound   Start div--%>
-                        <div id="ibenvelop810" style="display: none" >
-                            <table id="uploadTable810ib" style="float:left">
-                                <tr><td><s:file name="upload810ib" theme="simple" /></td></tr>
-                            </table>
-                            <input type="button" id="remove810ib" name="remove810ib" value="remove"/>
-                            <input type="button" value="add" id="addMoreFile810ib"/>
-                        </div>
-                        <%-- 810 Inbound   End div--%>
-                        <%-- 850 outbound   End div--%>
+                                               <%-- 850 outbound   End div--%>
                         <div id="obenvelop850" style="display: none" >
                             <table id="uploadTable850ob" style="float:left">
                                 <tr><td><s:file name="upload850ob" theme="simple" /></td></tr>
@@ -564,46 +528,7 @@
         }
 
         $(document).ready(function() {
-            $('#addMoreFile850ib').click(function() {
-                $('#uploadTable850ib').append(
-                        '<tr><td><s:file name="upload850ib" theme="simple" />' +
-                        '</td></tr>');
-                return false;
-            });
-            $('#remove850ib').click(function() {
-                $('#uploadTable850ib tr:last').remove();
-            })
-
-            $('#addMoreFile855ib').click(function() {
-                $('#uploadTable855ib').append(
-                        '<tr><td><s:file name="upload855ib" theme="simple" />' +
-                        '</td></tr>');
-                return false;
-            });
-            $('#remove855ib').click(function() {
-                $('#uploadTable855ib tr:last').remove();
-            })
-
-            $('#addMoreFile856ib').click(function() {
-                $('#uploadTable856ib').append(
-                        '<tr><td><s:file name="upload856ib" theme="simple" />' +
-                        '</td></tr>');
-                return false;
-            });
-            $('#remove856ib').click(function() {
-                $('#uploadTable856ib tr:last').remove();
-            })
-
-            $('#addMoreFile810ib').click(function() {
-                $('#uploadTable810ib').append(
-                        '<tr><td><s:file name="upload810ib" theme="simple" />' +
-                        '</td></tr>');
-                return false;
-            });
-            $('#remove810ib').click(function() {
-                $('#uploadTable810ib tr:last').remove();
-            })
-
+          
             $('#addMoreFile850ob').click(function() {
                 $('#uploadTable850ob').append(
                         '<tr><td><s:file name="upload850ob" theme="simple" />' +
