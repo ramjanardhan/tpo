@@ -513,6 +513,16 @@
                             <div class="col-sm-2 col-md-1 pull-right">
                                 <s:reset   value="Reset" cssClass="btn btn-info" tabindex="51"/>
                             </div>
+                            <div class="col-sm-2 col-md-1 pull-right">
+                                <s:if test="%{formAction == 'doAddProfile'}">
+                                    <s:url var="myUrl" action="../tpOnboarding/tpoAddProfile.action"></s:url>
+                                    <s:a href='%{#myUrl}'><input type="button" tabindex="52" value="Cancel" class="btn btn-info"/></s:a> 
+                                </s:if>
+                                <s:else>
+                                    <s:url var="myUrl1" action="../tpOnboarding/tpoManageProfiles.action"></s:url>
+                                    <s:a href='%{#myUrl1}'><input type="button" tabindex="52" value="Cancel" class="btn btn-info"/></s:a> 
+                                </s:else>
+                            </div>
                         </div>
                     </s:form>
                 </div>

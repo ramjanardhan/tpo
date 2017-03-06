@@ -315,9 +315,11 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(20, direction);
             preparedStatement.setInt(21, partnerId);
             count = count + preparedStatement.executeUpdate();
-            if ("true".equalsIgnoreCase(envelopeData[13])) {
+              if("Outbound".equalsIgnoreCase(direction)){
+                  if ("true".equalsIgnoreCase(envelopeData[13])) {
                 int a = addAcknowledgeEnvelope(envelopeDetials, partnerId, loginId);
             }
+              }
             if (count > 0) {
                 responseString = "<font color='green'>Envelope updated sucessfully</font>";
             } else {
@@ -358,7 +360,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement = connection.prepareStatement(envelopsInsertQuery);
             preparedStatement.setInt(1, partnerId);
             preparedStatement.setString(2, "997");
-            preparedStatement.setString(3, "Outbound");
+            preparedStatement.setString(3, "Inbound");
             preparedStatement.setString(4, envelopData1[5]);//reciever
             preparedStatement.setString(5, envelopData1[6]);
             preparedStatement.setString(6, envelopData1[7]);

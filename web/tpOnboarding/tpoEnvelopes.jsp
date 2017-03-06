@@ -1513,6 +1513,10 @@
                             <div class="col-sm-2 col-md-1 pull-right">
                                 <s:reset   value="Reset" cssClass="btn btn-primary pull-right" tabindex="113"/>
                             </div>
+                            <div class="col-sm-2 col-md-1 pull-right">
+                                <s:url var="myUrl" action="../tpOnboarding/tpoAddEnvelope.action"></s:url>
+                                    <s:a href='%{#myUrl}'><input type="button" tabindex="114" class="btn btn-primary pull-right" value="Cancel" /></s:a> 
+                            </div>
                         </div>
 
                     </div>

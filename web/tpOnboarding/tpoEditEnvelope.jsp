@@ -210,8 +210,12 @@
                         </div>
                         <%-- envelop  End--%>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-1 pull-right"><input type="button" value="Update" class="btn btn-primary"  tabindex="14" onclick="return envelopeUpdating();"/></div>
+                                <div class="col-md-1 pull-right">
+                                    <input type="button" value="Update" class="btn btn-primary"  tabindex="14" onclick="return envelopeUpdating();"/>
+                                </div>
+                            <div class="col-sm-2 col-md-1 pull-right">
+                                <s:url var="myUrl" action="../tpOnboarding/tpoManageEnvelopes.action"></s:url>
+                                    <s:a href='%{#myUrl}'><input type="button" tabindex="15" class="btn btn-primary" value="Cancel" /></s:a> 
                             </div>
                         </div>
                     </div>

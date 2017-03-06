@@ -176,7 +176,7 @@
                             <s:if test="#session.tpoRoleId == 1">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Assign To<span class="text-danger">*</span></label>
+                                        <label>Assign To</label>
                                         <s:select headerKey="-1" headerValue="--select--" cssClass="form-control" list="adminUsersList" name="adminUsersList" id="adminUsersList" />
                                     </div>
                                 </div>

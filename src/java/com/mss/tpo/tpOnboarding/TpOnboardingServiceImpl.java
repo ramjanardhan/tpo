@@ -1341,8 +1341,10 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(18, tpAction.getCreated_by());
                     preparedStatement.setTimestamp(19, curdate);
                     isEnevelopInserted = isEnevelopInserted + preparedStatement.executeUpdate();
-                    if ("true".equalsIgnoreCase(envelopData[13])) {
+                    if("Outbound".equalsIgnoreCase(envelopData[1])){
+                        if ("true".equalsIgnoreCase(envelopData[13])) {
                         int a = addAcknowledgeEnvelope(transactionsSplit[i], partnerId, tpAction.getCreated_by());
+                    }
                     }
                 }
             }
@@ -1391,7 +1393,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement = connection.prepareStatement(envelopsInsertQuery);
             preparedStatement.setInt(1, partnerId);
             preparedStatement.setString(2, "997");
-            preparedStatement.setString(3, "Outbound");
+            preparedStatement.setString(3, "Inbound");
             preparedStatement.setString(4, envelopData1[5]);//reciever
             preparedStatement.setString(5, envelopData1[6]);
             preparedStatement.setString(6, envelopData1[7]);

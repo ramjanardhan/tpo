@@ -497,13 +497,11 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         Map protocolsMap = new TreeMap();
         try {
-            if (roleId == 3) {
-                // queryString = "select ID,CONCAT(CONCAT(ID, '_'), PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId;
+           // if (roleId == 3) {
                 queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId;
-            } else {
-                // queryString = "select ID,CONCAT(CONCAT(ID, '_'), PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId + " and CREATED_BY='" + loginId + "'";
-                queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId + " and CREATED_BY='" + loginId + "'";
-            }
+//            } else {
+//                queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId + " and CREATED_BY='" + loginId + "'";
+//            }
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

@@ -152,7 +152,7 @@
             <!-- /Highlights -->
         </div>
         <footer class="footer">
-            <div class=" ">
+            <div>
                 <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>
