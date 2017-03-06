@@ -283,7 +283,7 @@ public class PayloadServiceImpl implements PayloadService {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
                 tpOnboardingBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 tpOnboardingBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
-                tpOnboardingBean.setCommnProtocol(resultSet.getString("RECEIVING_PROTOCOL"));
+                tpOnboardingBean.setCommnProtocol("SMTP");
                 tpOnboardingBean.setSmtp_recv_protocol(resultSet.getString("SMTP_SERVER_HOST"));
                 tpOnboardingBean.setSmtp_server_port(resultSet.getInt("SMTP_SERVER_PORT"));
                 tpOnboardingBean.setSmtp_from_email(resultSet.getString("FROM_EMAIL_ADDRESS"));

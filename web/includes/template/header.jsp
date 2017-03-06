@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-4">
+                <div class="col-sm-7 col-sm-offset-3">
                     <s:if test='%{#session.tpoLoginAccess== "Y"}'>
                         <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
                             <ul class="nav navbar-nav menu_tab" style="">
@@ -57,10 +57,10 @@
                                     </li>
                                     <%-- payload start --%>
                                     <li class="dropdown" id="PayLoad">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-database" aria-hidden="true"></i><span class="hidden-xs hidden-sm">PayLoad</span><b class="caret"></b></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-database" aria-hidden="true"></i><span class="hidden-xs">Exchange Central</span><b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li id="UploadPayload"><a href="<s:url action="../payload/payloadUpload"/>">Payload Upload</a></li>
-                                            <li id="PayloadTx"><a href="<s:url action="../payload/payloadHistory"/>">Payload History</a></li>
+                                            <li id="UploadPayload"><a href="<s:url action="../payload/payloadUpload"/>">Exchange Payload</a></li>
+                                            <li id="PayloadTx"><a href="<s:url action="../payload/payloadHistory"/>">Exchange History</a></li>
                                         </ul>
                                     </li>
                                     <%-- payload end --%>
