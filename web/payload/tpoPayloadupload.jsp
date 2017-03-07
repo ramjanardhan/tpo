@@ -90,7 +90,7 @@
         </div>
         <header id="head">
             <div class="container">
-                <h3 > <b>PayLoad Upload Transactions  </b></h3>
+                <h3 > <b>Upload Transactions  </b></h3>
             </div>
         </header>  
         <div class="container">
@@ -112,7 +112,7 @@
                         <div class="row"> 
                             <div class="col-sm-3"> 
                                 <div class="form-group">
-                                    <label>Doc_Type<span class="text-danger">*</span></label>
+                                    <label>Document Type<span class="text-danger">*</span></label>
                                     <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Standard':'Standard','Non-Standard':'Non-Standard'}" tabindex="1" name="docType" id="docType" value="%{docType}"  onchange="setdoctype();" cssClass="form-control" />         
                                 </div> 
                             </div>  
