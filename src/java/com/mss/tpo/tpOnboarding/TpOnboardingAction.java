@@ -27,6 +27,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+/**
+ *
+ * @author Narendar
+ */
 public class TpOnboardingAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 
     private static Logger logger = Logger.getLogger(LoginAction.class.getName());
@@ -731,10 +735,12 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                int id = (Integer) httpServletRequest.getAttribute("id");
+                System.out.println("envelope id::"+id);
                 String direction = httpServletRequest.getParameter("direction");
                 String transaction = httpServletRequest.getParameter("transaction");
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                setTpOnboardingBean(ServiceLocator.getTpOnboardingService().tpoEditEnvelope(partnerId, transaction, direction));
+                setTpOnboardingBean(ServiceLocator.getTpOnboardingService().tpoEditEnvelope(id, partnerId, transaction, direction));
                 resultType = SUCCESS;
             } catch (Exception ex) {
                 resultType = "error";

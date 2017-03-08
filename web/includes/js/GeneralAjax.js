@@ -134,11 +134,11 @@ function addingPartnerNameResponse(resText) {
     //alert(resText);
     document.getElementById("addpartnerMsg").innerHTML = resText;
     //$('#selfReg').modal('hide');
-    
-    
-  setTimeout(function(){
-    $('#selfReg').modal("hide");
-  }, 1500);
+
+
+    setTimeout(function() {
+        $('#selfReg').modal("hide");
+    }, 1500);
 
 }
 
@@ -152,7 +152,7 @@ function senderCopy() {
 function receiverCopy() {
     var recIdgs = document.getElementById('gsReceiverId');
     var recIdst = document.getElementById('stReceiverId');
-        recIdst.value = recIdgs.value;
+    recIdst.value = recIdgs.value;
 }
 
 function versionCopy() {
@@ -164,6 +164,7 @@ function versionCopy() {
 
 function envelopeUpdating() {
     var envelopeDetails = '';
+    var envelopeId = document.getElementById("envelopeId").value;
     var transaction = document.getElementById("transaction").value;
     var direction = document.getElementById("direction").value;
     var isaSenderId = document.getElementById("isaSenderId").value;
@@ -177,7 +178,12 @@ function envelopeUpdating() {
     var stVersion = document.getElementById("stVersion").value;
     var functionalGroupId = document.getElementById("functionalGroupId").value;
     var responsibleAgencyCode = document.getElementById("responsibleAgencyCode").value;
-    var generateAcknowledgement = document.getElementById("generateAcknowledgement").checked;
+    var generateAcknowledgement = '';
+    if (direction == 'Outbound') {
+        generateAcknowledgement = document.getElementById("generateAcknowledgement").checked;
+    } else {
+        generateAcknowledgement = 'false';
+    }
     var transactionSetIdCode = document.getElementById("transactionSetIdCode").value;
 
     if (isaSenderId.length == 0 || isaSenderId == "" || isaSenderId == null) {
@@ -243,8 +249,7 @@ function envelopeUpdating() {
 
     var req = getXMLHttpRequest();
     req.onreadystatechange = readyStateHandlerLoadText(req, envelopeUpdatingResponse);
-    var url = '../ajax/updateEnvelope.action?envelopeDetails=' + envelopeDetails + '&transaction=' + transaction + '&direction=' + direction;
-    //alert(url);
+    var url = '../ajax/updateEnvelope.action?id=' + envelopeId + '&envelopeDetails=' + envelopeDetails + '&transaction=' + transaction + '&direction=' + direction;
     req.open("GET", url, "true");
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(null);
@@ -303,9 +308,9 @@ function acceptPartner() {
 
 function acceptPartnerResponse(resText) {
     document.getElementById("tpResultMessage").innerHTML = resText;
-    setTimeout(function(){
-    $('#myModal').modal("hide");
-  }, 1500);
+    setTimeout(function() {
+        $('#myModal').modal("hide");
+    }, 1500);
 }
 
 function partnerReject(pId, pName) {

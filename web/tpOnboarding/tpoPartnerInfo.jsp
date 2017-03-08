@@ -1,8 +1,11 @@
-<%@page import="com.mss.tpo.util.AppConstants"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%-- 
+    Author     : Narendar
+--%>
+<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html>
+<%@page import="com.mss.tpo.util.AppConstants"%>
+<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <html lang="en">
     <head>
         <meta charset="utf-8">

@@ -1,5 +1,9 @@
 package com.mss.tpo.util;
 
+/**
+ *
+ * @author Narendar
+ */
 public class AppConstants {
 
     public static final String SES_LOGIN_ID = "loginId";

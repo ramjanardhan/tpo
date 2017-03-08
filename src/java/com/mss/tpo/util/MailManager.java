@@ -21,6 +21,10 @@ import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
+/**
+ *
+ * @author Narendar
+ */
 public class MailManager {
 
     private static final String SMTP_AUTH_USER = "mscvp_alerts@miraclesoft.com";

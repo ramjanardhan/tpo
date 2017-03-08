@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author miracle
+ * @author Narendar
  */
 public class PayloadBean {
 

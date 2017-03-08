@@ -1,8 +1,11 @@
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%-- 
+    Author     : Narendar
+--%>
+<!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
-<!DOCTYPE html>
+<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>

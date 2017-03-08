@@ -1,8 +1,11 @@
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%-- 
+    Author     : Narendar
+--%>
 <!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
+<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>
@@ -17,6 +20,12 @@
         <script>
             function doOnLoad() {
                 $("#envelopes").addClass("active");
+                var direction = document.getElementById("direction").value;
+                if(direction == 'Inbound'){
+                    document.getElementById("acknowledgement").style.display = "none";
+                }else{
+                    document.getElementById("acknowledgement").style.display = "block";
+                }
             }
         </script>
     </head>
@@ -33,7 +42,8 @@
         <div class="container">
             <div id="loadingImage"></div>
             <s:form action="" method="POST" enctype="multipart/form-data" name="updateEnvelope" id="updateEnvelope" theme="simple">
-                <div id="site_content" class="jumbotron">
+              <s:hidden name="envelopeId" id="envelopeId" value="%{tpOnboardingBean.id}"/>
+              <div id="site_content" class="jumbotron">
                     <div class="container">
                         <%-- envelop --%>  
                         <center> <div id="resultMessage"></div></center>
@@ -171,7 +181,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                                    <div class="row" id="acknowledgement" style="display: none">
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <div class="threshold" style="position: relative;top:0px">

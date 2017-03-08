@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ *
+ * @author Narendar
+ */
 public class SessionFilter implements Filter {
 
     private ArrayList<String> urlList;

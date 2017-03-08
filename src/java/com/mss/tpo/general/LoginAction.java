@@ -18,6 +18,10 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import org.apache.log4j.Logger;
 
+/**
+ *
+ * @author Narendar
+ */
 public class LoginAction extends ActionSupport implements ServletRequestAware {
 
     private static Logger logger = Logger.getLogger(LoginAction.class.getName());

@@ -25,6 +25,10 @@ import javax.sql.DataSource;
  *
  * <code>ServiceLocator serviceLocator = ServiceLocator.getInstance();</code>
  */
+/**
+ *
+ * @author Narendar
+ */
 public class DataServiceLocator {
 
     private Context context;

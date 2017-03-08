@@ -31,6 +31,10 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import sun.net.www.protocol.ftp.FtpURLConnection;
 
+/**
+ *
+ * @author Narendar
+ */
 public class AjaxHandlerServiceImpl implements AjaxHandlerService {
 
     /**
@@ -276,7 +280,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return responseString;
     }
 
-    public String doUpdateEnvelope(String envelopeDetials, String loginId, int partnerId, String transaction, String direction) throws ServiceLocatorException {
+    public String doUpdateEnvelope(int id, String envelopeDetials, String loginId, int partnerId, String transaction, String direction) throws ServiceLocatorException {
         int count = 0;
         String responseString = "";
         try {
@@ -286,7 +290,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                     + "SENDERID_GS = ?,SENDERID_ST = ?,RECEIVERID_ISA = ?,RECEIVERID_GS = ?,RECEIVERID_ST = ?,VERSION_ISA = ?,"
                     + "VERSION_GS = ?,VERSION_ST = ?,FUNCTIONAL_ID_CODE_GS = ?,RESPONSIBLE_AGENCY_CODE_GS = ?,"
                     + "GENERATE_AN_ACKNOWLEDGEMENT_GS = ?,TRANSACTION_SET_ID_CODE_ST = ?,MODIFIED_BY = ?,MODIFIED_TS =?,TP_FLAG=? "
-                    + "WHERE TRANSACTION = ? AND DIRECTION = ? AND PARTNER_ID = ?");
+                    + "WHERE ID = " + id + " ");
             preparedStatement = connection.prepareStatement(updateEnvelopeQuery);
             preparedStatement.setString(1, envelopeData[0]);
             preparedStatement.setString(2, envelopeData[1]);
@@ -302,28 +306,29 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
             preparedStatement.setString(12, envelopeData[11]);
             preparedStatement.setString(13, envelopeData[12]);
             //  preparedStatement.setString(14, envelopeData[13]);
-            if ("true".equalsIgnoreCase(envelopeData[13])) {
-                preparedStatement.setString(14, "YES");
-            } else if ("false".equalsIgnoreCase(envelopeData[13])) {
-                preparedStatement.setString(14, "NO");
+            if ("Outbound".equalsIgnoreCase(envelopeData[1])) {
+                if ("true".equalsIgnoreCase(envelopeData[13])) {
+                    preparedStatement.setString(14, "YES");
+                } else if ("false".equalsIgnoreCase(envelopeData[13])) {
+                    preparedStatement.setString(14, "NO");
+                }
+            }else{
+                 preparedStatement.setString(14, "NA");
             }
             preparedStatement.setString(15, envelopeData[14]);
             preparedStatement.setString(16, loginId);
             preparedStatement.setTimestamp(17, DateUtility.getInstance().getCurrentDB2Timestamp());
             preparedStatement.setString(18, "N");
-            preparedStatement.setString(19, transaction);
-            preparedStatement.setString(20, direction);
-            preparedStatement.setInt(21, partnerId);
             count = count + preparedStatement.executeUpdate();
-              if("Outbound".equalsIgnoreCase(direction)){
-                  if ("true".equalsIgnoreCase(envelopeData[13])) {
-                int a = addAcknowledgeEnvelope(envelopeDetials, partnerId, loginId);
+            if ("Outbound".equalsIgnoreCase(direction)) {
+                if ("true".equalsIgnoreCase(envelopeData[13])) {
+                    int a = updateAcknowledgeEnvelope(id, envelopeDetials, partnerId, loginId);
+                }
             }
-              }
             if (count > 0) {
                 responseString = "<font color='green'>Envelope updated sucessfully</font>";
             } else {
-                responseString = "<font color='red'>Envelope update filaed</font>";
+                responseString = "<font color='red'>Envelope update failed</font>";
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -346,7 +351,7 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return responseString;
     }
 
-    public int addAcknowledgeEnvelope(String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
+    public int updateAcknowledgeEnvelope(int id, String ackEnvelopData, int partnerId, String loginId) throws ServiceLocatorException {
         int isEnevelopInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         try {

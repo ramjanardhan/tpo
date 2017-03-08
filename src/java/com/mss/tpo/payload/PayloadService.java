@@ -9,6 +9,10 @@ import com.mss.tpo.tpOnboarding.TpOnboardingBean;
 import com.mss.tpo.util.ServiceLocatorException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Narendar
+ */
 public interface PayloadService {
 
     public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction);

@@ -9,6 +9,10 @@ import com.mss.tpo.util.ConnectionProvider;
 import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.ServiceLocatorException;
 
+/**
+ *
+ * @author Narendar
+ */
 public class GeneralServiceImpl implements GeneralService {
 
     Connection connection = null;

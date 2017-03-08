@@ -1,3 +1,7 @@
+/*
+ * This Class Creates instances of all classes.
+ */
+
 package com.mss.tpo.util;
 
 import com.mss.tpo.ajax.AjaxHandlerService;
@@ -8,10 +12,11 @@ import com.mss.tpo.payload.PayloadService;
 import com.mss.tpo.payload.PayloadServiceImpl;
 import com.mss.tpo.tpOnboarding.TpOnboardingService;
 import com.mss.tpo.tpOnboarding.TpOnboardingServiceImpl;
-/*
- * This Class Creates instances of all classes.
- */
 
+/**
+ *
+ * @author Narendar
+ */
 public class ServiceLocator {
 
     /**

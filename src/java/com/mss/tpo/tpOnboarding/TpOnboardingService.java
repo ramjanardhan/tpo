@@ -7,6 +7,10 @@ package com.mss.tpo.tpOnboarding;
 import com.mss.tpo.util.ServiceLocatorException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Narendar
+ */
 public interface TpOnboardingService {
 
     public TpOnboardingBean getPartnerInfo(int PartnerId, String loginId) throws ServiceLocatorException;
@@ -35,7 +39,7 @@ public interface TpOnboardingService {
 
     public String addTpoEnvelope(int partnerId, TpOnboardingAction tpAction) throws ServiceLocatorException;
 
-    public TpOnboardingBean tpoEditEnvelope(int partnerId, String transaction, String direction) throws ServiceLocatorException;
+    public TpOnboardingBean tpoEditEnvelope(int id, int partnerId, String transaction, String direction) throws ServiceLocatorException;
 
     public String doResetMyPassword(int roleId, String loginId, String pwd) throws ServiceLocatorException;
 

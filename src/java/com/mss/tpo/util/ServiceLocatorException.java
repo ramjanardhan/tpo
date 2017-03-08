@@ -1,5 +1,9 @@
 package com.mss.tpo.util;
 
+/**
+ *
+ * @author Narendar
+ */
 public class ServiceLocatorException extends Exception {
 
     private static final long serialVersionUID = 1L;

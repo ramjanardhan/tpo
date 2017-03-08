@@ -3,6 +3,10 @@ package com.mss.tpo.util;
 import java.util.ResourceBundle;
 import java.util.MissingResourceException;
 
+/**
+ *
+ * @author Narendar
+ */
 public class Properties {
 
     private static final String BUNDLE_NAME = "com/mss/tpo/config/mscvp";

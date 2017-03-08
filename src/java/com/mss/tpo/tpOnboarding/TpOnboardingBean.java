@@ -6,6 +6,10 @@ package com.mss.tpo.tpOnboarding;
 
 import java.sql.Timestamp;
 
+/**
+ *
+ * @author Narendar
+ */
 public class TpOnboardingBean {
 
     private String partnerName;

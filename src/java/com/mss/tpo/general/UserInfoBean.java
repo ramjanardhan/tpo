@@ -2,6 +2,10 @@ package com.mss.tpo.general;
 
 import java.sql.Timestamp;
 
+/**
+ *
+ * @author Narendar
+ */
 public class UserInfoBean {
 
     private int userId;

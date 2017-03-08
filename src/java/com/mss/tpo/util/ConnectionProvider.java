@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
+/**
+ *
+ * @author Narendar
+ */
 public class ConnectionProvider {
 
     private static ConnectionProvider _instance;

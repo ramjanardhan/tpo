@@ -8,6 +8,10 @@ package com.mss.tpo.ajax;
 
 import com.mss.tpo.util.ServiceLocatorException;
 
+/**
+ *
+ * @author Narendar
+ */
 public interface AjaxHandlerService {
 
     /**
@@ -21,7 +25,7 @@ public interface AjaxHandlerService {
 
     public String doAddTpoPartner(int roleId, String loginId, AjaxHandlerAction ajaxHandlerAction) throws ServiceLocatorException;
 
-    public String doUpdateEnvelope(String envelopeDetials, String loginId, int partnerId, String transaction, String direction) throws ServiceLocatorException;
+    public String doUpdateEnvelope(int id, String envelopeDetials, String loginId, int partnerId, String transaction, String direction) throws ServiceLocatorException;
 
     public String getProtocolDetails(String transferMode, String protocol) throws ServiceLocatorException;
 

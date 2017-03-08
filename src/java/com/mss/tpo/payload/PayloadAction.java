@@ -20,6 +20,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+/**
+ *
+ * @author Narendar
+ */
 public class PayloadAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 
     private HttpServletRequest httpServletRequest;

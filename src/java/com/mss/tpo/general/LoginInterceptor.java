@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.StrutsStatics;
 
+/**
+ *
+ * @author Narendar
+ */
 public class LoginInterceptor extends AbstractInterceptor implements StrutsStatics {
 
     /**

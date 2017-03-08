@@ -1,8 +1,11 @@
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%-- 
+    Author     : Narendar
+--%>
 <!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
+<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding portal</title>
@@ -243,12 +246,12 @@
                                                 <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
                                         </div>
-                                        <div class="tp_sm3">
+                                        <div class="tp_sm3" style="display:none">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" cssStyle="display:none" name="" id="" value="" />
                                             </div>
                                         </div>
-                                        <div class="tp_sm3">
+                                        <div class="tp_sm3" style="display:none">
                                             <div class="form-group">
                                                 <s:checkbox  name="gen850AckIB" id="gen850AckIB" tabindex="20" value="%{gen850AckIB}" />
                                             </div>
@@ -413,7 +416,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="display:none">
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <div class="threshold" style="position: relative;top:0px">
@@ -586,7 +589,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="display:none">
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <div class="threshold" style="position: relative;top:0px">
@@ -764,7 +767,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="display:none">
                                         <div class="tp_sm3">
                                             <div class="form-group">
                                                 <div class="threshold" style="position: relative;top:0px">

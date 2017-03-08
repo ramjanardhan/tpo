@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+/**
+ *
+ * @author Narendar
+ */
 public class AjaxHandlerAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 
     /**
@@ -149,7 +153,7 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
         int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
         if (loginId != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().doUpdateEnvelope(getEnvelopeDetails(), loginId, partnerId, getTransaction(), getDirection());
+                responseString = ServiceLocator.getAjaxHandlerService().doUpdateEnvelope(getId(),getEnvelopeDetails(), loginId, partnerId, getTransaction(), getDirection());
                 httpServletResponse.setContentType("text/xml");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {

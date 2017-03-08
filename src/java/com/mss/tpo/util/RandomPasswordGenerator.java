@@ -7,6 +7,10 @@ package com.mss.tpo.util;
 
 import java.util.Random;
 
+/**
+ *
+ * @author Narendar
+ */
 public class RandomPasswordGenerator {
 
     private static final String ALPHA_CAPS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

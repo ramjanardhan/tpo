@@ -1,15 +1,13 @@
 <%-- 
-    Document   : tpoSearchProfile
-    Created on : Dec 27, 2016, 4:45:23 AM
-    Author     : miracle1
+    Author     : Narendar
 --%>
-<%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
 <%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
-<!DOCTYPE html>
+<%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
+<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>

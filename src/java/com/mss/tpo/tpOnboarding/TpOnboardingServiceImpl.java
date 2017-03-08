@@ -25,6 +25,10 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ *
+ * @author Narendar
+ */
 public class TpOnboardingServiceImpl implements TpOnboardingService {
 
     Connection connection = null;
@@ -1242,7 +1246,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
     public ArrayList<TpOnboardingBean> tpoSearchEnvelope(String loginId, int partnerId, String flag, TpOnboardingAction tpAction) {
         StringBuffer envelopeSearchQuery = new StringBuffer();
-        envelopeSearchQuery.append("SELECT TRANSACTION, DIRECTION, SENDERID_ISA, RECEIVERID_ISA, CREATED_BY, CREATED_TS FROM MSCVP.TPO_ENVELOPES WHERE 1=1 ");
+        envelopeSearchQuery.append("SELECT ID, TRANSACTION, DIRECTION, SENDERID_ISA, RECEIVERID_ISA, CREATED_BY, CREATED_TS FROM MSCVP.TPO_ENVELOPES WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {
             if (tpAction.getTransaction() != null && !"-1".equals(tpAction.getTransaction().trim())) {
                 envelopeSearchQuery.append(" AND TRANSACTION='" + tpAction.getTransaction() + "' ");
@@ -1260,6 +1264,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
 
             while (resultSet.next()) {
                 TpOnboardingBean tpOnboardingBean = new TpOnboardingBean();
+                tpOnboardingBean.setId(resultSet.getInt("ID"));
                 tpOnboardingBean.setTransaction(resultSet.getString("TRANSACTION"));
                 tpOnboardingBean.setDirection(resultSet.getString("DIRECTION"));
                 tpOnboardingBean.setIsaSenderId(resultSet.getString("SENDERID_ISA"));
@@ -1331,20 +1336,24 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(12, envelopData[10]);
                     preparedStatement.setString(13, envelopData[11]);
                     preparedStatement.setString(14, envelopData[12]);
-                    if ("true".equalsIgnoreCase(envelopData[13])) {
-                        preparedStatement.setString(15, "YES");
-                    } else if ("false".equalsIgnoreCase(envelopData[13])) {
-                        preparedStatement.setString(15, "NO");
+                    if ("Outbound".equalsIgnoreCase(envelopData[1])) {
+                        if ("true".equalsIgnoreCase(envelopData[13])) {
+                            preparedStatement.setString(15, "YES");
+                        } else if ("false".equalsIgnoreCase(envelopData[13])) {
+                            preparedStatement.setString(15, "NO");
+                        }
+                    }else{
+                        preparedStatement.setString(15, "NA");
                     }
                     preparedStatement.setString(16, envelopData[14]);
                     preparedStatement.setString(17, "N");
                     preparedStatement.setString(18, tpAction.getCreated_by());
                     preparedStatement.setTimestamp(19, curdate);
                     isEnevelopInserted = isEnevelopInserted + preparedStatement.executeUpdate();
-                    if("Outbound".equalsIgnoreCase(envelopData[1])){
+                    if ("Outbound".equalsIgnoreCase(envelopData[1])) {
                         if ("true".equalsIgnoreCase(envelopData[13])) {
-                        int a = addAcknowledgeEnvelope(transactionsSplit[i], partnerId, tpAction.getCreated_by());
-                    }
+                            int a = addAcknowledgeEnvelope(transactionsSplit[i], partnerId, tpAction.getCreated_by());
+                        }
                     }
                 }
             }
@@ -1419,17 +1428,18 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         return isEnevelopInserted;
     }
 
-    public TpOnboardingBean tpoEditEnvelope(int partnerId, String transaction, String direction) throws ServiceLocatorException {
+    public TpOnboardingBean tpoEditEnvelope(int id, int partnerId, String transaction, String direction) throws ServiceLocatorException {
         try {
             tpOnboardingBean = new TpOnboardingBean();
             connection = ConnectionProvider.getInstance().getConnection();
             String editEnvelopeQuery = "SELECT PARTNER_ID,TRANSACTION,DIRECTION,PROTOCOL,SENDERID_ISA,SENDERID_GS,SENDERID_ST,RECEIVERID_ISA,RECEIVERID_GS,RECEIVERID_ST,"
                     + "VERSION_ISA,VERSION_GS,VERSION_ST,FUNCTIONAL_ID_CODE_GS,RESPONSIBLE_AGENCY_CODE_GS,GENERATE_AN_ACKNOWLEDGEMENT_GS,"
                     + "TRANSACTION_SET_ID_CODE_ST,TP_FLAG,CREATED_BY,CREATED_TS,MODIFIED_BY,MODIFIED_TS "
-                    + "FROM TPO_ENVELOPES WHERE TRANSACTION = '" + transaction + "' AND lcase(DIRECTION) like lcase('%" + direction + "%') AND PARTNER_ID = " + partnerId + "";
+                    + "FROM TPO_ENVELOPES WHERE ID= "+id+" ";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(editEnvelopeQuery);
             while (resultSet.next()) {
+                tpOnboardingBean.setId(id);
                 tpOnboardingBean.setTransaction(resultSet.getString("TRANSACTION"));
                 tpOnboardingBean.setDirection(resultSet.getString("DIRECTION"));
                 tpOnboardingBean.setIsaSenderId(resultSet.getString("SENDERID_ISA"));
