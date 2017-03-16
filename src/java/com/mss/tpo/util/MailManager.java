@@ -2877,15 +2877,10 @@ public class MailManager {
             htmlText.append("</tr>");
             htmlText.append("<tr>");
             htmlText.append("<td align='justify' style='padding: 5px 0 5px 0; border-top: 1px #2368a0; border-bottom: 1px #2368a0; font-size: 14px; line-height: 25px; font-family: Open Sans; color: #232527;' class='padding-copy'>");
-            htmlText.append("<b style='font-size: 14px; color: #ef4048;'>");
-
-            htmlText.append("<p><u><b> Your Login Details :</b></u><br>");
-            htmlText.append("LoginId : <b>" + userloginId + "</b><br>");
-            htmlText.append("Password : <b>" + password + "</b><br>");
-
-            htmlText.append("<br>");
-            htmlText.append("</p><br>");
-            htmlText.append("<p><u><b> Your Registration Details :</b></u><br><br>");
+           // htmlText.append("<b style='font-size: 14px; color: #ef4048;'>");
+            htmlText.append("<p><u><b style='font-size: 14px; color: #001dee;'> Your Registration Details :</b></u><br><br>");
+            
+            htmlText.append("<b style='font-size: 12px; color: #ef4048;'>");
             htmlText.append("Partner Name : <b>" + ajaxHandlerAction.getAddpartnerName() + "</b><br>");
             htmlText.append("Phone No : <b>" + ajaxHandlerAction.getAddphoneNo() + "</b><br>");
             htmlText.append("Address : <b>" + ajaxHandlerAction.getAddaddress1() + "</b><br>");
@@ -2895,9 +2890,11 @@ public class MailManager {
             htmlText.append("Zip-Code : <b>" + ajaxHandlerAction.getAddzipCode() + "</b><br>");
             htmlText.append("URL : <b>" + ajaxHandlerAction.getUrl() + "</b><br>");
             htmlText.append("Description : <b>" + ajaxHandlerAction.getDescription() + "</b><br>");
-
+            htmlText.append("</b>");
+            
             htmlText.append("<br>");
-            htmlText.append("</p></b></td>");
+            //htmlText.append("</p></b></td>");
+            htmlText.append("</p></td>");
             htmlText.append("</tr>");
             htmlText.append("<tr>");
             htmlText.append("<td style='padding-top: 0px;' align='left' valign='top'>");

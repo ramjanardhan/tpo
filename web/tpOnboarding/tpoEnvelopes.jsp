@@ -241,7 +241,7 @@
                                                 <s:textfield cssClass="form-control" name=""  cssStyle="opacity:0" id="" value="" />
                                             </div>
                                         </div>
-                                        <div class="tp_sm3">
+                                        <div class="tp_sm3" style="display:none">
                                             <div class="form-group threshold" style="position: relative;top:0px">
                                                 <input type="text" value="Generate Acknowledgement" name="thresholdSelect" disabled="disabled" class="jumbotron_bg">
                                             </div>
@@ -256,7 +256,7 @@
                                                 <s:checkbox  name="gen850AckIB" id="gen850AckIB" tabindex="20" value="%{gen850AckIB}" />
                                             </div>
                                         </div>
-                                        <div class="tp_sm3">
+                                        <div class="tp_sm3"  style="display:none">
                                             <div class="form-group">
                                                 <s:textfield cssClass="form-control" name=""  cssStyle="opacity:0" id="" value=""  />
                                             </div>
