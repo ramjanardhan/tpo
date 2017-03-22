@@ -91,7 +91,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                 try {
                     connection = ConnectionProvider.getInstance().getConnection();
                     // query = "insert into LOGUSERACCESS(LoginId,X_FORWARDED_FOR1,VIA, REMOTE_ADDR,User_Agent,DateAccessed)"
-                    query = "INSERT INTO MSCVP.LOGUSERACCESS (LOGINID, X_FORWARDED_FOR1, VIA, REMOTE_ADDR, USER_AGENT, DATEACCESSED) "
+                    query = "INSERT INTO MSCVP.TPO_LOG_USERS (LOGINID, X_FORWARDED_FOR1, VIA, REMOTE_ADDR, USER_AGENT, DATEACCESSED) "
                             + " values('" + loginId + "','" + forwarded + "','" + via + "','" + remote + "','" + agent + "','" + accessedtime + "')";
                     stmt = connection.createStatement();
                     int x = stmt.executeUpdate(query);

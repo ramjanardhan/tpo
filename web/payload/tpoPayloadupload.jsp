@@ -336,7 +336,7 @@
         <script src='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script type="text/javascript">
         function doOnLoad() {
-             $("#responseStringMsg").hide();
+            // $("#responseStringMsg").hide();
             $("#PayLoad").addClass("active");
             var docType = document.getElementById('docType').value;
             var direction = document.getElementById('direction').value;

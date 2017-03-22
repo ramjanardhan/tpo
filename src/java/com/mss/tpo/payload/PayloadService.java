@@ -17,7 +17,9 @@ public interface PayloadService {
 
     public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction);
 
-    public String doPayloadUpload(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException;
+    public String doPayloadUploadForInbound(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException;
+
+    public String doPayloadUploadForOutbound(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction, String[] fileNames) throws ServiceLocatorException;
 
     public ArrayList<TpOnboardingBean> getFTPCommunicationsList(String loginId, int roleId, int partnerId, String protocol) throws ServiceLocatorException;
 
@@ -28,4 +30,5 @@ public interface PayloadService {
     public ArrayList<TpOnboardingBean> getSMTPCommunicationsList(String loginId, int roleId, int partnerId, String protocol) throws ServiceLocatorException;
 
     public ArrayList<TpOnboardingBean> getAS2CommunicationsList(String loginId, int roleId, int partnerId, String protocol) throws ServiceLocatorException;
+    
 }

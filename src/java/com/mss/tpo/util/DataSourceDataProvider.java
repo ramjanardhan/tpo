@@ -466,9 +466,6 @@ public class DataSourceDataProvider {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(resultSet.getString("TRANSACTION_TYPE"));
-                //PartnerNameMap.put(resultSet.getInt("ID"), resultSet.getString("TRANSACTION_TYPE"));
-                // System.out.println("resultSet.getInt(\"ID\")=="+resultSet.getInt("ID"));
-                System.out.println("resultSet.getString(\"TRANSACTION_TYPE\")==" + resultSet.getString("TRANSACTION_TYPE"));
             }
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);

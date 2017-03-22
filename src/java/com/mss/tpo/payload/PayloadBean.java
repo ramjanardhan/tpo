@@ -29,6 +29,7 @@ public class PayloadBean {
     private String status;
     private int transaction;
     private String direction;
+    private String fileName;
     private int correlationID;
 
     public int getId() {
@@ -157,6 +158,14 @@ public class PayloadBean {
 
     public void setCurrentTestDate(Timestamp currentTestDate) {
         this.currentTestDate = currentTestDate;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
 }

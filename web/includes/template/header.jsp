@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="row">
-                <div class="col-sm-7 col-sm-offset-3">
+                <div class="col-sm-8 col-sm-offset-2">
                     <s:if test='%{#session.tpoLoginAccess== "Y"}'>
                         <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
                             <ul class="nav navbar-nav menu_tab" style="">
@@ -65,6 +65,16 @@
                                     </li>
                                     <%-- payload end --%>
                                 </s:if>
+                                     <%-- ticket start --%>
+                                    <li class="dropdown" id="ticket">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-database" aria-hidden="true"></i><span class="hidden-xs">Ticketing</span><b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li id="addTicket"><a href="<s:url action="../ticket/addTicket"/>">Create Ticket</a></li>
+                                            <li id="ticketsList"><a href="<s:url action="../ticket/ticketsList"/>">Manage Tickets</a></li>
+                                            <li id="editTicket"><a href="<s:url action="../ticket/editTicket"/>">Edit Tickets</a></li>
+                                        </ul>
+                                    </li>
+                                    <%-- ticket end --%>
                                 <li class="dropdown" id="services">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="">Services</span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">

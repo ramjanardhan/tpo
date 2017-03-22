@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!--
+    Document    : ticket.xml
+    Author      : Narendar
+-->
+
+<struts>
+    <package name="ticket" namespace="/ticket" extends="default">
+        
+        <default-interceptor-ref name="crudStack"/>     
+        
+        <action name="addTicket" class="com.mss.tpo.ticket.TicketAction" method="addTicket">
+            <result name="success">/ticket/addTicket.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        <action name="ticketsList" class="com.mss.tpo.ticket.TicketAction" method="ticketsList">
+            <result name="success">/ticket/ticketsList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        <action name="editTicket" class="com.mss.tpo.ticket.TicketAction" method="editTicket">
+            <result name="success">/ticket/editTicket.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+    </package>
+</struts>

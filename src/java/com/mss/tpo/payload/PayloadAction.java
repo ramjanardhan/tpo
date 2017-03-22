@@ -11,6 +11,11 @@ import com.mss.tpo.util.Properties;
 import com.mss.tpo.util.ServiceLocator;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +80,9 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private List<String> tpoProtocolsHeadersList;
 
     private String filepath;
+    public InputStream inputStream;
+    public OutputStream outputStream;
+    private String fileName;
 
     public String payloadUpload() throws Exception {
         resultType = LOGIN;
@@ -141,6 +149,9 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
                 String filePath = "";
+                String resultMessage = "";
+                String fileNames[] = null;
+                int i = 0;
                 if ("Inbound".equalsIgnoreCase(getDirection())) {
                     if ("850".equalsIgnoreCase(getTransaction())) {
                         if (getUpload850ibFileName() != null && !getUpload850ibFileName().equals(null) && getUpload850ibFileName().size() > 0) {
@@ -163,22 +174,46 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                     if ("850".equalsIgnoreCase(getTransaction())) {
                         if (getUpload850obFileName() != null && !getUpload850obFileName().equals(null) && getUpload850obFileName().size() > 0) {
                             filePath = saveFileToDisk(partnerId, loginId);
+                            fileNames = new String[upload850ob.size()];
+                            for (File file : upload850ob) {
+                                fileNames[i] = upload850obFileName.get(i);
+                                i++;
+                            }
                         }
                     } else if ("855".equalsIgnoreCase(getTransaction())) {
                         if (getUpload855obFileName() != null && !getUpload855obFileName().equals(null) && getUpload855obFileName().size() > 0) {
                             filePath = saveFileToDisk(partnerId, loginId);
+                            fileNames = new String[upload855ob.size()];
+                            for (File file : upload855ob) {
+                                fileNames[i] = upload855obFileName.get(i);
+                                i++;
+                            }
                         }
                     } else if ("856".equalsIgnoreCase(getTransaction())) {
                         if (getUpload856obFileName() != null && !getUpload856obFileName().equals(null) && getUpload856obFileName().size() > 0) {
                             filePath = saveFileToDisk(partnerId, loginId);
+                            fileNames = new String[upload856ob.size()];
+                            for (File file : upload856ob) {
+                                fileNames[i] = upload856obFileName.get(i);
+                                i++;
+                            }
                         }
                     } else if ("810".equalsIgnoreCase(getTransaction())) {
                         if (getUpload810obFileName() != null && !getUpload810obFileName().equals(null) && getUpload810obFileName().size() > 0) {
                             filePath = saveFileToDisk(partnerId, loginId);
+                            fileNames = new String[upload810ob.size()];
+                            for (File file : upload810ob) {
+                                fileNames[i] = upload810obFileName.get(i);
+                                i++;
+                            }
                         }
                     }
                 }
-                String resultMessage = ServiceLocator.getPayloadService().doPayloadUpload(partnerId, partnerName,loginId, filePath, this);
+                if ("Inbound".equalsIgnoreCase(getDirection())) {
+                    resultMessage = ServiceLocator.getPayloadService().doPayloadUploadForInbound(partnerId, partnerName, loginId, filePath, this);
+                } else if ("Outbound".equalsIgnoreCase(getDirection())) {
+                    resultMessage = ServiceLocator.getPayloadService().doPayloadUploadForOutbound(partnerId, partnerName, loginId, filePath, this, fileNames);
+                }
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception ex) {
@@ -194,7 +229,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             //String partner_contactName = partnerId + "_" + loginId;
             String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);
             /*getrequestType is used to create a directory of the object type specified in the jsp page*/
-            if("Outbound".equalsIgnoreCase(getDirection())){
+            if ("Outbound".equalsIgnoreCase(getDirection())) {
                 setConn_type("File_System");
             }
             if ("Communication_Protocol".equalsIgnoreCase(getConn_type())) {
@@ -202,8 +237,6 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             } else {
                 createPath = new File(createPath.getAbsolutePath() + "//" + partnerName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction() + "//" + getConn_type());
             }
-            System.out.println("getConn_type-->"+getConn_type());
-            System.out.println("createPath-->"+createPath);
             /*This creates a directory forcefully if the directory does not exsist*/
             createPath.mkdir();
             /*here it takes the absolute path and the name of the file that is to be uploaded*/
@@ -316,7 +349,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getHTTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "HTTP");
                 } else if ("SMTP".equalsIgnoreCase(getProtocol())) {
-                     tpoProtocolsHeadersList.add("Protocol_ID");
+                    tpoProtocolsHeadersList.add("Protocol_ID");
                     tpoProtocolsHeadersList.add("Partner_ID");
                     tpoProtocolsHeadersList.add("Protocol");
                     tpoProtocolsHeadersList.add("Host");
@@ -326,7 +359,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                     tpoCommunicationsList = ServiceLocator.getPayloadService().getSMTPCommunicationsList(loginId, roleId, partnerId, getProtocol());
                     httpServletRequest.getSession(false).setAttribute("protocol", "SMTP");
                 } else if ("AS2".equalsIgnoreCase(getProtocol())) {
-                   tpoProtocolsHeadersList.add("Protocol_ID");
+                    tpoProtocolsHeadersList.add("Protocol_ID");
                     tpoProtocolsHeadersList.add("Partner_ID");
                     tpoProtocolsHeadersList.add("Protocol");
                     tpoProtocolsHeadersList.add("My_Organization");
@@ -344,6 +377,53 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             }
         }
         return resultType;
+    }
+
+    public void downloadPayloadFile() {
+        String responseString = "";
+        try {
+            httpServletResponse.setContentType("application/force-download");
+            File file = new File(getFilepath());
+            if (file.exists()) {
+                fileName = file.getName();
+                inputStream = new FileInputStream(file);
+                outputStream = httpServletResponse.getOutputStream();
+                httpServletResponse.setHeader("Content-Disposition", "attachment;filename=\"" + fileName + "\"");
+                int noOfBytesRead = 0;
+                byte[] byteArray = null;
+                while (true) {
+                    byteArray = new byte[1024];
+                    noOfBytesRead = inputStream.read(byteArray);
+                    if (noOfBytesRead == 0) {
+                        break;
+                    }
+                    outputStream.write(byteArray, 0, noOfBytesRead);
+                }
+                responseString = "downLoaded!!";
+                httpServletResponse.setContentType("text");
+                httpServletResponse.getWriter().write(responseString);
+
+            } else {
+                throw new FileNotFoundException("File not found");
+            }
+        } catch (FileNotFoundException ex) {
+            try {
+                httpServletResponse.sendRedirect("../general/exception.action?exceptionMessage='No File found'");
+            } catch (IOException ex1) {
+                // Logger.getLogger(DownloadAction.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }/*catch (ServiceLocatorException ex) {
+         ex.printStackTrace();
+         }*/ finally {
+            try {
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

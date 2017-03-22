@@ -83,10 +83,12 @@
                                     <th>CORRELATION&nbsp;ID</th>
                                     <th>TRANSACTION</th>
                                     <th>DIRECTION</th>
+                                    <th>FILE_NAME</th>
+                                    <th>DOWNLOAD</th>
+                                    <th>CUR&nbsp;TEST&nbsp;STATUS</th>
+                                    <th>CUR&nbsp;TEST&nbsp;DATE</th>
                                     <th>LT&nbsp;TEST&nbsp;STATUS</th>
                                     <th>LT&nbsp;TEST&nbsp;DATE</th>
-                                    <th>CUR&nbsp;TEST&nbsp;STATUS</th>
-                                    <th>CUR&nbsp;TEST&nbsp;DATE</th>                                    
                                     </thead>
                                     <tbody>
                                         <%
@@ -97,6 +99,7 @@
                                                 PayloadBean payloadBean;
                                                 for (int i = 0; i < list.size(); i++) {
                                                     payloadBean = (PayloadBean) list.get(i);
+                                                    int id = payloadBean.getId();
                                         %>
                                         <tr>
                                             <td> <% if ((payloadBean.getCorrelationID()) == 0) {
@@ -107,20 +110,24 @@
                                                 %> </td> 
                                             <td> <% out.println(payloadBean.getTransaction()); %> </td>
                                             <td> <% out.println(payloadBean.getDirection()); %> </td>
-                                            <td> <% if ((payloadBean.getLastTestStatus()) == null) {
-                                                    out.println("--");
-                                                } else if (payloadBean.getLastTestStatus().equalsIgnoreCase("SUCCESS")) {
-                                                    out.println("<font color='green'>" + payloadBean.getLastTestStatus() + "</font>");
-                                                } else {
-                                                    out.println("<font color='red'>" + payloadBean.getLastTestStatus() + "</font>");
-                                                }
-                                                %> </td>  
-                                            <td> <% if ((payloadBean.getLastTestDate()) == null) {
+                                            <td> <% if ((payloadBean.getFileName()) == null) {
                                                     out.println("--");
                                                 } else {
-                                                    out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":")));
-                                                }
-                                                %> </td>  
+                                                    out.println(payloadBean.getFileName());
+                                                }%> </td>
+                                            <td align="center">   
+                                                <% if ("Inbound".equalsIgnoreCase(payloadBean.getDirection())) {
+                                                        out.println("--");
+                                                    } else {
+                                                        if (payloadBean.getPath() != null) {%>
+                                                <s:url var="myUrl" action="../payload/downloadPayloadFile.action">
+                                                    <s:param name="filepath"><%=(payloadBean.getPath())%></s:param> 
+                                                </s:url>
+                                                <s:a href='%{#myUrl}' style="color: green;"><span class="glyphicon glyphicon-download"></span></s:a>
+                                                <% } else {%> 
+                                                <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-download"></span></a>
+                                                    <% }
+                                                    } %> </td>
                                             <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
                                                     out.println("--");
                                                 } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
@@ -135,11 +142,25 @@
                                                     out.println(payloadBean.getCurrentTestDate().toString().substring(0, payloadBean.getCurrentTestDate().toString().lastIndexOf(":")));
                                                 }
                                                 %> </td>  
+                                            <td> <% if ((payloadBean.getLastTestStatus()) == null) {
+                                                    out.println("--");
+                                                } else if (payloadBean.getLastTestStatus().equalsIgnoreCase("SUCCESS")) {
+                                                    out.println("<font color='green'>" + payloadBean.getLastTestStatus() + "</font>");
+                                                } else {
+                                                    out.println("<font color='red'>" + payloadBean.getLastTestStatus() + "</font>");
+                                                }
+                                                %> </td>  
+                                            <td> <% if ((payloadBean.getLastTestDate()) == null) {
+                                                    out.println("--");
+                                                } else {
+                                                    out.println(payloadBean.getLastTestDate().toString().substring(0, payloadBean.getLastTestDate().toString().lastIndexOf(":")));
+                                                }
+                                                %> </td>  
                                         </tr>
-                                         <%
+                                        <%
+                                                }
                                             }
-                                        }
-                                    %>
+                                        %>
                                     </tbody>
                                 </table>
                             </s:if> 

@@ -41,7 +41,7 @@ public class PayloadServiceImpl implements PayloadService {
     public ArrayList<PayloadBean> payloadSearch(String loginId, int roleId, int partnerId, String flag, PayloadAction payloadAction) {
         StringBuffer payloadSearchQuery = new StringBuffer();
         payloadSearchQuery.append(" SELECT ID,PARTNER_ID, PARTNER_NAME, DOC_TYPE, DIRECTION, TRANSACTION, CONNECTION_TYPE, ");
-        payloadSearchQuery.append(" COMMUNICATION_ID, PATH, STATUS, LAST_TEST_STATUS, LAST_TEST_DATE, CURRENT_TEST_STATUS, ");
+        payloadSearchQuery.append(" COMMUNICATION_ID, INPUT_PATH, FILE_NAME, OUTPUT_PATH, STATUS, LAST_TEST_STATUS, LAST_TEST_DATE, CURRENT_TEST_STATUS, ");
         payloadSearchQuery.append(" CURRENT_TEST_DATE, STATUS_FLAG, CREATED_BY, CREATED_TS FROM MSCVP.TPO_PAYLOAD WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {
             if (payloadAction.getDirection() != null && !"-1".equals(payloadAction.getDirection())) {
@@ -67,6 +67,8 @@ public class PayloadServiceImpl implements PayloadService {
                 payloadBean.setCorrelationID(resultSet.getInt("COMMUNICATION_ID"));
                 payloadBean.setTransaction(resultSet.getInt("TRANSACTION"));
                 payloadBean.setDirection(resultSet.getString("DIRECTION"));
+                payloadBean.setFileName(resultSet.getString("FILE_NAME"));
+                payloadBean.setPath(resultSet.getString("OUTPUT_PATH"));
                 payloadBean.setLastTestStatus(resultSet.getString("LAST_TEST_STATUS"));
                 payloadBean.setLastTestDate(resultSet.getTimestamp("LAST_TEST_DATE"));
                 payloadBean.setCurrentTestStatus(resultSet.getString("CURRENT_TEST_STATUS"));
@@ -79,7 +81,7 @@ public class PayloadServiceImpl implements PayloadService {
         return payloadSearchList;
     }
 
-    public String doPayloadUpload(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException {
+    public String doPayloadUploadForInbound(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction) throws ServiceLocatorException {
         int isPayloadInserted = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         try {
@@ -87,7 +89,7 @@ public class PayloadServiceImpl implements PayloadService {
             statement = connection.createStatement();
             StringBuffer payloadQuery = new StringBuffer();
             payloadQuery.append("INSERT INTO MSCVP.TPO_PAYLOAD (PARTNER_ID, PARTNER_NAME, TRANSACTION,  ");
-            payloadQuery.append("DOC_TYPE, DIRECTION, PATH, STATUS, CONNECTION_TYPE,CREATED_BY,CREATED_TS ");
+            payloadQuery.append("DOC_TYPE, DIRECTION, INPUT_PATH, STATUS, CONNECTION_TYPE,CREATED_BY,CREATED_TS ");
             if ("Communication_Protocol".equalsIgnoreCase(payloadAction.getConn_type())) {
                 payloadQuery.append(" ,COMMUNICATION_ID ");
             }
@@ -112,6 +114,62 @@ public class PayloadServiceImpl implements PayloadService {
                 preparedStatement.setInt(11, payloadAction.getCommunicationId());
             }
             isPayloadInserted = isPayloadInserted + preparedStatement.executeUpdate();
+            if (isPayloadInserted > 0) {
+                responseString = "<font color='green'>Payload uploaded successfully.</font>";
+            } else {
+                responseString = "<font color='green'>Payload uploaded failed.</font>";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            responseString = "<font color='red'>Please try again!</font>";
+        } finally {
+            try {
+                if (callableStatement != null) {
+                    callableStatement.close();
+                    callableStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException se) {
+                throw new ServiceLocatorException(se);
+            }
+        }
+        return responseString;
+    }
+    
+     public String doPayloadUploadForOutbound(int partnerId, String partnerName, String loginId, String filePath, PayloadAction payloadAction, String[] fileNames) throws ServiceLocatorException {
+        int isPayloadInserted = 0;
+        Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            statement = connection.createStatement();
+           
+            for(int i=0; i<fileNames.length;i++){
+                 StringBuffer payloadQuery = new StringBuffer();
+                String file=filePath+"\\"+fileNames[i];
+            payloadQuery.append("INSERT INTO MSCVP.TPO_PAYLOAD (PARTNER_ID, PARTNER_NAME, TRANSACTION,  ");
+            payloadQuery.append("DOC_TYPE, DIRECTION, INPUT_PATH, STATUS, CONNECTION_TYPE,CREATED_BY,CREATED_TS,FILE_NAME) ");
+            payloadQuery.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?) ");
+            
+            preparedStatement = connection.prepareStatement(payloadQuery.toString());
+            preparedStatement.setInt(1, partnerId);
+            preparedStatement.setString(2, DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId));
+            preparedStatement.setString(3, payloadAction.getTransaction());
+            preparedStatement.setString(4, payloadAction.getDocType());
+            preparedStatement.setString(5, payloadAction.getDirection());
+            preparedStatement.setString(6, file);
+            preparedStatement.setString(7, "UPLOADED");
+            preparedStatement.setString(8, payloadAction.getConn_type());
+            preparedStatement.setString(9, loginId);
+            preparedStatement.setTimestamp(10, curdate);
+            preparedStatement.setString(11, fileNames[i]);
+            isPayloadInserted = isPayloadInserted + preparedStatement.executeUpdate();
+            }
+            
             if (isPayloadInserted > 0) {
                 responseString = "<font color='green'>Payload uploaded successfully.</font>";
             } else {
@@ -334,4 +392,5 @@ public class PayloadServiceImpl implements PayloadService {
         }
         return tpoCommunicationsList;
     }
+
 }

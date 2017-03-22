@@ -47,4 +47,6 @@
     
     <include file="payload.xml"/>
     
+    <include file="ticket.xml"/>
+    
 </struts>

@@ -172,8 +172,7 @@
         </action>
         
         <!--   new     -->
-        <action name="tpOnboardingDownloads" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpOnboardingDownloads">
-        </action>
+        <action name="tpOnboardingDownloads" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpOnboardingDownloads"></action>
         
         <action name="tpoResetMyPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetMyPwd">
             <result name="success">/tpOnboarding/tpoResetMyPwd.jsp</result>
