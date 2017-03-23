@@ -37,10 +37,17 @@
                         <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
                             <ul class="nav navbar-nav menu_tab" style="">
                                 <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2}'>
-                                    <li id="partnerAdd"><a href="<s:url action="../tpOnboarding/tpoPartnerAdd"/>"><i class="fa fa-briefcase" aria-hidden="true"></i>Add Partner</a></li>
-                                    <li id="partnersList"><a href="<s:url action="../tpOnboarding/tpoPartnersList"/>"><i class="fa fa-handshake-o" aria-hidden="true"></i>Partners List</a></li>
-                                    </s:if> 
-                                    <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
+                                    <li class="dropdown" id="partners">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-handshake-o" aria-hidden="true"></i><span class="">Partner Config</span><b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li id="partnerAdd"><a href="<s:url action="../tpOnboarding/tpoPartnerAdd"/>">Add Partner</a></li>
+                                            <li id="partnersList"><a href="<s:url action="../tpOnboarding/tpoPartnersList"/>">Partners List</a></li>
+                                            <li id="adminAddProfile"><a href="../admin/tpoAdminProfile.jsp">Add Profile</a></li>
+                                            <li id="adminManageProfile"><a href="../admin/tpoAdminManageProfiles.jsp">Manage Profiles</a></li>
+                                        </ul>
+                                    </li>
+                                </s:if> 
+                                <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
                                     <li class="dropdown" id="profiles">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user" aria-hidden="true"></i><span class="">Profiles</span><b class="caret"></b></a>
                                         <ul class="dropdown-menu">
@@ -65,16 +72,16 @@
                                     </li>
                                     <%-- payload end --%>
                                 </s:if>
-                                     <%-- ticket start --%>
-                                    <li class="dropdown" id="ticket">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-database" aria-hidden="true"></i><span class="hidden-xs">Ticketing</span><b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li id="addTicket"><a href="<s:url action="../ticket/addTicket"/>">Create Ticket</a></li>
-                                            <li id="ticketsList"><a href="<s:url action="../ticket/ticketsList"/>">Manage Tickets</a></li>
-                                            <li id="editTicket"><a href="<s:url action="../ticket/editTicket"/>">Edit Tickets</a></li>
-                                        </ul>
-                                    </li>
-                                    <%-- ticket end --%>
+                                <%-- ticket start --%>
+                                <li class="dropdown" id="ticket">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-database" aria-hidden="true"></i><span class="hidden-xs">Ticketing</span><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li id="addTicket"><a href="<s:url action="../ticket/addTicket"/>">Create Ticket</a></li>
+                                        <li id="ticketsList"><a href="<s:url action="../ticket/ticketsList"/>">Manage Tickets</a></li>
+                                        <li id="editTicket"><a href="<s:url action="../ticket/editTicket"/>">Edit Tickets</a></li>
+                                    </ul>
+                                </li>
+                                <%-- ticket end --%>
                                 <li class="dropdown" id="services">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="">Services</span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">

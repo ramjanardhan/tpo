@@ -91,7 +91,7 @@
                                     <th>LT&nbsp;TEST&nbsp;DATE</th>
                                     </thead>
                                     <tbody>
-                                        <%
+                                        <%            
                                             int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
                                             if (list.size() != 0) {
@@ -119,15 +119,15 @@
                                                 <% if ("Inbound".equalsIgnoreCase(payloadBean.getDirection())) {
                                                         out.println("--");
                                                     } else {
-                                                        if (payloadBean.getPath() != null) {%>
+                                                        if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {%>
                                                 <s:url var="myUrl" action="../payload/downloadPayloadFile.action">
                                                     <s:param name="filepath"><%=(payloadBean.getPath())%></s:param> 
                                                 </s:url>
                                                 <s:a href='%{#myUrl}' style="color: green;"><span class="glyphicon glyphicon-download"></span></s:a>
                                                 <% } else {%> 
                                                 <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-download"></span></a>
-                                                    <% }
-                                                    } %> </td>
+                                                <% }
+                                                        } %> </td>
                                             <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
                                                     out.println("--");
                                                 } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
@@ -157,7 +157,7 @@
                                                 }
                                                 %> </td>  
                                         </tr>
-                                        <%
+                                        <%    
                                                 }
                                             }
                                         %>
@@ -187,7 +187,7 @@
                                             function doOnLoad() {
                                                 $("#PayLoad").addClass("active");
                                             }
-
+                                            
                                             $(function() {
                                                 $('#profiletable').DataTable({
                                                     "paging": true,
@@ -198,7 +198,7 @@
                                                     "autoWidth": false
                                                 });
                                             });
-
+                                            
                                             function resetValues() {
                                                 document.getElementById("transaction").value = "-1";
                                                 document.getElementById("direction").value = "-1";

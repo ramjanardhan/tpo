@@ -51,6 +51,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String zipCode;
     private String country;
     private String status;
+    private Map protocolList;
     private String commnProtocol;
     private String transferMode;
     private String ftp_conn_method;
@@ -407,6 +408,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setCreated_by(loginId);
                 tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, roleId, partnerId, "initialFlag", this);
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchProfileList, tpoSearchProfileList);
                 resultType = SUCCESS;
             } catch (Exception e) {
@@ -420,7 +422,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchProfileList);
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 setFormAction("doAddProfile");
                 resultType = SUCCESS;
             } catch (Exception e) {
@@ -434,11 +438,13 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 String Email = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_EMAIL).toString();
                 setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 String FTPKeys[] = new String[]{"Ftp Method", "Connection Method", "Receiving Protocol", "Response TimeOut", "Host", "Port ", "User ID ", "Password ", "Directory "};
                 String AS2Keys[] = new String[]{"Upload Your System Certificate", "My Organization ", "Your Organization ", "My Partner Profle Name  ", "Your Partner Profle Name ", "My End Point ", "Your End Point", "AS2 Messages", "Synchronous MDN Process"};
                 String SFTPKeys[] = new String[]{"Connection Type", "Authentication Type", " SSH Public Key", "Remote Host IP Address ", "Remote Port ", "Remote UserId ", "Remote Password ", "Directory ", "Type"};
@@ -525,6 +531,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setCreated_by(loginId);
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 tpoSearchProfileList = ServiceLocator.getTpOnboardingService().tpoSearchProfile(loginId, roleId, partnerId, "searchFlag", this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchProfileList, tpoSearchProfileList);
                 resultType = SUCCESS;
@@ -541,6 +548,8 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
             try {
                 int commnId = Integer.parseInt(httpServletRequest.getParameter("communicationId").toString());
                 setCommunicationId(commnId);
+                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 ServiceLocator.getTpOnboardingService().tpogetProfile(getCommunicationId(), getCommnProtocol(), this);
                 setFormAction("doUpdateProfile");
@@ -556,11 +565,13 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 String Email = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_EMAIL).toString();
                 setCreated_by(loginId);
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 String FTPKeys[] = new String[]{"Ftp Method", "Connection Method", "Receiving Protocol", "Response TimeOut", "Host", "Port ", "User ID ", "Password ", "Directory "};
                 String AS2Keys[] = new String[]{"Upload Your System Certificate", "My Organization ", "Your Organization ", "My Partner Profle Name  ", "Your Partner Profle Name ", "My End Point ", "Your End Point", "AS2 Messages", "Synchronous MDN Process"};
                 String SFTPKeys[] = new String[]{"Connection Type", "Authentication Type", " SSH Public Key", "Remote Host IP Address ", "Remote Port ", "Remote UserId ", "Remote Password ", "Directory ", "Type"};
@@ -640,7 +651,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
+                  int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 String resultMessage = ServiceLocator.getTpOnboardingService().getDeleteProfile(getCommunicationId(), getCommnProtocol(), partnerId, getTransferMode());
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
@@ -1876,6 +1889,14 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
 
     public void setPartnerRole(int partnerRole) {
         this.partnerRole = partnerRole;
+    }
+
+    public Map getProtocolList() {
+        return protocolList;
+    }
+
+    public void setProtocolList(Map protocolList) {
+        this.protocolList = protocolList;
     }
 
 }

@@ -144,10 +144,10 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="row" >
-                            <div class="col-sm-3"> 
-                                <div class="form-group" id="connTypeDiv" style="display: none">
-                                    <label>Connection Type<span class="text-danger">*</span></label>
+                            <div class="row" >
+                                <div class="col-sm-3"> 
+                                    <div class="form-group" id="connTypeDiv" style="display: none">
+                                        <label>Connection Type<span class="text-danger">*</span></label>
                                     <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Communication_Protocol':'Communication Protocol','File_System':'File system'}" tabindex="5" name="conn_type" id="conn_type" value="%{conn_type}"  cssClass="form-control" onchange="getPayloadProtocols();"/>         
                                 </div> 
                             </div> 
@@ -165,7 +165,7 @@
                                 <s:if test="#session.tpoCommunicationsList != null"> 
                                     <label>Communications<span class="text-danger">*</span></label>
 
-                                    <div id="site_content" class="jumbotron">
+                                    <div id="site_content" class="jumbotron" style="padding-left: 0px">
                                         <div class="container">
                                             <center><div id="resultMsg"></div></center>
                                             <center><div id="protocolmsgSsl"></div></center>
@@ -271,7 +271,7 @@
                             </s:if> 
                         </div>
                         <br>
-                                               <%-- 850 outbound   End div--%>
+                        <%-- 850 outbound   End div--%>
                         <div id="obenvelop850" style="display: none" >
                             <table id="uploadTable850ob" style="float:left">
                                 <tr><td><s:file name="upload850ob" theme="simple" /></td></tr>
@@ -363,10 +363,10 @@
         }
 
         function setdirection() {
-             $("#responseStringMsg").hide();
+            $("#responseStringMsg").hide();
             var direction = document.getElementById("direction").value;
             if (direction == 'Inbound') {
-                 $('#conn_type').prop('disabled',false);
+                $('#conn_type').prop('disabled', false);
                 $("#inBoundTransactions").show();
                 $("#outBoundTransactions").hide();
                 $("#ibenvelop850").hide();
@@ -379,7 +379,7 @@
                 $("#obenvelop810").hide();
             } else if (direction == 'Outbound') {
                 document.getElementById('conn_type').value = "File_System";
-                $('#conn_type').prop('disabled',true);
+                $('#conn_type').prop('disabled', true);
                 $("#inBoundTransactions").hide();
                 $("#outBoundTransactions").show();
                 $("#communicationsGrid").hide();
@@ -414,11 +414,11 @@
         }
 
         function transactionChange(x) {
-             $("#responseStringMsg").hide();
+            $("#responseStringMsg").hide();
             var direction = document.getElementById('direction').value;
             document.getElementById('transaction').value = x;
             if (direction == 'Inbound') {
-                 $('#conn_type').prop('disabled',false);
+                $('#conn_type').prop('disabled', false);
                 if (x == '850') {
                     document.getElementById("connTypeDiv").style.display = 'block';
                     $("#ibenvelop850").show();
@@ -464,7 +464,7 @@
                     $("#obenvelop810").hide();
                 }
             } else if (direction == 'Outbound') {
-                $('#conn_type').prop('disabled',true);
+                $('#conn_type').prop('disabled', true);
                 $("#communicationsGrid").hide();
                 $("#protocolDiv").hide();
                 if (x == '850') {
@@ -525,7 +525,7 @@
         }
 
         $(document).ready(function() {
-          
+
             $('#addMoreFile850ob').click(function() {
                 $('#uploadTable850ob').append(
                         '<tr><td><s:file name="upload850ob" theme="simple" />' +

@@ -49,4 +49,5 @@
     
     <include file="ticket.xml"/>
     
+    
 </struts>

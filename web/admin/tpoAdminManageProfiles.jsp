@@ -1,4 +1,6 @@
 <%-- 
+    Document   : tpoAdminManageProfiles
+    Created on : Mar 23, 2017, 2:44:28 PM
     Author     : Narendar
 --%>
 <!DOCTYPE html>
@@ -89,7 +91,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Protocol Name</label>
-                                    <s:select name="commnProtocol" id="commnProtocol" headerKey="-1" headerValue="-- Select --" list="protocolList" tabindex="1" value="%{commnProtocol}"  cssClass="form-control" onchange="showTransferDiv()"/>         
+                                     <s:select name="commnProtocol" id="commnProtocol" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" tabindex="1" value="%{commnProtocol}"  cssClass="form-control" onchange="showTransferDiv()"/>         
                                 </div>
                             </div>
                             <div class="col-sm-3" id="TransferDiv" style="display:none">

@@ -530,5 +530,45 @@ public class DataSourceDataProvider {
         }
         return protocolsMap;
     }
-
+    
+public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getConnection();
+        Map protocolsMap = new TreeMap();
+        try {
+            if (roleId == 1 || roleId == 2) {
+                queryString = "SELECT PROTOCOL, PROTOCOL_NAME FROM MSCVP.TPO_PROTOCOLS WHERE PROTOCOL != 'AS2' AND PROTOCOL != 'SMTP' ";
+            } else {
+                queryString = "SELECT PROTOCOL, PROTOCOL_NAME FROM MSCVP.TPO_PROTOCOLS";
+           }
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                protocolsMap.put(resultSet.getString("PROTOCOL"), resultSet.getString("PROTOCOL_NAME"));
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return protocolsMap;
+    }
 }

@@ -19,7 +19,7 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>'>
         <script>
             function doOnLoad() {
-                $("#partnerAdd").addClass("active");
+                $("#partners").addClass("active");
             }
         </script>
     </head>

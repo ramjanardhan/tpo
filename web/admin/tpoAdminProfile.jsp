@@ -1,6 +1,9 @@
 <%-- 
+    Document   : tpoAdminProfile
+    Created on : Mar 23, 2017, 2:44:07 PM
     Author     : Narendar
 --%>
+
 <!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
@@ -89,15 +92,15 @@
                                 <div class="form-group">
                                     <div id="tpoCommMsg"></div>
                                     <h4 style="color: #2d8fc8;margin-left: -15px" class="heading_4">Communication Protocol</h4>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="protocolList" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="1" cssClass="form-control" onchange="protocolsSelect(this.value)"/>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="1" cssClass="form-control" onchange="protocolsSelect(this.value)"/>
                                     <s:hidden name="protocolValue" id="protocolValue"></s:hidden>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="container">
-                            <div id="transferModeDiv"  style="display: none">
-                                <div class="pull-left">   <label>Transfer&nbsp;Mode&nbsp;:</label></div> 
+                            <div id="transferModeDiv" style="display: none">
+                                <div class="pull-left"><label>Transfer&nbsp;Mode&nbsp;:</label></div> 
                                 <div class="pull-left">
                                     <input type="text" id="tempTransferMode" style="display:none"/>
                                 <s:radio name="transferMode" id="transferMode" list="{'pull','push'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
@@ -596,3 +599,4 @@
         </script>
     </body>
 </html>
+
