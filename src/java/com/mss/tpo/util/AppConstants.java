@@ -51,4 +51,5 @@ public class AppConstants {
     public static final String PROP_ARCH_DS_NAME = "arch.ds.name";
     public static final String PLATFORM_TITLE = "Demo -";
     public static final String ACTIVE_FLAG = "A";
+    public static final String CERTMONITOR_LIST = "certmonitorList";
 }

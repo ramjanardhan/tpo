@@ -6,6 +6,7 @@ package com.mss.tpo.admin;
 
 import com.mss.tpo.util.ServiceLocatorException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,4 +33,5 @@ public interface AdminService {
     public String doTpoManageCommunicationAdd(AdminAction adminAction) throws ServiceLocatorException;
 
     public String doTpoManageCommunicationRemove(String communicationId) throws ServiceLocatorException;
+    public List getCertMonitorData(String certType,String dateFrom,String dateTo) throws ServiceLocatorException;
 }

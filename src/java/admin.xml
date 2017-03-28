@@ -68,5 +68,16 @@
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>  
+                 <action name="tpoMonitorCertificate" class="com.mss.tpo.admin.AdminAction" method="tpoMonitorCertificate">
+            <result name="success">/admin/tpoCertMonitor.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>  
+          <action name="certMonitorSearch" class="com.mss.tpo.admin.AdminAction" method="getCertMonitor">
+            <result>/admin/tpoCertMonitor.jsp</result>
+            <result name="error" type="redirect" >../general/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>
+        </action>
     </package>
+    
 </struts>

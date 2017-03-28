@@ -101,6 +101,7 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     private String manageCommunication;
     private String[] CommunicationMesId;
     private Map partnerNameList;
+     private String certType;
 
     public String tpoAdminManageProfiles() {
         resultType = LOGIN;
@@ -503,6 +504,23 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
             }
         }
         return resultType;
+    }
+    public String tpoMonitorCertificate() {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+                resultType = SUCCESS;
+        }
+        return resultType;
+    }
+    public String getCertMonitor() throws Exception {
+        String resultType = LOGIN;
+        
+        String cert = "SYSTEM";
+        List list = ServiceLocator.getAdminService().getCertMonitorData(getCertType(),null,null);
+        httpServletRequest.getSession(false).setAttribute(AppConstants.CERTMONITOR_LIST, list);
+        resultType = SUCCESS;
+        return resultType;
+
     }
 
     @Override
@@ -973,6 +991,14 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
 
     public void setPartnerId(int partnerId) {
         this.partnerId = partnerId;
+    }
+
+    public String getCertType() {
+        return certType;
+    }
+
+    public void setCertType(String certType) {
+        this.certType = certType;
     }
 
 }
