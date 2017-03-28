@@ -259,9 +259,8 @@
                                                         <td> <% out.println(tpOnboardingBean.getAs2_myEndPoint()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getAs2_strMsg()); %> </td>
                                                     </tr>
-                                                    <%  }   %>
-
-                                                    <%     }
+                                                    <%  }  
+                                                            }
                                                         }%>
                                                 </tbody>
                                             </table>

@@ -119,10 +119,12 @@
                                                 }%> </td>
                                             <td align="center">   
                                                 <% String disable = "";
+                                                    String path = "";
                                                     if ("Inbound".equalsIgnoreCase(payloadBean.getDirection())) {
                                                         if ((payloadBean.getTransaction()) == 997) {
                                                             if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {
                                                                 disable = "no";
+                                                                path = (payloadBean.getPath());
                                                             } else {
                                                                 disable = "block";
                                                             }
@@ -132,10 +134,16 @@
                                                     }
                                                     if ("Outbound".equalsIgnoreCase(payloadBean.getDirection())) {
                                                         if (payloadBean.getTransaction() == 850) {
-                                                            disable = "yes";
+                                                            if ((!("".equals(payloadBean.getInputPath()))) && (payloadBean.getInputPath() != null)) {
+                                                                disable = "no";
+                                                                path = (payloadBean.getInputPath());
+                                                            } else {
+                                                                disable = "block";
+                                                            }
                                                         } else {
                                                             if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {
                                                                 disable = "no";
+                                                                path = (payloadBean.getPath());
                                                             } else {
                                                                 disable = "block";
                                                             }
@@ -143,7 +151,7 @@
                                                     }
                                                     if ("no".equals(disable)) {%>
                                                 <s:url var="downloadPayloadFileURL" action="../payload/downloadPayloadFile.action">
-                                                    <s:param name="filepath"><%=(payloadBean.getPath())%></s:param> 
+                                                    <s:param name="filepath"><%=(path)%></s:param> 
                                                 </s:url>
                                                 <s:a href='%{#downloadPayloadFileURL}' style="color: green;"><span class="glyphicon glyphicon-download"></span></s:a>
                                                 <% } else if ("yes".equals(disable)) {
@@ -157,19 +165,19 @@
                                                     <s:param name="filepath"><%=(payloadBean.getInputPath())%></s:param> 
                                                     <s:param name="id"><%=(id)%></s:param> 
                                                 </s:url>
-                                                 <% if ((!"".equals(payloadBean.getInputPath())) && ((payloadBean.getInputPath()) != null)) { %>
-                                                    <s:a href='%{#reprocessURL}' style="color: blue;"><span class="glyphicon glyphicon-refresh"></span></s:a>
-                                               <% } else {%>
+                                                <% if ((!"".equals(payloadBean.getInputPath())) && ((payloadBean.getInputPath()) != null)) { %>
+                                                <s:a href='%{#reprocessURL}' style="color: blue;"><span class="glyphicon glyphicon-refresh"></span></s:a>
+                                                <% } else {%>
                                                 <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-refresh"></span></a>
                                                     <%  }%> 
-                                                </td>
-                                                <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
-                                                        out.println("--");
-                                                    } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
-                                                        out.println("<font color='green'>" + payloadBean.getCurrentTestStatus() + "</font>");
-                                                    } else {
-                                                        out.println("<font color='red'>" + payloadBean.getCurrentTestStatus() + "</font>");
-                                                    }
+                                            </td>
+                                            <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
+                                                    out.println("--");
+                                                } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
+                                                    out.println("<font color='green'>" + payloadBean.getCurrentTestStatus() + "</font>");
+                                                } else {
+                                                    out.println("<font color='red'>" + payloadBean.getCurrentTestStatus() + "</font>");
+                                                }
                                                 %> </td>  
                                             <td> <% if ((payloadBean.getCurrentTestDate()) == null) {
                                                     out.println("--");

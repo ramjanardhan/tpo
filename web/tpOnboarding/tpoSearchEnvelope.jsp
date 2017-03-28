@@ -87,10 +87,10 @@
                             <thead>
                             <th>TRANSACTION</th>
                             <th>DIRECTION</th>
-                            <th>SENDER ID</th>
-                            <th>RECEIVER ID</th>
-                            <th>CREATED_BY</th>
-                            <th>CREATED_DATE</th>
+                            <th>SENDER&nbsp;ID</th>
+                            <th>RECEIVER&nbsp;ID</th>
+                            <th>CREATED&nbsp;BY</th>
+                            <th>CREATED&nbsp;DATE</th>
                             <th>EDIT</th>
                             <th>DELETE</th>
                             </thead>

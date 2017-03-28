@@ -110,8 +110,8 @@
                             <th>ROLE</th>
                             <th>PHONE</th>
                             <th>COUNTRY</th>
-                            <th>CREATED_BY</th>
-                            <th>CREATED_DATE</th>
+                            <th>CREATED&nbsp;BY</th>
+                            <th>CREATED&nbsp;DATE</th>
                             <th>STATUS</th>
                             <th>ACTIVE</th>
                             <th>INACTIVE</th>

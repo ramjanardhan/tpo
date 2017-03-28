@@ -20,8 +20,6 @@ public class TpOnboardingBean {
     private String contactEmail;
     private String phoneNo;
     private String country;
-    private Timestamp lastLoginTS;
-    private Timestamp lastLogoutTS;
     private int userId;
     private String address1;
     private String city;
@@ -1034,22 +1032,6 @@ public class TpOnboardingBean {
 
     public void setIsa856senderIdOB(String isa856senderIdOB) {
         this.isa856senderIdOB = isa856senderIdOB;
-    }
-
-    public Timestamp getLastLoginTS() {
-        return lastLoginTS;
-    }
-
-    public void setLastLoginTS(Timestamp lastLoginTS) {
-        this.lastLoginTS = lastLoginTS;
-    }
-
-    public Timestamp getLastLogoutTS() {
-        return lastLogoutTS;
-    }
-
-    public void setLastLogoutTS(Timestamp lastLogoutTS) {
-        this.lastLogoutTS = lastLogoutTS;
     }
 
     public String getLoginId() {
