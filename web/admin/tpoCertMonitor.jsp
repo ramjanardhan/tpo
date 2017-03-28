@@ -13,9 +13,9 @@
         <meta name="description" content="">
         <meta name="author" content="TP On-boarding">
         <title>Miracle TP On-boarding</title>
-     <%--   <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script> --%>
+       <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>
+        <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/> 
         <link rel="stylesheet" href='<s:url value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap.min.css"/>' type="text/css"/>
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/main.css"/>' type="text/css"/>
@@ -24,38 +24,11 @@
         <link rel="stylesheet" href='<s:url value="/includes/css/bootstrap/bootstrap-theme.css" />' media="screen" type="text/css"/>
 
   <link rel="stylesheet" href='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
-        <link rel="stylesheet" href='<s:url value="/includes/plugins/daterangepicker/daterangepicker.css"/>' type="text/css"> 
+        <link rel="stylesheet" href='<s:url value="/includes/plugins/daterangepicker/daterangepicker-bs3.css"/>' type="text/css"> 
       
         <script>
           
-        
-             $(function() {
-    
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MM/DD/YYYY  HH:MM') + ' - ' + end.format('MM/DD/YYYY HH:MM'));
-    }
-    cb(moment().subtract(29, 'days'), moment());
-
-    $('#reportrange').daterangepicker({
-        ranges: {
-            'Today': [moment(), moment()],
-           
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-            'Transactions Until': [moment()]
-        },
-        timePicker: true,
-        timePicker24Hour: true,
-        timePickerIncrement: 1,
-        locale: {
-            format: 'MM/DD/YYYY HH:mm'
-        }
-    }, cb);
-
-});
-            function doOnLoad() {
+               function doOnLoad() {
                 $("#services").addClass("active");
                
                 
@@ -97,8 +70,9 @@
                         %>
                     </center>
                     <div id="loadingImage"></div>
-                    <s:form action="../admin/certMonitorSearch.action" method="post" cssClass="contact-form" name="manageCommunicationForm" id="manageCommunicationForm" theme="simple">
-                        <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
+                    <s:form action="../admin/certMonitorSearch.action" method="post" cssClass="contact-form" name="certForm" id="certForm" theme="simple">
+                            <s:hidden id="docdatepickerfrom" name="docdatepickerfrom" />
+                                    <s:hidden id="docdatepicker" name="docdatepicker"/>
                         <div class="">
                             <div class="row" id="connTypeDiv" >
                                 <div class="col-sm-3"> 
@@ -250,7 +224,7 @@
                 <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>
-        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script language="JavaScript" src='<s:url value="/includes/js/headroom.min.js"/>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/jQuery.headroom.min.js"/>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/template.js"/>'></script>
@@ -262,12 +236,14 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script language="JavaScript" src='<s:url value="/includes/js/adminValidations.js"/>'></script>
-
+ <script src='<s:url value="/includes/plugins/daterangepicker/moment.js"/>'></script>
+ <script src='<s:url value="/includes/plugins/daterangepicker/moment.min.js"/>'></script>
+ <script src='<s:url value="/includes/plugins/daterangepicker/daterangepicker.js"/>'></script>
   <script src='<s:url value="/includes/bootstrap/js/app.min.js"/>'></script>
     <script src='<s:url value="/includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
     <script src='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         
-        <script src='<s:url value="/includes/plugins/daterangepicker/daterangepicker.js"/>'></script>
+       
         <script type="text/javascript">
             function Date1()
             {
@@ -277,6 +253,36 @@
                 document.getElementById("docdatepickerfrom").value = arr[0];
                 document.getElementById("docdatepicker").value = x;
             }
+        </script>
+        <script>
+        //      $('#reportrange').daterangepicker();
+             $(function() {
+    
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MM/DD/YYYY  HH:MM') + ' - ' + end.format('MM/DD/YYYY HH:MM'));
+    }
+    cb(moment().subtract(29, 'days'), moment());
+
+    $('#reportrange').daterangepicker({
+        ranges: {
+            'Today': [moment(), moment()],
+           
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+            'Transactions Until': [moment()]
+        },
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerIncrement: 1,
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    }, cb);
+
+});
+    
         </script>
         <script>
                 
@@ -294,8 +300,8 @@
 
         function resetvalues()
         {
-           // document.getElementById('docdatepickerfrom').value = "";
-           // document.getElementById('docdatepicker').value = "";
+            document.getElementById('docdatepickerfrom').value = "";
+            document.getElementById('docdatepicker').value = "";
             document.getElementById('certType').value = "-1";
             document.getElementById('reportrange').value = "";
             $('#gridDiv').hide();

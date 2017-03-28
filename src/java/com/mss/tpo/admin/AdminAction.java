@@ -102,6 +102,9 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     private String[] CommunicationMesId;
     private Map partnerNameList;
      private String certType;
+     private String docdatepickerfrom;
+     private String docdatepicker;
+     private String reportrange;
 
     public String tpoAdminManageProfiles() {
         resultType = LOGIN;
@@ -516,7 +519,7 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
         String resultType = LOGIN;
         
         String cert = "SYSTEM";
-        List list = ServiceLocator.getAdminService().getCertMonitorData(getCertType(),null,null);
+        List list = ServiceLocator.getAdminService().getCertMonitorData(getCertType(),getDocdatepickerfrom(),getDocdatepicker());
         httpServletRequest.getSession(false).setAttribute(AppConstants.CERTMONITOR_LIST, list);
         resultType = SUCCESS;
         return resultType;
@@ -999,6 +1002,30 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
 
     public void setCertType(String certType) {
         this.certType = certType;
+    }
+
+    public String getDocdatepickerfrom() {
+        return docdatepickerfrom;
+    }
+
+    public void setDocdatepickerfrom(String docdatepickerfrom) {
+        this.docdatepickerfrom = docdatepickerfrom;
+    }
+
+    public String getDocdatepicker() {
+        return docdatepicker;
+    }
+
+    public void setDocdatepicker(String docdatepicker) {
+        this.docdatepicker = docdatepicker;
+    }
+
+    public String getReportrange() {
+        return reportrange;
+    }
+
+    public void setReportrange(String reportrange) {
+        this.reportrange = reportrange;
     }
 
 }
