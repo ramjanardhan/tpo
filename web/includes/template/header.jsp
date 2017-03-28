@@ -44,7 +44,7 @@
                                             <li id="partnersList"><a href="<s:url action="../partner/tpoPartnersList"/>">Partners List</a></li>
                                             <li id="adminAddProfile"><a href="<s:url action="../admin/tpoAdminAddProfile"/>">Add Profile</a></li>
                                             <li id="adminManageProfile"><a href="<s:url action="../admin/tpoAdminManageProfiles"/>">Manage Profiles</a></li>
-                                            <li id="adminManageProfile"><a href="<s:url action="../admin/tpoAdminManageCommunication"/>">Manage Communication</a></li>
+                                            <li id="adminManageCommunication"><a href="<s:url action="../admin/tpoAdminManageCommunication"/>">Manage Communication</a></li>
                                          <%--<li id="manageCommunication"><a href="../tpOnboarding/tpoManageCommunication.jsp">Manage Communication</a></li>--%>
                                         </ul>
                                     </li>
