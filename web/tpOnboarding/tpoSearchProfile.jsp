@@ -125,10 +125,10 @@
                             <s:if test="#session.tpoSearchProfileList != null"> 
                                 <table id="profiletable" class="table table-bordered table-hover">
                                     <thead>
-                                    <th>COMM_ID</th>
+                                    <th>ID</th>
                                     <th>PROTOCOL</th>
-                                    <th>CREATED_BY</th>
-                                    <th>CREATED_DATE</th>
+                                    <th>CREATED&nbsp;BY</th>
+                                    <th>CREATED&nbsp;DATE</th>
                                     <th>TEST</th>
                                     <!--  <th>TEST&nbsp;STATUS</th>-->
                                     <th>EDIT</th>

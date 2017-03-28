@@ -101,7 +101,7 @@
                                                     <th>ID </th>
                                                     <th>IP</th>    
                                                     <th>PORT</th>    
-                                                    <th>USER NAME</th>    
+                                                    <th>USER&nbsp;NAME</th>    
                                                 </tr>
                                             </thead>
                                             <tbody>
