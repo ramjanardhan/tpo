@@ -17,6 +17,7 @@ public class PayloadBean {
     private int id;
     private String docType;
     private String path;
+    private String inputPath;
     private String createdBy;
     private Timestamp createdTS;
     private String modifiedBy;
@@ -27,6 +28,7 @@ public class PayloadBean {
     private String currentTestStatus;
     private Timestamp currentTestDate;
     private String status;
+    private String connectionType;
     private int transaction;
     private String direction;
     private String fileName;
@@ -166,6 +168,22 @@ public class PayloadBean {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getConnectionType() {
+        return connectionType;
+    }
+
+    public void setConnectionType(String connectionType) {
+        this.connectionType = connectionType;
+    }
+
+    public String getInputPath() {
+        return inputPath;
+    }
+
+    public void setInputPath(String inputPath) {
+        this.inputPath = inputPath;
     }
 
 }

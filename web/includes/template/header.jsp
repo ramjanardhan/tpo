@@ -42,8 +42,10 @@
                                         <ul class="dropdown-menu">
                                             <li id="partnerAdd"><a href="<s:url action="../tpOnboarding/tpoPartnerAdd"/>">Add Partner</a></li>
                                             <li id="partnersList"><a href="<s:url action="../tpOnboarding/tpoPartnersList"/>">Partners List</a></li>
-                                            <li id="adminAddProfile"><a href="../admin/tpoAdminProfile.jsp">Add Profile</a></li>
-                                            <li id="adminManageProfile"><a href="../admin/tpoAdminManageProfiles.jsp">Manage Profiles</a></li>
+                                            <li id="adminAddProfile"><a href="<s:url action="../admin/tpoAdminAddProfile"/>">Add Profile</a></li>
+                                            <li id="adminManageProfile"><a href="<s:url action="../admin/tpoAdminManageProfiles"/>">Manage Profiles</a></li>
+                                            <li id="adminManageProfile"><a href="<s:url action="../admin/tpoAdminManageCommunication"/>">Manage Communication</a></li>
+                                         <%--<li id="manageCommunication"><a href="../tpOnboarding/tpoManageCommunication.jsp">Manage Communication</a></li>--%>
                                         </ul>
                                     </li>
                                 </s:if> 
@@ -86,6 +88,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="">Services</span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <s:if test="#session.tpoRoleId == 1">
+                                            <li id="certificates"><a href="#">Certificates Monitering</a></li>
                                             <li id="userAdd"><a href="<s:url action="../tpOnboarding/tpoUserAdd"/>">Create User</a></li>
                                                 <%-- <li id="adminUsersList"><a href="<s:url action="tpoAdminUsersList"/>">Users List</a></li>--%>
                                             </s:if>

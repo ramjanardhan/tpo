@@ -45,9 +45,10 @@ public class GeneralServiceImpl implements GeneralService {
                 userInfoBean.setUserId(resultSet.getInt("ID"));
                 userInfoBean.setLoginId(resultSet.getString("LOGINID"));
                 userInfoBean.setPwd(resultSet.getString("PASSWORD"));
-                userInfoBean.setRoleId(resultSet.getInt("ROLE_ID"));
+                int roleId = (resultSet.getInt("ROLE_ID"));
+                userInfoBean.setRoleId(roleId);
                 userInfoBean.setPartnerId(resultSet.getInt("PARTNER_ID"));
-                if ((resultSet.getInt("ID")) == 1000) {
+                if ((roleId == 1) || (roleId == 2)) {
                     userInfoBean.setPartnerName("TPO_ADMIN");
                 } else {
                     userInfoBean.setPartnerName(DataSourceDataProvider.getInstance().getTpoPartnerName(resultSet.getInt("PARTNER_ID")));

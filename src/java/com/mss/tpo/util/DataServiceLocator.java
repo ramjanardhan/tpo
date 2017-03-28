@@ -46,8 +46,7 @@ public class DataServiceLocator {
      * @return An instance of the DataServiceLocator class
      * @throws ServiceLocatorException
      */
-    public static DataServiceLocator getInstance()
-            throws ServiceLocatorException {
+    public static DataServiceLocator getInstance() throws ServiceLocatorException {
         try {
             if (_instance == null) {
                 _instance = new DataServiceLocator();
@@ -58,8 +57,7 @@ public class DataServiceLocator {
         return _instance;
     }
 
-    public DataSource getDataSource(String dataSourceName)
-            throws ServiceLocatorException {
+    public DataSource getDataSource(String dataSourceName) throws ServiceLocatorException {
         DataSource dataSource = null;
         try {
             if (CacheManager.getCache().containsKey(dataSourceName)) {

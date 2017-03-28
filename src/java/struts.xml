@@ -49,5 +49,5 @@
     
     <include file="ticket.xml"/>
     
-    
+    <include file="admin.xml"/>
 </struts>

@@ -571,4 +571,41 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         }
         return protocolsMap;
     }
+
+ public String getProtocolByCommunicationId(int communicationId) throws ServiceLocatorException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String protocol = "";
+        connection = ConnectionProvider.getInstance().getConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT PROTOCOL FROM MSCVP.TPO_COMMUNICATION WHERE ID =" + communicationId + " ");
+            while (resultSet.next()) {
+                protocol = resultSet.getString("PROTOCOL");
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return protocol;
+    }
+ 
+ 
 }

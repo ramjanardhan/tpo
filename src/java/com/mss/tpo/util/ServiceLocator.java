@@ -4,6 +4,8 @@
 
 package com.mss.tpo.util;
 
+import com.mss.tpo.admin.AdminService;
+import com.mss.tpo.admin.AdminServiceImpl;
 import com.mss.tpo.ajax.AjaxHandlerService;
 import com.mss.tpo.ajax.AjaxHandlerServiceImpl;
 import com.mss.tpo.general.GeneralService;
@@ -45,6 +47,11 @@ public class ServiceLocator {
     public static PayloadService getPayloadService() throws ServiceLocatorException {
         PayloadService payloadService = new PayloadServiceImpl();
         return payloadService;
+    }
+    
+    public static AdminService getAdminService() throws ServiceLocatorException {
+        AdminService adminService = new AdminServiceImpl();
+        return adminService;
     }
     
     public static TicketService getTicketService() throws ServiceLocatorException {

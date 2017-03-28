@@ -1,6 +1,5 @@
 <%-- 
-    Document   : tpoAdminProfile
-    Created on : Mar 23, 2017, 2:44:07 PM
+    Document   : tpoAdminAddProfile
     Author     : Narendar
 --%>
 
@@ -8,7 +7,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%@page import="com.mss.tpo.admin.AdminBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>
@@ -39,7 +38,7 @@
             }
         </style>
     </head>
-    <s:if test="%{formAction == 'doAddProfile'}">
+    <s:if test="%{formAction == 'doAdminAddProfile'}">
         <body onload="onLoad();" class="home">
         </s:if>
         <s:else>
@@ -50,7 +49,7 @@
         </div>    
         <header>
             <div class="container">
-                <s:if test="%{formAction == 'doAddProfile'}">
+                <s:if test="%{formAction == 'doAdminAddProfile'}">
                     <h3 > <b>Add Profile</b></h3>
                 </s:if>
                 <s:else>
@@ -59,15 +58,15 @@
             </div>
         </header>            
         <div class="container">
-            <s:form action="%{formAction}" method="POST" enctype="multipart/form-data" name="addTpOnboard" id="addTpOnboard" theme="simple">
+            <s:form action="%{formAction}" method="POST" enctype="multipart/form-data" name="addAdminProfile" id="addAdminProfile" theme="simple">
                 <s:hidden id="communicationId" name="communicationId" value="%{communicationId}"/>
+                <s:hidden id="transferMode" name="transferMode" value="%{transferMode}"/>
                 <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
-                <s:hidden name="partnerName" id="partnerName" value="%{#session.tpoPartnerName}" ></s:hidden>
-                    <div id="site_content" class="jumbotron">
-                        <div class="container">
-                            <div>
-                                <center>
-                                    <div id="responseString">
+                <div id="site_content" class="jumbotron">
+                    <div class="container">
+                        <div>
+                            <center>
+                                <div id="responseString">
                                     <%
                                         if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
                                             String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
@@ -77,11 +76,11 @@
                                     %>
                                 </div> <div id="protocolmsg"></div>
                             </center>
-                            <s:if test="%{formAction == 'doUpdateProfile'}">
+                            <s:if test="%{formAction == 'doAdminUpdateProfile'}">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-1 pull-right"> 
-                                            <s:url var="myUrl" action="../tpOnboarding/tpoManageProfiles.action"></s:url>
+                                            <s:url var="myUrl" action="../admin/tpoAdminManageProfiles.action"></s:url>
                                             <s:a href='%{#myUrl}'><input type="button" style="color: #61eaf1;" value="Back to list" class="btn btn-primary"/></s:a> 
                                             <%--  <s:a href='%{#myUrl}' ><span class="glyphicon glyphicon-arrow-left"></span></s:a> --%>
                                         </div>
@@ -92,35 +91,20 @@
                                 <div class="form-group">
                                     <div id="tpoCommMsg"></div>
                                     <h4 style="color: #2d8fc8;margin-left: -15px" class="heading_4">Communication Protocol</h4>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="1" cssClass="form-control" onchange="protocolsSelect(this.value)"/>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="protocolList" name="commnProtocol" id="commnProtocol" value="%{commnProtocol}" tabindex="1" cssClass="form-control" onchange="protocolsSelectForAdmin(this.value)"/>
                                     <s:hidden name="protocolValue" id="protocolValue"></s:hidden>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="container">
-                            <div id="transferModeDiv" style="display: none">
-                                <div class="pull-left"><label>Transfer&nbsp;Mode&nbsp;:</label></div> 
-                                <div class="pull-left">
-                                    <input type="text" id="tempTransferMode" style="display:none"/>
-                                <s:radio name="transferMode" id="transferMode" list="{'pull','push'}" value="%{transferMode}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
-                                    <div class="tooltip"><i class="fa fa-question-circle-o"></i>
-                                        <span class="tooltiptext">Pull&nbsp;:&nbsp;Partner&nbsp;Server <br>Push&nbsp;:&nbsp;Your&nbsp;Server </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="loaderdiv" class="loadingImg" style="display: none">
-                                <span id ="LoadingContent" > <img src="<s:url value="/includes/images/Loader2.gif"/>" ></span>
-                        </div>
-                        <div id="transferModeMsg" style="display: none;position: relative;right: 226px;bottom: 11px;"></div>
-
-                        <div id="ftpDiv" style="display: none;clear:both">
-                            <div id="protocolmsgFtp"></div>
-                            <h4 style="color: #2d8fc8" class="heading_4">FTP&nbsp;Server&nbsp;Details  : </h4>
-                            <div id="tpResultMessage"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>FTP&nbsp;Type</label>
+                            <div id="ftpDiv" style="display: none;clear:both">
+                                <div id="protocolmsgFtp"></div>
+                                <h4 style="color: #2d8fc8" class="heading_4">FTP&nbsp;Server&nbsp;Details  : </h4>
+                                <div id="tpResultMessage"></div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>FTP&nbsp;Type</label>
                                     <s:select list="#@java.util.LinkedHashMap@{'GET':'Get','PUT':'Put'}" name="ftp_method" id="ftp_method" value="%{ftp_method}" tabindex="3" cssClass="form-control"/>
                                 </div>
                             </div>
@@ -133,7 +117,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
-                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP','FTPS':'FTPS'}" name="ftp_recv_protocol" id="ftp_recv_protocol" value="%{ftp_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxFTPchange(this.value);"/>
+                                    <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP','FTPS':'FTPS'}" name="ftp_recv_protocol" id="ftp_recv_protocol" value="%{ftp_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxFTPchangeForAdmin(this.value);"/>
                                     <%-- <s:textfield  name="ftp_recv_protocol" id="ftp_recv_protocol" tabindex="5"  value="%{ftp_recv_protocol}" cssClass="form-control"/> --%>
                                 </div>
                             </div>
@@ -181,7 +165,7 @@
                                     <label for="ftp_ssl_req" style="display: none">
                                         SSL&nbsp;Required
                                     </label>
-                                    <s:checkbox  style="display:none" name="ftp_ssl_req" id="ftp_ssl_req" tabindex="12" value="%{ftp_ssl_req}" onclick="sslRequired('ftp')" cssClass=""/>
+                                    <s:checkbox  style="display:none" name="ftp_ssl_req" id="ftp_ssl_req" tabindex="12" value="%{ftp_ssl_req}" onclick="sslRequiredForAdmin('ftp')" cssClass=""/>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +243,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Receiving&nbsp;Protocol </label>
-                                    <s:select headerKey="-1" headerValue="--Select--" list="#@java.util.LinkedHashMap@{'HTTP':'HTTP','HTTPS':'HTTPS'}" name="http_recv_protocol" id="http_recv_protocol" value="%{http_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxHTTPchange(this.value);"/>
+                                    <s:select headerKey="-1" headerValue="--Select--" list="#@java.util.LinkedHashMap@{'HTTP':'HTTP','HTTPS':'HTTPS'}" name="http_recv_protocol" id="http_recv_protocol" value="%{http_recv_protocol}" tabindex="5" cssClass="form-control" onchange="rxHTTPchangeForAdmin(this.value);"/>
                                     <%--   <s:textfield cssClass="form-control" name="http_recv_protocol" id="http_recv_protocol" tabindex="22" value="HTTP"/> --%>
                                 </div>
                             </div>
@@ -298,161 +282,7 @@
                                     <label for="http_ssl_req" style="display: none">
                                         SSL&nbsp;Required
                                     </label>
-                                    <s:checkbox style="display: none" id="http_ssl_req" name="http_ssl_req" tabindex="28" value="%{http_ssl_req}" onclick="sslRequired('http')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="smtpDiv" style="display: none;clear:both">
-                            <div id="protocolmsgSmtp"></div>
-                            <h4 style="color: #2d8fc8" class="heading_4">SMTP&nbsp;Server&nbsp;Details  : </h4>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Receiving&nbsp;Protocol </label>
-                                    <s:textfield cssClass="form-control" name="smtp_recv_protocol" id="smtp_recv_protocol" tabindex="29" value="SMTP" readonly="true"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>SMTP&nbsp;Server&nbsp;Host </label>
-                                    <s:textfield cssClass="form-control" name="smtp_server_protocol" id="smtp_server_protocol" tabindex="30" value="%{smtp_server_protocol}"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>SMTP&nbsp;Server&nbsp;Port</label>
-                                    <s:textfield cssClass="form-control" name="smtp_server_port" id="smtp_server_port" tabindex="31" value="%{smtp_server_port}" onchange="fieldLengthValidator(this);"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>From&nbsp;Email&nbsp;address</label>
-                                    <s:textfield cssClass="form-control" name="smtp_from_email" id="smtp_from_email" tabindex="32" value="%{smtp_from_email}" onchange="validateEmail(this);"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>To Email&nbsp;address </label>
-                                    <s:textfield cssClass="form-control" name="smtp_to_email" id="smtp_to_email" tabindex="33" value="%{smtp_to_email}" onchange="validateEmail(this);"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="loadingImage"></div>
-                        <div id="as2Div" style="display: none;clear:both">
-                            <div id="protocolmsgAs2"></div>
-                            <h4 style="color: #2d8fc8" class="heading_4">AS2&nbsp;Server&nbsp;Details  : </h4>
-                            <div class="col-sm-12 form-group">
-                                <div class="col-sm-3 gutter_hide">
-                                    <div class="threshold" style="/*! position: relative; *//*! top:31px */">
-                                        <input value="System Certificates" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 col-md-3">    
-                                    <label>Download&nbsp;System&nbsp;Certificate </label>
-                                    <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label>Upload&nbsp;System&nbsp;Certificate </label>
-                                    <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="34"/>  
-                                </div>
-
-                            </div>
-                            <div class="col-sm-12">    
-                                <div class="col-sm-3 gutter_hide">
-                                    <div class="threshold" style="/*! position: relative; *//*! top:31px */">
-                                        <input value="Organization Profiles" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
-                                    <div class="col-sm-6">
-                                        <label>My&nbsp;Organization</label>
-                                        <s:textfield cssClass="form-control" name="as2_myOrgName" id="as2_myOrgName" tabindex="35" value="%{as2_myOrgName}" onkeyup="as2OrgProfileNames(this);" onblur="isExistedAS2PartnerProfileName();"/><img id="correctImg" style="display: none;" src="/<%=AppConstants.CONTEXT_PATH%>/includes/images/right.png" 
-                                             width="13" height="13" border="0"><img id="wrongImg" style="display: none;" src="/<%=AppConstants.CONTEXT_PATH%>/includes/images/wrong.jpg" width="13" height="13" border="0"><img id="loadingImageAjax" style="display: none;" width="16" height="16" border="0" src="<s:url value="/includes/images/ajax-loader.gif"/>">
-                                    </div>
-                                    <div class="col-sm-6 ">
-                                        <label>Your&nbsp;Organization </label>
-                                        <s:textfield cssClass="form-control" name="as2_partOrgName" id="as2_partOrgName" tabindex="36" value="%{as2_partOrgName}" onkeyup="as2PartnerProfileNames(this);"/>
-                                    </div >
-                                </div>
-                            </div>
-                            <div class="col-sm-12">  
-                                <div class="col-sm-3 gutter_hide">
-                                    <div class="threshold" style="/*! position: relative; *//*! top:31px */">
-                                        <input value="Partner Profiles" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
-                                    <div class="col-sm-6"> 
-                                        <label>My&nbsp;Partner&nbsp;Profile&nbsp;Name</label>
-                                        <s:textfield cssClass="form-control" name="as2_myPartname" id="as2_myPartname" tabindex="37" value="%{as2_myPartname}"/>
-                                    </div>
-                                    <div class="col-sm-6">    
-                                        <label>Your&nbsp;Partner&nbsp;Profile&nbsp;Name </label>
-                                        <s:textfield cssClass="form-control" name="as2_yourPartname" id="as2_yourPartname" tabindex="38" value="%{as2_yourPartname}" readonly="true"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-sm-12">  
-                                <div class="col-sm-3 gutter_hide">
-                                    <div class="threshold" style="/*! position: relative; *//*! top:31px */">
-                                        <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
-                                    <div class="col-sm-6"> 
-                                        <label>My&nbsp;Endpoint</label>
-                                        <s:textfield cssClass="form-control" name="as2_myEndPoint" id="as2_myEndPoint" tabindex="39" value="%{as2_myEndPoint}"/>
-                                    </div>
-                                    <div class="col-sm-6">    
-                                        <label>Your&nbsp;Endpoint </label>
-                                        <s:textfield cssClass="form-control" name="as2_partendpoint" id="as2_partendpoint" tabindex="40" value="%{as2_partendpoint}"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">  
-                                <div class="col-sm-3 gutter_hide">
-                                    <div class="threshold" style="display: none">
-                                        <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Store&nbsp;AS2&nbsp;Messages&nbsp;in </label>
-                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'MailBox':'Mailbox','FSA':'FSA'}" name="as2_strMsg" id="as2_strMsg" value="%{as2_strMsg}" tabindex="41" cssClass="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group" id="Synchronous">
-                                            <label>Wait&nbsp;For&nbsp;Synchronous&nbsp;MDN&nbsp;Process</label>
-                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'YES':'Yes','NO':'No'}" name="as2_waitForSync" id="as2_waitForSync" value="%{as2_waitForSync}" tabindex="42"  cssClass="form-control"/>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-                            <div class="col-sm-12">  
-                                <div class="col-sm-3 gutter_hide">
-                                    <div class="threshold" style="display: none">
-                                        <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-md-6 gutter_hide form-group">
-                                    <div class="col-sm-6">
-                                        <div class="form-group"> 
-                                            <label>Payload&nbsp;Send&nbsp;Mode</label>
-                                            <s:select headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'SYNC':'SYNC','ASYNC':'ASYNC','NoMDN':'No MDN'}" name="as2_payloadSendMode" id="as2_payloadSendMode" value="%{as2_payloadSendMode}" tabindex="43" cssClass="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6" >
-                                        <div class="" style="margin-top:30px">
-                                            <label for="as2_ssl_req">
-                                                SSL&nbsp;Required
-                                            </label>
-                                            <s:checkbox  name="as2_ssl_req" id="as2_ssl_req" tabindex="44" value="%{as2_ssl_req}" onclick="sslRequired('as2')" cssClass=""/>
-                                        </div>
-                                    </div>
+                                    <s:checkbox style="display: none" id="http_ssl_req" name="http_ssl_req" tabindex="28" value="%{http_ssl_req}" onclick="sslRequiredForAdmin('http')"/>
                                 </div>
                             </div>
                         </div>
@@ -462,41 +292,18 @@
                 <div id="site_content" class="jumbotron">
                     <div class="container">
                         <div id="sslDiv" style="display: none">
+                            <div id="protocolmsgSsl"></div>
                             <h4 style="color: #2d8fc8" class="heading_4">SSL  : </h4>
                             <div class="col-sm-3">
-                                <div class="form-group"> 
+                                <div class="form-group">
                                     <label>SSL&nbsp;Priority:</label>
-                                    <s:select list="#@java.util.LinkedHashMap@{'MUST':'Must','NONE':'None'}" name="ssl_priority" id="ssl_priority" value="%{ssl_priority}" tabindex="45" cssClass="form-control" onchange="sslPriorityChange(this.value)"/>
+                                    <s:select list="#@java.util.LinkedHashMap@{'MUST':'Must','NONE':'None'}" name="ssl_priority" id="ssl_priority" value="%{ssl_priority}" tabindex="47" cssClass="form-control" onchange="sslPriorityChangeForAdmin(this.value)"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group"> 
                                     <label>Cipher&nbsp;Strength:</label>
-                                    <s:select list="#@java.util.LinkedHashMap@{'STRONG':'Strong','NONE':'None'}" name="ssl_cipher_stergth" id="ssl_cipher_stergth" value="%{ssl_cipher_stergth}" tabindex="46" cssClass="form-control"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group"> 
-                                    <label>CA&nbsp;Certificate:</label>
-                                    <%--<s:textfield cssClass="button" name="ssl_sysStore" id="ssl_sysStore" tabindex="57" value="Download"/>--%>
-                                    <s:a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</s:a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="sslDiv2" style="display: none">
-                                <div id="protocolmsgSsl"></div>
-                                <h4 style="color: #2d8fc8" class="heading_4">SSL  : </h4>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>SSL&nbsp;Priority:</label>
-                                    <s:select list="#@java.util.LinkedHashMap@{'MUST':'Must','NONE':'None'}" name="ssl_priority2" id="ssl_priority2" value="%{ssl_priority2}" tabindex="47" cssClass="form-control" onchange="sslPriorityChange(this.value)"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group"> 
-                                    <label>Cipher&nbsp;Strength:</label>
-                                    <s:select list="#@java.util.LinkedHashMap@{'STRONG':'Strong','NONE':'None'}" name="ssl_cipher_stergth2" id="ssl_cipher_stergth2" value="%{ssl_cipher_stergth2}" tabindex="48" cssClass="form-control"/>
+                                    <s:select list="#@java.util.LinkedHashMap@{'STRONG':'Strong','NONE':'None'}" name="ssl_cipher_stergth" id="ssl_cipher_stergth" value="%{ssl_cipher_stergth}" tabindex="48" cssClass="form-control"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -509,18 +316,18 @@
                         </div>
                         <div class="col-sm-12" id="saveButton" style="display: none">
                             <div class="col-md-2 pull-right">  
-                                <s:if test="%{formAction == 'doAddProfile'}">
-                                    <s:submit value="Save" cssClass="btn btn-info" tabindex="50" onclick="return checkProfile('add')"/>
+                                <s:if test="%{formAction == 'doAdminAddProfile'}">
+                                    <s:submit value="Save" cssClass="btn btn-info" tabindex="50" onclick="return checkAdminProfile('add')"/>
                                 </s:if>
                                 <s:else>
-                                    <s:submit value="Update" cssClass="btn btn-info" tabindex="50" onclick="return checkProfile('update')"/>
+                                    <s:submit value="Update" cssClass="btn btn-info" tabindex="50" onclick="return checkAdminProfile('update')"/>
                                 </s:else>
                             </div>
                             <div class="col-sm-2 col-md-1 pull-right">
                                 <s:reset   value="Reset" cssClass="btn btn-info" tabindex="51"/>
                             </div>
                             <div class="col-sm-2 col-md-1 pull-right">
-                                <s:if test="%{formAction == 'doAddProfile'}">
+                                <s:if test="%{formAction == 'doAdminAddProfile'}">
                                     <s:url var="myUrl" action="../tpOnboarding/tpoAddProfile.action"></s:url>
                                     <s:a href='%{#myUrl}'><input type="button" tabindex="52" value="Cancel" class="btn btn-info"/></s:a> 
                                 </s:if>
@@ -537,18 +344,16 @@
         <div class=" " style="position:relative;bottom: 0;width:100%">
             <s:include value="../includes/template/footer.jsp"/>
         </div>
-        <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/adminValidations.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script type="text/javascript" src='<s:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>'></script>
-        <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
         <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
 
         <script type="text/javascript">
                                             function onLoad() {
-                                                $("#profiles").addClass("active");
+                                                $("#partners").addClass("active");
                                                 document.getElementById("commnProtocol").value = "-1";
                                             }
 
@@ -573,16 +378,6 @@
                                                         document.getElementById("http_ssl_req").onclick();
                                                     }
                                                 }
-//                                                var formAction = document.getElementById("formAction").value;
-//                                                if(formAction == 'doAddProfile'){
-//                                                    document.getElementById("commnProtocol").disabled = false;
-//                                                   // document.getElementById("transferMode").disabled = false;
-//                                                   // document.doAddProfile.transferMode.disabled = false;
-//                                                }else{
-//                                                    document.getElementById("commnProtocol").disabled = true;
-//                                                   // document.getElementById("transferMode").disabled = true;
-//                                                   // document.doUpdateProfile.transferMode.disabled = true;
-//                                                }
                                             }
 
                                             $(document).ready(function() {

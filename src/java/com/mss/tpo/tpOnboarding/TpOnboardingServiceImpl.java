@@ -350,9 +350,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
              } */
         }
         if (roleId == 3) {
-            profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " ");
+            profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + "  AND ADMIN_PROTOCOL_FLAG = 'N' ");
         } else {
-            profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "' ");
+            profileSearchQuery.append(" AND PARTNER_ID=" + partnerId + " AND CREATED_BY = '" + loginId + "'  AND ADMIN_PROTOCOL_FLAG = 'N' ");
         }
         profileSearchQuery.append(" order By CREATED_TS DESC");
         try {
@@ -391,8 +391,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
 
-            String addTpoProfileQuery = "INSERT INTO MSCVP.TPO_COMMUNICATION(PARTNER_ID, PARTNER_NAME, PROTOCOL, TRANSFER_MODE, TP_FLAG, CREATED_BY, CREATED_TS, STATUS) "
-                    + "VALUES(?,?,?,?,?,?,?,?)";
+            String addTpoProfileQuery = "INSERT INTO MSCVP.TPO_COMMUNICATION(PARTNER_ID, PARTNER_NAME, PROTOCOL, TRANSFER_MODE, TP_FLAG, CREATED_BY, CREATED_TS, STATUS, ADMIN_PROTOCOL_FLAG) "
+                    + "VALUES(?,?,?,?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(addTpoProfileQuery);
             preparedStatement.setInt(1, partnerId);
             preparedStatement.setString(2, partnerName);
@@ -406,6 +406,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             preparedStatement.setString(6, tpAction.getCreated_by());
             preparedStatement.setTimestamp(7, curdate);
             preparedStatement.setString(8, "INACTIVE");
+            preparedStatement.setString(9, "N");
             isProfileCommnInserted = isProfileCommnInserted + preparedStatement.executeUpdate();
 
             String commnIdQuery = "SELECT max(ID) AS communicationId FROM MSCVP.TPO_COMMUNICATION WHERE PARTNER_ID =" + partnerId + " AND CREATED_BY='" + tpAction.getCreated_by() + "' ";
@@ -417,7 +418,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("FTP") && tpAction.getTransferMode().equals("push")) {
                 String ftpInsertQuery = "INSERT INTO MSCVP.TPO_FTP(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, SSL_FLAG, FTP_METHOD, RECEIVING_PROTOCOL,"
                         + " FTP_HOST, FTP_PORT, FTP_USER_ID, FTP_PASSWORD, FTP_DIRECTORY, CONNECTION_METHOD, RESPONSE_TIMEOUT_SEC, TP_FLAG, CREATED_BY,"
-                        + " CREATED_TS, STATUS) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + " CREATED_TS, STATUS, ADMIN_PROTOCOL_FLAG) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(ftpInsertQuery);
                 preparedStatement.setInt(1, communicationId);
                 preparedStatement.setInt(2, partnerId);
@@ -436,10 +437,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 preparedStatement.setString(15, tpAction.getCreated_by());
                 preparedStatement.setTimestamp(16, curdate);
                 preparedStatement.setString(17, "INACTIVE");
+                preparedStatement.setString(18, "N");
                 isProtocolInserted = isProtocolInserted + preparedStatement.executeUpdate();
                 if ((isProtocolInserted > 0) && ("true".equalsIgnoreCase(tpAction.getFtp_ssl_req()))) {
                     String insertQuery = "INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,"
-                            + " CIPHER_STRENGTH, TP_FLAG, CREATED_BY, CREATED_TS, CA_CERTIFICATES,SSL_CERT_DATA) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                            + " CIPHER_STRENGTH, TP_FLAG, CREATED_BY, CREATED_TS, CA_CERTIFICATES,SSL_CERT_DATA, ADMIN_PROTOCOL_FLAG) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                     preparedStatement = connection.prepareStatement(insertQuery);
                     preparedStatement.setInt(1, communicationId);
                     preparedStatement.setInt(2, partnerId);
@@ -456,16 +458,16 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     } else {
                         preparedStatement.setString(11, "");
                     }
+                    preparedStatement.setString(12, "N");
                     preparedStatement.executeUpdate();
                 }
             } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("AS2")) {
                 String as2InsertQuery = "INSERT INTO MSCVP.TPO_AS2(COMMUNICATION_ID, PARTNER_ID, SSL_FLAG, UPL_YOUR_SYS_CERT, MY_ORG, "
                         + "YOUR_ORG, MY_PART_PRO_NAME, YOUR_PART_PRO_NAME, MY_END_POINT, YOUR_END_POINT, STR_AS2_MSG_IN, "
-                        + "WAIT_FOR_SYNC_MDN_PROC, TP_FLAG, CREATED_BY, CREATED_TS, STATUS, TRANSFER_MODE,SYS_CERT_DATA) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "WAIT_FOR_SYNC_MDN_PROC, TP_FLAG, CREATED_BY, CREATED_TS, STATUS, TRANSFER_MODE,SYS_CERT_DATA, ADMIN_PROTOCOL_FLAG) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(as2InsertQuery);
                 preparedStatement.setInt(1, communicationId);
                 preparedStatement.setInt(2, partnerId);
-                //preparedStatement.setString(3, tpAction.getTransferMode());
                 preparedStatement.setString(3, tpAction.getAs2_ssl_req());
                 preparedStatement.setString(4, tpAction.getFilepath());
                 preparedStatement.setString(5, tpAction.getAs2_myOrgName());
@@ -486,10 +488,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 } else {
                     preparedStatement.setString(18, "");
                 }
+                preparedStatement.setString(19, "N");
                 isProtocolInserted = isProtocolInserted + preparedStatement.executeUpdate();
                 if ((isProtocolInserted > 0) && ("true".equalsIgnoreCase(tpAction.getAs2_ssl_req()))) {
                     String insertQuery = "INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,"
-                            + " CIPHER_STRENGTH, CA_CERTIFICATES, TP_FLAG, CREATED_BY, CREATED_TS,SSL_CERT_DATA) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                            + " CIPHER_STRENGTH, CA_CERTIFICATES, TP_FLAG, CREATED_BY, CREATED_TS,SSL_CERT_DATA, ADMIN_PROTOCOL_FLAG) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                     preparedStatement = connection.prepareStatement(insertQuery);
                     preparedStatement.setInt(1, communicationId);
                     preparedStatement.setInt(2, partnerId);
@@ -506,14 +509,15 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     } else {
                         preparedStatement.setString(11, "");
                     }
+                    preparedStatement.setString(12, "N");
                     preparedStatement.executeUpdate();
 
                 }
             } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("HTTP") && tpAction.getTransferMode().equals("pull")) {
                 String httpInsertQuery = "INSERT INTO MSCVP.TPO_HTTP(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, SSL_FLAG, "
                         + "RECEIVING_PROTOCOL, HTTP_END_POINT, HTTP_MODE, RESPONSE_TIMEOUT_SEC, HTTP_PORT, TP_FLAG, "
-                        + "CREATED_BY, CREATED_TS, URL, STATUS) "
-                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "CREATED_BY, CREATED_TS, URL, STATUS, ADMIN_PROTOCOL_FLAG) "
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(httpInsertQuery);
                 preparedStatement.setInt(1, communicationId);
                 preparedStatement.setInt(2, partnerId);
@@ -529,10 +533,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 preparedStatement.setTimestamp(12, curdate);
                 preparedStatement.setString(13, tpAction.getHttp_url());
                 preparedStatement.setString(14, "INACTIVE");
+                preparedStatement.setString(15, "N");
                 isProtocolInserted = isProtocolInserted + preparedStatement.executeUpdate();
                 if ((isProtocolInserted > 0) && ("true".equalsIgnoreCase(tpAction.getHttp_ssl_req()))) {
                     String insertQuery = "INSERT INTO MSCVP.TPO_SSL(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, PROTOCOL, SSL_PRIORITY,"
-                            + " CIPHER_STRENGTH, CA_CERTIFICATES, TP_FLAG, CREATED_BY, CREATED_TS,SSL_CERT_DATA) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                            + " CIPHER_STRENGTH, CA_CERTIFICATES, TP_FLAG, CREATED_BY, CREATED_TS,SSL_CERT_DATA, ADMIN_PROTOCOL_FLAG) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                     preparedStatement = connection.prepareStatement(insertQuery);
                     preparedStatement.setInt(1, communicationId);
                     preparedStatement.setInt(2, partnerId);
@@ -549,13 +554,14 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     } else {
                         preparedStatement.setString(11, "");
                     }
+                    preparedStatement.setString(12, "N");
                     preparedStatement.executeUpdate();
                 }
             } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("SFTP") && tpAction.getTransferMode().equals("push")) {
                 String sftpInsertQuery = "INSERT INTO MSCVP.TPO_SFTP(COMMUNICATION_ID, PARTNER_ID, TRANSFER_MODE, "
                         + "CONN_METHOD, MY_SSH_PUB_KEY, UPL_YOUR_SSH_PUB_KEY, REMOTE_HOST_IP_ADD, REMOTE_USERID, "
-                        + "METHOD, AUTH_METHOD, REMOTE_PORT, REMOTE_PWD, DIRECTORY, TP_FLAG, CREATED_BY, CREATED_TS, STATUS,SSH_CERT_DATA)"
-                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "METHOD, AUTH_METHOD, REMOTE_PORT, REMOTE_PWD, DIRECTORY, TP_FLAG, CREATED_BY, CREATED_TS, STATUS,SSH_CERT_DATA, ADMIN_PROTOCOL_FLAG)"
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(sftpInsertQuery);
                 preparedStatement.setInt(1, communicationId);
                 preparedStatement.setInt(2, partnerId);
@@ -579,11 +585,12 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 } else {
                     preparedStatement.setString(18, "");
                 }
+                preparedStatement.setString(19, "N");
                 isProtocolInserted = isProtocolInserted + preparedStatement.executeUpdate();
             } else if ((isProfileCommnInserted > 0) && tpAction.getCommnProtocol().equals("SMTP")) {
-                String smtpInsertQuery = "INSERT INTO MSCVP.TPO_SMTP (COMMUNICATION_ID, PARTNER_ID,RECEIVING_PROTOCOL, "
-                        + "SMTP_SERVER_PORT, TO_EMAIL_ADDRESS, SMTP_SERVER_HOST, FROM_EMAIL_ADDRESS, TP_FLAG, CREATED_BY, CREATED_TS, STATUS)"
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                String smtpInsertQuery = "INSERT INTO MSCVP.TPO_SMTP (COMMUNICATION_ID, PARTNER_ID,RECEIVING_PROTOCOL, SMTP_SERVER_PORT, "
+                        + "TO_EMAIL_ADDRESS, SMTP_SERVER_HOST, FROM_EMAIL_ADDRESS, TP_FLAG, CREATED_BY, CREATED_TS, STATUS, ADMIN_PROTOCOL_FLAG)"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(smtpInsertQuery);
                 preparedStatement.setInt(1, communicationId);
                 preparedStatement.setInt(2, partnerId);
@@ -596,6 +603,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 preparedStatement.setString(9, tpAction.getCreated_by());
                 preparedStatement.setTimestamp(10, curdate);
                 preparedStatement.setString(11, "INACTIVE");
+                preparedStatement.setString(12, "N");
                 isProtocolInserted = isProtocolInserted + preparedStatement.executeUpdate();
             }
             mp = tpAction.getMap();

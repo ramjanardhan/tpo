@@ -426,6 +426,22 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
         }
     }
 
+    public String reprocessPayloadData() throws Exception {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                String resultMessage = ServiceLocator.getPayloadService().reprocessPayloadData(loginId,getFilepath(), getId());
+                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
+                resultType = SUCCESS;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return resultType;
+    }
+
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.httpServletRequest = httpServletRequest;

@@ -39,6 +39,12 @@
             <result name = "redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
+        
+        <action name="reprocessPayloadData" class="com.mss.tpo.payload.PayloadAction" method="reprocessPayloadData">
+            <result name = "success" type="redirect" >/payload/payloadHistory.action</result>
+            <result name = "redirect">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
 <!--        Download file action-->
         <action name="downloadPayloadFile" class="com.mss.tpo.payload.PayloadAction" method="downloadPayloadFile"></action>
         

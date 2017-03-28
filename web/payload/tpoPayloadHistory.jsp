@@ -29,7 +29,7 @@
         </div> 
         <header id="head">
             <div class="container">
-                <h3><b>Payload History</b></h3>
+                <h3><b>Exchange History</b></h3>
             </div>
         </header>     
         <div class="container">
@@ -80,28 +80,30 @@
                             <s:if test="#session.payloadSearchList != null"> 
                                 <table id="profiletable" class="table table-bordered table-hover">
                                     <thead>
+                                    <th>CONNECTION&nbsp;TYPE</th>
                                     <th>CORRELATION&nbsp;ID</th>
                                     <th>TRANSACTION</th>
                                     <th>DIRECTION</th>
-                                    <th>FILE_NAME</th>
+                                    <th>FILE&nbsp;NAME</th>
                                     <th>DOWNLOAD</th>
+                                    <th>REPROCESS</th>
                                     <th>CUR&nbsp;TEST&nbsp;STATUS</th>
                                     <th>CUR&nbsp;TEST&nbsp;DATE</th>
                                     <th>LT&nbsp;TEST&nbsp;STATUS</th>
                                     <th>LT&nbsp;TEST&nbsp;DATE</th>
                                     </thead>
                                     <tbody>
-                                        <%            
+                                        <%
                                             int partnerId = (Integer) session.getAttribute(AppConstants.TPO_PARTNER_ID);
                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.PAYLOAD_SEARCH_LIST);
                                             if (list.size() != 0) {
-                                                System.out.println("list.size()>>" + list.size());
                                                 PayloadBean payloadBean;
                                                 for (int i = 0; i < list.size(); i++) {
                                                     payloadBean = (PayloadBean) list.get(i);
                                                     int id = payloadBean.getId();
                                         %>
                                         <tr>
+                                            <td> <% out.println(payloadBean.getConnectionType()); %> </td>
                                             <td> <% if ((payloadBean.getCorrelationID()) == 0) {
                                                     out.println("--");
                                                 } else {
@@ -116,25 +118,58 @@
                                                     out.println(payloadBean.getFileName());
                                                 }%> </td>
                                             <td align="center">   
-                                                <% if ("Inbound".equalsIgnoreCase(payloadBean.getDirection())) {
-                                                        out.println("--");
-                                                    } else {
-                                                        if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {%>
-                                                <s:url var="myUrl" action="../payload/downloadPayloadFile.action">
+                                                <% String disable = "";
+                                                    if ("Inbound".equalsIgnoreCase(payloadBean.getDirection())) {
+                                                        if ((payloadBean.getTransaction()) == 997) {
+                                                            if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {
+                                                                disable = "no";
+                                                            } else {
+                                                                disable = "block";
+                                                            }
+                                                        } else {
+                                                            disable = "yes";
+                                                        }
+                                                    }
+                                                    if ("Outbound".equalsIgnoreCase(payloadBean.getDirection())) {
+                                                        if (payloadBean.getTransaction() == 850) {
+                                                            disable = "yes";
+                                                        } else {
+                                                            if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {
+                                                                disable = "no";
+                                                            } else {
+                                                                disable = "block";
+                                                            }
+                                                        }
+                                                    }
+                                                    if ("no".equals(disable)) {%>
+                                                <s:url var="downloadPayloadFileURL" action="../payload/downloadPayloadFile.action">
                                                     <s:param name="filepath"><%=(payloadBean.getPath())%></s:param> 
                                                 </s:url>
-                                                <s:a href='%{#myUrl}' style="color: green;"><span class="glyphicon glyphicon-download"></span></s:a>
-                                                <% } else {%> 
-                                                <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-download"></span></a>
-                                                <% }
-                                                        } %> </td>
-                                            <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
+                                                <s:a href='%{#downloadPayloadFileURL}' style="color: green;"><span class="glyphicon glyphicon-download"></span></s:a>
+                                                <% } else if ("yes".equals(disable)) {
                                                     out.println("--");
-                                                } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
-                                                    out.println("<font color='green'>" + payloadBean.getCurrentTestStatus() + "</font>");
-                                                } else {
-                                                    out.println("<font color='red'>" + payloadBean.getCurrentTestStatus() + "</font>");
-                                                }
+                                                } else {%>
+                                                <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-download"></span></a>
+                                                    <%  }%> 
+                                            </td>
+                                            <td align="center">
+                                                <s:url var="reprocessURL" action="../payload/reprocessPayloadData.action">
+                                                    <s:param name="filepath"><%=(payloadBean.getInputPath())%></s:param> 
+                                                    <s:param name="id"><%=(id)%></s:param> 
+                                                </s:url>
+                                                 <% if ((!"".equals(payloadBean.getInputPath())) && ((payloadBean.getInputPath()) != null)) { %>
+                                                    <s:a href='%{#reprocessURL}' style="color: blue;"><span class="glyphicon glyphicon-refresh"></span></s:a>
+                                               <% } else {%>
+                                                <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-refresh"></span></a>
+                                                    <%  }%> 
+                                                </td>
+                                                <td> <% if ((payloadBean.getCurrentTestStatus()) == null) {
+                                                        out.println("--");
+                                                    } else if (payloadBean.getCurrentTestStatus().equalsIgnoreCase("SUCCESS")) {
+                                                        out.println("<font color='green'>" + payloadBean.getCurrentTestStatus() + "</font>");
+                                                    } else {
+                                                        out.println("<font color='red'>" + payloadBean.getCurrentTestStatus() + "</font>");
+                                                    }
                                                 %> </td>  
                                             <td> <% if ((payloadBean.getCurrentTestDate()) == null) {
                                                     out.println("--");
@@ -157,7 +192,7 @@
                                                 }
                                                 %> </td>  
                                         </tr>
-                                        <%    
+                                        <%
                                                 }
                                             }
                                         %>
@@ -187,7 +222,7 @@
                                             function doOnLoad() {
                                                 $("#PayLoad").addClass("active");
                                             }
-                                            
+
                                             $(function() {
                                                 $('#profiletable').DataTable({
                                                     "paging": true,
@@ -198,7 +233,7 @@
                                                     "autoWidth": false
                                                 });
                                             });
-                                            
+
                                             function resetValues() {
                                                 document.getElementById("transaction").value = "-1";
                                                 document.getElementById("direction").value = "-1";

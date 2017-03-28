@@ -1,6 +1,5 @@
 <%-- 
     Document   : tpoAdminManageProfiles
-    Created on : Mar 23, 2017, 2:44:28 PM
     Author     : Narendar
 --%>
 <!DOCTYPE html>
@@ -9,7 +8,7 @@
 <%@page import="com.mss.tpo.util.AppConstants"%>
 <%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
 <%@page import="com.mss.tpo.util.DataSourceDataProvider"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%@page import="com.mss.tpo.admin.AdminBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>
@@ -27,25 +26,10 @@
         <link rel="stylesheet" href='<s:url value="../includes/plugins/datatables/dataTables.bootstrap.css"/>' type="text/css">
         <script>
             function doOnLoad() {
-                $("#profiles").addClass("active");
-                showTransferDiv();
-            }
-            function showTransferDiv() {
-                var protocol = document.getElementById("commnProtocol").value;
-                if ((protocol == 'FTP') || (protocol == 'SFTP') || (protocol == 'HTTP')) {
-                    document.getElementById("TransferDiv").style.display = "none";
-                } else {
-                    document.getElementById("TransferDiv").style.display = "none";
-                }
+                $("#partners").addClass("active");
             }
         </script>
         <style>
-            #transferModeget{
-                margin:5px;
-            }
-            #transferModeput{
-                margin:5px;
-            }
             .block_div{
                 overflow: hidden; 
             }
@@ -75,7 +59,7 @@
         </header>     
         <div class="container">
             <div id="profileDeleteMsg"></div>
-            <s:form action="searchProfiles" method="POST" enctype="multipart/form-data" name="searchTpOnboard" id="searchTpOnboard" theme="simple">
+            <s:form action="tpoAdminSearchProfiles" method="POST" enctype="multipart/form-data" name="adminSearchProfiles" id="adminSearchProfiles" theme="simple">
                 <div id="site_content" class="jumbotron block_div">
                     <div class="">
                         <center>
@@ -91,17 +75,9 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Protocol Name</label>
-                                     <s:select name="commnProtocol" id="commnProtocol" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'FTP':'FTP/FTPS','AS2':'AS2','SFTP':'SFTP','HTTP':'HTTP/HTTPS','SMTP':'SMTP'}" tabindex="1" value="%{commnProtocol}"  cssClass="form-control" onchange="showTransferDiv()"/>         
+                                     <s:select name="commnProtocol" id="commnProtocol" headerKey="-1" headerValue="-- Select --" list="protocolList" tabindex="1" value="%{commnProtocol}"  cssClass="form-control" onchange=""/>         
                                 </div>
                             </div>
-                            <div class="col-sm-3" id="TransferDiv" style="display:none">
-                                <div class="form-group">
-                                    <label>Transfer Mode :</label>
-                                    <div class="col-sm-12" style="padding: 0">
-                                        <s:radio name="transferMode" id="transferMode" list="{'pull','push'}" onchange="gettransferModeSelection(this.value)" cssClass="from-control"  tabindex="2"></s:radio>&nbsp;&nbsp;
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Status</label>
@@ -142,37 +118,39 @@
                                             String partnerName = DataSourceDataProvider.getInstance().getTpoPartnerName(partnerId);
                                             java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchProfileList);
                                             if (list.size() != 0) {
-                                                TpOnboardingBean tpOnboardingBean;
+                                                AdminBean adminBean;
                                                 for (int i = 0; i < list.size(); i++) {
-                                                    tpOnboardingBean = (TpOnboardingBean) list.get(i);%>
+                                                    adminBean = (AdminBean) list.get(i);%>
                                         <tr>
-                                            <td> <% out.println(tpOnboardingBean.getId()); %> </td>
-                                            <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
-                                            <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>  
-                                            <td> <% out.println(tpOnboardingBean.getCreated_ts().toString().substring(0, tpOnboardingBean.getCreated_ts().toString().lastIndexOf(":")));%> </td>
+                                            <td> <% out.println(adminBean.getId()); %> </td>
+                                            <td> <% out.println(adminBean.getCommnProtocol()); %> </td>
+                                            <td> <% out.println(adminBean.getCreated_by()); %> </td>  
+                                            <td> <% out.println(adminBean.getCreated_ts().toString().substring(0, adminBean.getCreated_ts().toString().lastIndexOf(":")));%> </td>
                                             <td align="center">   
                                                 <%-- <s:hidden id = "iValue"/>--%>
-                                                <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(tpOnboardingBean.getId())%>","<%=(tpOnboardingBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                                <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(adminBean.getId())%>","<%=(adminBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                                             </td>
                                             <%--  <td> <div id = "<%=i%>"></div> </td>--%>
                                             <td align="center">
-                                                <s:url var="myUrl" action="../tpOnboarding/tpogetProfile.action">
-                                                    <s:param name="communicationId"><%=(tpOnboardingBean.getId())%></s:param>
-                                                    <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param>
+                                                <s:url var="myUrl" action="../admin/tpoAdminGetProfile.action">
+                                                    <s:param name="communicationId"><%=(adminBean.getId())%></s:param>
+                                                    <s:param name="commnProtocol"><%=(adminBean.getCommnProtocol())%></s:param>
                                                 </s:url>
                                                 <%
                                                     String disable = "";
-                                                    if ("push".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
-                                                        if (("FTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) || ("SFTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol())))) {
+                                                    if ("pull".equalsIgnoreCase((adminBean.getTransferMode()))) {
+                                                        if (("FTP".equalsIgnoreCase((adminBean.getCommnProtocol()))) || ("SFTP".equalsIgnoreCase((adminBean.getCommnProtocol())))) {
                                                             disable = "no";
                                                         }
-                                                    } else if ("pull".equalsIgnoreCase((tpOnboardingBean.getTransferMode()))) {
-                                                        if ("HTTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) {
+                                                    } else if ("push".equalsIgnoreCase((adminBean.getTransferMode()))) {
+                                                        if ("HTTP".equalsIgnoreCase((adminBean.getCommnProtocol()))) {
                                                             disable = "no";
                                                         }
-                                                    } else if (("AS2".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol()))) || ("SMTP".equalsIgnoreCase((tpOnboardingBean.getCommnProtocol())))) {
-                                                        disable = "no";
-                                                    } else {
+                                                    } 
+//                                                    else if (("AS2".equalsIgnoreCase((adminBean.getCommnProtocol()))) || ("SMTP".equalsIgnoreCase((adminBean.getCommnProtocol())))) {
+//                                                        disable = "no";
+//                                                    } 
+                                                    else {
                                                         disable = "yes";
                                                     }
                                                     if ("no".equalsIgnoreCase(disable)) {
@@ -185,10 +163,10 @@
                                                 %>
                                             </td>
                                             <td align="center">   
-                                                <s:url var="myUrl1" action="../tpOnboarding/tpoDeleteProfile.action">
-                                                    <s:param name="communicationId"><%=(tpOnboardingBean.getId())%></s:param> 
-                                                    <s:param name="commnProtocol"><%=(tpOnboardingBean.getCommnProtocol())%></s:param> 
-                                                    <s:param name="transferMode"><%=(tpOnboardingBean.getTransferMode())%></s:param> 
+                                                <s:url var="myUrl1" action="../admin/tpoAdminDeleteProfile.action">
+                                                    <s:param name="communicationId"><%=(adminBean.getId())%></s:param> 
+                                                    <s:param name="commnProtocol"><%=(adminBean.getCommnProtocol())%></s:param> 
+                                                    <s:param name="transferMode"><%=(adminBean.getTransferMode())%></s:param> 
                                                 </s:url>
                                                 <s:a href='%{#myUrl1}' style="color: red;"><span class="glyphicon glyphicon-trash"></span></s:a>
                                                 </td>
@@ -218,7 +196,7 @@
                 <s:include value="../includes/template/footer.jsp"/>
             </div>
         </footer>
-        <script language="JavaScript" src='<s:url value="/includes/js/tpOnbordingDeatails.js"/>'></script>
+        <script language="JavaScript" src='<s:url value="/includes/js/adminValidations.js"/>'></script>
         <script language="JavaScript" src='<s:url value="/includes/js/GeneralAjax.js"/>'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -238,7 +216,6 @@
                                             function resetValues() {
                                                 document.getElementById("commnProtocol").value = "-1";
                                                 document.getElementById("status").value = "-1";
-                                                document.getElementById("transferMode").checked = false;
                                             }
         </script>
     </body>
