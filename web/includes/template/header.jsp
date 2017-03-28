@@ -40,8 +40,8 @@
                                     <li class="dropdown" id="partners">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-handshake-o" aria-hidden="true"></i><span class="">Partner Config</span><b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li id="partnerAdd"><a href="<s:url action="../tpOnboarding/tpoPartnerAdd"/>">Add Partner</a></li>
-                                            <li id="partnersList"><a href="<s:url action="../tpOnboarding/tpoPartnersList"/>">Partners List</a></li>
+                                            <li id="partnerAdd"><a href="<s:url action="../partner/tpoPartnerAdd"/>">Add Partner</a></li>
+                                            <li id="partnersList"><a href="<s:url action="../partner/tpoPartnersList"/>">Partners List</a></li>
                                             <li id="adminAddProfile"><a href="<s:url action="../admin/tpoAdminAddProfile"/>">Add Profile</a></li>
                                             <li id="adminManageProfile"><a href="<s:url action="../admin/tpoAdminManageProfiles"/>">Manage Profiles</a></li>
                                             <li id="adminManageProfile"><a href="<s:url action="../admin/tpoAdminManageCommunication"/>">Manage Communication</a></li>
@@ -89,21 +89,21 @@
                                     <ul class="dropdown-menu">
                                         <s:if test="#session.tpoRoleId == 1">
                                             <li id="certificates"><a href="#">Certificates Monitering</a></li>
-                                            <li id="userAdd"><a href="<s:url action="../tpOnboarding/tpoUserAdd"/>">Create User</a></li>
+                                            <li id="userAdd"><a href="<s:url action="../user/tpoUserAdd"/>">Create User</a></li>
                                                 <%-- <li id="adminUsersList"><a href="<s:url action="tpoAdminUsersList"/>">Users List</a></li>--%>
                                             </s:if>
                                             <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
-                                            <li id="partnerInfo"><a href="<s:url action="../tpOnboarding/tpoPartnerInfo"/>">Partner Info</a></li>
-                                            <li id="partnerUserAdd"><a href="<s:url action="../tpOnboarding/tpoPartnerUserAdd"/>">Create User</a></li>
+                                            <li id="partnerInfo"><a href="<s:url action="../partner/tpoPartnerInfo"/>">Partner Info</a></li>
+                                            <li id="partnerUserAdd"><a href="<s:url action="../partner/tpoPartnerUserAdd"/>">Create User</a></li>
                                             </s:if>
                                             <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 3 || #session.tpoRoleId== 4}'>
-                                            <li id="users"><a href="<s:url action="../tpOnboarding/tpoUsersList"/>">Users List</a></li>
-                                            <li id="resetUserPwd"><a href="<s:url action="../tpOnboarding/tpoResetUserPwd"/>">Reset User Pwd</a></li>
+                                            <li id="users"><a href="<s:url action="../user/tpoUsersList"/>">Users List</a></li>
+                                            <li id="resetUserPwd"><a href="<s:url action="../user/tpoResetUserPwd"/>">Reset User Pwd</a></li>
                                             </s:if>
                                             <s:if test='%{#session.tpoRoleId== 1 || #session.tpoRoleId== 2}'>
-                                            <li id="resetPartnerPwd"><a href="<s:url action="../tpOnboarding/tpoResetPartnerPwd"/>">Reset Partner Pwd</a></li>
+                                            <li id="resetPartnerPwd"><a href="<s:url action="../user/tpoResetPartnerPwd"/>">Reset Partner Pwd</a></li>
                                             </s:if>
-                                        <li id="resetMyPwd"><a href="<s:url action="../tpOnboarding/tpoResetMyPwd"/>">Reset My Pwd</a></li>
+                                        <li id="resetMyPwd"><a href="<s:url action="../user/tpoResetMyPwd"/>">Reset My Pwd</a></li>
                                     </ul>
                                 </li>
                             </ul>

@@ -35,21 +35,12 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
 
     private static Logger logger = Logger.getLogger(LoginAction.class.getName());
     private HttpServletRequest httpServletRequest;
+    private HttpServletResponse httpServletResponse;
     private String resultType;
     private String loginId;
-    private String password;
     private int id;
     private int roleId;
     private String partnerName;
-    private String contactName;
-    private String contactLastName;
-    private String contactEmail;
-    private String phoneNo;
-    private String address1;
-    private String city;
-    private String state;
-    private String zipCode;
-    private String country;
     private String status;
     private Map protocolList;
     private String commnProtocol;
@@ -118,17 +109,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String formAction;
     private int CommunicationId;
     private int regpartnerId;
-    private String regpartnerName;
-    private String regcontactName;
-    private String regcontactLName;
-    private String regcontactEmail;
-    private String regpassword;
-    private String regcountry;
-    private String regphoneNo;
-    private String regaddress;
-    private String regcity;
-    private String regstate;
-    private String regzipCode;
     private String created_by;
     private TpOnboardingBean tpOnboardingBean;
     private int existFirst = 0;
@@ -138,7 +118,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public OutputStream outputStream;
     private String fileName;
     private String filepath;
-    private HttpServletResponse httpServletResponse;
     private String ssl_priority;
     private String ssl_cipher_stergth;
     private String ssl_priority2;
@@ -154,14 +133,10 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private Map partnerNameList;
     private Map adminUsersList;
     private Map partnerRolesList;
-    private int partnerRole;
-    private Map myUsersList;
     private String transaction;
     private String direction;
     private List<TpOnboardingBean> tpoSearchProfileList;
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
-    private ArrayList<TpOnboardingBean> tpoSearchPartnersList;
-    private ArrayList<TpOnboardingBean> tpoSearchUsersList;
 
     public String execute() throws Exception {
         resultType = LOGIN;
@@ -194,7 +169,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                     } else {
                         int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);
                         if ((IsExistedUserid != 0)) {
-                            setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
+                           // setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
                             resultType = "tpoManageProfiles";
                         }
                     }
@@ -204,195 +179,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
             } catch (Exception ex) {
                 ex.printStackTrace();
                 resultType = "error";
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoRegister() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
-                String resultMessage = ServiceLocator.getTpOnboardingService().doTpoUserRegister(partnerId, roleId, loginId, this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoUserAdd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoUsersList() {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchUsersList);
-                tpoSearchUsersList = ServiceLocator.getTpOnboardingService().tpoSearchUsers(loginId, roleId, "initialFlag", this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchUsersList, tpoSearchUsersList);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String searchUser() {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchUsersList);
-                tpoSearchUsersList = ServiceLocator.getTpOnboardingService().tpoSearchUsers(loginId, roleId, "searchFlag", this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchUsersList, tpoSearchUsersList);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoPartnerUserAdd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                 setRoleId(roleId);
-                 setPartnerRolesList(DataSourceDataProvider.getInstance().getPartnerRolesList(roleId));
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String doAddPartnerUser() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                String resultMessage = ServiceLocator.getTpOnboardingService().doAddPartnerUser(partnerId, roleId, loginId, this);
-                 setRoleId(roleId);
-                 setPartnerRolesList(DataSourceDataProvider.getInstance().getPartnerRolesList(roleId));
-                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoPartnerAdd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
-                setRoleId(roleId);
-                if (roleId == 1) {
-                    setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
-                }
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoPartnerInfo() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String updatePartnerInfo() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                setCreated_by(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString());
-                String resultMessage = ServiceLocator.getTpOnboardingService().updatePartnerInfo(this, loginId, partnerId);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoPartnersList() {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                if (roleId == 1) {
-                    setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
-                }
-                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchPartnersList);
-                tpoSearchPartnersList = ServiceLocator.getTpOnboardingService().tpoSearchPartners(loginId, roleId, "initialFlag", this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchPartnersList, tpoSearchPartnersList);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String searchPartner() {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                if (roleId == 1) {
-                    setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
-                } else if (roleId == 2) {
-                }
-                httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchPartnersList);
-                tpoSearchPartnersList = ServiceLocator.getTpOnboardingService().tpoSearchPartners(loginId, roleId, "searchFlag", this);
-                httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchPartnersList, tpoSearchPartnersList);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return resultType;
@@ -852,102 +638,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         return isSave;
     }
 
-    public String tpoResetMyPwd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                // setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String doTpoResetMyPwd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                String resultMessage = ServiceLocator.getTpOnboardingService().doResetMyPassword(roleId, loginId, getRegpassword());
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoResetUserPwd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                setMyUsersList(DataSourceDataProvider.getInstance().getMyUsersList(loginId, roleId));
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String doTpoResetUserPwd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                setMyUsersList(DataSourceDataProvider.getInstance().getMyUsersList(loginId, roleId));
-                String resultMessage = ServiceLocator.getTpOnboardingService().doTpoResetUserPwd(loginId, getContactName(), getRegpassword());
-                //String resultMessage = "";
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String tpoResetPartnerPwd() {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                setPartnerNameList(DataSourceDataProvider.getInstance().getMyPartnersList(loginId, roleId));
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
-
-    public String doTpoResetPartnerPwd() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-
-            try {
-                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                setPartnerNameList(DataSourceDataProvider.getInstance().getMyPartnersList(loginId, roleId));
-                String resultMessage = ServiceLocator.getTpOnboardingService().doTpoResetPartnerPwd(loginId, getPartnerName(), getRegpassword());
-                //String resultMessage = "";
-                httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
-                resultType = SUCCESS;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return resultType;
-    }
+    
 
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -1030,21 +721,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         this.OB855Transaction = OB855Transaction;
     }
 
-    public String getAddress1() {
-        return address1;
-    }
-
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+   
 
     public String getCommnProtocol() {
         return commnProtocol;
@@ -1052,30 +729,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
 
     public void setCommnProtocol(String commnProtocol) {
         this.commnProtocol = commnProtocol;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
-    }
-
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getFtp_conn_method() {
@@ -1214,14 +867,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         this.partnerName = partnerName;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getTransferMode() {
         return transferMode;
     }
@@ -1236,22 +881,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
 
     public void setFtp_resp_time(int ftp_resp_time) {
         this.ftp_resp_time = ftp_resp_time;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 
     public String getAs2_myEndPoint() {
@@ -1501,63 +1130,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void setLoginId(String loginId) {
         this.loginId = loginId;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRegcontactEmail() {
-        return regcontactEmail;
-    }
-
-    public void setRegcontactEmail(String regcontactEmail) {
-        this.regcontactEmail = regcontactEmail;
-    }
-
-    public String getRegcontactName() {
-        return regcontactName;
-    }
-
-    public void setRegcontactName(String regcontactName) {
-        this.regcontactName = regcontactName;
-    }
-
-    public String getRegpassword() {
-        return regpassword;
-    }
-
-    public void setRegpassword(String regpassword) {
-        this.regpassword = regpassword;
-    }
-
-    public String getRegcountry() {
-        return regcountry;
-    }
-
-    public void setRegcountry(String regcountry) {
-        this.regcountry = regcountry;
-    }
-
-    public String getRegpartnerName() {
-        return regpartnerName;
-    }
-
-    public void setRegpartnerName(String regpartnerName) {
-        this.regpartnerName = regpartnerName;
-    }
-
-    public String getRegphoneNo() {
-        return regphoneNo;
-    }
-
-    public void setRegphoneNo(String regphoneNo) {
-        this.regphoneNo = regphoneNo;
-    }
-
+    
     public String getCreated_by() {
         return created_by;
     }
@@ -1607,7 +1180,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     }
 
     public void setServletResponse(HttpServletResponse httpServletResponse) {
-
         this.httpServletResponse = httpServletResponse;
     }
 
@@ -1739,14 +1311,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         this.partnerNameList = partnerNameList;
     }
 
-    public int getRegpartnerId() {
-        return regpartnerId;
-    }
-
-    public void setRegpartnerId(int regpartnerId) {
-        this.regpartnerId = regpartnerId;
-    }
-
     public String getDirection() {
         return direction;
     }
@@ -1795,54 +1359,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         this.status = status;
     }
 
-    public String getContactLastName() {
-        return contactLastName;
-    }
-
-    public void setContactLastName(String contactLastName) {
-        this.contactLastName = contactLastName;
-    }
-
-    public String getRegcontactLName() {
-        return regcontactLName;
-    }
-
-    public void setRegcontactLName(String regcontactLName) {
-        this.regcontactLName = regcontactLName;
-    }
-
-    public String getRegaddress() {
-        return regaddress;
-    }
-
-    public void setRegaddress(String regaddress) {
-        this.regaddress = regaddress;
-    }
-
-    public String getRegcity() {
-        return regcity;
-    }
-
-    public void setRegcity(String regcity) {
-        this.regcity = regcity;
-    }
-
-    public String getRegstate() {
-        return regstate;
-    }
-
-    public void setRegstate(String regstate) {
-        this.regstate = regstate;
-    }
-
-    public String getRegzipCode() {
-        return regzipCode;
-    }
-
-    public void setRegzipCode(String regzipCode) {
-        this.regzipCode = regzipCode;
-    }
-
     public Map getAdminUsersList() {
         return adminUsersList;
     }
@@ -1859,13 +1375,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         this.roleId = roleId;
     }
 
-    public Map getMyUsersList() {
-        return myUsersList;
-    }
-
-    public void setMyUsersList(Map myUsersList) {
-        this.myUsersList = myUsersList;
-    }
+  
 
     public File getUpload2() {
         return upload2;
@@ -1883,20 +1393,20 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         this.partnerRolesList = partnerRolesList;
     }
 
-    public int getPartnerRole() {
-        return partnerRole;
-    }
-
-    public void setPartnerRole(int partnerRole) {
-        this.partnerRole = partnerRole;
-    }
-
     public Map getProtocolList() {
         return protocolList;
     }
 
     public void setProtocolList(Map protocolList) {
         this.protocolList = protocolList;
+    }
+
+    public int getRegpartnerId() {
+        return regpartnerId;
+    }
+
+    public void setRegpartnerId(int regpartnerId) {
+        this.regpartnerId = regpartnerId;
     }
 
 }

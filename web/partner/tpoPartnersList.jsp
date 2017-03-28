@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%@page import="com.mss.tpo.partner.PartnerBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>
@@ -101,47 +101,47 @@
                                     String loginId = session.getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                                     java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchPartnersList);
                                     if (list.size() != 0) {
-                                        TpOnboardingBean tpOnboardingBean;
+                                        PartnerBean partnerBean;
                                         for (int i = 0; i < list.size(); i++) {
-                                            tpOnboardingBean = (TpOnboardingBean) list.get(i);
-                                            int id = tpOnboardingBean.getId();
+                                            partnerBean = (PartnerBean) list.get(i);
+                                            int id = partnerBean.getId();
                                 %>
                                 <tr>
-                                    <td> <% out.println(tpOnboardingBean.getPartnerName()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getPhoneNo()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getCountry()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getCreated_ts()); %> </td>
+                                    <td> <% out.println(partnerBean.getPartnerName()); %> </td>
+                                    <td> <% out.println(partnerBean.getPhoneNo()); %> </td>
+                                    <td> <% out.println(partnerBean.getCountry()); %> </td>
+                                    <td> <% out.println(partnerBean.getCreated_by()); %> </td>
+                                    <td> <% out.println(partnerBean.getCreated_ts()); %> </td>
                                     <td> 
                                         <%
-                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("REJECTED")) {
-                                                out.println("<font color='red'>" + tpOnboardingBean.getStatus() + "</font>");
-                                            } else if (tpOnboardingBean.getStatus().equalsIgnoreCase("ACTIVE")) {
-                                                out.println("<font color='green'>" + tpOnboardingBean.getStatus() + "</font>");
+                                            if (partnerBean.getStatus().equalsIgnoreCase("REJECTED")) {
+                                                out.println("<font color='red'>" + partnerBean.getStatus() + "</font>");
+                                            } else if (partnerBean.getStatus().equalsIgnoreCase("ACTIVE")) {
+                                                out.println("<font color='green'>" + partnerBean.getStatus() + "</font>");
                                             } else {
-                                                out.println("<font color='orange'>" + tpOnboardingBean.getStatus() + "</font>");
+                                                out.println("<font color='orange'>" + partnerBean.getStatus() + "</font>");
                                             }
                                         %>
                                     </td>
                                     <td align="center">
                                         <%
-                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("ACTIVE")) {
+                                            if (partnerBean.getStatus().equalsIgnoreCase("ACTIVE")) {
                                         %>
                                         <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-ok-sign"></span></a>
                                             <% } else {
                                             %>  
-                                        <a style="color: green;" href='javascript:getPartnerName("<%=loginId%>","<%=roleId%>","<%=id%>","<%=(tpOnboardingBean.getPartnerName())%>")' id="acceptButton" ><span class="glyphicon glyphicon-ok-sign"></span></a>
+                                        <a style="color: green;" href='javascript:getPartnerName("<%=loginId%>","<%=roleId%>","<%=id%>","<%=(partnerBean.getPartnerName())%>")' id="acceptButton" ><span class="glyphicon glyphicon-ok-sign"></span></a>
                                             <%  }
                                             %>
                                     </td>
                                     <td align="center">
                                         <%
-                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("REJECTED")) {
+                                            if (partnerBean.getStatus().equalsIgnoreCase("REJECTED")) {
                                         %>
                                         <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                             <% } else {
                                             %>  
-                                        <a style="color: red" href='javascript:partnerReject("<%=id%>","<%=(tpOnboardingBean.getPartnerName())%>")'><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        <a style="color: red" href='javascript:partnerReject("<%=id%>","<%=(partnerBean.getPartnerName())%>")'><span class="glyphicon glyphicon-remove-sign"></span></a>
                                             <%  }
                                             %>
                                     </td>
@@ -167,8 +167,10 @@
                         <input type="hidden" id="partnerId" name="partnerId"/>
                         <input type="hidden" id="roleId" name="roleId"/>
                         <input type="hidden" id="loginId" name="loginId"/>
-                        <center><div id="loadingImage"></div>
-                            <div id="tpResultMessage"></div></center>
+                        <center>
+                            <div id="loadingImage"></div>
+                            <div id="tpResultMessage"></div>
+                        </center>
                         <div class="row">   
                             <div class="col-sm-6">
                                 <div class="form-group">

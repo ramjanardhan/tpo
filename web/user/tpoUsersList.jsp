@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.mss.tpo.util.AppConstants"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%@page import="com.mss.tpo.user.UserBean"%>
 <html>
     <head>
         <title>Miracle TP On-boarding</title>
@@ -107,6 +107,7 @@
                         <table id="usersTable" name="usersTable" class="table table-bordered table-hover">
                             <thead>
                             <th>NAME</th>
+                            <th>ROLE</th>
                             <th>PHONE</th>
                             <th>COUNTRY</th>
                             <th>CREATED_BY</th>
@@ -119,45 +120,46 @@
                                 <%
                                     java.util.List list = (java.util.List) session.getAttribute(AppConstants.TPO_SearchUsersList);
                                     if (list.size() != 0) {
-                                        TpOnboardingBean tpOnboardingBean;
+                                        UserBean userBean;
                                         for (int i = 0; i < list.size(); i++) {
-                                            tpOnboardingBean = (TpOnboardingBean) list.get(i);
-                                            int id = tpOnboardingBean.getId();
+                                            userBean = (UserBean) list.get(i);
+                                            int id = userBean.getId();
                                 %>
                                 <tr>
-                                    <td> <% out.println(tpOnboardingBean.getContactName()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getPhoneNo()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getCountry()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getCreated_by()); %> </td>
-                                    <td> <% out.println(tpOnboardingBean.getCreated_ts()); %> </td>
+                                    <td> <% out.println(userBean.getContactName()); %> </td>
+                                    <td> <% out.println(userBean.getRoleName()); %> </td>
+                                    <td> <% out.println(userBean.getPhoneNo()); %> </td>
+                                    <td> <% out.println(userBean.getCountry()); %> </td>
+                                    <td> <% out.println(userBean.getCreated_by()); %> </td>
+                                    <td> <% out.println(userBean.getCreated_ts()); %> </td>
                                     <td>
                                         <%
-                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("I")) {
+                                            if (userBean.getStatus().equalsIgnoreCase("I")) {
                                                 out.println("<font color='red'>INACTIVE</font>");
-                                            } else if (tpOnboardingBean.getStatus().equalsIgnoreCase("A")) {
+                                            } else if (userBean.getStatus().equalsIgnoreCase("A")) {
                                                 out.println("<font color='green'>ACTIVE</font>");
                                             }
                                         %>
                                     </td>
                                     <td align="center">
                                         <%
-                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("A")) {
+                                            if (userBean.getStatus().equalsIgnoreCase("A")) {
                                         %>
                                         <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-ok-sign"></span></a>
                                             <% } else {
                                             %>  
-                                        <a style="color: green;" href='javascript:activateUser("<%=id%>","<%=(tpOnboardingBean.getContactName())%>")'><span class="glyphicon glyphicon-ok-sign"></span></a>
+                                        <a style="color: green;" href='javascript:activateUser("<%=id%>","<%=(userBean.getContactName())%>")'><span class="glyphicon glyphicon-ok-sign"></span></a>
                                             <%  }
                                             %>
                                     </td>
                                     <td align="center">
                                         <%
-                                            if (tpOnboardingBean.getStatus().equalsIgnoreCase("I")) {
+                                            if (userBean.getStatus().equalsIgnoreCase("I")) {
                                         %>
                                         <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                             <% } else {
                                             %>  
-                                        <a style="color: red;" href='javascript:inActivateUser("<%=id%>","<%=(tpOnboardingBean.getContactName())%>")'><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        <a style="color: red;" href='javascript:inActivateUser("<%=id%>","<%=(userBean.getContactName())%>")'><span class="glyphicon glyphicon-remove-sign"></span></a>
                                             <%  }
                                             %>
                                     </td>

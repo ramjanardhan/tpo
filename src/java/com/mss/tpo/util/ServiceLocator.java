@@ -10,12 +10,16 @@ import com.mss.tpo.ajax.AjaxHandlerService;
 import com.mss.tpo.ajax.AjaxHandlerServiceImpl;
 import com.mss.tpo.general.GeneralService;
 import com.mss.tpo.general.GeneralServiceImpl;
+import com.mss.tpo.partner.PartnerService;
+import com.mss.tpo.partner.PartnerServiceImpl;
 import com.mss.tpo.payload.PayloadService;
 import com.mss.tpo.payload.PayloadServiceImpl;
 import com.mss.tpo.ticket.TicketService;
 import com.mss.tpo.ticket.TicketServiceImpl;
 import com.mss.tpo.tpOnboarding.TpOnboardingService;
 import com.mss.tpo.tpOnboarding.TpOnboardingServiceImpl;
+import com.mss.tpo.user.UserService;
+import com.mss.tpo.user.UserServiceImpl;
 
 /**
  *
@@ -49,9 +53,19 @@ public class ServiceLocator {
         return payloadService;
     }
     
+    public static PartnerService getPartnerService() throws ServiceLocatorException {
+        PartnerService partnerService = new PartnerServiceImpl();
+        return partnerService;
+    }
+    
     public static AdminService getAdminService() throws ServiceLocatorException {
         AdminService adminService = new AdminServiceImpl();
         return adminService;
+    }
+    
+    public static UserService getUserService() throws ServiceLocatorException {
+        UserService userService = new UserServiceImpl();
+        return userService;
     }
     
     public static TicketService getTicketService() throws ServiceLocatorException {

@@ -113,11 +113,17 @@ function addPartner(flag) {
     }
     document.getElementById('addbutton').disabled = true;
     var req = getXMLHttpRequest();
-    req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse);
+     if (flag == 'admin') {
+         alert('admin');
+          req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse);
+     }else{
+         alert('self');
+          req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse1);
+     }
     var url;
     if (flag == 'admin') {
         if (roleId == 1) {
-            url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
+          url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
         } else {
             url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&flag=' + flag;
         }
@@ -131,15 +137,15 @@ function addPartner(flag) {
 }
 
 function addingPartnerNameResponse(resText) {
-    //alert(resText);
+    alert('respadmin--'+resText);
     document.getElementById("addpartnerMsg").innerHTML = resText;
-    //$('#selfReg').modal('hide');
-
-
+}
+function addingPartnerNameResponse1(resText) {
+    alert('respself--'+resText);
+    document.getElementById("addpartnerMsg").innerHTML = resText;
     setTimeout(function() {
         $('#selfReg').modal("hide");
     }, 1500);
-
 }
 
 /* edit transaction gs and st value start*/
@@ -311,6 +317,7 @@ function acceptPartnerResponse(resText) {
     setTimeout(function() {
         $('#myModal').modal("hide");
     }, 1500);
+    window.location = "../partner/tpoPartnersList.action";
 }
 
 function partnerReject(pId, pName) {
@@ -327,7 +334,7 @@ function partnerReject(pId, pName) {
 }
 
 function rejectPartnerResponse(resText) {
-    window.location = "../tpOnboarding/tpoPartnersList.action";
+    window.location = "../partner/tpoPartnersList.action";
     document.getElementById("resultMsg").innerHTML = resText;
 }
 
@@ -414,7 +421,7 @@ function activateUser(id, name) {
 }
 
 function activateUserResponse(resText) {
-    window.location = "../tpOnboarding/tpoUsersList.action";
+    window.location = "../user/tpoUsersList.action";
     document.getElementById("resultMsg").innerHTML = resText;
 }
 
@@ -431,6 +438,6 @@ function inActivateUser(id, name) {
 }
 
 function inActivateUserResponse(resText) {
-    window.location = "../tpOnboarding/tpoUsersList.action";
+    window.location = "../user/tpoUsersList.action";
     document.getElementById("resultMsg").innerHTML = resText;
 }

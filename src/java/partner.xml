@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!--
+    Document    : partner.xml
+    Author      : Narendar
+-->
+
+<struts>
+    <package name="partner" namespace="/partner" extends="default">
+        
+        <default-interceptor-ref name="crudStack"/>     
+        
+       <action name="tpoPartnerAdd" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnerAdd">
+            <result name="success">/partner/tpoPartnerAdd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoPartnerUserAdd" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnerUserAdd">
+            <result name="success">/partner/tpoPartnerUserAdd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="doAddPartnerUser" class="com.mss.tpo.partner.PartnerAction" method="doAddPartnerUser">
+            <result name="success">/partner/tpoPartnerUserAdd.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoPartnerInfo" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnerInfo">
+            <result name="success">/partner/tpoPartnerInfo.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="updatePartnerInfo" class="com.mss.tpo.partner.PartnerAction" method="updatePartnerInfo">
+            <result name="success">/partner/tpoPartnerInfo.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+        <action name="tpoPartnersList" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnersList">
+            <result name="success">/partner/tpoPartnersList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result>
+        </action>
+        
+        <action name="searchPartner" class="com.mss.tpo.partner.PartnerAction" method="searchPartner">
+            <result name="success">/partner/tpoPartnersList.jsp</result>
+            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect" >../exception/exception.action</result> 
+        </action>
+        
+    </package>
+</struts>

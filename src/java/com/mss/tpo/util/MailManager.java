@@ -373,7 +373,7 @@ public class MailManager {
             htmlText.append("<br>");
             htmlText.append("<p style='line-height:180%; text-align: justify; font-size: 14px;'>");
             htmlText.append("<font color='#232527' face='Open Sans'>");
-            htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been created with the following credentials. Please login and change your password within 48 hours of this email. ");
+            htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been created with the following credentials. Please login and change your password. ");
             htmlText.append("</font>");
             htmlText.append("</p>");
             htmlText.append("<font color='#232527' face='Open Sans'>");
@@ -2255,7 +2255,7 @@ public class MailManager {
             htmlText.append("<br>");
             htmlText.append("<p style='line-height:180%; text-align: justify; font-size: 14px;'>");
             htmlText.append("<font color='#232527' face='Open Sans'>");
-            htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been created with the following credentials. Please login and change your password within 48 hours of this email. ");
+            htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been created with the following credentials. Please login and change your password. ");
             htmlText.append("</font>");
             htmlText.append("</p>");
             htmlText.append("<font color='#232527' face='Open Sans'>");
@@ -4602,7 +4602,7 @@ public class MailManager {
             htmlText.append("<font color='#232527' face='Open Sans'>");
 
             if ("acceptPartner".equals(flag)) {
-                htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been activated with the following credentials. Please login and change your password within 48 hours of this email. ");
+                htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been activated with the following credentials. Please login and change your password. ");
             } else if ("rejectPartner".equals(flag)) {
                 htmlText.append("Welcome to Miracle's Trading Partner On-boarding Portal! Your account has been rejected. Please contact admin for details.");
             }

@@ -41,20 +41,20 @@
             <div id="site_content" class="jumbotron" style="padding: 21px 27px">
                 <div class="container">
                     <div id="responseStringMsg">
-                    <center>
-                        <%
-                            if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
-                                String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
-                                out.println(responseString);
-                                session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
-                            }
-                        %>
-                        <div id="addpartnerMsg"></div>
-                    </center>
-                         </div>
-                    <div id="loadingImage"></div>
-                    <s:form action="" method="post" cssClass="contact-form"  name="tpoPartnerAdd" id="tpoPartnerAdd" theme="simple">
-                        <s:hidden id="roleId" name="roleId" value="%{roleId}"/>
+                        <center>
+                            <%
+                                if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
+                                    String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
+                                    out.println(responseString);
+                                    session.setAttribute(AppConstants.REQ_RESULT_MSG, null);
+                                }
+                            %>
+                        </center>
+                    </div>
+                    <center>  <div id="addpartnerMsg"></div>
+                        <div id="loadingImage"></div></center>
+                        <s:form action="" method="post" cssClass="contact-form"  name="tpoPartnerAdd" id="tpoPartnerAdd" theme="simple">
+                            <s:hidden id="roleId" name="roleId" value="%{roleId}"/>
                         <div class="row">
                             <div class="col-sm-4 col-md-3">
                                 <div class="form-group ajax_img">

@@ -39,15 +39,20 @@
         </action>
     </package>
     
-    <include file="general.xml"/>
- 
+    <include file="admin.xml"/>
+    
     <include file="ajax.xml"/>
-
-    <include file="tpOnboarding.xml"/>
+    
+    <include file="general.xml"/>
+    
+    <include file="partner.xml"/>
     
     <include file="payload.xml"/>
     
     <include file="ticket.xml"/>
+
+    <include file="tpOnboarding.xml"/>
     
-    <include file="admin.xml"/>
+    <include file="user.xml"/>
+    
 </struts>

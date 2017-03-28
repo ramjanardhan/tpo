@@ -38,7 +38,7 @@ public class DataSourceDataProvider {
         return _instance;
     }
 
-    public String getuserNameByUserId(String userId) throws ServiceLocatorException {
+    public String getuserNameByUserId(String loginId) throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -46,7 +46,7 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT NAME FROM MSCVP.TPO_USER WHERE LOGINID ='" + userId + "'");
+            resultSet = statement.executeQuery("SELECT NAME FROM MSCVP.TPO_USER WHERE LOGINID ='" + loginId + "'");
             while (resultSet.next()) {
                 userName = resultSet.getString("NAME");
             }
@@ -605,6 +605,41 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
             }
         }
         return protocol;
+    }
+ 
+ public String getRoleNameByRoleId(int roleId) throws ServiceLocatorException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String roleName = "";
+        connection = ConnectionProvider.getInstance().getConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT ROLE FROM MSCVP.TPO_USER_ROLES WHERE ID = "+roleId);
+            while (resultSet.next()) {
+                roleName = resultSet.getString("ROLE");
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return roleName;
     }
  
  

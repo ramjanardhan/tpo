@@ -5,7 +5,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page import="com.mss.tpo.util.AppConstants"%>
-<%@page import="com.mss.tpo.tpOnboarding.TpOnboardingBean"%>
+<%@page import="com.mss.tpo.partner.PartnerBean"%>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -71,49 +71,49 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Partner Name<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{tpOnboardingBean.partnerName}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="1"/>
+                                    <s:textfield cssClass="form-control" name="partnerName" id="partnerName" value="%{partnerBean.partnerName}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="1"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Email<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" value="%{tpOnboardingBean.contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" readOnly="true"  tabindex="2"/>
+                                    <s:textfield cssClass="form-control" name="contactEmail" id="contactEmail" value="%{partnerBean.contactEmail}" onchange="validateEmail(this);fieldLengthValidator(this);" readOnly="true"  tabindex="2"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Phone Number<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" value="%{tpOnboardingBean.phoneNo}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="3"/>
+                                    <s:textfield cssClass="form-control" name="phoneNo" id="phoneNo" value="%{partnerBean.phoneNo}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="3"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="address1" id="address1" value="%{tpOnboardingBean.address1}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="4"/>
+                                    <s:textfield cssClass="form-control" name="address1" id="address1" value="%{partnerBean.address1}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="4"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>City<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="city" id="city" value="%{tpOnboardingBean.city}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="5"/>
+                                    <s:textfield cssClass="form-control" name="city" id="city" value="%{partnerBean.city}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="5"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="state" id="state" value="%{tpOnboardingBean.state}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="6"/>
+                                    <s:textfield cssClass="form-control" name="state" id="state" value="%{partnerBean.state}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="6"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Country<span class="text-danger">*</span></label>
-                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{tpOnboardingBean.country}"  tabindex="7"/>
+                                    <s:select cssClass="form-control" headerKey="-1" headerValue="--select--" list="#@java.util.LinkedHashMap@{'US':'USA','IN':'India','CN':'Canada','UK':'United Kingdom'}" name="country" id="country" value="%{partnerBean.country}"  tabindex="7"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Zip Code<span class="text-danger">*</span></label>
-                                    <s:textfield cssClass="form-control" name="zipCode" id="zipCode" value="%{tpOnboardingBean.zipCode}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="8"/>
+                                    <s:textfield cssClass="form-control" name="zipCode" id="zipCode" value="%{partnerBean.zipCode}" onchange="fieldLengthValidator(this);" readOnly="true"  tabindex="8"/>
                                 </div>
                             </div>
                         </div>

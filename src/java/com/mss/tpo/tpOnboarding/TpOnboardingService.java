@@ -13,17 +13,7 @@ import java.util.ArrayList;
  */
 public interface TpOnboardingService {
 
-    public TpOnboardingBean getPartnerInfo(int PartnerId, String loginId) throws ServiceLocatorException;
-
-    public String doTpoUserRegister(int partnerId, int roleId, String loginId, TpOnboardingAction tpAction) throws ServiceLocatorException;
-
-    public String doAddPartnerUser(int partnerId, int roleId, String loginId, TpOnboardingAction tpAction) throws ServiceLocatorException;
-
-    public String updatePartnerInfo(TpOnboardingAction tpAction, String loginId, int partnerId) throws ServiceLocatorException;
-
-    public ArrayList<TpOnboardingBean> tpoSearchPartners(String loginId, int roleId, String flag, TpOnboardingAction tpAction);
-
-    public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int roleId, int partnerId, String flag, TpOnboardingAction tpAction);
+   public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int roleId, int partnerId, String flag, TpOnboardingAction tpAction);
 
     public String addTpoProfile(int partnerId, String PartnerName, String loginId, String Email, TpOnboardingAction tpAction) throws ServiceLocatorException;
 
@@ -41,11 +31,4 @@ public interface TpOnboardingService {
 
     public TpOnboardingBean tpoEditEnvelope(int id, int partnerId, String transaction, String direction) throws ServiceLocatorException;
 
-    public String doResetMyPassword(int roleId, String loginId, String pwd) throws ServiceLocatorException;
-
-    public String doTpoResetUserPwd(String loginId, String contactName, String pwd) throws ServiceLocatorException;
-
-    public String doTpoResetPartnerPwd(String loginId, String partnreName, String pwd) throws ServiceLocatorException;
-
-    public ArrayList<TpOnboardingBean> tpoSearchUsers(String loginId, int roleId, String flag, TpOnboardingAction tpAction);
 }

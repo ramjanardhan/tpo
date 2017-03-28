@@ -15,82 +15,13 @@
         <action name="tpoSuccess" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoSuccess">
             <result type="redirect">../tpOnboarding/tpoPartnerInfo.action</result>
             <!-- <result name="tpoRegister">/tpOnboarding/tpoRegister.jsp</result>-->
-            <result name="tpoPartnersList" type="redirect">../tpOnboarding/tpoPartnersList.action</result>
+            <result name="tpoPartnersList" type="redirect">../partner/tpoPartnersList.action</result>
             <result name="tpoManageProfiles" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
-            <result name="tpoResetMyPwd" type="redirect">../tpOnboarding/tpoResetMyPwd.action</result>
+            <result name="tpoResetMyPwd" type="redirect">../user/tpoResetMyPwd.action</result>
             <result type="redirect" name="login">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
-        
-        <!-- user creation action-->
-        <action name="tpoRegister" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoRegister">
-            <result>/tpOnboarding/tpoRegister.jsp</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="accessFailed" type="redirect" >../exception/accessFailed.action</result> 
-        </action>
-        
-        <action name="tpoUserAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoUserAdd">
-            <result name="success">/tpOnboarding/tpoRegister.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="tpoUsersList" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoUsersList">
-            <result name="success">/tpOnboarding/tpoUsersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result>
-        </action>
-        
-        <action name="searchUser" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchUser">
-            <result name="success">/tpOnboarding/tpoUsersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <!-- partner actions-->
-        <action name="tpoPartnerAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerAdd">
-            <result name="success">/tpOnboarding/tpoPartnerAdd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="tpoPartnerUserAdd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerUserAdd">
-            <result name="success">/tpOnboarding/tpoPartnerUserAdd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="doAddPartnerUser" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doAddPartnerUser">
-            <result name="success">/tpOnboarding/tpoPartnerUserAdd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="tpoPartnerInfo" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnerInfo">
-            <result name="success">/tpOnboarding/tpoPartnerInfo.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="updatePartnerInfo" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="updatePartnerInfo">
-            <result name="success">/tpOnboarding/tpoPartnerInfo.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="tpoPartnersList" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoPartnersList">
-            <result name="success">/tpOnboarding/tpoPartnersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result>
-        </action>
-        
-        <action name="searchPartner" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchPartner">
-            <result name="success">/tpOnboarding/tpoPartnersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
+
         <!-- profiles actions-->
         <action name="tpoManageProfiles" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoManageProfiles">
             <result name="success">/tpOnboarding/tpoSearchProfile.jsp</result>
@@ -173,40 +104,6 @@
         
         <!--   new     -->
         <action name="tpOnboardingDownloads" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpOnboardingDownloads"></action>
-        
-        <action name="tpoResetMyPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetMyPwd">
-            <result name="success">/tpOnboarding/tpoResetMyPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        <action name="doTpoResetMyPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doTpoResetMyPwd">
-            <result name="success">/tpOnboarding/tpoResetMyPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="tpoResetUserPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetUserPwd">
-            <result name="success">/tpOnboarding/tpoResetUserPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        <action name="doTpoResetUserPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doTpoResetUserPwd">
-            <result name="success">/tpOnboarding/tpoResetUserPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
-        <action name="tpoResetPartnerPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoResetPartnerPwd">
-            <result name="success">/tpOnboarding/tpoResetPartnerPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        <action name="doTpoResetPartnerPwd" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doTpoResetPartnerPwd">
-            <result name="success">/tpOnboarding/tpoResetPartnerPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
-        
         
     </package>
 </struts>

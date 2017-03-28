@@ -712,7 +712,7 @@ public class AdminServiceImpl implements AdminService {
                 } else {
                     queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID"
                             + " FROM MSCVP.TPO_FTP left outer join TPO_COMMUNICATION on (TPO_FTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID)"
-                            + " WHERE TPO_COMMUNICATION.PROTOCOL='FTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull' and CREATED_BY='" + loginId + "'";
+                            + " WHERE TPO_COMMUNICATION.PROTOCOL='FTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull' and TPO_COMMUNICATION.CREATED_BY='" + loginId + "'";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -755,7 +755,7 @@ public class AdminServiceImpl implements AdminService {
                 } else {
                     queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID"
                             + " FROM MSCVP.TPO_SFTP left outer join TPO_COMMUNICATION on (TPO_SFTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID)"
-                            + " WHERE TPO_COMMUNICATION.PROTOCOL='SFTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull' and CREATED_BY='" + loginId + "'";
+                            + " WHERE TPO_COMMUNICATION.PROTOCOL='SFTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull' and TPO_COMMUNICATION.CREATED_BY='" + loginId + "'";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -796,7 +796,7 @@ public class AdminServiceImpl implements AdminService {
                 } else {
                     queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.URL,TPO_HTTP.HTTP_PORT"
                             + " FROM MSCVP.TPO_HTTP left outer join TPO_COMMUNICATION on (TPO_HTTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID) "
-                            + "WHERE TPO_COMMUNICATION.PROTOCOL='HTTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='push' and CREATED_BY='" + loginId + "'";
+                            + "WHERE TPO_COMMUNICATION.PROTOCOL='HTTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='push' and TPO_COMMUNICATION.CREATED_BY='" + loginId + "'";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {

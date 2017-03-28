@@ -2376,6 +2376,7 @@ function addPtnerLengthValidator(element) {
     $("#responseStringMsg").hide();
     var i = 0;
     var k = 0;
+    var p = 0;
     if (element.value != null && (element.value != "")) {
         if (element.id == 'addpartnerName' || element.id == 'contactPerson' || element.id == 'contactPersonLN' || element.id == 'contactEmail' || element.id == 'addphoneNo' || element.id == 'addaddress1' || element.id == 'addcity' || element.id == 'addstate' || element.id == 'url' || element.id == 'addzipCode') {
             i = 50;
