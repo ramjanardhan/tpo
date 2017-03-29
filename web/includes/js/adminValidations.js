@@ -288,37 +288,55 @@ function rxHTTPchangeForAdmin(x) {
     }
 }
 
-function getManageCommunication(x,a) {
-    if(a != 'onload') {
-        document.getElementById("partnerId").value="-1" ;   
-        document.getElementById("protocol").value="-1" ; 
+function getManageCommunication(x, a) {
+    if (a != 'onload') {
+        document.getElementById("partnerId").value = "-1";
+        document.getElementById("protocol").value = "-1";
         $("#communicationsGrid").hide();
     }
     if (x == 'Remove Communication') {
         document.getElementById("connTypeDiv").style.display = 'block';
         document.getElementById("removeButton").style.display = 'block';
-    }else{
+    } else {
         document.getElementById("removeButton").style.display = 'none';
     }
     if (x == 'Assign Communication') {
         document.getElementById("connTypeDiv").style.display = 'block';
         document.getElementById("saveButton").style.display = 'block';
-    }else{
+    } else {
         document.getElementById("saveButton").style.display = 'none';
     }
 }
-function getProtocolList(protocol){
+function getProtocolList(protocol) {
     var manageCommunication = document.forms["manageCommunicationForm"]["manageCommunication"].value;
-    if(protocol!=-1){
-         var partnerId=document.getElementById('partnerId').value;
-        if(manageCommunication=='Remove Communication'){
-            if(partnerId=="-1"){
-                alert("Please select PartnerName");
-                document.getElementById("protocol").value="-1";
-                return false;
-            }
+    var partnerId = document.getElementById('partnerId').value;
+    if (partnerId == '-1') {
+        document.getElementById('resultMsg').innerHTML = "<font color=red>Please select Partner name</font>";
+        document.getElementById("protocol").value = "-1";
+        return false;
+    } else if(protocol == ''){
+         document.getElementById('resultMsg').innerHTML = "<font color=red>Please select protocol</font>";
+          return false;
+    } else {
+        if (protocol != '-1') {
+            window.location = "../admin/getManageCommunicationList.action?protocol=" + protocol + "&manageCommunication=" + manageCommunication + "&partnerId=" + partnerId;
         }
-        window.location = "../admin/getManageCommunicationList.action?protocol="+protocol+"&manageCommunication="+manageCommunication+"&partnerId="+partnerId; 
     }
 }
 
+function checkManageCommunications() {
+    var manageCommunication = document.forms["manageCommunicationForm"]["manageCommunication"].value;
+    var partnerId = document.getElementById('partnerId').value;
+    var protocol = document.getElementById('protocol').value;
+    if (partnerId == '-1') {
+        document.getElementById('resultMsg').innerHTML = "<font color=red>Please select Partner name</font>";
+        document.getElementById("protocol").value = "-1";
+        return false;
+    } else if(protocol == '-1'){
+         document.getElementById('resultMsg').innerHTML = "<font color=red>Please select protocol</font>";
+          return false;
+    }
+//    var CommunicationMesId = document.getElementsByName("CommunicationMesId");
+//    alert(CommunicationMesId.length);
+//     return false;
+}

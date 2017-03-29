@@ -53,6 +53,8 @@
             <div id="site_content" class="jumbotron block_div" style="padding-top: 9px;">
                 <div class="container">
                     <center>
+                         <div id="resultMsg"></div>
+                    <div id="loadingImage"></div>
                         <%
                             if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
                                 String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
@@ -61,7 +63,6 @@
                             }
                         %>
                     </center>
-                    <div id="loadingImage"></div>
                     <s:form action="doManageCommunicationAdd" method="post" cssClass="contact-form" name="manageCommunicationForm" id="manageCommunicationForm" theme="simple">
                         <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
                         <div class="">
@@ -162,10 +163,10 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="col-sm-1 pull-right" id="saveButton" style="display: none">
-                                <s:submit value="Assign" cssClass="btn btn-primary pull-right" tabindex="7"/>
+                                <s:submit value="Assign" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkManageCommunications()"/>
                             </div>
                             <div class="col-sm-1 pull-right" id="removeButton" style="display: none">
-                                <s:submit value="Remove" cssClass="btn btn-primary pull-right" tabindex="7" />
+                                <s:submit value="Remove" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkManageCommunications()"/>
                             </div>
                         </div>
                     </s:form>
