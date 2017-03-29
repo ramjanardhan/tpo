@@ -111,7 +111,7 @@
                 </div>
                 <s:else>
                     <ul class="nav navbar-nav pull-right menu_tab" style="border-style: solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; border-width: 4px 1px 0px; margin-right: 423px; border-radius: 2px;">
-                        <li id="resetMyPwd1"><a href="<s:url action="../tpOnboarding/tpoResetMyPwd"/>"><i class="fa fa-user" aria-hidden="true"></i>Reset Password</a></li>
+                        <li id="resetMyPwd1"><a href="<s:url action="../user/tpoResetMyPwd"/>"><i class="fa fa-user" aria-hidden="true"></i>Reset Password</a></li>
                     </ul>
                 </s:else>
             </div>
