@@ -98,10 +98,24 @@
                                                         <%
                                                             String protocol = session.getAttribute("protocol").toString();
                                                         %>
-                                                    <th>ID </th>
-                                                    <th>IP</th>    
+                                                        <% if ("FTP".equalsIgnoreCase(protocol)) {%>
+                                                    <th>ID</th>
+                                                    <th>HOST</th>    
                                                     <th>PORT</th>    
-                                                    <th>USER&nbsp;NAME</th>    
+                                                    <th>USER&nbsp;ID</th>   
+                                                        <% }%>
+                                                        <% if ("SFTP".equalsIgnoreCase(protocol)) {%>
+                                                    <th>ID</th>
+                                                    <th>HOST</th>    
+                                                    <th>PORT</th>    
+                                                    <th>USER&nbsp;ID</th>     
+                                                        <% }%>
+                                                        <% if ("HTTP".equalsIgnoreCase(protocol)) {%>
+                                                    <th>ID</th>
+                                                    <th>END&nbsp;POINT</th>    
+                                                    <th>PORT</th>    
+                                                    <th>URL</th>   
+                                                        <% }%>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -113,7 +127,7 @@
                                                             adminBean = (AdminBean) list.get(i);
                                                             if ("FTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td><input type="checkbox" name="CommunicationMesId" id="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" id="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getFtp_host()); %> </td>
                                                     <td> <% out.println(adminBean.getFtp_port()); %> </td>
@@ -122,7 +136,7 @@
                                                 <%  }
                                                     if ("SFTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getSftp_host_ip()); %> </td>
                                                     <td> <% out.println(adminBean.getSftp_remote_port()); %> </td>
@@ -131,8 +145,9 @@
                                                 <%  }
                                                     if ("HTTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
+                                                    <td> <% out.println(adminBean.getHttp_endpoint()); %> </td>
                                                     <td> <% out.println(adminBean.getHttp_port()); %> </td>
                                                     <td> <% out.println(adminBean.getHttp_url()); %> </td>
                                                 </tr>

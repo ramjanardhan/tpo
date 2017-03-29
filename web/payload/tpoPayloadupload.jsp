@@ -194,7 +194,7 @@
 
                                                     <% if ("FTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
-                                                        <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
+                                                        <td align="center"><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getFtp_recv_protocol()); %> </td>
@@ -209,7 +209,7 @@
 
                                                     <% if ("SFTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
-                                                        <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
+                                                        <td align="center"><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
@@ -224,7 +224,7 @@
 
                                                     <% if ("HTTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
-                                                        <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
+                                                        <td align="center"><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getHttp_recv_protocol()); %> </td>
@@ -237,7 +237,7 @@
 
                                                     <% if ("SMTP".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
-                                                        <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
+                                                        <td align="center"><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
@@ -250,7 +250,7 @@
 
                                                     <% if ("AS2".equalsIgnoreCase(protocol)) {%>
                                                     <tr>
-                                                        <td><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
+                                                        <td align="center"><input type="radio" name="communicationId" value="<%=(tpOnboardingBean.getId())%>" /></td>
                                                         <td> <% out.println(tpOnboardingBean.getId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getPartnerId()); %> </td>
                                                         <td> <% out.println(tpOnboardingBean.getCommnProtocol()); %> </td>
