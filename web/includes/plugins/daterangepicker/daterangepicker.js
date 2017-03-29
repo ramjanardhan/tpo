@@ -1,4 +1,4 @@
-/**
+ /**
 * @version: 2.1.13
 * @author: Dan Grossman http://www.dangrossman.info/
 * @copyright: Copyright (c) 2012-2015 Dan Grossman. All rights reserved.
@@ -100,20 +100,20 @@
             options.template = '<div class="daterangepicker dropdown-menu">' +
         '<div class="calendar right">' +
         '<div class="daterangepicker_input">' +
-        '<input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />' +
-        '<i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
+        '<input class="input-mini form-control" type="text" name="daterangepicker_end" value=""/>' +
+        '<i class="fa fa-calendar glyphicon glyphicon-calendar"  style="top: -24px; right:-200px"></i>' +
         '<div class="calendar-time">' +
-        '<div class="fa fa-clock-o glyphicon glyphicon-time" style="margin-left:-1cm;"></div>' +
+        '<div class="fa fa-clock-o glyphicon glyphicon-time" ></div>' +
         '</div>' +
         '</div>' +
         '<div class="calendar-table"></div>' +
         '</div>' +
         '<div class="calendar left">' +
         '<div class="daterangepicker_input">' +
-        '<input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />' +
-        '<i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
+        '<input class="input-mini form-control" type="text" name="daterangepicker_start" value=""  style="width:223px"/>' +
+        '<i class="fa fa-calendar glyphicon glyphicon-calendar" style="top: -24px; right:-202px"></i>' +
         '<div class="calendar-time">' +
-        '<div class="fa fa-clock-o glyphicon glyphicon-time" style="margin-left:-1.5cm;" ></div>' +
+        '<div class="fa fa-clock-o glyphicon glyphicon-time" style="margin-left:-27px" ></div>' +
         '</div>' +
         '</div>' +
         '<div class="calendar-table"></div>' +
