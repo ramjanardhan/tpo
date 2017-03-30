@@ -109,7 +109,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-sm-4">
                         <div class="panel panel-default bx_shadow login_bx">
@@ -120,10 +119,15 @@
                                         if (request.getAttribute(AppConstants.REQ_ERROR_INFO) != null) {
                                             out.println("<font size=2 color=red>" + request.getAttribute(AppConstants.REQ_ERROR_INFO).toString() + "</font>");
                                         }
-                                    %>
+
+                                        if (request.getParameter("partnerName") != null) {
+                                           // out.println(request.getParameter("partnerName"));
+                                            String partnerName = request.getParameter("partnerName");
+                                            session.setAttribute("partnerName", partnerName);
+                                        }%>
                                 </center> 
                                 <hr>
-                                <s:form action="general/tpoLoginCheck" method="post" name="tpLoginForm" id="tpLoginForm" theme="simple">
+                                <s:form action="/general/tpoLoginCheck" method="post" name="tpLoginForm" id="tpLoginForm" theme="simple">
                                     <div class="top-margin">
                                         <label>Username <span class="text-danger">*</span></label>
                                         <s:textfield cssClass="form-control" name="loginId" id="loginId"  tabindex="1"/>
@@ -186,7 +190,7 @@
                                 <div class="modal-dialog1" role="document">
                                     <div class="modal-content" style="margin:2%">
                                         <div class="modal-header1"  style="border:0">
-                                            <button type="button" style="color:#ff0000" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <button type="button" id="closeButton" style="color:#ff0000" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <h3 class="modal-title" id="selfRegLabel" style="color:#285e8e">Partner self registration form</h3>
                                         </div>
                                         <hr>
@@ -287,7 +291,7 @@
                     <div class="col-sm-12 register hidden-lg hidden-md hidden-sm">  
                         <!-- <img src="..includes/images/register.png" alt="miraclesoft" data-toggle="modal" data-target="#selfReg"/>-->
                         For partner self registration   
-                        <a href="" data-toggle="modal" data-target="#selfReg"  tabindex="5"><img  alt="click here" src='<%=path%>/includes/images/register.png'></a>
+                        <a href="" data-toggle="modal" data-target="#selfReg"  tabindex="5"><img alt="click here" src='<%=path%>/includes/images/register.png'></a>
                     </div>
                 </article>
                 <!-- /Article -->

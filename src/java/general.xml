@@ -15,9 +15,13 @@
             
         <action name="tpoLoginCheck" class="com.mss.tpo.general.LoginAction" method="tpoLoginCheck">
             <interceptor-ref name="crudStack" />
-            <result type="redirect">/tpOnboarding/tpoSuccess.action</result>
+            <!--            <result type="redirect">/tpOnboarding/tpoSuccess.action</result>-->
             <result name="input">/general/login.jsp</result>
-            <result type="redirect" name="login">login.action</result>
+            <result name="tpoPartnersList" type="redirect">../partner/tpoPartnersList.action</result>
+            <result name="tpoManageProfiles" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
+            <result name="tpoResetMyPwd" type="redirect">../user/tpoResetMyPwd.action</result>
+            <result name="acceptPartner" type="redirect" >../partner/searchPartner.action?partnerName=${partnerName}</result>
+            <result name="login" type="redirect" >login.action</result>
             <result name="error" type="redirect">../exception/exception.action</result> 
         </action>
  

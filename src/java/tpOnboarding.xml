@@ -10,17 +10,6 @@
     <package name="tpOnboarding" namespace="/tpOnboarding" extends="default">
         
         <default-interceptor-ref name="crudStack"/>     
-        
-        <!-- after successfull login action-->
-        <action name="tpoSuccess" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoSuccess">
-            <result type="redirect">../tpOnboarding/tpoPartnerInfo.action</result>
-            <!-- <result name="tpoRegister">/tpOnboarding/tpoRegister.jsp</result>-->
-            <result name="tpoPartnersList" type="redirect">../partner/tpoPartnersList.action</result>
-            <result name="tpoManageProfiles" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
-            <result name="tpoResetMyPwd" type="redirect">../user/tpoResetMyPwd.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
-            <result name="error" type="redirect" >../exception/exception.action</result> 
-        </action>
 
         <!-- profiles actions-->
         <action name="tpoManageProfiles" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoManageProfiles">

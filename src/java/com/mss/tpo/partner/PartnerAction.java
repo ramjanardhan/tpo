@@ -155,7 +155,7 @@ public class PartnerAction extends ActionSupport implements ServletRequestAware,
 
     public String searchPartner() {
         resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID) != null) {
             try {
                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
@@ -163,6 +163,10 @@ public class PartnerAction extends ActionSupport implements ServletRequestAware,
                     setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
                 } else if (roleId == 2) {
                 }
+                String pName = httpServletRequest.getAttribute("partnerName").toString();
+                httpServletRequest.getSession(false).setAttribute("partnerName", pName);
+                String partnerName = httpServletRequest.getSession(false).getAttribute("partnerName").toString();
+                setPartnerName(partnerName);
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_SearchPartnersList);
                 tpoSearchPartnersList = ServiceLocator.getPartnerService().tpoSearchPartners(loginId, roleId, "searchFlag", this);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_SearchPartnersList, tpoSearchPartnersList);
