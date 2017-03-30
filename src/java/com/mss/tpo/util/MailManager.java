@@ -42,35 +42,17 @@ public class MailManager {
     }
 
     public static String sendUserIdPwd(String loginId, String email, String password) throws ServiceLocatorException {
-        /**
-         * The to is used for storing the user mail id to send details.
-         */
-        String to = email;
-        /**
-         * The from is used for storing the from address.
-         */
-        String from = "mscvp_alerts@miraclesoft.com";
         String userName = DataSourceDataProvider.getInstance().getuserNameByUserId(loginId);
-        // SUBSTITUTE YOUR ISP'S MAIL SERVER HERE!!!
-        /**
-         * The host is used for storing the IP address of mail
-         */
-        /**
-         * The props is instance variabel to <code>Properties</code> class
-         */
+        String from = SMTP_AUTH_USER;
+        String to = email;
+
         Properties props = new Properties();
-        /**
-         * Here set smtp protocal to props
-         */
         props.setProperty("mail.transport.protocol", "smtp");
-        //**Here set the address of the host to props */ 
         props.setProperty("mail.host", SMTP_HOST);
         props.put("mail.smtp.starttls.enable", "true");
-        /**
-         * Here set the authentication for the host *
-         */
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", PORT);
+
         Authenticator auth = new SMTPAuthenticator();
         Session mailSession = Session.getDefaultInstance(props, auth);
         mailSession.setDebug(true);
@@ -81,13 +63,9 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
-
-            // This HTML mail have to 2 part, the BODY and the embedded image
             MimeMultipart multipart = new MimeMultipart("related");
-
-            // first part  (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
             StringBuilder htmlText = new StringBuilder();
 
@@ -685,7 +663,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
 
             // This HTML mail have to 2 part, the BODY and the embedded image
@@ -1302,7 +1280,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
             // This HTML mail have to 2 part, the BODY and the embedded image
             MimeMultipart multipart = new MimeMultipart("related");
@@ -1965,7 +1943,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Password Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
             // This HTML mail have to 2 part, the BODY and the embedded image
             MimeMultipart multipart = new MimeMultipart("related");
@@ -2531,34 +2509,14 @@ public class MailManager {
 
     }
 
-    public static void tpoPartnerSelfRegistrationMail(String userloginId, String password, AjaxHandlerAction ajaxHandlerAction) {
-        // SUBSTITUTE YOUR EMAIL ADDRESSES HERE!!!
-        /**
-         * The to is used for storing the user mail id to send details.
-         */
+    public static void tpoPartnerSelfRegistrationMail(String userloginId, String password, AjaxHandlerAction ajaxHandlerAction) throws ServiceLocatorException {
+        String adminEmail = DataSourceDataProvider.getInstance().getAdminEmail();
         String to = ajaxHandlerAction.getEmail();
-        /**
-         * The from is used for storing the from address.
-         */
         String from = "mscvp_alerts@miraclesoft.com";
-        // SUBSTITUTE YOUR ISP'S MAIL SERVER HERE!!!
-        /**
-         * The host is used for storing the IP address of mail
-         */
-        /**
-         * The props is instance variabel to <code>Properties</code> class
-         */
         Properties props = new Properties();
-        /**
-         * Here set smtp protocal to props
-         */
         props.setProperty("mail.transport.protocol", "smtp");
-        //**Here set the address of the host to props */
         props.setProperty("mail.host", SMTP_HOST);
         props.put("mail.smtp.starttls.enable", "true");
-        /**
-         * Here set the authentication for the host *
-         */
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", PORT);
         Authenticator auth = new SMTPAuthenticator();
@@ -2571,7 +2529,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Password Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
 
             // This HTML mail have to 2 part, the BODY and the embedded image
@@ -2877,9 +2835,9 @@ public class MailManager {
             htmlText.append("</tr>");
             htmlText.append("<tr>");
             htmlText.append("<td align='justify' style='padding: 5px 0 5px 0; border-top: 1px #2368a0; border-bottom: 1px #2368a0; font-size: 14px; line-height: 25px; font-family: Open Sans; color: #232527;' class='padding-copy'>");
-           // htmlText.append("<b style='font-size: 14px; color: #ef4048;'>");
+            // htmlText.append("<b style='font-size: 14px; color: #ef4048;'>");
             htmlText.append("<p><u><b style='font-size: 14px; color: #001dee;'> Your Registration Details :</b></u><br><br>");
-            
+
             htmlText.append("<b style='font-size: 12px; color: #ef4048;'>");
             htmlText.append("Partner Name : <b>" + ajaxHandlerAction.getAddpartnerName() + "</b><br>");
             htmlText.append("Phone No : <b>" + ajaxHandlerAction.getAddphoneNo() + "</b><br>");
@@ -2891,7 +2849,7 @@ public class MailManager {
             htmlText.append("URL : <b>" + ajaxHandlerAction.getUrl() + "</b><br>");
             htmlText.append("Description : <b>" + ajaxHandlerAction.getDescription() + "</b><br>");
             htmlText.append("</b>");
-            
+
             htmlText.append("<br>");
             //htmlText.append("</p></b></td>");
             htmlText.append("</p></td>");
@@ -3119,7 +3077,8 @@ public class MailManager {
             transport.close();
 
             /* Mail to admin*/
-            String toAdmin = "rpulleboina@miraclesoft.com";
+            String productionUrl = com.mss.tpo.util.Properties.getProperty("PROD.URL");
+            String toAdmin = adminEmail;
             Session mailSession1 = Session.getDefaultInstance(props, auth);
             mailSession1.setDebug(true);
             Transport transport1;
@@ -3128,7 +3087,7 @@ public class MailManager {
             message1.setSubject("Miracle Trading Partner Onboarding Password Details");
             message1.setFrom(new InternetAddress(from));
             message1.addRecipient(Message.RecipientType.TO, new InternetAddress(toAdmin));
-            message1.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message1.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message1.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
 
             // This HTML mail have to 2 part, the BODY and the embedded image
@@ -3139,10 +3098,13 @@ public class MailManager {
             htmlText1.append("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>");
             htmlText1.append("<html xmlns='http://www.w3.org/1999/xhtml'>");
             htmlText1.append("<head>");
-            htmlText1.append("  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />");
-            htmlText1.append("  <title>Partner Self Registration Details</title>");
-            htmlText1.append("  <style type='text/css'>");
-
+            htmlText1.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />");
+            htmlText1.append("<title>Partner Self Registration Details</title>");
+            htmlText1.append("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+            htmlText1.append("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js\"></script>");
+            htmlText1.append("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>");
+            htmlText1.append("<style type='text/css'>");
+        
             htmlText1.append(" body {");
             htmlText1.append("  padding-top: 0 !important;");
             htmlText1.append("  padding-bottom: 0 !important;");
@@ -3154,10 +3116,30 @@ public class MailManager {
             htmlText1.append(" -ms-text-size-adjust: 100% !important;;");
             htmlText1.append(" -webkit-font-smoothing: antialiased !important;");
             htmlText1.append(" }");
+
             htmlText1.append(" .tableContent img {");
             htmlText1.append("   border: 0 !important;");
             htmlText1.append("  display: block !important;");
             htmlText1.append("   outline: none !important;");
+            htmlText1.append(" }");
+
+            htmlText1.append(" .btn {");
+            htmlText1.append(" margin-bottom: 0;");
+            htmlText1.append(" text-align: center;");
+            htmlText1.append(" vertical-align: middle;");
+            htmlText1.append(" background-image: none;");
+            htmlText1.append(" border: 1px solid transparent;");
+            htmlText1.append(" white-space: nowrap;");
+            htmlText1.append(" padding: 6px 12px;");
+            htmlText1.append(" font-size: 14px;");
+            htmlText1.append(" line-height: 1.428571429;");
+            htmlText1.append(" border-radius: 4px;");
+            htmlText1.append(" }");
+
+            htmlText1.append(" .btn-block{");
+            htmlText1.append(" display: block;");
+            htmlText1.append(" padding-left: 0;");
+            htmlText1.append(" padding-right: 0;");
             htmlText1.append(" }");
 
             htmlText1.append("a{");
@@ -3418,24 +3400,16 @@ public class MailManager {
             htmlText1.append("<br>");
             htmlText1.append("<p style='line-height:180%; text-align: justify; font-size: 14px;'>");
             htmlText1.append("<font color='#232527' face='Open Sans'>");
-
+            htmlText1.append("'"+ ajaxHandlerAction.getAddpartnerName() +"' partner has registered for on-boarding with following details");
             htmlText1.append("</font>");
             htmlText1.append("</p>");
-            htmlText1.append("<font color='#232527' face='Open Sans'>");
-
-            htmlText1.append("</font>");
             htmlText1.append("</div>");
-            htmlText1.append("<font color='#232527' face='Open Sans'>");
-            htmlText1.append("</font>");
             htmlText1.append("</div>");
-            htmlText1.append("<font color='#232527' face='Open Sans'>");
-            htmlText1.append("</font>");
             htmlText1.append("</td>");
             htmlText1.append("</tr>");
             htmlText1.append("<tr>");
             htmlText1.append("<td align='justify' style='padding: 5px 0 5px 0; border-top: 1px #2368a0; border-bottom: 1px #2368a0; font-size: 14px; line-height: 25px; font-family: Open Sans; color: #232527;' class='padding-copy'>");
-            htmlText1.append("<b style='font-size: 14px; color: #ef4048;'>");
-            htmlText1.append("<p><u><b> Partner Registration Details :</b></u><br><br>");
+            htmlText1.append("<b style='font-size: 14px; color: #ef4048;'><p>");
             htmlText1.append("Partner Name : <b>" + ajaxHandlerAction.getAddpartnerName() + "</b><br>");
             htmlText1.append("Phone No : <b>" + ajaxHandlerAction.getAddphoneNo() + "</b><br>");
             htmlText1.append("Address : <b>" + ajaxHandlerAction.getAddaddress1() + "</b><br>");
@@ -3447,8 +3421,7 @@ public class MailManager {
             htmlText1.append("Description : <b>" + ajaxHandlerAction.getDescription() + "</b><br>");
 
             htmlText1.append("<br>");
-            // htmlText1.append("<input type='button' id='addbutton' value='Accept' class='btn btn-primary'/>");
-            //  htmlText1.append("<input type='button' id='addbutton' value='Reject' class='btn btn-primary'/>");
+            htmlText1.append("Click here to <a href='" + productionUrl + "partner/searchPartner.action?partnerName=" + ajaxHandlerAction.getAddpartnerName() + "'><input type='button' id='addButton' value='Accept/Reject' class='btn btn-info'/></a>");
             htmlText1.append("</td>");
             htmlText1.append("</tr>");
             htmlText1.append("<tr>");
@@ -3718,7 +3691,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Password Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
 
             // This HTML mail have to 2 part, the BODY and the embedded image
@@ -4315,7 +4288,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Password Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
             // This HTML mail have to 2 part, the BODY and the embedded image
             MimeMultipart multipart = new MimeMultipart("related");
@@ -4922,7 +4895,7 @@ public class MailManager {
             message.setSubject("Miracle Trading Partner Onboarding Details");
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("skunibilli@miraclesoft.com"));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("lpudi@miraclesoft.com"));
             message.addRecipient(Message.RecipientType.BCC, new InternetAddress("rpulleboina@miraclesoft.com"));
             // This HTML mail have to 2 part, the BODY and the embedded image
             MimeMultipart multipart = new MimeMultipart("related");

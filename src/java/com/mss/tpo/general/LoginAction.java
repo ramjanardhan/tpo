@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.mss.tpo.util.AppConstants;
 import com.mss.tpo.util.ConnectionProvider;
+import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.DateUtility;
 import com.mss.tpo.util.PasswordUtil;
 import com.mss.tpo.util.Properties;
@@ -16,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Map;
 import org.apache.log4j.Logger;
 
 /**
@@ -30,6 +32,9 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private String loginId;
     private String password;
     private String url;
+    private String partnerName;
+    private int roleId;
+    private Map adminUsersList;
 
     public String tpoLoginCheck() throws Exception {
         resultType = LOGIN;
@@ -53,7 +58,34 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                         httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_LOGIN_ACCESS, userInfoBean.getLoginAccess());
                         //httpServletRequest.getSession(true).setAttribute(AppConstants.TPO_PARTNER_NAME,tpOnboardingBean.getPartnerName());
                         logUserAccess();
-                        resultType = SUCCESS;
+                        int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
+                        int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                        String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                        String loginAccess = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ACCESS).toString();
+                        setRoleId(roleId);
+                        if (roleId == 1) {
+                            setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
+                        }
+                        if ("Y".equalsIgnoreCase(loginAccess)) {
+                            if ((roleId == 1) || (roleId == 2)) {
+                                //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId());
+                                resultType = "tpoPartnersList";
+                            } else {
+                                int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);
+                                if ((IsExistedUserid != 0)) {
+                                    // setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
+                                    resultType = "tpoManageProfiles";
+                                }
+                            }
+                        } else {
+                            resultType = "tpoResetMyPwd";
+                        }
+                        //resultType = SUCCESS;
+                        if (httpServletRequest.getSession(true).getAttribute("partnerName") != null) {
+                            System.out.println("partnerName : " + httpServletRequest.getSession(true).getAttribute("partnerName"));
+                            setPartnerName(httpServletRequest.getSession(true).getAttribute("partnerName").toString());
+                            resultType = "acceptPartner";
+                        }
                     } else {
                         httpServletRequest.setAttribute(AppConstants.REQ_ERROR_INFO, "<span class=\"resultFailure\">You are currently not an active user.</span>");
                         resultType = "input";
@@ -146,7 +178,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                 httpServletRequest.getSession(false).invalidate();
             }
 
-             url = "http://192.168.1.179:8084/tpo";
+            url = "http://192.168.1.179:8084/tpo";
             //url = "http://localhost:8084/tpo";
             setResultType("redirect");
 
@@ -230,6 +262,30 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPartnerName() {
+        return partnerName;
+    }
+
+    public void setPartnerName(String partnerName) {
+        this.partnerName = partnerName;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public Map getAdminUsersList() {
+        return adminUsersList;
+    }
+
+    public void setAdminUsersList(Map adminUsersList) {
+        this.adminUsersList = adminUsersList;
     }
 
 }

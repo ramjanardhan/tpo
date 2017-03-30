@@ -74,7 +74,6 @@ function addPartner(flag) {
     if (flag == 'admin') {
         var roleId = document.getElementById("roleId").value;
     }
-
     if (addpartnerName.trim() == "") {
         document.getElementById('addpartnerMsg').innerHTML = "<font color=red>Please enter Partner name.</font>";
         return false;
@@ -113,17 +112,15 @@ function addPartner(flag) {
     }
     document.getElementById('addbutton').disabled = true;
     var req = getXMLHttpRequest();
-     if (flag == 'admin') {
-         alert('admin');
-          req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse);
-     }else{
-         alert('self');
-          req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse1);
-     }
+    if (flag == 'admin') {
+        req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse);
+    } else {
+        req.onreadystatechange = readyStateHandlerLoadText(req, addingPartnerNameResponse1);
+    }
     var url;
     if (flag == 'admin') {
         if (roleId == 1) {
-          url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
+            url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&assignTo=' + adminUsersList + '&flag=' + flag;
         } else {
             url = '../ajax/addPartner.action?addpartnerName=' + addpartnerName + '&addphoneNo=' + addphoneNo + '&addaddress1=' + addaddress1 + '&addcity=' + addcity + '&addstate=' + addstate + '&addcountry=' + addcountry + '&addzipCode=' + addzipCode + '&name=' + contactPerson + '&email=' + contactEmail + '&url=' + url + '&description=' + description + '&lastName=' + contactPersonLN + '&roleId=' + roleId + '&flag=' + flag;
         }
@@ -137,15 +134,32 @@ function addPartner(flag) {
 }
 
 function addingPartnerNameResponse(resText) {
-    alert('respadmin--'+resText);
     document.getElementById("addpartnerMsg").innerHTML = resText;
 }
 function addingPartnerNameResponse1(resText) {
-    alert('respself--'+resText);
     document.getElementById("addpartnerMsg").innerHTML = resText;
     setTimeout(function() {
         $('#selfReg').modal("hide");
     }, 1500);
+    document.getElementById('addbutton').disabled = false;
+    document.getElementById("addpartnerMsg").value = "";
+    document.getElementById("addpartnerName").value = "";
+    document.getElementById("contactPerson").value = "";
+    document.getElementById("contactPersonLN").value = "";
+    document.getElementById("contactEmail").value = "";
+    document.getElementById("addphoneNo").value = "";
+    document.getElementById("addaddress1").value = "";
+    document.getElementById("addcity").value = "";
+    document.getElementById("addstate").value = "";
+    document.getElementById("addcountry").value = "-1";
+    document.getElementById("addzipCode").value = "";
+    document.getElementById("url").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("correctImg").style.display = "none";
+    document.getElementById("wrongImg").style.display = "none";
+    document.getElementById("correctImg1").style.display = "none";
+    document.getElementById("wrongImg1").style.display = "none";
+    document.getElementById("addpartnerMsg").style.display = "";
 }
 
 /* edit transaction gs and st value start*/

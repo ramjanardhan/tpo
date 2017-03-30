@@ -642,5 +642,39 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         return roleName;
     }
  
+  public String getAdminEmail() throws ServiceLocatorException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String adminEmail = "";
+        connection = ConnectionProvider.getInstance().getConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT EMAIL FROM MSCVP.TPO_USER WHERE ROLE_ID = 1");
+            while (resultSet.next()) {
+                adminEmail = resultSet.getString("EMAIL");
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return adminEmail;
+    }
  
 }

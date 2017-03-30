@@ -150,40 +150,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         return resultType;
     }
 
-    public String tpoSuccess() throws Exception {
-        resultType = LOGIN;
-        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-            try {
-                int roleId = Integer.parseInt(httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID).toString());
-                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
-                String loginAccess = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ACCESS).toString();
-                setRoleId(roleId);
-                if (roleId == 1) {
-                    setAdminUsersList(DataSourceDataProvider.getInstance().getAdminUsersList());
-                }
-                if ("Y".equalsIgnoreCase(loginAccess)) {
-                    if ((roleId == 1) || (roleId == 2)) {
-                        //  tpoUserSession.setAttribute(AppConstants.TPO_LOGIN_ID,tpOnboardingBean.getLoginId());
-                        resultType = "tpoPartnersList";
-                    } else {
-                        int IsExistedUserid = DataSourceDataProvider.getInstance().getIsExistedUserId(partnerId);
-                        if ((IsExistedUserid != 0)) {
-                           // setTpOnboardingBean(ServiceLocator.getTpOnboardingService().getPartnerInfo(partnerId, loginId.trim().toLowerCase()));
-                            resultType = "tpoManageProfiles";
-                        }
-                    }
-                } else {
-                    resultType = "tpoResetMyPwd";
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                resultType = "error";
-            }
-        }
-        return resultType;
-    }
-
     public String tpoManageProfiles() {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
