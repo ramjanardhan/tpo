@@ -711,19 +711,21 @@ public class AdminServiceImpl implements AdminService {
         try {
             if (managecommunication.equalsIgnoreCase("Assign Communication")) {
                 if (roleId == 1) {
-                    queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID"
-                            + " FROM MSCVP.TPO_FTP left outer join TPO_COMMUNICATION on (TPO_FTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID)"
-                            + " WHERE TPO_COMMUNICATION.PROTOCOL='FTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull'";
+                    queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
+                            + " FROM MSCVP.TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'FTP' AND TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull'"
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
                 } else {
-                    queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID"
-                            + " FROM MSCVP.TPO_FTP left outer join TPO_COMMUNICATION on (TPO_FTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID)"
-                            + " WHERE TPO_COMMUNICATION.PROTOCOL='FTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull' and TPO_COMMUNICATION.CREATED_BY='" + loginId + "'";
+                    queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
+                            + " FROM MSCVP.TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'FTP' AND TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull' and TPO_FTP.CREATED_BY='" + loginId + "'"
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
                 queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
-                        + "FROM MSCVP.TPO_FTP left outer join TPO_PARTNER_COMMUNICATIONS on (TPO_FTP.COMMUNICATION_ID=TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                        + "where TPO_FTP.COMMUNICATION_ID=TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID and TPO_FTP.PARTNER_ID=" + partnerId + "";
+                        + " FROM TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                        + "WHERE TPO_PARTNER_COMMUNICATIONS.PARTNER_ID = " + partnerId;
             }
             System.out.println("queryString---" + queryString);
             connection = ConnectionProvider.getInstance().getConnection();
@@ -733,7 +735,6 @@ public class AdminServiceImpl implements AdminService {
 
             while (resultSet.next()) {
                 AdminBean adminBean = new AdminBean();
-                //Protocol ID   Partner ID Protocol Email Host Port UserID Password Directory
                 adminBean.setId(resultSet.getInt("COMMUNICATION_ID"));
                 adminBean.setFtp_host(resultSet.getString("FTP_HOST"));
                 adminBean.setFtp_port(resultSet.getString("FTP_PORT"));
@@ -754,19 +755,21 @@ public class AdminServiceImpl implements AdminService {
         try {
             if (managecommunication.equalsIgnoreCase("Assign Communication")) {
                 if (roleId == 1) {
-                    queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID"
-                            + " FROM MSCVP.TPO_SFTP left outer join TPO_COMMUNICATION on (TPO_SFTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID)"
-                            + " WHERE TPO_COMMUNICATION.PROTOCOL='SFTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull'";
+                    queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
+                            + " FROM MSCVP.TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'SFTP' AND TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull'"
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
                 } else {
-                    queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID"
-                            + " FROM MSCVP.TPO_SFTP left outer join TPO_COMMUNICATION on (TPO_SFTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID)"
-                            + " WHERE TPO_COMMUNICATION.PROTOCOL='SFTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='pull' and TPO_COMMUNICATION.CREATED_BY='" + loginId + "'";
+                    queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
+                            + " FROM MSCVP.TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'SFTP' AND TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull' and TPO_SFTP.CREATED_BY='" + loginId + "'"
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
-                queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID"
-                        + " FROM MSCVP.TPO_SFTP left outer join TPO_PARTNER_COMMUNICATIONS on (TPO_SFTP.COMMUNICATION_ID=TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID)"
-                        + " WHERE TPO_SFTP.COMMUNICATION_ID=TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID and TPO_SFTP.PARTNER_ID=" + partnerId + "";
+                queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
+                        + " FROM TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                        + " WHERE TPO_PARTNER_COMMUNICATIONS.PARTNER_ID = " + partnerId;
             }
             System.out.println("queryString---" + queryString);
             connection = ConnectionProvider.getInstance().getConnection();
@@ -795,20 +798,22 @@ public class AdminServiceImpl implements AdminService {
         try {
             if (managecommunication.equalsIgnoreCase("Assign Communication")) {
                 if (roleId == 1) {
-                    queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.URL,TPO_HTTP.HTTP_PORT"
-                            + " FROM MSCVP.TPO_HTTP left outer join TPO_COMMUNICATION on (TPO_HTTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID) "
-                            + "WHERE TPO_COMMUNICATION.PROTOCOL='HTTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='push'";
+                    queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
+                            + " FROM MSCVP.TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'HTTP' AND TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push'"
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
                 } else {
-                    queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.URL,TPO_HTTP.HTTP_PORT"
-                            + " FROM MSCVP.TPO_HTTP left outer join TPO_COMMUNICATION on (TPO_HTTP.COMMUNICATION_ID=TPO_COMMUNICATION.ID) "
-                            + "WHERE TPO_COMMUNICATION.PROTOCOL='HTTP' and TPO_COMMUNICATION.ADMIN_PROTOCOL_FLAG='Y' and TPO_COMMUNICATION.TRANSFER_MODE='push' and TPO_COMMUNICATION.CREATED_BY='" + loginId + "'";
+                    queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
+                            + " FROM MSCVP.TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'HTTP' AND TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push' and TPO_HTTP.CREATED_BY='" + loginId + "'"
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
 
-                queryString = " SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.URL,TPO_HTTP.HTTP_PORT"
-                        + " FROM MSCVP.TPO_HTTP left outer join TPO_PARTNER_COMMUNICATIONS on (TPO_HTTP.COMMUNICATION_ID=TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID)"
-                        + " WHERE TPO_HTTP.COMMUNICATION_ID=TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID and TPO_HTTP.PARTNER_ID=" + partnerId + "";
+                queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
+                        + " FROM TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
+                        + "WHERE TPO_PARTNER_COMMUNICATIONS.PARTNER_ID = " + partnerId;
             }
             System.out.println("queryString--- " + queryString);
             connection = ConnectionProvider.getInstance().getConnection();
@@ -819,6 +824,7 @@ public class AdminServiceImpl implements AdminService {
             while (resultSet.next()) {
                 AdminBean adminBean = new AdminBean();
                 adminBean.setId(resultSet.getInt("COMMUNICATION_ID"));
+                adminBean.setHttp_endpoint(resultSet.getString("HTTP_END_POINT"));
                 adminBean.setHttp_port(resultSet.getInt("HTTP_PORT"));
                 adminBean.setHttp_url(resultSet.getString("URL"));
                 tpoManageCommunicationList.add(adminBean);
@@ -908,7 +914,7 @@ public class AdminServiceImpl implements AdminService {
         }
         return responseString;
     }
-    
+
     public List getCertMonitorData(String certType, String dateFrom, String dateTo) throws ServiceLocatorException {
 
         String cType = certType;
@@ -971,7 +977,6 @@ public class AdminServiceImpl implements AdminService {
                 al.add(map);
                 System.out.println("al**" + al);
             }
-
 
         } catch (SQLException s) {
 

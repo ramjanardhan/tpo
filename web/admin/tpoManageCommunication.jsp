@@ -53,6 +53,8 @@
             <div id="site_content" class="jumbotron block_div" style="padding-top: 9px;">
                 <div class="container">
                     <center>
+                         <div id="resultMsg"></div>
+                    <div id="loadingImage"></div>
                         <%
                             if (session.getAttribute(AppConstants.REQ_RESULT_MSG) != null) {
                                 String responseString = session.getAttribute(AppConstants.REQ_RESULT_MSG).toString();
@@ -61,7 +63,6 @@
                             }
                         %>
                     </center>
-                    <div id="loadingImage"></div>
                     <s:form action="doManageCommunicationAdd" method="post" cssClass="contact-form" name="manageCommunicationForm" id="manageCommunicationForm" theme="simple">
                         <s:hidden name="formAction" id="formAction" value="%{formAction}"/>
                         <div class="">
@@ -98,10 +99,24 @@
                                                         <%
                                                             String protocol = session.getAttribute("protocol").toString();
                                                         %>
-                                                    <th>ID </th>
-                                                    <th>IP</th>    
+                                                        <% if ("FTP".equalsIgnoreCase(protocol)) {%>
+                                                    <th>ID</th>
+                                                    <th>HOST</th>    
                                                     <th>PORT</th>    
-                                                    <th>USER&nbsp;NAME</th>    
+                                                    <th>USER&nbsp;ID</th>   
+                                                        <% }%>
+                                                        <% if ("SFTP".equalsIgnoreCase(protocol)) {%>
+                                                    <th>ID</th>
+                                                    <th>HOST</th>    
+                                                    <th>PORT</th>    
+                                                    <th>USER&nbsp;ID</th>     
+                                                        <% }%>
+                                                        <% if ("HTTP".equalsIgnoreCase(protocol)) {%>
+                                                    <th>ID</th>
+                                                    <th>END&nbsp;POINT</th>    
+                                                    <th>PORT</th>    
+                                                    <th>URL</th>   
+                                                        <% }%>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -113,7 +128,7 @@
                                                             adminBean = (AdminBean) list.get(i);
                                                             if ("FTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td><input type="checkbox" name="CommunicationMesId" id="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" id="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getFtp_host()); %> </td>
                                                     <td> <% out.println(adminBean.getFtp_port()); %> </td>
@@ -122,7 +137,7 @@
                                                 <%  }
                                                     if ("SFTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getSftp_host_ip()); %> </td>
                                                     <td> <% out.println(adminBean.getSftp_remote_port()); %> </td>
@@ -131,8 +146,9 @@
                                                 <%  }
                                                     if ("HTTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
+                                                    <td> <% out.println(adminBean.getHttp_endpoint()); %> </td>
                                                     <td> <% out.println(adminBean.getHttp_port()); %> </td>
                                                     <td> <% out.println(adminBean.getHttp_url()); %> </td>
                                                 </tr>
@@ -147,10 +163,10 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="col-sm-1 pull-right" id="saveButton" style="display: none">
-                                <s:submit value="Assign" cssClass="btn btn-primary pull-right" tabindex="7"/>
+                                <s:submit value="Assign" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkManageCommunications()"/>
                             </div>
                             <div class="col-sm-1 pull-right" id="removeButton" style="display: none">
-                                <s:submit value="Remove" cssClass="btn btn-primary pull-right" tabindex="7" />
+                                <s:submit value="Remove" cssClass="btn btn-primary pull-right" tabindex="7" onclick="return checkManageCommunications()"/>
                             </div>
                         </div>
                     </s:form>

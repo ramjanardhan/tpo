@@ -20,7 +20,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -408,7 +407,7 @@ public class PayloadServiceImpl implements PayloadService {
             connection = ConnectionProvider.getInstance().getConnection();
             String updateTpoUserPwdQuery = ("UPDATE MSCVP.TPO_PAYLOAD SET STATUS_FLAG = ?, FILE_NAME = ?, PATH = ?, MODIFIED_BY = ?, MODIFIED_TS = ? WHERE ID = "+id);
             preparedStatement = connection.prepareStatement(updateTpoUserPwdQuery);
-            preparedStatement.setString(1, "N");
+            preparedStatement.setString(1, "");
             preparedStatement.setString(2, fileName);
             preparedStatement.setString(3, path);
             preparedStatement.setString(4, loginId);
