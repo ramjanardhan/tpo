@@ -3403,7 +3403,7 @@ public class MailManager {
             htmlText1.append("'"+ ajaxHandlerAction.getAddpartnerName() +"' partner has registered for on-boarding with following details");
             htmlText1.append("</font>");
             htmlText1.append("</p>");
-            htmlText1.append("</div>");
+            htmlText1.append("<br></div>");
             htmlText1.append("</div>");
             htmlText1.append("</td>");
             htmlText1.append("</tr>");
