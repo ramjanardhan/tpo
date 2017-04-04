@@ -177,8 +177,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
             if (httpServletRequest.getSession(false) != null) {
                 httpServletRequest.getSession(false).invalidate();
             }
-
-            url = "http://192.168.1.179:8084/tpo";
+            url = com.mss.tpo.util.Properties.getProperty("PROD.URL");
             //url = "http://localhost:8084/tpo";
             setResultType("redirect");
 

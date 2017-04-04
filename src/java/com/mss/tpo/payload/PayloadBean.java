@@ -18,6 +18,7 @@ public class PayloadBean {
     private String docType;
     private String path;
     private String inputPath;
+    private String outputPath;
     private String createdBy;
     private Timestamp createdTS;
     private String modifiedBy;
@@ -184,6 +185,14 @@ public class PayloadBean {
 
     public void setInputPath(String inputPath) {
         this.inputPath = inputPath;
+    }
+
+    public String getOutputPath() {
+        return outputPath;
+    }
+
+    public void setOutputPath(String outputPath) {
+        this.outputPath = outputPath;
     }
 
 }

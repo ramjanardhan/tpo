@@ -46,6 +46,9 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private String obTransaction;
     private String transaction;
     private String direction;
+    private String inputPath;
+    private String outputPath;
+    private String path;
     private String conn_type;
     private File upload;
     private String protocol;
@@ -431,7 +434,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             try {
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                String resultMessage = ServiceLocator.getPayloadService().reprocessPayloadData(loginId,getFilepath(), getId());
+                String resultMessage = ServiceLocator.getPayloadService().reprocessPayloadData(loginId,getInputPath(), getId(), getDirection(),getOutputPath(),getPath());
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception ex) {
@@ -804,6 +807,30 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
 
     public void setTpoProtocolsHeadersList(List<String> tpoProtocolsHeadersList) {
         this.tpoProtocolsHeadersList = tpoProtocolsHeadersList;
+    }
+
+    public String getInputPath() {
+        return inputPath;
+    }
+
+    public void setInputPath(String inputPath) {
+        this.inputPath = inputPath;
+    }
+
+    public String getOutputPath() {
+        return outputPath;
+    }
+
+    public void setOutputPath(String outputPath) {
+        this.outputPath = outputPath;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
 }

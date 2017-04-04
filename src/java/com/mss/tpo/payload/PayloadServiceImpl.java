@@ -10,6 +10,7 @@ import com.mss.tpo.util.ConnectionProvider;
 import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.DateUtility;
 import com.mss.tpo.util.ServiceLocatorException;
+import java.io.File;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -68,7 +70,8 @@ public class PayloadServiceImpl implements PayloadService {
                 payloadBean.setTransaction(resultSet.getInt("TRANSACTION"));
                 payloadBean.setDirection(resultSet.getString("DIRECTION"));
                 payloadBean.setFileName(resultSet.getString("FILE_NAME"));
-                payloadBean.setPath(resultSet.getString("OUTPUT_PATH"));
+                payloadBean.setPath(resultSet.getString("PATH"));
+                payloadBean.setOutputPath(resultSet.getString("OUTPUT_PATH"));
                 payloadBean.setInputPath(resultSet.getString("INPUT_PATH"));
                 payloadBean.setConnectionType(resultSet.getString("CONNECTION_TYPE"));
                 payloadBean.setLastTestStatus(resultSet.getString("LAST_TEST_STATUS"));
@@ -395,28 +398,45 @@ public class PayloadServiceImpl implements PayloadService {
         return tpoCommunicationsList;
     }
 
-    public String reprocessPayloadData(String loginId, String filepath, int id) throws ServiceLocatorException {
+    public String reprocessPayloadData(String loginId, String inputPath, int id, String direction, String outputPath, String path) throws ServiceLocatorException {
         int processCount = 0;
         String responseString = "";
-         int index = filepath.lastIndexOf("\\");
-        System.out.println("index:"+index);
-        String path = filepath.substring(0, index);
-        String fileName = filepath.substring((index+1), filepath.length());
+        String reprocessPayloadQuery = "";
+        int index = inputPath.lastIndexOf("\\");
+        String filePath = inputPath.substring(0, index);
+        String fileName = inputPath.substring((index + 1), inputPath.length());
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            String updateTpoUserPwdQuery = ("UPDATE MSCVP.TPO_PAYLOAD SET STATUS_FLAG = ?, FILE_NAME = ?, PATH = ?, MODIFIED_BY = ?, MODIFIED_TS = ? WHERE ID = "+id);
-            preparedStatement = connection.prepareStatement(updateTpoUserPwdQuery);
-            preparedStatement.setString(1, "");
-            preparedStatement.setString(2, fileName);
-            preparedStatement.setString(3, path);
-            preparedStatement.setString(4, loginId);
-            preparedStatement.setTimestamp(5, curdate);
-            processCount = processCount + preparedStatement.executeUpdate();
+            if ("Outbound".equalsIgnoreCase(direction)) {
+                reprocessPayloadQuery = ("UPDATE MSCVP.TPO_PAYLOAD SET STATUS_FLAG = ?, FILE_NAME = ?, PATH = ?, MODIFIED_BY = ?, MODIFIED_TS = ? WHERE ID = " + id);
+                preparedStatement = connection.prepareStatement(reprocessPayloadQuery);
+                preparedStatement.setString(1, "");
+                preparedStatement.setString(2, fileName);
+                preparedStatement.setString(3, filePath);
+                preparedStatement.setString(4, loginId);
+                preparedStatement.setTimestamp(5, curdate);
+                processCount = processCount + preparedStatement.executeUpdate();
+            } else if ("Inbound".equalsIgnoreCase(direction)) {
+                if ((!"".equalsIgnoreCase(inputPath)) && (!"".equalsIgnoreCase(path))) {
+                    File sorceFile = new File(inputPath);
+                    File destFile = new File(path);
+                    destFile.mkdir();
+                    String fileName1 = inputPath.substring(((inputPath.lastIndexOf("\\")) + 1), inputPath.length());
+                    File theFile = new File(destFile.getAbsolutePath(), fileName1);
+                    FileUtils.copyFile(sorceFile, theFile);
+                    reprocessPayloadQuery = ("UPDATE MSCVP.TPO_PAYLOAD SET STATUS_FLAG = ?, MODIFIED_BY = ?, MODIFIED_TS = ? WHERE ID = " + id);
+                    preparedStatement = connection.prepareStatement(reprocessPayloadQuery);
+                    preparedStatement.setString(1, "");
+                    preparedStatement.setString(2, loginId);
+                    preparedStatement.setTimestamp(3, curdate);
+                    processCount = processCount + preparedStatement.executeUpdate();
+                }
+            }
             if (processCount > 0) {
                 responseString = "<font color='green'>Reprocess successfully</font>";
             } else {
-                responseString = "<font color='red'>Please try again!</font>";
+                responseString = "<font color='green'>Paths are incorrect or not given</font>";
             }
         } catch (Exception e) {
             responseString = "<font color='red'>Please try again!</font>";

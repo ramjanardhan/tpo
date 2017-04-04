@@ -121,13 +121,9 @@
                                                 <% String disable = "";
                                                     String path = "";
                                                     if ("Inbound".equalsIgnoreCase(payloadBean.getDirection())) {
-                                                        if ((payloadBean.getTransaction()) == 997) {
-                                                            if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {
-                                                                disable = "no";
-                                                                path = (payloadBean.getPath());
-                                                            } else {
-                                                                disable = "block";
-                                                            }
+                                                        if ((!("".equals(payloadBean.getOutputPath()))) && (payloadBean.getOutputPath() != null)) {
+                                                            disable = "no";
+                                                            path = (payloadBean.getOutputPath());
                                                         } else {
                                                             disable = "yes";
                                                         }
@@ -138,14 +134,14 @@
                                                                 disable = "no";
                                                                 path = (payloadBean.getInputPath());
                                                             } else {
-                                                                disable = "block";
+                                                                disable = "yes";
                                                             }
                                                         } else {
-                                                            if ((!("".equals(payloadBean.getPath()))) && (payloadBean.getPath() != null)) {
+                                                            if ((!("".equals(payloadBean.getOutputPath()))) && (payloadBean.getOutputPath() != null)) {
                                                                 disable = "no";
-                                                                path = (payloadBean.getPath());
+                                                                path = (payloadBean.getOutputPath());
                                                             } else {
-                                                                disable = "block";
+                                                                disable = "yes";
                                                             }
                                                         }
                                                     }
@@ -154,16 +150,17 @@
                                                     <s:param name="filepath"><%=(path)%></s:param> 
                                                 </s:url>
                                                 <s:a href='%{#downloadPayloadFileURL}' style="color: green;"><span class="glyphicon glyphicon-download"></span></s:a>
-                                                <% } else if ("yes".equals(disable)) {
-                                                    out.println("--");
-                                                } else {%>
+                                                <% } else {%>
                                                 <a style="disable:true;color:#d4cecd;"><span class="glyphicon glyphicon-download"></span></a>
                                                     <%  }%> 
                                             </td>
                                             <td align="center">
                                                 <s:url var="reprocessURL" action="../payload/reprocessPayloadData.action">
-                                                    <s:param name="filepath"><%=(payloadBean.getInputPath())%></s:param> 
                                                     <s:param name="id"><%=(id)%></s:param> 
+                                                    <s:param name="direction"><%=(payloadBean.getDirection())%></s:param> 
+                                                    <s:param name="inputPath"><%=(payloadBean.getInputPath())%></s:param> 
+                                                    <s:param name="outputPath"><%=(payloadBean.getOutputPath())%></s:param> 
+                                                    <s:param name="path"><%=(payloadBean.getPath())%></s:param> 
                                                 </s:url>
                                                 <% if ((!"".equals(payloadBean.getInputPath())) && ((payloadBean.getInputPath()) != null)) { %>
                                                 <s:a href='%{#reprocessURL}' style="color: blue;"><span class="glyphicon glyphicon-refresh"></span></s:a>

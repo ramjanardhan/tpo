@@ -31,6 +31,6 @@ public interface PayloadService {
 
     public ArrayList<TpOnboardingBean> getAS2CommunicationsList(String loginId, int roleId, int partnerId, String protocol) throws ServiceLocatorException;
 
-    public String reprocessPayloadData(String loginId, String filepath, int id) throws ServiceLocatorException;
+    public String reprocessPayloadData(String loginId, String inputPath, int id, String direction, String outputPath, String path) throws ServiceLocatorException;
 
 }
