@@ -101,10 +101,10 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     private String manageCommunication;
     private String[] CommunicationMesId;
     private Map partnerNameList;
-     private String certType;
-     private String docdatepickerfrom;
-     private String docdatepicker;
-     private String reportrange;
+    private String certType;
+    private String docdatepickerfrom;
+    private String docdatepicker;
+    private String reportrange;
 
     public String tpoAdminManageProfiles() {
         resultType = LOGIN;
@@ -508,22 +508,32 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
         }
         return resultType;
     }
+
     public String tpoMonitorCertificate() {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
-                resultType = SUCCESS;
+            resultType = SUCCESS;
         }
         return resultType;
     }
+
     public String getCertMonitor() throws Exception {
         String resultType = LOGIN;
-        
+
         String cert = "SYSTEM";
-        List list = ServiceLocator.getAdminService().getCertMonitorData(getCertType(),getDocdatepickerfrom(),getDocdatepicker());
+        List list = ServiceLocator.getAdminService().getCertMonitorData(getCertType(), getDocdatepickerfrom(), getDocdatepicker());
         httpServletRequest.getSession(false).setAttribute(AppConstants.CERTMONITOR_LIST, list);
         resultType = SUCCESS;
         return resultType;
 
+    }
+
+    public String tpoCodeList() {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            resultType = SUCCESS;
+        }
+        return resultType;
     }
 
     @Override
@@ -1027,5 +1037,4 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     public void setReportrange(String reportrange) {
         this.reportrange = reportrange;
     }
-
 }
