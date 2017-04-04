@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -146,6 +147,7 @@ public class DataSourceDataProvider {
         }
         return adminUsersMap;
     }
+
     public Map getPartnerRolesList(int roleId) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -154,10 +156,10 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         Map partnerRolesMap = new TreeMap();
         try {
-            if(roleId == 3){
-                 queryString = "SELECT ID, ROLE FROM TPO_USER_ROLES WHERE (ID = 4 OR ID = 5) ";
-            }else if(roleId == 4){
-                 queryString = "SELECT ID, ROLE FROM TPO_USER_ROLES WHERE ID = 5 ";
+            if (roleId == 3) {
+                queryString = "SELECT ID, ROLE FROM TPO_USER_ROLES WHERE (ID = 4 OR ID = 5) ";
+            } else if (roleId == 4) {
+                queryString = "SELECT ID, ROLE FROM TPO_USER_ROLES WHERE ID = 5 ";
             }
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
@@ -498,8 +500,8 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         Map protocolsMap = new TreeMap();
         try {
-           // if (roleId == 3) {
-                queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId;
+            // if (roleId == 3) {
+            queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId;
 //            } else {
 //                queryString = "select DISTINCT(PROTOCOL) as protocol from MSCVP.TPO_COMMUNICATION where PARTNER_ID=" + partnerId + " and CREATED_BY='" + loginId + "'";
 //            }
@@ -530,8 +532,8 @@ public class DataSourceDataProvider {
         }
         return protocolsMap;
     }
-    
-public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException {
+
+    public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -543,7 +545,7 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
                 queryString = "SELECT PROTOCOL, PROTOCOL_NAME FROM MSCVP.TPO_PROTOCOLS WHERE PROTOCOL != 'AS2' AND PROTOCOL != 'SMTP' ";
             } else {
                 queryString = "SELECT PROTOCOL, PROTOCOL_NAME FROM MSCVP.TPO_PROTOCOLS";
-           }
+            }
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -572,7 +574,7 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         return protocolsMap;
     }
 
- public String getProtocolByCommunicationId(int communicationId) throws ServiceLocatorException {
+    public String getProtocolByCommunicationId(int communicationId) throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -606,8 +608,8 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         }
         return protocol;
     }
- 
- public String getRoleNameByRoleId(int roleId) throws ServiceLocatorException {
+
+    public String getRoleNameByRoleId(int roleId) throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -615,7 +617,7 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         connection = ConnectionProvider.getInstance().getConnection();
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT ROLE FROM MSCVP.TPO_USER_ROLES WHERE ID = "+roleId);
+            resultSet = statement.executeQuery("SELECT ROLE FROM MSCVP.TPO_USER_ROLES WHERE ID = " + roleId);
             while (resultSet.next()) {
                 roleName = resultSet.getString("ROLE");
             }
@@ -641,8 +643,8 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         }
         return roleName;
     }
- 
-  public String getAdminEmail() throws ServiceLocatorException {
+
+    public String getAdminEmail() throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -676,5 +678,43 @@ public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException 
         }
         return adminEmail;
     }
- 
+
+    // get List_Name for CodeList 
+    public List getListName() throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getOracleConnection();
+        List listNameMap = new ArrayList();
+        String listName = null;
+        try {
+            queryString = "SELECT  DISTINCT(LIST_NAME) FROM CODELIST_XREF_ITEM";
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listNameMap.add(resultSet.getString("LIST_NAME"));
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return listNameMap;
+    }
 }

@@ -83,6 +83,22 @@
             <result name="error" type="redirect" >../general/exception.action</result> 
             <result type="redirect" name="login">../general/login.action</result>
         </action>
+          <action name="codeListSearch" class="com.mss.tpo.admin.AdminAction" method="getCodeListItems">
+            <result>/admin/tpoCodeList.jsp</result>
+            <result name="error" type="redirect" >../general/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>
+        </action>
+        
+          <action name="getCodeListName" class="com.mss.tpo.admin.AdminAction" method="getCodeListName">
+            <result>/admin/tpoCodeList.jsp</result>
+            <result name="error" type="redirect" >../general/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>
+        </action>
+          <action name="codeListAdd" class="com.mss.tpo.admin.AdminAction" method="tpoCodeListAdd">
+            <result>/admin/tpoCodeList.jsp</result>
+            <result name="error" type="redirect" >../general/exception.action</result> 
+            <result type="redirect" name="login">../general/login.action</result>
+        </action>
     </package>
     
 </struts>

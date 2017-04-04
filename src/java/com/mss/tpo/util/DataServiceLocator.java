@@ -5,23 +5,21 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import javax.sql.DataSource;
+import oracle.jdbc.pool.OracleDataSource;
 
 /**
  * This is a Data Service Locator object used to abstract all JNDI usage and to
  * hide the complexities of initial context creation, DataSource lookup.
  * Multiple clients can reuse the Service Locator object to reduce code
  * complexity, provide a single point of control, and improve performance by
- * providing a caching facility.
- * <p>
- * This class reduces the client complexity that results from the client's
- * dependency on and need to perform lookup and creation processes, which are
- * resource-intensive. To eliminate these problems, this pattern provides a
- * mechanism to abstract all dependencies and network details into the Service
- * Locator.
+ * providing a caching facility. <p> This class reduces the client complexity
+ * that results from the client's dependency on and need to perform lookup and
+ * creation processes, which are resource-intensive. To eliminate these
+ * problems, this pattern provides a mechanism to abstract all dependencies and
+ * network details into the Service Locator.
  *
- * <p>
- * Usage: This is a Singleton class, usage is as follows:<br>
- * Use the getInstance method to create an instance of the class.
+ * <p> Usage: This is a Singleton class, usage is as follows:<br> Use the
+ * getInstance method to create an instance of the class.
  *
  * <code>ServiceLocator serviceLocator = ServiceLocator.getInstance();</code>
  */
@@ -74,6 +72,25 @@ public class DataServiceLocator {
                 dataSource = datasource;
                 CacheManager.getCache().put(dataSourceName, datasource);
             }
+        } catch (Exception ex) {
+            throw new ServiceLocatorException("Cannot get Data Source REASON:" + ex.getMessage(), ex);
+        }
+        return dataSource;
+    }
+    
+    //for getting oracle datasource to connect with oracle database.
+    public DataSource getOracleDataSource(String dataSourceName) throws ServiceLocatorException {
+        DataSource dataSource = null;
+        try {
+            OracleDataSource datasource = new OracleDataSource();
+            datasource.setServerName(ConfigProperties.getProperty(AppConstants.ORACLEDB_HOST));
+            datasource.setUser(ConfigProperties.getProperty(AppConstants.ORACLEDB_USER));
+            datasource.setPassword(ConfigProperties.getProperty(AppConstants.ORACLEDB_PWD));
+            datasource.setDriverType(ConfigProperties.getProperty(AppConstants.ORACLEDB_DRIVERTYPE)); 
+            datasource.setPortNumber(Integer.parseInt(ConfigProperties.getProperty(AppConstants.ORACLEDB_Port)));
+            datasource.setDatabaseName(ConfigProperties.getProperty(AppConstants.ORACLEDB_NAME));
+            dataSource = datasource;
+            //CacheManager.getCache().put(dataSourceName, datasource);
         } catch (Exception ex) {
             throw new ServiceLocatorException("Cannot get Data Source REASON:" + ex.getMessage(), ex);
         }

@@ -9,6 +9,7 @@ import com.mss.tpo.util.AppConstants;
 import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.Properties;
 import com.mss.tpo.util.ServiceLocator;
+import com.mss.tpo.util.ServiceLocatorException;
 import static com.opensymphony.xwork2.Action.LOGIN;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,6 +21,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -28,6 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.json.annotations.JSON;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -105,7 +110,30 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     private String docdatepickerfrom;
     private String docdatepicker;
     private String reportrange;
-
+    //Variables for CodeList functionality
+    private String listName;
+    private String name;
+    private String selectedName;
+    private List listNameMap;
+     private String[] listName1;
+     private String[] senderIdInst;                  
+     private String[] recId;
+     private String[] listVerson;
+     private String[] senderItem;
+     private String[] recItem;
+     private String[] text1;
+     private String[] text2;
+     private String[] text3;
+     private String[] text4;
+     private String[] desc;
+     private String[] text5;
+     private String[] text6;
+     private String[] text7;
+     private String[] text8;
+     private String[] text9;
+private String json;
+     
+   
     public String tpoAdminManageProfiles() {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
@@ -528,14 +556,86 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
 
     }
 
-    public String tpoCodeList() {
+    public String tpoCodeList() throws ServiceLocatorException {
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            httpServletRequest.getSession(false).removeAttribute(AppConstants.CODE_LIST);
+            System.out.println("into action before getting codeList");
+            setListNameMap(DataSourceDataProvider.getInstance().getListName());
+            System.out.println("into action after getting codeList");
             resultType = SUCCESS;
         }
         return resultType;
     }
 
+    public String getCodeListItems() throws Exception {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+
+            try {
+                setListNameMap(DataSourceDataProvider.getInstance().getListName());
+                List codeList = new ArrayList();
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                codeList = ServiceLocator.getAdminService().doTpoCodeListItems(getListName());
+                httpServletRequest.getSession(false).setAttribute(AppConstants.CODE_LIST, codeList);
+                resultType = SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultType;
+    }
+    // method to get the code list according to the given name
+      public String getCodeListName() throws Exception {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                 String resultMessage = "";
+                List codeList = new ArrayList();
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                setListNameMap(ServiceLocator.getAdminService().getCodeListNames(getName()));
+                resultType = SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultType;
+    }
+      public String tpoCodeListAdd() throws Exception {
+        resultType = LOGIN;
+        if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
+            try {
+                 String resultMessage = "";
+                List codeList = new ArrayList();
+
+
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
+                 setListNameMap(DataSourceDataProvider.getInstance().getListName());
+                resultMessage= ServiceLocator.getAdminService().addCodeList(getJson());
+                resultType = SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultType;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+
+    
+
+    
+    
+    
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.httpServletRequest = httpServletRequest;
@@ -1037,4 +1137,166 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     public void setReportrange(String reportrange) {
         this.reportrange = reportrange;
     }
+
+    public String getListName() {
+        return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
+    }
+
+    public List getListNameMap() {
+        return listNameMap;
+    }
+
+    public void setListNameMap(List listNameMap) {
+        this.listNameMap = listNameMap;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSelectedName() {
+        return selectedName;
+    }
+
+    public void setSelectedName(String selectedName) {
+        this.selectedName = selectedName;
+    }
+
+    public String[] getListName1() {
+        return listName1;
+    }
+
+    public void setListName1(String[] listName1) {
+        this.listName1 = listName1;
+    }
+
+    public String[] getSenderIdInst() {
+        return senderIdInst;
+    }
+
+    public void setSenderIdInst(String[] senderIdInst) {
+        this.senderIdInst = senderIdInst;
+    }
+
+    public String[] getRecId() {
+        return recId;
+    }
+
+    public void setRecId(String[] recId) {
+        this.recId = recId;
+    }
+
+    public String[] getListVerson() {
+        return listVerson;
+    }
+
+    public void setListVerson(String[] listVerson) {
+        this.listVerson = listVerson;
+    }
+
+    public String[] getSenderItem() {
+        return senderItem;
+    }
+
+    public void setSenderItem(String[] senderItem) {
+        this.senderItem = senderItem;
+    }
+
+    public String[] getRecItem() {
+        return recItem;
+    }
+
+    public void setRecItem(String[] recItem) {
+        this.recItem = recItem;
+    }
+
+    public String[] getText1() {
+        return text1;
+    }
+
+    public void setText1(String[] text1) {
+        this.text1 = text1;
+    }
+
+    public String[] getText2() {
+        return text2;
+    }
+
+    public void setText2(String[] text2) {
+        this.text2 = text2;
+    }
+
+    public String[] getText3() {
+        return text3;
+    }
+
+    public void setText3(String[] text3) {
+        this.text3 = text3;
+    }
+
+    public String[] getText4() {
+        return text4;
+    }
+
+    public void setText4(String[] text4) {
+        this.text4 = text4;
+    }
+
+    public String[] getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String[] desc) {
+        this.desc = desc;
+    }
+
+    public String[] getText5() {
+        return text5;
+    }
+
+    public void setText5(String[] text5) {
+        this.text5 = text5;
+    }
+
+    public String[] getText6() {
+        return text6;
+    }
+
+    public void setText6(String[] text6) {
+        this.text6 = text6;
+    }
+
+    public String[] getText7() {
+        return text7;
+    }
+
+    public void setText7(String[] text7) {
+        this.text7 = text7;
+    }
+
+    public String[] getText8() {
+        return text8;
+    }
+
+    public void setText8(String[] text8) {
+        this.text8 = text8;
+    }
+
+    public String[] getText9() {
+        return text9;
+    }
+
+    public void setText9(String[] text9) {
+        this.text9 = text9;
+    }
+
+           
 }
