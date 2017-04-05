@@ -707,7 +707,6 @@ public class AdminServiceImpl implements AdminService {
 
     //Manage communications for assigning
     public ArrayList<AdminBean> getFTPManageCommunicationsList(int roleId, String loginId, int partnerId, String managecommunication) {
-        System.out.println("managecommunication --- in impl " + managecommunication);
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -731,7 +730,6 @@ public class AdminServiceImpl implements AdminService {
                         + " FROM TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                         + "WHERE TPO_PARTNER_COMMUNICATIONS.PARTNER_ID = " + partnerId;
             }
-            System.out.println("queryString---" + queryString);
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
             resultSet = statement.executeQuery();
@@ -775,7 +773,6 @@ public class AdminServiceImpl implements AdminService {
                         + " FROM TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                         + " WHERE TPO_PARTNER_COMMUNICATIONS.PARTNER_ID = " + partnerId;
             }
-            System.out.println("queryString---" + queryString);
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
             resultSet = statement.executeQuery();
@@ -819,7 +816,6 @@ public class AdminServiceImpl implements AdminService {
                         + " FROM TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                         + "WHERE TPO_PARTNER_COMMUNICATIONS.PARTNER_ID = " + partnerId;
             }
-            System.out.println("queryString--- " + queryString);
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.prepareStatement(queryString);
             resultSet = statement.executeQuery();
@@ -848,18 +844,18 @@ public class AdminServiceImpl implements AdminService {
             StringBuffer assignCommunicationQuery = new StringBuffer();
             assignCommunicationQuery.append(" INSERT INTO MSCVP.TPO_PARTNER_COMMUNICATIONS(PARTNER_ID, COMMUNICATION_ID, PROTOCOL)");
             assignCommunicationQuery.append(" VALUES(?,?,?)");
-            String str[] = adminAction.getCommunicationMesId();
-            for (int i = 0; i < adminAction.getCommunicationMesId().length; i++) {
+            String communications[] = adminAction.getCommunicationMesId();
+            for (int i = 0; i < communications.length; i++) {
                 preparedStatement = connection.prepareStatement(assignCommunicationQuery.toString());
                 preparedStatement.setInt(1, adminAction.getPartnerId());
-                preparedStatement.setInt(2, Integer.parseInt(str[i]));
-                preparedStatement.setString(3, DataSourceDataProvider.getInstance().getProtocolByCommunicationId(Integer.parseInt(str[i])));
+                preparedStatement.setInt(2, Integer.parseInt(communications[i]));
+                preparedStatement.setString(3, DataSourceDataProvider.getInstance().getProtocolByCommunicationId(Integer.parseInt(communications[i])));
                 isManageCommunicationInserted = isManageCommunicationInserted + preparedStatement.executeUpdate();
             }
             if (isManageCommunicationInserted > 0) {
-                responseString = "<font color='green'>Protocol Assigned successfully.</font>";
+                responseString = "<font color='green'>Protocol assigned successfully.</font>";
             } else {
-                responseString = "<font color='green'>Protocol Assigned failed.</font>";
+                responseString = "<font color='green'>Protocol assigning failed.</font>";
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -890,7 +886,6 @@ public class AdminServiceImpl implements AdminService {
             connection = ConnectionProvider.getInstance().getConnection();
             // String query = "DELETE FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE PARTNER_ID =" + partnerId + " AND COMMUNICATION_ID=" + communicationId + "";
             String query = "DELETE FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE COMMUNICATION_ID='" + communicationId + "'";
-            System.out.println("query------" + query);
             preparedStatement = connection.prepareStatement(query);
             count = preparedStatement.executeUpdate();
             if (count > 0) {
@@ -920,22 +915,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public List getCertMonitorData(String certType, String dateFrom, String dateTo) throws ServiceLocatorException {
-
         String cType = certType;
         Connection con = null;
         List<LinkedHashMap> al = new LinkedList<LinkedHashMap>();
-        System.out.println("dateFrom is " + dateFrom);
         String date = null;
         String dateto = null;
         if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
             date = dateFrom.replace("/", "-").substring(0, 10);
             dateto = dateTo.replace("/", "-").substring(0, 10);
-
         }
-        System.out.println("datefrom is " + date);
-        System.out.println("dateto is " + dateto);
         try {
-
             Class.forName("oracle.jdbc.OracleDriver");
             con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.179:1521:orcl", "si_user", "SI_admin1");
             Statement st = con.createStatement();
@@ -943,27 +932,21 @@ public class AdminServiceImpl implements AdminService {
             if ("TRUSTED".equalsIgnoreCase(cType)) {
                 if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
                     rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy') ORDER BY DAYS ");
-                    //  System.out.println("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy') ORDER BY DAYS ");
                 } else {
                     rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO ORDER BY DAYS ");
-                    //  System.out.println("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO ORDER BY DAYS ");
 
                 }
             } else if ("CA".equalsIgnoreCase(cType)) {
                 if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
                     rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CA_CERT_INFO WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy')  ORDER BY DAYS");
-                    // System.out.println("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CA_CERT_INFO WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy')  ORDER BY DAYS");;
                 } else {
                     rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CA_CERT_INFO   ORDER BY DAYS");
-                    // System.out.println("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CA_CERT_INFO   ORDER BY DAYS");
                 }
             } else if ("SYSTEM".equalsIgnoreCase(cType)) {
                 if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
                     rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL ,(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))  AS DAYS FROM CERTS_AND_PRI_KEY WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy')   ORDER BY DAYS");
-                    // System.out.println("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL ,(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))  AS DAYS FROM CERTS_AND_PRI_KEY WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy')   ORDER BY DAYS");;
                 } else {
                     rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL ,(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))  AS DAYS FROM CERTS_AND_PRI_KEY   ORDER BY DAYS");
-                    // System.out.println("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL ,(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))  AS DAYS FROM CERTS_AND_PRI_KEY   ORDER BY DAYS");
                 }
             }
 
@@ -973,13 +956,10 @@ public class AdminServiceImpl implements AdminService {
 
             while (rs.next()) {
                 map = new LinkedHashMap();
-                System.out.println("map = " + map);
                 for (int i = 1; i <= columncount; i++) {
-
                     map.put(md.getColumnName(i), rs.getObject(i));
                 }
                 al.add(map);
-                System.out.println("al**" + al);
             }
 
         } catch (SQLException s) {
