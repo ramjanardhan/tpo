@@ -13,36 +13,36 @@
         
         <action name="payloadUpload" class="com.mss.tpo.payload.PayloadAction" method="payloadUpload">
             <result name="success">/payload/tpoPayloadupload.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="doPayloadUpload" class="com.mss.tpo.payload.PayloadAction" method="doPayloadUpload">
             <result name="success" type="redirect">payloadUpload.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="payloadHistory" class="com.mss.tpo.payload.PayloadAction" method="payloadHistory">
             <result name="success">/payload/tpoPayloadHistory.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="payloadSearch" class="com.mss.tpo.payload.PayloadAction" method="payloadSearch">
-            <result name = "success">/payload/tpoPayloadHistory.jsp</result>
-            <result name = "redirect">../general/login.action</result>
+            <result name="success">/payload/tpoPayloadHistory.jsp</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         <action name="getCommunicationsList" class="com.mss.tpo.payload.PayloadAction" method="getCommunicationsList">
-            <result name = "success">/payload/tpoPayloadupload.jsp</result>
-            <result name = "redirect">../general/login.action</result>
+            <result name="success">/payload/tpoPayloadupload.jsp</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="reprocessPayloadData" class="com.mss.tpo.payload.PayloadAction" method="reprocessPayloadData">
-            <result name = "success" type="redirect" >/payload/payloadHistory.action</result>
-            <result name = "redirect">../general/login.action</result>
+            <result name="success" type="redirect" >/payload/payloadHistory.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
 <!--        Download file action-->

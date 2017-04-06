@@ -14,74 +14,74 @@
          <!--Admin profiles actions-->
         <action name="tpoAdminManageProfiles" class="com.mss.tpo.admin.AdminAction" method="tpoAdminManageProfiles">
             <result name="success">/admin/tpoAdminManageProfiles.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="tpoAdminAddProfile" class="com.mss.tpo.admin.AdminAction" method="tpoAdminAddProfile">
             <result name="success">/admin/tpoAdminAddProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="doAdminAddProfile" class="com.mss.tpo.admin.AdminAction" method="doAdminAddProfile">
             <result name="success">../admin/tpoAdminAddProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoAdminSearchProfiles" class="com.mss.tpo.admin.AdminAction" method="tpoAdminSearchProfiles">
             <result name="success">/admin/tpoAdminManageProfiles.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoAdminGetProfile" class="com.mss.tpo.admin.AdminAction" method="tpoAdminGetProfile">
             <result name="success">/admin/tpoAdminAddProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         <action name="doAdminUpdateProfile" class="com.mss.tpo.admin.AdminAction" method="doAdminUpdateProfile">
             <result name="success" type="redirect">../admin/tpoAdminManageProfiles.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoAdminDeleteProfile" class="com.mss.tpo.admin.AdminAction" method="tpoAdminDeleteProfile">
             <result name="success" type="redirect">../admin/tpoAdminManageProfiles.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
      <!-- manage communications-->
          <action name="tpoAdminManageCommunication" class="com.mss.tpo.admin.AdminAction" method="tpoAdminManageCommunication">
             <result name="success">/admin/tpoManageCommunication.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
                <action name="getManageCommunicationList" class="com.mss.tpo.admin.AdminAction" method="getManageCommunicationList">
             <result name="success">/admin/tpoManageCommunication.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
                  <action name="doManageCommunicationAdd" class="com.mss.tpo.admin.AdminAction" method="doManageCommunicationAdd">
             <result name="success">/admin/tpoManageCommunication.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>  
                  <action name="tpoMonitorCertificate" class="com.mss.tpo.admin.AdminAction" method="tpoMonitorCertificate">
             <result name="success">/admin/tpoCertMonitor.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>  
           <action name="certMonitorSearch" class="com.mss.tpo.admin.AdminAction" method="getCertMonitor">
             <result>/admin/tpoCertMonitor.jsp</result>
-            <result name="error" type="redirect" >../general/exception.action</result> 
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect">../general/exception.action</result> 
+            <result name="login" type="redirect">../general/login.action</result>
         </action>
           <action name="tpoCodeList" class="com.mss.tpo.admin.AdminAction" method="tpoCodeList">
             <result>/admin/tpoCodeList.jsp</result>
-            <result name="error" type="redirect" >../general/exception.action</result> 
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="error" type="redirect">../general/exception.action</result> 
+            <result name="login" type="redirect">../general/login.action</result>
         </action>
     </package>
     

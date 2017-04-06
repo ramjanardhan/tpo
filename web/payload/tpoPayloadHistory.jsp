@@ -100,7 +100,7 @@
                                                 PayloadBean payloadBean;
                                                 for (int i = 0; i < list.size(); i++) {
                                                     payloadBean = (PayloadBean) list.get(i);
-                                                    int id = payloadBean.getId();
+                                                  //  int id = 0;
                                         %>
                                         <tr>
                                             <td> <% out.println(payloadBean.getConnectionType()); %> </td>
@@ -156,7 +156,7 @@
                                             </td>
                                             <td align="center">
                                                 <s:url var="reprocessURL" action="../payload/reprocessPayloadData.action">
-                                                    <s:param name="id"><%=(id)%></s:param> 
+                                                    <s:param name="id"><%=(payloadBean.getId())%></s:param> 
                                                     <s:param name="direction"><%=(payloadBean.getDirection())%></s:param> 
                                                     <s:param name="inputPath"><%=(payloadBean.getInputPath())%></s:param> 
                                                     <s:param name="outputPath"><%=(payloadBean.getOutputPath())%></s:param> 

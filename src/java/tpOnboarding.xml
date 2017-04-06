@@ -14,42 +14,42 @@
         <!-- profiles actions-->
         <action name="tpoManageProfiles" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoManageProfiles">
             <result name="success">/tpOnboarding/tpoSearchProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="tpoAddProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoAddProfile">
             <result name="success">/tpOnboarding/tpoProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="doAddProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doAddProfile">
             <result name="success">../tpOnboarding/tpoProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="searchProfiles" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoSearchProfiles">
             <result name="success">/tpOnboarding/tpoSearchProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpogetProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpogetProfile">
             <result name="success">/tpOnboarding/tpoProfile.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         <action name="doUpdateProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doUpdateProfile">
             <result name="success" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoDeleteProfile" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoDeleteProfile">
             <result name="success" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
        
@@ -57,37 +57,37 @@
         <!-- envelopes actions-->
         <action name="tpoManageEnvelopes" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoManageEnvelopes">
             <result name="success">/tpOnboarding/tpoSearchEnvelope.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="tpoAddEnvelope" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoAddEnvelope">
             <result name="success">/tpOnboarding/tpoEnvelopes.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="searchEnvelopes" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="searchEnvelopes">
             <result name="success">/tpOnboarding/tpoSearchEnvelope.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="doAddEnvelopes" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="doAddEnvelopes">
             <result name="success">/tpOnboarding/tpoEnvelopes.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
       
         <action name="tpoEditEnvelope" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpoEditEnvelope">
             <result name="success">/tpOnboarding/tpoEditEnvelope.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoDeleteEnvelope" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="getDeleteEnvelope">
             <result name="success" type="redirect">../tpOnboarding/tpoManageEnvelopes.action</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         

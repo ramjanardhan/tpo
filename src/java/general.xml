@@ -21,7 +21,7 @@
             <result name="tpoManageProfiles" type="redirect">../tpOnboarding/tpoManageProfiles.action</result>
             <result name="tpoResetMyPwd" type="redirect">../user/tpoResetMyPwd.action</result>
             <result name="acceptPartner" type="redirect" >../partner/searchPartner.action?partnerName=${partnerName}</result>
-            <result name="login" type="redirect" >login.action</result>
+            <result name="login" type="redirect">login.action</result>
             <result name="error" type="redirect">../exception/exception.action</result> 
         </action>
  

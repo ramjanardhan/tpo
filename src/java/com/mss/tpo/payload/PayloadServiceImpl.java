@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 
@@ -402,13 +403,16 @@ public class PayloadServiceImpl implements PayloadService {
         int processCount = 0;
         String responseString = "";
         String reprocessPayloadQuery = "";
-        int index = inputPath.lastIndexOf("\\");
-        String filePath = inputPath.substring(0, index);
-        String fileName = inputPath.substring((index + 1), inputPath.length());
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             if ("Outbound".equalsIgnoreCase(direction)) {
+                if (inputPath.contains("/")) {
+                        inputPath = inputPath.replaceAll("/", Matcher.quoteReplacement(File.separator));
+                        System.out.println("inputPath-->" + inputPath);
+                    }
+                String filePath = inputPath.substring(0, inputPath.lastIndexOf("\\"));
+                String fileName = inputPath.substring(((inputPath.lastIndexOf("\\")) + 1), inputPath.length());
                 reprocessPayloadQuery = ("UPDATE MSCVP.TPO_PAYLOAD SET STATUS_FLAG = ?, FILE_NAME = ?, PATH = ?, MODIFIED_BY = ?, MODIFIED_TS = ? WHERE ID = " + id);
                 preparedStatement = connection.prepareStatement(reprocessPayloadQuery);
                 preparedStatement.setString(1, "");
@@ -419,6 +423,10 @@ public class PayloadServiceImpl implements PayloadService {
                 processCount = processCount + preparedStatement.executeUpdate();
             } else if ("Inbound".equalsIgnoreCase(direction)) {
                 if ((!"".equalsIgnoreCase(inputPath)) && (!"".equalsIgnoreCase(path))) {
+                   if (inputPath.contains("/")) {
+                        inputPath = inputPath.replaceAll("/", Matcher.quoteReplacement(File.separator));
+                        System.out.println("inputPath-->" + inputPath);
+                    }
                     File sorceFile = new File(inputPath);
                     File destFile = new File(path);
                     destFile.mkdir();
@@ -434,9 +442,9 @@ public class PayloadServiceImpl implements PayloadService {
                 }
             }
             if (processCount > 0) {
-                responseString = "<font color='green'>Reprocess successfully</font>";
+                responseString = "<font color='green'>Reprocess successful.</font>";
             } else {
-                responseString = "<font color='green'>Paths are incorrect or not given</font>";
+                responseString = "<font color='green'>Paths are not provided or incorrect.</font>";
             }
         } catch (Exception e) {
             responseString = "<font color='red'>Please try again!</font>";

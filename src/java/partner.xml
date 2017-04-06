@@ -13,43 +13,43 @@
         
         <action name="tpoPartnerAdd" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnerAdd">
             <result name="success">/partner/tpoPartnerAdd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoPartnerUserAdd" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnerUserAdd">
             <result name="success">/partner/tpoPartnerUserAdd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="doAddPartnerUser" class="com.mss.tpo.partner.PartnerAction" method="doAddPartnerUser">
             <result name="success">/partner/tpoPartnerUserAdd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoPartnerInfo" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnerInfo">
             <result name="success">/partner/tpoPartnerInfo.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="updatePartnerInfo" class="com.mss.tpo.partner.PartnerAction" method="updatePartnerInfo">
             <result name="success">/partner/tpoPartnerInfo.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoPartnersList" class="com.mss.tpo.partner.PartnerAction" method="tpoPartnersList">
             <result name="success">/partner/tpoPartnersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="searchPartner" class="com.mss.tpo.partner.PartnerAction" method="searchPartner">
             <result name="success">/partner/tpoPartnersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action?partnerName=${partnerName}</result>
+            <result name="login" type="redirect">../general/login.action?partnerName=${partnerName}</result>
             <!-- <result type="redirect" name="login">../general/login.action</result> -->
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>

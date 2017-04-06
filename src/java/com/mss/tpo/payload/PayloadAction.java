@@ -235,6 +235,9 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             if ("Outbound".equalsIgnoreCase(getDirection())) {
                 setConn_type("File_System");
             }
+            if ("Inbound".equalsIgnoreCase(getDirection())) {
+                setConn_type("Communication_Protocol");
+            }
             if ("Communication_Protocol".equalsIgnoreCase(getConn_type())) {
                 createPath = new File(createPath.getAbsolutePath() + "//" + partnerName + "//" + getDocType() + "//" + getDirection() + "//" + getTransaction() + "//" + getConn_type() + "//" + getProtocol());
             } else {

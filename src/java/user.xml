@@ -14,58 +14,58 @@
          <action name="tpoRegister" class="com.mss.tpo.user.UserAction" method="tpoRegister">
             <result>/user/tpoRegister.jsp</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="accessFailed" type="redirect" >../exception/accessFailed.action</result> 
         </action>
         
         <action name="tpoUserAdd" class="com.mss.tpo.user.UserAction" method="tpoUserAdd">
             <result name="success">/user/tpoRegister.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoUsersList" class="com.mss.tpo.user.UserAction" method="tpoUsersList">
             <result name="success">/user/tpoUsersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
         <action name="searchUser" class="com.mss.tpo.user.UserAction" method="searchUser">
             <result name="success">/user/tpoUsersList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
       <action name="tpoResetMyPwd" class="com.mss.tpo.user.UserAction" method="tpoResetMyPwd">
             <result name="success">/user/tpoResetMyPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         <action name="doTpoResetMyPwd" class="com.mss.tpo.user.UserAction" method="doTpoResetMyPwd">
             <result name="success">/user/tpoResetMyPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoResetUserPwd" class="com.mss.tpo.user.UserAction" method="tpoResetUserPwd">
             <result name="success">/user/tpoResetUserPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         <action name="doTpoResetUserPwd" class="com.mss.tpo.user.UserAction" method="doTpoResetUserPwd">
             <result name="success">/user/tpoResetUserPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         
         <action name="tpoResetPartnerPwd" class="com.mss.tpo.user.UserAction" method="tpoResetPartnerPwd">
             <result name="success">/user/tpoResetPartnerPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         <action name="doTpoResetPartnerPwd" class="com.mss.tpo.user.UserAction" method="doTpoResetPartnerPwd">
             <result name="success">/user/tpoResetPartnerPwd.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result> 
         </action>
         

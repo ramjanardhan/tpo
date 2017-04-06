@@ -13,17 +13,17 @@
         
         <action name="addTicket" class="com.mss.tpo.ticket.TicketAction" method="addTicket">
             <result name="success">/ticket/addTicket.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         <action name="ticketsList" class="com.mss.tpo.ticket.TicketAction" method="ticketsList">
             <result name="success">/ticket/ticketsList.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         <action name="editTicket" class="com.mss.tpo.ticket.TicketAction" method="editTicket">
             <result name="success">/ticket/editTicket.jsp</result>
-            <result type="redirect" name="login">../general/login.action</result>
+            <result name="login" type="redirect">../general/login.action</result>
             <result name="error" type="redirect" >../exception/exception.action</result>
         </action>
         
