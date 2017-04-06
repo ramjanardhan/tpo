@@ -38,7 +38,7 @@
         <!-- Header -->
         <header id="head">
             <div class="container">
-                <h3><b>Create ticket</b></h3>
+                <h3><b>Create Ticket</b></h3>
             </div>
         </header> 
         <!-- /Header -->

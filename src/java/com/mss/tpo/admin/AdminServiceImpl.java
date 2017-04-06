@@ -20,12 +20,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -713,12 +717,12 @@ public class AdminServiceImpl implements AdminService {
                     queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
                             + " FROM MSCVP.TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                             + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'FTP' AND TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 } else {
                     queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
                             + " FROM MSCVP.TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                             + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'FTP' AND TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull' and TPO_FTP.CREATED_BY='" + loginId + "'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -756,12 +760,12 @@ public class AdminServiceImpl implements AdminService {
                     queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
                             + " FROM MSCVP.TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                             + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'SFTP' AND TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 } else {
                     queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
                             + " FROM MSCVP.TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                             + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'SFTP' AND TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull' and TPO_SFTP.CREATED_BY='" + loginId + "'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -798,12 +802,12 @@ public class AdminServiceImpl implements AdminService {
                     queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
                             + " FROM MSCVP.TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                             + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'HTTP' AND TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 } else {
                     queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
                             + " FROM MSCVP.TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
                             + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'HTTP' AND TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push' and TPO_HTTP.CREATED_BY='" + loginId + "'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId+" )";
+                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -969,4 +973,173 @@ public class AdminServiceImpl implements AdminService {
         return al;
 
     }
+
+    @Override
+    public List doTpoCodeListItems(String selectedName) throws ServiceLocatorException {
+        System.out.println("in getListName");
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getOracleConnection();
+        List codeList = new ArrayList();
+        CodeListBean codeListBean = null;
+        String listName = null;
+        System.out.println("before try");
+        try {
+            queryString = "SELECT  * FROM CODELIST_XREF_ITEM WHERE  LIST_NAME='" + selectedName + "'";
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                codeListBean = new CodeListBean();
+                codeListBean.setListName(resultSet.getString("LIST_NAME"));
+                codeListBean.setSender_id(resultSet.getString("SENDER_ID"));
+                codeListBean.setReceiver_id(resultSet.getString("RECEIVER_ID"));
+                codeListBean.setList_version(resultSet.getString("LIST_VERSION"));
+                codeListBean.setSender_item(resultSet.getString("SENDER_ITEM"));
+                codeListBean.setReceiver_item(resultSet.getString("RECEIVER_ITEM"));
+                codeListBean.setText1(resultSet.getString("TEXT1"));
+                codeListBean.setText2(resultSet.getString("TEXT2"));
+                codeListBean.setText3(resultSet.getString("TEXT3"));
+                codeListBean.setText4(resultSet.getString("TEXT4"));
+                codeListBean.setDescription(resultSet.getString("DESCRIPTION"));
+                codeListBean.setText5(resultSet.getString("TEXT5"));
+                codeListBean.setText6(resultSet.getString("TEXT6"));
+                codeListBean.setText7(resultSet.getString("TEXT7"));
+                codeListBean.setText8(resultSet.getString("TEXT8"));
+                codeListBean.setText9(resultSet.getString("TEXT9"));
+                codeList.add(codeListBean);
+
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return codeList;
+    }
+
+    @Override
+    public List getCodeListNames(String selectedName) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getOracleConnection();
+        List listNameMap = new ArrayList();
+        String listName = null;
+        try {
+            queryString = "SELECT  DISTINCT(LIST_NAME) FROM CODELIST_XREF_ITEM WHERE LIST_NAME LIKE '" + selectedName.toUpperCase() + "%'";
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listNameMap.add(resultSet.getString("LIST_NAME"));
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return listNameMap;
+    }
+
+    @Override
+    public String addCodeList(String jsonData) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getOracleConnection();
+        JSONArray array = null;
+           JSONObject jsonObj=null;
+           int updatedRows=0;
+        try {
+            array = new JSONArray(jsonData);
+
+           
+        }  catch (JSONException ex) {
+            Logger.getLogger(AdminServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        try {
+            queryString = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
+                    + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
+                    + " VALUES (?, ?, ?,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+           for(int i=0; i<array.length(); i++){
+       jsonObj  = array.getJSONObject(i);
+            preparedStatement = connection.prepareStatement(queryString);
+            preparedStatement.setString(1, jsonObj.getString("listName1"));
+            preparedStatement.setString(2, jsonObj.getString("senderIdInst"));
+            preparedStatement.setString(3, jsonObj.getString("recId"));
+            preparedStatement.setInt(4, Integer.parseInt(jsonObj.getString("listVerson")));
+            preparedStatement.setString(5, jsonObj.getString("senderItem"));
+            preparedStatement.setString(6, jsonObj.getString("recItem"));
+            preparedStatement.setString(7, jsonObj.getString("text1"));
+            preparedStatement.setString(8, jsonObj.getString("text2"));
+            preparedStatement.setString(9, jsonObj.getString("text3"));
+            preparedStatement.setString(10, jsonObj.getString("text4"));
+            preparedStatement.setString(11, jsonObj.getString("desc"));
+            preparedStatement.setString(12, jsonObj.getString("text5"));
+            preparedStatement.setString(13, jsonObj.getString("text6"));
+            preparedStatement.setString(14, jsonObj.getString("text7"));
+            preparedStatement.setString(15, jsonObj.getString("text8"));
+            preparedStatement.setString(16, jsonObj.getString("text9"));
+            updatedRows = preparedStatement.executeUpdate();
+           }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } catch (JSONException e) {
+           e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+
+return "success";
+    }
+
+    
 }

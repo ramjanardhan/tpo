@@ -23,7 +23,7 @@
         <!-- Header -->
         <header id="head">
             <div class="container">
-                <h3><b>Search ticket</b></h3>
+                <h3><b>Search Ticket</b></h3>
             </div>
         </header> 
         <!-- /Header -->

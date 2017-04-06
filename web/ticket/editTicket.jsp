@@ -39,7 +39,7 @@
         <!-- Header -->
         <header id="head">
             <div class="container">
-                <h3><b>Edit ticket</b></h3>
+                <h3><b>Edit Ticket</b></h3>
             </div>
         </header> 
         <!-- /Header -->

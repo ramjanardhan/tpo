@@ -17,6 +17,7 @@ public class AppConstants {
     public static final String DB_HOST = "DB.Host";
     public static final String DB_Port = "DB.Port";
     public static final String DB_DRIVERTYPE = "DB.DriverType";
+   
 
     public static final String CONTEXT_PATH = "tpo";
     public static final String SES_PARTNER_LIST = "partnerList";
@@ -52,4 +53,14 @@ public class AppConstants {
     public static final String PLATFORM_TITLE = "Demo -";
     public static final String ACTIVE_FLAG = "A";
     public static final String CERTMONITOR_LIST = "certmonitorList";
+    
+       public static final String CODE_LIST = "codeList";
+    
+    //Oracle Data Source
+    public static final String ORACLEDB_USER = "ORACLEDB.User";
+    public static final String ORACLEDB_PWD = "ORACLEDB.Password";
+    public static final String ORACLEDB_NAME = "ORACLEDB.Name";
+    public static final String ORACLEDB_HOST = "ORACLEDB.Host";
+    public static final String ORACLEDB_Port = "ORACLEDB.Port";
+    public static final String ORACLEDB_DRIVERTYPE = "ORACLEDB.DriverType";
 }
