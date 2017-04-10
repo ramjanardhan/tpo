@@ -50,6 +50,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private String outputPath;
     private String path;
     private String conn_type;
+    private String formAction;
     private File upload;
     private String protocol;
     private Map protocolsList;
@@ -78,10 +79,8 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
     private List<File> upload810ob;
     private List<String> upload810obFileName;
     private List<String> upload810obContentType;
-
     private List<TpOnboardingBean> tpoCommunicationsList;
     private List<String> tpoProtocolsHeadersList;
-
     private String filepath;
     public InputStream inputStream;
     public OutputStream outputStream;
@@ -376,7 +375,8 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
                 }
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_ProtocolsHeadersList, tpoProtocolsHeadersList);
                 httpServletRequest.getSession(false).setAttribute(AppConstants.TPO_CommunicationsList, tpoCommunicationsList);
-                resultType = SUCCESS;
+                setFormAction("CommunicationList");
+                        resultType = SUCCESS;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -437,7 +437,7 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
             try {
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
-                String resultMessage = ServiceLocator.getPayloadService().reprocessPayloadData(loginId,getInputPath(), getId(), getDirection(),getOutputPath(),getPath());
+                String resultMessage = ServiceLocator.getPayloadService().reprocessPayloadData(loginId, getInputPath(), getId(), getDirection(), getOutputPath(), getPath());
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 resultType = SUCCESS;
             } catch (Exception ex) {
@@ -834,6 +834,14 @@ public class PayloadAction extends ActionSupport implements ServletRequestAware,
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getFormAction() {
+        return formAction;
+    }
+
+    public void setFormAction(String formAction) {
+        this.formAction = formAction;
     }
 
 }

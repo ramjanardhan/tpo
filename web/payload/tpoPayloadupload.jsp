@@ -85,14 +85,18 @@
             }
         </style>
     </head>
-    <body onload="doOnLoad();" class="home">
+     <s:if test="%{formAction == 'CommunicationList'}">
+       <body onload="doOnLoad();" class="home">
+        </s:if> <s:else>
+        <body class="home">
+        </s:else>
         <script type="text/javascript" src='<s:url value="/includes/js/wz_tooltip.js"/>'></script>
         <div>
             <s:include value="../includes/template/header.jsp"/>
         </div>
         <header id="head">
             <div class="container">
-                <h3 > <b>Exchange Payload</b></h3>
+                <h3> <b>Exchange Payload</b></h3>
             </div>
         </header>  
         <div class="container">
@@ -342,16 +346,17 @@
             var transaction = document.getElementById('transaction').value;
             var conn_type = document.getElementById('conn_type').value;
             $("#docType").trigger("change");
-            $("#direction").trigger("change");
+           // $("#direction").trigger("change");
+           setdirection1();
             if (direction == 'Inbound') {
                 var ibTransaction = document.forms["payloadForm"]["ibTransaction"].value;
                 transactionChange(ibTransaction);
-                //  $("#ibTransaction").trigger("change");
+                 $("#ibTransaction").trigger("change");
             }
             if (direction == 'Outbound') {
                 var obTransaction = document.forms["payloadForm"]["obTransaction"].value;
                 transactionChange(obTransaction);
-                //$("#obTransaction").trigger("change");
+                $("#obTransaction").trigger("change");
             }
             $("#conn_type").trigger("change");
         }
@@ -365,9 +370,14 @@
             $("#responseStringMsg").hide();
             var direction = document.getElementById("direction").value;
             if (direction == 'Inbound') {
+               // document.getElementById('conn_type').value = "Communication_Protocol";
                 $('#conn_type').prop('disabled', false);
                 $("#inBoundTransactions").show();
                 $("#outBoundTransactions").hide();
+                $('input[name=ibTransaction]').attr('checked',false);
+                $('input[name=obTransaction]').attr('checked',false);
+               // $("#ibTransaction").prop('checked', false);
+               // $("#obTransaction").prop('checked', false);
                 $("#ibenvelop850").hide();
                 $("#ibenvelop855").hide();
                 $("#ibenvelop856").hide();
@@ -381,16 +391,55 @@
                 $('#conn_type').prop('disabled', true);
                 $("#inBoundTransactions").hide();
                 $("#outBoundTransactions").show();
+                $('input[name=ibTransaction]').attr('checked',false);
+                $('input[name=obTransaction]').attr('checked',false);
+              //  $("#ibTransaction").prop('checked', false);
+              //  $("#obTransaction").prop('checked', false);
                 $("#communicationsGrid").hide();
                 $("#protocolDiv").hide();
-//                $("#ibenvelop850").hide();
-//                $("#ibenvelop855").hide();
-//                $("#ibenvelop856").hide();
-//                $("#ibenvelop810").hide();
-//                $("#obenvelop850").hide();
-//                $("#obenvelop855").hide();
-//                $("#obenvelop856").hide();
-//                $("#obenvelop810").hide();
+            } else {
+                $("#inBoundTransactions").hide();
+                $("#outBoundTransactions").hide();
+                $("#communicationsGrid").hide();
+                $("#protocolDiv").hide();
+                $("#ibenvelop850").hide();
+                $("#ibenvelop855").hide();
+                $("#ibenvelop856").hide();
+                $("#ibenvelop810").hide();
+                $("#obenvelop850").hide();
+                $("#obenvelop855").hide();
+                $("#obenvelop856").hide();
+                $("#obenvelop810").hide();
+            }
+            // document.getElementById("connTypeDiv").style.display = 'block';
+        }
+        function setdirection1() {
+            $("#responseStringMsg").hide();
+            var direction = document.getElementById("direction").value;
+            if (direction == 'Inbound') {
+                //document.getElementById('conn_type').value = "Communication_Protocol";
+                 $('#conn_type').prop('disabled', false);
+                $("#inBoundTransactions").show();
+                $("#outBoundTransactions").hide();
+               // $("#ibTransaction").prop('checked', false);
+               // $("#obTransaction").prop('checked', false);
+                $("#ibenvelop850").hide();
+                $("#ibenvelop855").hide();
+                $("#ibenvelop856").hide();
+                $("#ibenvelop810").hide();
+                $("#obenvelop850").hide();
+                $("#obenvelop855").hide();
+                $("#obenvelop856").hide();
+                $("#obenvelop810").hide();
+            } else if (direction == 'Outbound') {
+                document.getElementById('conn_type').value = "File_System";
+                $('#conn_type').prop('disabled', true);
+                $("#inBoundTransactions").hide();
+                $("#outBoundTransactions").show();
+              //  $("#ibTransaction").prop('checked', false);
+              //  $("#obTransaction").prop('checked', false);
+                $("#communicationsGrid").hide();
+                $("#protocolDiv").hide();
             } else {
                 $("#inBoundTransactions").hide();
                 $("#outBoundTransactions").hide();
@@ -417,6 +466,7 @@
             var direction = document.getElementById('direction').value;
             document.getElementById('transaction').value = x;
             if (direction == 'Inbound') {
+                //document.getElementById("protocolDiv").style.display = 'block';
                 $('#conn_type').prop('disabled', false);
                 if (x == '850') {
                     document.getElementById("connTypeDiv").style.display = 'block';
