@@ -89,7 +89,7 @@
                                     <ul class="dropdown-menu">
                                         <s:if test="#session.tpoRoleId == 1">
                                             <li id="certificates"><a href="../admin/tpoMonitorCertificate">Certificate Monitoring</a></li>
-                                            <%-- <li id="codeList"><a href="<s:url action="../admin/tpoCodeList"/>">Code List</a></li>--%>
+                                                <%-- <li id="codeList"><a href="<s:url action="../admin/tpoCodeList"/>">Code List</a></li>--%>
                                             <li id="userAdd"><a href="<s:url action="../user/tpoUserAdd"/>">Create User</a></li>
                                             </s:if>
                                             <s:if test='%{#session.tpoRoleId== 3 || #session.tpoRoleId== 4 || #session.tpoRoleId== 5}'>
