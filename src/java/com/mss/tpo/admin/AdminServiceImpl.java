@@ -914,52 +914,83 @@ public class AdminServiceImpl implements AdminService {
         return responseString;
     }
 
-    public List getCertMonitorData(String certType, String dateFrom, String dateTo) throws ServiceLocatorException {
+      public List getCertMonitorData(String certType, String daycount) throws ServiceLocatorException {
+
         String cType = certType;
+        String days = daycount;
+
+        System.out.println("cType===" + cType);
+        System.out.println("days ===" + days);
+
         Connection con = null;
         List<LinkedHashMap> al = new LinkedList<LinkedHashMap>();
-        String date = null;
-        String dateto = null;
-        if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
-            date = dateFrom.replace("/", "-").substring(0, 10);
-            dateto = dateTo.replace("/", "-").substring(0, 10);
-        }
+
         try {
+ 
             Class.forName("oracle.jdbc.OracleDriver");
             con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.179:1521:orcl", "si_user", "SI_admin1");
             Statement st = con.createStatement();
             ResultSet rs = null;
-            if ("TRUSTED".equalsIgnoreCase(cType)) {
-                if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
-                    rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy') ORDER BY DAYS ");
-                } else {
-                    rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO ORDER BY DAYS ");
+          
+            if (( !"-1".equalsIgnoreCase(days)) && "CA".equalsIgnoreCase(certType)) {
+                System.out.println("=============1");
 
-                }
-            } else if ("CA".equalsIgnoreCase(cType)) {
-                if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
-                    rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CA_CERT_INFO WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy')  ORDER BY DAYS");
-                } else {
-                    rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CA_CERT_INFO   ORDER BY DAYS");
-                }
-            } else if ("SYSTEM".equalsIgnoreCase(cType)) {
-                if ((dateFrom != null) && !"".equalsIgnoreCase(dateFrom)) {
-                    rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL ,(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))  AS DAYS FROM CERTS_AND_PRI_KEY WHERE NOT_BEFORE > to_date('" + date + "','dd-mm-yyyy') AND NOT_AFTER < to_date('" + dateto + "','dd-mm-yyyy')   ORDER BY DAYS");
-                } else {
-                    rs = st.executeQuery("SELECT NAME AS CERTIFICATE_NAME,NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL ,(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))  AS DAYS FROM CERTS_AND_PRI_KEY   ORDER BY DAYS");
-                }
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL,"
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) "
+                        + "AS DAYS from CA_CERT_INFO where "
+                        + "((to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))) >=0 AND ((to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))) <= " + days + "");
+            } else if ((!"-1".equalsIgnoreCase(days)) && "System".equalsIgnoreCase(certType)) {
+System.out.println("=================2");
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL,"
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) "
+                        + "AS DAYS from CERTS_AND_PRI_KEY where "
+                        + "((to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))) >=0 AND ((to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))) <= '" + days + "'");
+
+            } else if (( !"-1".equalsIgnoreCase(days)) && "Trusted".equalsIgnoreCase(certType)) {
+                System.out.println("====================3");
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL,"
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) "
+                        + "AS DAYS from TRUSTED_CERT_INFO where "
+                        + "((to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))) >=0 AND ((to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy'))) <= '" + days + "'");
+            } else if ((days == null || "-1".equalsIgnoreCase(days)) && "CA".equalsIgnoreCase(certType)) {
+System.out.println("================4");
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL,"
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) "
+                        + "AS DAYS from CA_CERT_INFO");
+            } else if ((days == null || "-1".equalsIgnoreCase(days)) && "System".equalsIgnoreCase(certType)) {
+System.out.println("================5");
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL,"
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) "
+                        + "AS DAYS from CERTS_AND_PRI_KEY");
+
+            } else if ((days == null || "-1".equalsIgnoreCase(days)) && "Trusted".equalsIgnoreCase(certType)) {
+                System.out.println("================6");
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL,"
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) "
+                        + "AS DAYS from TRUSTED_CERT_INFO");
+                
+        //default page to display all records
+            } else if (((days == null || "".equalsIgnoreCase(days))) && (certType == null || "".equalsIgnoreCase(certType))) {
+                System.out.println("===============7");
+                rs = st.executeQuery("SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - "
+                        + "to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS from CA_CERT_INFO  UNION ALL SELECT NAME, NOT_BEFORE as VALID_FROM , NOT_AFTER as VALID_TILL , "
+                        + "(to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM TRUSTED_CERT_INFO UNION ALL SELECT NAME, NOT_BEFORE as "
+                        + "VALID_FROM , NOT_AFTER as VALID_TILL , (to_date (NOT_AFTER,'dd-MM-yyyy') - to_date(SYSDATE,'dd-MM-yyyy')) AS DAYS FROM CERTS_AND_PRI_KEY");
+
             }
-
             ResultSetMetaData md = rs.getMetaData();
             int columncount = md.getColumnCount();
             LinkedHashMap map;
 
             while (rs.next()) {
                 map = new LinkedHashMap();
+                System.out.println("map = " + map);
                 for (int i = 1; i <= columncount; i++) {
+
                     map.put(md.getColumnName(i), rs.getObject(i));
                 }
                 al.add(map);
+                System.out.println("al**" + al);
             }
 
         } catch (SQLException s) {
@@ -973,6 +1004,8 @@ public class AdminServiceImpl implements AdminService {
         return al;
 
     }
+
+
 
     @Override
     public List doTpoCodeListItems(String selectedName) throws ServiceLocatorException {

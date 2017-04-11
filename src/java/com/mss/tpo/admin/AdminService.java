@@ -35,7 +35,7 @@ public interface AdminService {
 
     public String doTpoManageCommunicationRemove(String communicationId) throws ServiceLocatorException;
     
-    public List getCertMonitorData(String certType,String dateFrom,String dateTo) throws ServiceLocatorException;
+    public List getCertMonitorData(String certType, String daysCount) throws ServiceLocatorException;
     
     public List doTpoCodeListItems(String selectedName) throws ServiceLocatorException;
     

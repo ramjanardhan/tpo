@@ -131,7 +131,10 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
      private String[] text7;
      private String[] text8;
      private String[] text9;
-private String json;
+    private String json;
+  //  private String certType;
+    private String daysCount;
+    private String date;
      
    
     public String tpoAdminManageProfiles() {
@@ -545,16 +548,28 @@ private String json;
         return resultType;
     }
 
+  
     public String getCertMonitor() throws Exception {
         String resultType = LOGIN;
-
-        String cert = "SYSTEM";
-        List list = ServiceLocator.getAdminService().getCertMonitorData(getCertType(), getDocdatepickerfrom(), getDocdatepicker());
+        String days=null;
+         days = getDaysCount();
+        certType = getCertType();
+        List list=null;
+        System.out.println("days === "+days);
+        if(getDaysCount()!=null){
+        if(getDaysCount().equals("Other")){
+             days = getDate();
+        }
+        }
+              System.out.println("daysCount with specified days is  === "+days);
+         list = ServiceLocator.getAdminService().getCertMonitorData(certType,days);
+        
         httpServletRequest.getSession(false).setAttribute(AppConstants.CERTMONITOR_LIST, list);
         resultType = SUCCESS;
         return resultType;
 
     }
+
 
     public String tpoCodeList() throws ServiceLocatorException {
         resultType = LOGIN;
@@ -1296,6 +1311,22 @@ private String json;
 
     public void setText9(String[] text9) {
         this.text9 = text9;
+    }
+
+    public String getDaysCount() {
+        return daysCount;
+    }
+
+    public void setDaysCount(String daysCount) {
+        this.daysCount = daysCount;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
            

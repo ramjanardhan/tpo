@@ -26,6 +26,7 @@
         <script>
             function doOnLoad() {
                 $("#services").addClass("active");
+                $("#daysCount").trigger("change");
             }
         </script>
         <style>
@@ -73,9 +74,17 @@
                                         <s:select headerKey="-1" headerValue="--Select Type--" cssClass="form-control" list="#@java.util.LinkedHashMap@{'CA':'CA Certificate','System':'System Certificate','Trusted':'Trusted Certificate'}" name="certType" id="certType" value="%{certType}"  /> 
                                 </div>
                                 <div class="col-sm-3"> 
-                                    <label>Date Range</label>
-                                    <s:textfield name="reportrange"  id="reportrange" cssClass="form-control"   value="%{reportrange}" onchange="Date1();" /> 
+                                    <label>Days in Expire Certificate</label>
+                                    <s:select headerKey="-1" headerValue="--Select Type--" cssClass="form-control" list="#@java.util.LinkedHashMap@{'30':'Expiring in 30 days','60':'Expiring in 60 days','90':'Expiring in 90 days','Other':'Other'}" name="daysCount" id="daysCount" value="%{daysCount}"  /> 
                                 </div> 
+
+
+                                <div class="col-sm-3" id="daysdiv" style="display: none">
+                                    <label>Enter Days</label>
+                                    <s:textfield name="date" id="date" cssClass="form-control" value="%{date}" />
+                                </div> 
+
+
                             </div>
                             <br>
                             <span id="span1">
@@ -122,9 +131,9 @@
                                                                                     Object[] valuesarray = values.toArray(new Object[values.size()]);
                                                                         %>
                                                                         <tr>
-                                                                            <td> <% out.println(valuesarray[0]); %> </td>
-                                                                            <td> <%  out.println(valuesarray[1]); %> </td>
-                                                                            <td> <%out.println(valuesarray[2]); %> </td>  
+                                                                            <td> <% out.println(valuesarray[0]);%> </td>
+                                                                            <td> <%  out.println(valuesarray[1]);%> </td>
+                                                                            <td> <%out.println(valuesarray[2]);%> </td>  
                                                                             <td> <% String str = (String) valuesarray[3].toString();
                                                                                 StringBuffer sb = new StringBuffer("Expired Since ");
                                                                                 StringBuffer sb1 = new StringBuffer("Will Expire in ");
@@ -187,64 +196,74 @@
         <script src='<s:url value="/includes/plugins/datatables/jquery.dataTables.min.js"/>'></script>
         <script src='<s:url value="/includes/plugins/datatables/dataTables.bootstrap.min.js"/>'></script>
         <script type="text/javascript">
-                                    function Date1() {
-                                        var date = document.certForm.reportrange.value;
-                                        var arr = date.split("-");
-                                        var x = arr[1].trim();
-                                        document.getElementById("docdatepickerfrom").value = arr[0];
-                                        document.getElementById("docdatepicker").value = x;
-                                    }
-                                    $(function() {
-                                        function cb(start, end) {
-                                            $('#reportrange span').html(start.format('MM/DD/YYYY  HH:MM') + ' - ' + end.format('MM/DD/YYYY HH:MM'));
-                                        }
-                                        cb(moment().subtract(29, 'days'), moment());
+            $(function () {
+                $("#daysCount").change(function () {
+                    if ($("#daysCount").val() == "Other") {
+                        $("#daysdiv").show();
+                    } else
+                    {
+                        $("#daysdiv").hide();
+                    }
+                });
+            });
+            function Date1() {
+                var date = document.certForm.reportrange.value;
+                var arr = date.split("-");
+                var x = arr[1].trim();
+                document.getElementById("docdatepickerfrom").value = arr[0];
+                document.getElementById("docdatepicker").value = x;
+            }
+            $(function() {
+                function cb(start, end) {
+                    $('#reportrange span').html(start.format('MM/DD/YYYY  HH:MM') + ' - ' + end.format('MM/DD/YYYY HH:MM'));
+                }
+                cb(moment().subtract(29, 'days'), moment());
 
-                                        $('#reportrange').daterangepicker({
-                                            ranges: {
-                                                'Today': [moment(), moment()],
-                                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                                                'Transactions Until': [moment()]
-                                            },
-                                            timePicker: true,
-                                            timePicker24Hour: true,
-                                            timePickerIncrement: 1,
-                                            locale: {
-                                                format: 'DD/MM/YYYY'
-                                            }
-                                        }, cb);
-                                    });
+                $('#reportrange').daterangepicker({
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                        'Transactions Until': [moment()]
+                    },
+                    timePicker: true,
+                    timePicker24Hour: true,
+                    timePickerIncrement: 1,
+                    locale: {
+                        format: 'DD/MM/YYYY'
+                    }
+                }, cb);
+            });
 
-                                    function validateCertType() {
-                                        var certType = document.getElementById('certType').value;
-                                        if (certType == "-1") {
-                                            alert("please select certificate type");
-                                            return false;
-                                        }
-                                        return true;
-                                    }
+            function validateCertType() {
+                var certType = document.getElementById('certType').value;
+                if (certType == "-1") {
+                    alert("please select certificate type");
+                    return false;
+                }
+                return true;
+            }
 
-                                    function resetvalues() {
-                                        document.getElementById('docdatepickerfrom').value = "";
-                                        document.getElementById('docdatepicker').value = "";
-                                        document.getElementById('certType').value = "-1";
-                                        document.getElementById('reportrange').value = "";
-                                        $('#gridDiv').hide();
-                                    }
+            function resetvalues() {
+                document.getElementById('docdatepickerfrom').value = "";
+                document.getElementById('docdatepicker').value = "";
+                document.getElementById('certType').value = "-1";
+                document.getElementById('reportrange').value = "";
+                $('#gridDiv').hide();
+            }
 
-                                    $(function() {
-                                        $('#results').DataTable({
-                                            "paging": true,
-                                            "lengthChange": true,
-                                            "searching": true,
-                                            "ordering": true,
-                                            "info": true,
-                                            "autoWidth": false
-                                        });
-                                    });
+            $(function() {
+                $('#results').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false
+                });
+            });
         </script>
     </body> 
 </html>
