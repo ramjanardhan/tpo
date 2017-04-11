@@ -88,7 +88,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-list" aria-hidden="true"></i><span class="">Services</span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <s:if test="#session.tpoRoleId == 1">
-                                            <li id="certificates"><a href="../admin/tpoMonitorCertificate">Certificate Monitoring</a></li>
+                                            <li id="certificates"><a href="../admin/certMonitorSearch">Certificate Monitoring</a></li>
                                                 <%-- <li id="codeList"><a href="<s:url action="../admin/tpoCodeList"/>">Code List</a></li>--%>
                                             <li id="userAdd"><a href="<s:url action="../user/tpoUserAdd"/>">Create User</a></li>
                                             </s:if>
