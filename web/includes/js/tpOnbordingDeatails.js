@@ -204,13 +204,9 @@ function protocolsSelect(x) {
     }
     document.getElementById("transferModeMsg").style.display = "none";
     var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-    if (transferMode == "pull" || transferMode == "push")
-
-    {
+    if (transferMode == "pull" || transferMode == "push"){
         gettransferModeSelection(transferMode);
     }
-//gettransferModeSelection(transferMode);
-//transferModeSelection(transferMode);
 }
 function sslRequired(x) {
     var transferMode;

@@ -717,4 +717,43 @@ public class DataSourceDataProvider {
         }
         return listNameMap;
     }
+    
+    public int getAssignedCommunications(int partnerId, String protocol) throws ServiceLocatorException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String queryString = null;
+        connection = ConnectionProvider.getInstance().getConnection();
+        int assignedCommunication = 0;
+        try {
+                queryString = "SELECT DISTINCT(COMMUNICATION_ID) AS COMM_ID FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE PARTNER_ID ="+partnerId+" AND PROTOCOL = '"+protocol+"'";
+            preparedStatement = connection.prepareStatement(queryString);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                assignedCommunication = resultSet.getInt("COMM_ID");
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                    preparedStatement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return assignedCommunication;
+    }
+    
+    
 }

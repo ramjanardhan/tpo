@@ -81,7 +81,7 @@
                                 <table id="profiletable" class="table table-bordered table-hover">
                                     <thead>
                                     <th>CONNECTION&nbsp;TYPE</th>
-                                    <th>CORRELATION&nbsp;ID</th>
+                                    <th>COMMUNICATION&nbsp;ID</th>
                                     <th>TRANSACTION</th>
                                     <th>DIRECTION</th>
                                     <th>FILE&nbsp;NAME</th>

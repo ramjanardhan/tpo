@@ -312,8 +312,8 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 } else if ("false".equalsIgnoreCase(envelopeData[13])) {
                     preparedStatement.setString(14, "NO");
                 }
-            }else{
-                 preparedStatement.setString(14, "NA");
+            } else {
+                preparedStatement.setString(14, "NA");
             }
             preparedStatement.setString(15, envelopeData[14]);
             preparedStatement.setString(16, loginId);
@@ -391,15 +391,15 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
         return isEnevelopInserted;
     }
 
-    public String getProtocolDetails(String transferMode, String protocol) throws ServiceLocatorException {
+    public String getProtocolDetails(String transferMode, String protocol, int partnerId) throws ServiceLocatorException {
         stringBuffer = new StringBuffer();
         Statement statement = null;
         ResultSet resultSet = null;
         JSONObject subJson = null;
-        int partnerId = 0;
         int i = 0;
         String empty = "";
         try {
+            int assignedCommunication = DataSourceDataProvider.getInstance().getAssignedCommunications(partnerId, protocol);
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
             if ("FTP".equalsIgnoreCase(protocol)) {
@@ -409,10 +409,10 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 subJson = new JSONObject();
                 if ("pull".equalsIgnoreCase(transferMode)) {
                     i = 1;
-                    ftpTransferModeQuery = "SELECT ID,COMMUNICATION_ID,PARTNER_ID,FTP_METHOD,RECEIVING_PROTOCOL,FTP_HOST,FTP_PORT,"
-                            + "FTP_USER_ID,FTP_PASSWORD,FTP_DIRECTORY,CONNECTION_METHOD,RESPONSE_TIMEOUT_SEC,TRANSFER_MODE,"
-                            + "SSL_FLAG,CREATED_BY,CREATED_TS,MODIFIED_BY,MODIFIED_TS "
-                            + "FROM MSCVP.TPO_FTP WHERE ID = 1 AND TRANSFER_MODE = 'pull'";
+                    ftpTransferModeQuery = "SELECT ID,COMMUNICATION_ID,PARTNER_ID,FTP_METHOD,RECEIVING_PROTOCOL,FTP_HOST,"
+                            + "FTP_PORT,FTP_USER_ID,FTP_PASSWORD,FTP_DIRECTORY,CONNECTION_METHOD,RESPONSE_TIMEOUT_SEC,"
+                            + "TRANSFER_MODE,SSL_FLAG,CREATED_BY,CREATED_TS,MODIFIED_BY,MODIFIED_TS "
+                            + "FROM MSCVP.TPO_FTP WHERE COMMUNICATION_ID = " + assignedCommunication + " AND TRANSFER_MODE = 'pull'";
                     resultSet = statement.executeQuery(ftpTransferModeQuery);
                     if (resultSet.next()) {
                         subJson.put("FTP_METHOD", resultSet.getString("FTP_METHOD"));
@@ -428,7 +428,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         subJson.put("SSL_REQUIRED_FLAG", ftp_ssl_req);
                     }
                     if ("true".equalsIgnoreCase(ftp_ssl_req)) {
-                        ftpSslQuery = "SELECT ID,COMMUNICATION_ID,PROTOCOL, SSL_PRIORITY, KEY_CERTIFICATE_PASSPHRASE, CIPHER_STRENGTH, KEY_CERTIFICATE, CA_CERTIFICATES, TP_FLAG,PARTNER_ID,TRANSFER_MODE FROM MSCVP.TPO_SSL WHERE TRANSFER_MODE = 'pull' AND PROTOCOL = 'FTP' AND ID = 1";
+                        ftpSslQuery = "SELECT ID,COMMUNICATION_ID,PROTOCOL, SSL_PRIORITY, KEY_CERTIFICATE_PASSPHRASE, CIPHER_STRENGTH, "
+                                + "KEY_CERTIFICATE, CA_CERTIFICATES, TP_FLAG,PARTNER_ID,TRANSFER_MODE FROM MSCVP.TPO_SSL "
+                                + "WHERE TRANSFER_MODE = 'pull' AND PROTOCOL = 'FTP' AND COMMUNICATION_ID = " + assignedCommunication + "";
                         resultSet = statement.executeQuery(ftpSslQuery);
                         if (resultSet.next()) {
                             subJson.put("SSL_PRIORITY", resultSet.getString("SSL_PRIORITY"));
@@ -441,9 +443,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 String sftpTransferModeQuery = "";
                 if ("pull".equalsIgnoreCase(transferMode)) {
                     i = 1;
-                    sftpTransferModeQuery = "SELECT ID,PARTNER_ID,CONN_METHOD,MY_SSH_PUB_KEY,UPL_YOUR_SSH_PUB_KEY,REMOTE_HOST_IP_ADD,"
-                            + "REMOTE_USERID,METHOD,AUTH_METHOD,REMOTE_PORT,REMOTE_PWD,DIRECTORY,TRANSFER_MODE,CREATED_BY,"
-                            + "CREATED_TS,MODIFIED_BY,MODIFIED_TS FROM MSCVP.TPO_SFTP WHERE ID =1 AND TRANSFER_MODE = 'pull'";
+                    sftpTransferModeQuery = "SELECT ID,COMMUNICATION_ID,PARTNER_ID,CONN_METHOD,MY_SSH_PUB_KEY,UPL_YOUR_SSH_PUB_KEY,REMOTE_HOST_IP_ADD,"
+                            + "REMOTE_USERID,METHOD,AUTH_METHOD,REMOTE_PORT,REMOTE_PWD,DIRECTORY,TRANSFER_MODE,CREATED_BY,CREATED_TS,"
+                            + "MODIFIED_BY,MODIFIED_TS FROM MSCVP.TPO_SFTP WHERE COMMUNICATION_ID = " + assignedCommunication + " AND TRANSFER_MODE = 'pull'";
                     resultSet = statement.executeQuery(sftpTransferModeQuery);
                     if (resultSet.next()) {
                         subJson = new JSONObject();
@@ -466,9 +468,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                 subJson = new JSONObject();
                 if ("push".equalsIgnoreCase(transferMode)) {
                     i = 1;
-                    httpTransferModeQuery = "SELECT ID, PARTNER_ID, RECEIVING_PROTOCOL, HTTP_END_POINT, HTTP_MODE, RESPONSE_TIMEOUT_SEC, HTTP_PORT, "
-                            + "SSL_FLAG, TRANSFER_MODE, CREATED_BY, CREATED_TS, MODIFIED_BY, MODIFIED_TS,URL "
-                            + "FROM MSCVP.TPO_HTTP WHERE ID = 1 AND TRANSFER_MODE = 'push'";
+                    httpTransferModeQuery = "SELECT ID, COMMUNICATION_ID, PARTNER_ID, RECEIVING_PROTOCOL, HTTP_END_POINT, HTTP_MODE, RESPONSE_TIMEOUT_SEC, "
+                            + "HTTP_PORT, SSL_FLAG, TRANSFER_MODE, CREATED_BY, CREATED_TS, MODIFIED_BY, MODIFIED_TS,URL "
+                            + "FROM MSCVP.TPO_HTTP WHERE COMMUNICATION_ID = " + assignedCommunication + "  AND TRANSFER_MODE = 'push'";
                     resultSet = statement.executeQuery(httpTransferModeQuery);
                     if (resultSet.next()) {
                         subJson.put("RECEIVING_PROTOCOL", resultSet.getString("RECEIVING_PROTOCOL"));
@@ -480,7 +482,9 @@ public class AjaxHandlerServiceImpl implements AjaxHandlerService {
                         subJson.put("SSL_REQUIRED", http_ssl_req);
                     }
                     if ("true".equalsIgnoreCase(http_ssl_req)) {
-                        httpSslQuery = "SELECT ID, PROTOCOL, SSL_PRIORITY, KEY_CERTIFICATE_PASSPHRASE, CIPHER_STRENGTH, KEY_CERTIFICATE, CA_CERTIFICATES, TP_FLAG,PARTNER_ID,TRANSFER_MODE FROM MSCVP.TPO_SSL WHERE TRANSFER_MODE = 'push' AND PROTOCOL = 'HTTP' AND ID = 2";
+                        httpSslQuery = "SELECT ID, COMMUNICATION_ID, PROTOCOL, SSL_PRIORITY, KEY_CERTIFICATE_PASSPHRASE, CIPHER_STRENGTH, "
+                                + "KEY_CERTIFICATE, CA_CERTIFICATES, TP_FLAG,PARTNER_ID,TRANSFER_MODE FROM MSCVP.TPO_SSL "
+                                + "WHERE TRANSFER_MODE = 'push' AND PROTOCOL = 'HTTP' AND COMMUNICATION_ID = " + assignedCommunication + " ";
                         resultSet = statement.executeQuery(httpSslQuery);
                         if (resultSet.next()) {
                             subJson.put("SSL_PRIORITY", resultSet.getString("SSL_PRIORITY"));

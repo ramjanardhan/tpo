@@ -714,15 +714,13 @@ public class AdminServiceImpl implements AdminService {
         try {
             if (managecommunication.equalsIgnoreCase("Assign Communication")) {
                 if (roleId == 1) {
-                    queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
-                            + " FROM MSCVP.TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'FTP' AND TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
+                    queryString = "SELECT DISTINCT(TPO_FTP.COMMUNICATION_ID),TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
+                            + "FROM MSCVP.TPO_FTP WHERE TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull' "
+                            + "AND TPO_FTP.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 } else {
-                    queryString = "SELECT TPO_FTP.COMMUNICATION_ID,TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
-                            + " FROM MSCVP.TPO_FTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_FTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'FTP' AND TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull' and TPO_FTP.CREATED_BY='" + loginId + "'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
+                    queryString = "SELECT DISTINCT(TPO_FTP.COMMUNICATION_ID),TPO_FTP.FTP_HOST,TPO_FTP.FTP_PORT,TPO_FTP.FTP_USER_ID "
+                            + "FROM MSCVP.TPO_FTP WHERE TPO_FTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_FTP.TRANSFER_MODE='pull' and TPO_FTP.CREATED_BY='" + loginId + "'"
+                            + "AND TPO_FTP.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -757,15 +755,13 @@ public class AdminServiceImpl implements AdminService {
         try {
             if (managecommunication.equalsIgnoreCase("Assign Communication")) {
                 if (roleId == 1) {
-                    queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
-                            + " FROM MSCVP.TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'SFTP' AND TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
+                    queryString = "SELECT DISTINCT(TPO_SFTP.COMMUNICATION_ID),TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
+                            + "FROM MSCVP.TPO_SFTP WHERE TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull' "
+                            + "AND TPO_SFTP.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " and PROTOCOL='SFTP')";
                 } else {
-                    queryString = "SELECT TPO_SFTP.COMMUNICATION_ID,TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
-                            + " FROM MSCVP.TPO_SFTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_SFTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'SFTP' AND TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull' and TPO_SFTP.CREATED_BY='" + loginId + "'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
+                    queryString = "SELECT DISTINCT(TPO_SFTP.COMMUNICATION_ID),TPO_SFTP.REMOTE_HOST_IP_ADD,TPO_SFTP.REMOTE_PORT,TPO_SFTP.REMOTE_USERID "
+                            + "FROM MSCVP.TPO_SFTP WHERE TPO_SFTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_SFTP.TRANSFER_MODE='pull' and TPO_SFTP.CREATED_BY='" + loginId + "' "
+                            + "AND TPO_SFTP.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " and PROTOCOL='SFTP')";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -799,15 +795,13 @@ public class AdminServiceImpl implements AdminService {
         try {
             if (managecommunication.equalsIgnoreCase("Assign Communication")) {
                 if (roleId == 1) {
-                    queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
-                            + " FROM MSCVP.TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'HTTP' AND TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
+                    queryString = "SELECT DISTINCT(TPO_HTTP.COMMUNICATION_ID),TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,"
+                            + "TPO_HTTP.URL FROM MSCVP.TPO_HTTP WHERE  TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push' "
+                            + "AND TPO_HTTP.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " and PROTOCOL='HTTP')";
                 } else {
-                    queryString = "SELECT TPO_HTTP.COMMUNICATION_ID,TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,TPO_HTTP.URL "
-                            + " FROM MSCVP.TPO_HTTP LEFT OUTER JOIN TPO_PARTNER_COMMUNICATIONS ON (TPO_HTTP.COMMUNICATION_ID = TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID) "
-                            + " WHERE TPO_PARTNER_COMMUNICATIONS.PROTOCOL= 'HTTP' AND TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push' and TPO_HTTP.CREATED_BY='" + loginId + "'"
-                            + " AND TPO_PARTNER_COMMUNICATIONS.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " )";
+                    queryString = "SELECT DISTINCT(TPO_HTTP.COMMUNICATION_ID),TPO_HTTP.HTTP_END_POINT,TPO_HTTP.HTTP_PORT,"
+                            + "TPO_HTTP.URL FROM MSCVP.TPO_HTTP WHERE  TPO_HTTP.ADMIN_PROTOCOL_FLAG='Y' and TPO_HTTP.TRANSFER_MODE='push' AND TPO_HTTP.CREATED_BY='" + loginId + "' "
+                            + "AND TPO_HTTP.COMMUNICATION_ID not in (SELECT COMMUNICATION_ID FROM TPO_PARTNER_COMMUNICATIONS where PARTNER_ID = " + partnerId + " and PROTOCOL='HTTP')";
                 }
             }
             if (managecommunication.equalsIgnoreCase("Remove Communication")) {
@@ -837,22 +831,39 @@ public class AdminServiceImpl implements AdminService {
 
     public String doTpoManageCommunicationAdd(AdminAction adminAction) throws ServiceLocatorException {
         int isManageCommunicationInserted = 0;
+        int isManageCommunicationUpdated = 0;
         Timestamp curdate = DateUtility.getInstance().getCurrentDB2Timestamp();
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
             StringBuffer assignCommunicationQuery = new StringBuffer();
-            assignCommunicationQuery.append(" INSERT INTO MSCVP.TPO_PARTNER_COMMUNICATIONS(PARTNER_ID, COMMUNICATION_ID, PROTOCOL)");
-            assignCommunicationQuery.append(" VALUES(?,?,?)");
-            String communications[] = adminAction.getCommunicationMesId();
-            for (int i = 0; i < communications.length; i++) {
-                preparedStatement = connection.prepareStatement(assignCommunicationQuery.toString());
-                preparedStatement.setInt(1, adminAction.getPartnerId());
-                preparedStatement.setInt(2, Integer.parseInt(communications[i]));
-                preparedStatement.setString(3, DataSourceDataProvider.getInstance().getProtocolByCommunicationId(Integer.parseInt(communications[i])));
-                isManageCommunicationInserted = isManageCommunicationInserted + preparedStatement.executeUpdate();
+            String selectQuery = "SELECT count(ID) FROM MSCVP.TPO_PARTNER_COMMUNICATIONS where PARTNER_ID= ? AND PROTOCOL=?";
+            preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setInt(1, adminAction.getPartnerId());
+            preparedStatement.setString(2, DataSourceDataProvider.getInstance().getProtocolByCommunicationId(adminAction.getCommunicationMesId()));
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getInt(1) > 0) {
+                    assignCommunicationQuery.append("Update MSCVP.TPO_PARTNER_COMMUNICATIONS SET COMMUNICATION_ID=? ");
+                    assignCommunicationQuery.append(" WHERE PROTOCOL=? AND PARTNER_ID = ?");
+                    preparedStatement = connection.prepareStatement(assignCommunicationQuery.toString());
+                    preparedStatement.setInt(1, adminAction.getCommunicationMesId());
+                    preparedStatement.setString(2, DataSourceDataProvider.getInstance().getProtocolByCommunicationId(adminAction.getCommunicationMesId()));
+                    preparedStatement.setInt(3, adminAction.getPartnerId());
+                    isManageCommunicationUpdated = isManageCommunicationUpdated + preparedStatement.executeUpdate();
+                } else {
+                    assignCommunicationQuery.append(" INSERT INTO MSCVP.TPO_PARTNER_COMMUNICATIONS(PARTNER_ID, COMMUNICATION_ID, PROTOCOL) VALUES(?,?,?)");
+                    preparedStatement = connection.prepareStatement(assignCommunicationQuery.toString());
+                    preparedStatement.setInt(1, adminAction.getPartnerId());
+                    preparedStatement.setInt(2, adminAction.getCommunicationMesId());
+                    preparedStatement.setString(3, DataSourceDataProvider.getInstance().getProtocolByCommunicationId(adminAction.getCommunicationMesId()));
+                    isManageCommunicationInserted = isManageCommunicationInserted + preparedStatement.executeUpdate();
+                }
             }
+
             if (isManageCommunicationInserted > 0) {
+                responseString = "<font color='green'>Protocol assigned successfully.</font>";
+            } else if (isManageCommunicationUpdated > 0) {
                 responseString = "<font color='green'>Protocol assigned successfully.</font>";
             } else {
                 responseString = "<font color='green'>Protocol assigning failed.</font>";
@@ -879,13 +890,13 @@ public class AdminServiceImpl implements AdminService {
         return responseString;
     }
 
-    public String doTpoManageCommunicationRemove(String communicationId) throws ServiceLocatorException {
+    public String doTpoManageCommunicationRemove(int communicationId) throws ServiceLocatorException {
         int count = 0;
         String responseString = "";
         try {
             connection = ConnectionProvider.getInstance().getConnection();
             // String query = "DELETE FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE PARTNER_ID =" + partnerId + " AND COMMUNICATION_ID=" + communicationId + "";
-            String query = "DELETE FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE COMMUNICATION_ID='" + communicationId + "'";
+            String query = "DELETE FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE COMMUNICATION_ID=" + communicationId + "";
             preparedStatement = connection.prepareStatement(query);
             count = preparedStatement.executeUpdate();
             if (count > 0) {
@@ -1080,45 +1091,44 @@ public class AdminServiceImpl implements AdminService {
         String queryString = null;
         connection = ConnectionProvider.getInstance().getOracleConnection();
         JSONArray array = null;
-           JSONObject jsonObj=null;
-           int updatedRows=0;
+        JSONObject jsonObj = null;
+        int updatedRows = 0;
         try {
             array = new JSONArray(jsonData);
 
-           
-        }  catch (JSONException ex) {
+        } catch (JSONException ex) {
             Logger.getLogger(AdminServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+
         try {
             queryString = "INSERT INTO SI_USER.CODELIST_XREF_ITEM "
                     + "(LIST_NAME, SENDER_ID, RECEIVER_ID, LIST_VERSION, SENDER_ITEM, RECEIVER_ITEM, TEXT1, TEXT2, TEXT3, TEXT4, DESCRIPTION, TEXT5, TEXT6, TEXT7, TEXT8, TEXT9)"
                     + " VALUES (?, ?, ?,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-           for(int i=0; i<array.length(); i++){
-       jsonObj  = array.getJSONObject(i);
-            preparedStatement = connection.prepareStatement(queryString);
-            preparedStatement.setString(1, jsonObj.getString("listName1"));
-            preparedStatement.setString(2, jsonObj.getString("senderIdInst"));
-            preparedStatement.setString(3, jsonObj.getString("recId"));
-            preparedStatement.setInt(4, Integer.parseInt(jsonObj.getString("listVerson")));
-            preparedStatement.setString(5, jsonObj.getString("senderItem"));
-            preparedStatement.setString(6, jsonObj.getString("recItem"));
-            preparedStatement.setString(7, jsonObj.getString("text1"));
-            preparedStatement.setString(8, jsonObj.getString("text2"));
-            preparedStatement.setString(9, jsonObj.getString("text3"));
-            preparedStatement.setString(10, jsonObj.getString("text4"));
-            preparedStatement.setString(11, jsonObj.getString("desc"));
-            preparedStatement.setString(12, jsonObj.getString("text5"));
-            preparedStatement.setString(13, jsonObj.getString("text6"));
-            preparedStatement.setString(14, jsonObj.getString("text7"));
-            preparedStatement.setString(15, jsonObj.getString("text8"));
-            preparedStatement.setString(16, jsonObj.getString("text9"));
-            updatedRows = preparedStatement.executeUpdate();
-           }
+            for (int i = 0; i < array.length(); i++) {
+                jsonObj = array.getJSONObject(i);
+                preparedStatement = connection.prepareStatement(queryString);
+                preparedStatement.setString(1, jsonObj.getString("listName1"));
+                preparedStatement.setString(2, jsonObj.getString("senderIdInst"));
+                preparedStatement.setString(3, jsonObj.getString("recId"));
+                preparedStatement.setInt(4, Integer.parseInt(jsonObj.getString("listVerson")));
+                preparedStatement.setString(5, jsonObj.getString("senderItem"));
+                preparedStatement.setString(6, jsonObj.getString("recItem"));
+                preparedStatement.setString(7, jsonObj.getString("text1"));
+                preparedStatement.setString(8, jsonObj.getString("text2"));
+                preparedStatement.setString(9, jsonObj.getString("text3"));
+                preparedStatement.setString(10, jsonObj.getString("text4"));
+                preparedStatement.setString(11, jsonObj.getString("desc"));
+                preparedStatement.setString(12, jsonObj.getString("text5"));
+                preparedStatement.setString(13, jsonObj.getString("text6"));
+                preparedStatement.setString(14, jsonObj.getString("text7"));
+                preparedStatement.setString(15, jsonObj.getString("text8"));
+                preparedStatement.setString(16, jsonObj.getString("text9"));
+                updatedRows = preparedStatement.executeUpdate();
+            }
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);
         } catch (JSONException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         } finally {
             try {
                 if (resultSet != null) {
@@ -1138,8 +1148,7 @@ public class AdminServiceImpl implements AdminService {
             }
         }
 
-return "success";
+        return "success";
     }
 
-    
 }

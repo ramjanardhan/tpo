@@ -255,13 +255,13 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>HTTP&nbsp;Endpoint</label>
+                                    <label>Endpoint&nbsp;IP</label>
                                     <s:textfield cssClass="form-control" name="http_endpoint" id="http_endpoint" tabindex="24" value="%{http_endpoint}"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>HTTP&nbsp;Port </label>
+                                    <label>Endpoint&nbsp;Port</label>
                                     <s:textfield cssClass="form-control" name="http_port" id="http_port" tabindex="25" value="%{http_port}" onchange="fieldLengthValidator(this);"/>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>URL </label>
+                                    <label>Endpoint</label>
                                     <s:textfield cssClass="form-control" name="http_url" id="http_url" tabindex="27" value="%{http_url}" />
                                 </div>
                             </div>

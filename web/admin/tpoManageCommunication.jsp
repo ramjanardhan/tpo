@@ -128,7 +128,7 @@
                                                             adminBean = (AdminBean) list.get(i);
                                                             if ("FTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" id="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="radio" name="CommunicationMesId" id="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getFtp_host()); %> </td>
                                                     <td> <% out.println(adminBean.getFtp_port()); %> </td>
@@ -137,7 +137,7 @@
                                                 <%  }
                                                     if ("SFTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="radio" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getSftp_host_ip()); %> </td>
                                                     <td> <% out.println(adminBean.getSftp_remote_port()); %> </td>
@@ -146,7 +146,7 @@
                                                 <%  }
                                                     if ("HTTP".equalsIgnoreCase(protocol)) {%>
                                                 <tr>
-                                                    <td align="center"><input type="checkbox" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
+                                                    <td align="center"><input type="radio" name="CommunicationMesId" value="<%=(adminBean.getId())%>" /></td>
                                                     <td> <% out.println(adminBean.getId()); %> </td>
                                                     <td> <% out.println(adminBean.getHttp_endpoint()); %> </td>
                                                     <td> <% out.println(adminBean.getHttp_port()); %> </td>

@@ -104,7 +104,7 @@ public class AdminAction extends ActionSupport implements ServletRequestAware, S
     private ArrayList<AdminBean> tpoManageCommunicationList;
     private String protocol;
     private String manageCommunication;
-    private String[] CommunicationMesId;
+    private int CommunicationMesId;
     private Map partnerNameList;
     private String certType;
     private String docdatepickerfrom;
@@ -521,11 +521,11 @@ private String json;
                 setPartnerNameList(DataSourceDataProvider.getInstance().getMyPartnersList(loginId, roleId));
                 setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 setManageCommunication(getManageCommunication());
-                String communicationRemove[] = getCommunicationMesId();
+                //String communicationRemove[] = getCommunicationMesId();
                 if (getManageCommunication().equalsIgnoreCase("Assign Communication")) {
                     resultMessage = ServiceLocator.getAdminService().doTpoManageCommunicationAdd(this);
                 } else {
-                    resultMessage = ServiceLocator.getAdminService().doTpoManageCommunicationRemove(communicationRemove[0]);
+                    resultMessage = ServiceLocator.getAdminService().doTpoManageCommunicationRemove(getCommunicationMesId());
                 }
                 httpServletRequest.getSession(false).setAttribute(AppConstants.REQ_RESULT_MSG, resultMessage);
                 httpServletRequest.getSession(false).removeAttribute(AppConstants.TPO_CommunicationsList);
@@ -1082,11 +1082,11 @@ private String json;
         this.manageCommunication = manageCommunication;
     }
 
-    public String[] getCommunicationMesId() {
+    public int getCommunicationMesId() {
         return CommunicationMesId;
     }
 
-    public void setCommunicationMesId(String[] CommunicationMesId) {
+    public void setCommunicationMesId(int CommunicationMesId) {
         this.CommunicationMesId = CommunicationMesId;
     }
 

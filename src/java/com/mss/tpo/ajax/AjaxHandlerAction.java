@@ -166,7 +166,8 @@ public class AjaxHandlerAction extends ActionSupport implements ServletRequestAw
     public String getProtocolDetails() {
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                responseString = ServiceLocator.getAjaxHandlerService().getProtocolDetails(getTransferMode(), getProtocol());
+                int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
+                responseString = ServiceLocator.getAjaxHandlerService().getProtocolDetails(getTransferMode(), getProtocol(), partnerId);
                 httpServletResponse.setContentType("text");
                 httpServletResponse.getWriter().write(responseString);
             } catch (Exception ex) {

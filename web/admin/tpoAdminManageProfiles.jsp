@@ -107,7 +107,7 @@
                                     <th>PROTOCOL</th>
                                     <th>CREATED&nbsp;BY</th>
                                     <th>CREATED&nbsp;DATE</th>
-                                    <th>TEST</th>
+<!--                                    <th>TEST</th>-->
                                     <!--  <th>TEST&nbsp;STATUS</th>-->
                                     <th>EDIT</th>
                                     <th>DELETE </th>
@@ -126,10 +126,10 @@
                                             <td> <% out.println(adminBean.getCommnProtocol()); %> </td>
                                             <td> <% out.println(adminBean.getCreated_by()); %> </td>  
                                             <td> <% out.println(adminBean.getCreated_ts().toString().substring(0, adminBean.getCreated_ts().toString().lastIndexOf(":")));%> </td>
-                                            <td align="center">   
-                                                <%-- <s:hidden id = "iValue"/>--%>
+                                           <%-- <td align="center">   
+                                                <!-- <s:hidden id = "iValue"/>-->
                                                 <a style="color: green" href='javascript:testConnectionProfile("<%=i%>","<%=(adminBean.getId())%>","<%=(adminBean.getCommnProtocol())%>","<%=partnerName%>")'><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-                                            </td>
+                                            </td>--%>
                                             <%--  <td> <div id = "<%=i%>"></div> </td>--%>
                                             <td align="center">
                                                 <s:url var="myUrl" action="../admin/tpoAdminGetProfile.action">

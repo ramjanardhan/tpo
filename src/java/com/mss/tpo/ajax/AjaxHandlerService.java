@@ -27,7 +27,7 @@ public interface AjaxHandlerService {
 
     public String doUpdateEnvelope(int id, String envelopeDetials, String loginId, int partnerId, String transaction, String direction) throws ServiceLocatorException;
 
-    public String getProtocolDetails(String transferMode, String protocol) throws ServiceLocatorException;
+    public String getProtocolDetails(String transferMode, String protocol, int partnerId) throws ServiceLocatorException;
 
     public String isExistedAS2PartnerProfileName(String name, String partnerName) throws ServiceLocatorException;
 
