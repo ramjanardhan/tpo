@@ -204,7 +204,7 @@ function protocolsSelect(x) {
     }
     document.getElementById("transferModeMsg").style.display = "none";
     var transferMode = document.forms["addTpOnboard"]["transferMode"].value;
-    if (transferMode == "pull" || transferMode == "push"){
+    if (transferMode == "pull" || transferMode == "push") {
         gettransferModeSelection(transferMode);
     }
 }
@@ -1681,7 +1681,7 @@ function isExistedUserEmailResponse2(resText) {
 }
 
 function gettransferModeSelection(x) {
-     document.getElementById("responseString").style.display = 'none';
+    document.getElementById("responseString").style.display = 'none';
     document.getElementById('tempTransferMode').value = x;
     document.getElementById("transferModeMsg").style.display = "none";
     var protocol = document.getElementById("commnProtocol").value;
@@ -1775,6 +1775,8 @@ function gettransferModeSelection(x) {
         if (x == 'push') {
             document.getElementById("saveButton").style.display = 'block';
             $("#mail_button").css("display", "none");
+            $('#ftp_method').attr('disabled', true);
+            document.getElementById("ftp_method").value = "PUT";
             var ftp_recv;
             if (formAction == 'doAddProfile') {
                 document.getElementById("ftp_resp_time").value = "";
@@ -1811,7 +1813,6 @@ function gettransferModeSelection(x) {
             document.getElementById("ftp_userId").readOnly = false;
             document.getElementById("ftp_pwd").readOnly = false;
             document.getElementById("ftp_directory").readOnly = false;
-            $('#ftp_method').attr('disabled', false);
             $('#ssl_priority2').attr('disabled', false);
             $('#ssl_cipher_stergth2').attr('disabled', false);
         }
@@ -2194,27 +2195,43 @@ function validateFTP(flag) {
     }
 }
 
-function validateSFTP(flag) {     // var sftp_conn_method = document.getElementById("sftp_conn_method").value;
-    //  var sftp_auth_method = document.getElementById("sftp_auth_method").value;
-    var FileName = document.getElementById("attachmentFileNameSftp").value;
+function validateSFTP(flag) {
+    // var sftp_conn_method = document.getElementById("sftp_conn_method").value;
+    var sftp_auth_method = document.getElementById("sftp_auth_method").value;
     var sftp_host_ip = document.getElementById("sftp_host_ip").value;
     var sftp_remote_port = document.getElementById("sftp_remote_port").value;
     var sftp_remote_userId = document.getElementById("sftp_remote_userId").value;
-    var sftp_remote_pwd = document.getElementById("sftp_remote_pwd").value;
+
     // var sftp_method = document.getElementById("sftp_method").value;
     var sftp_directory = document.getElementById("sftp_directory").value;
     // var ftp_ssl_req = document.getElementById("ftp_ssl_req").value;
     //var ftp_ssl = document.getElementById("ftp_ssl_req").checked;
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
-    if (flag == 'add') {
-        if (((FileName == null) || (FileName == ""))) {
-            document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please upload SSH public key</font>";
-            return false;
+    //if (flag == 'add') {
+        var FileName = document.getElementById("attachmentFileNameSftp").value;
+        var sftp_remote_pwd = document.getElementById("sftp_remote_pwd").value;
+        if (sftp_auth_method == 'SSH_Public_Key') {
+            if (((FileName == null) || (FileName == ""))) {
+                document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please upload SSH public key</font>";
+                return false;
+            }
+        } else if (sftp_auth_method == 'Pwd_Only') {
+            if ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) {
+                document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter remote password.</font>";
+            }
+        } else if (sftp_auth_method == 'pwd_and_public') {
+            if (((FileName == null) || (FileName == ""))) {
+                document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please upload SSH public key</font>";
+                return false;
+            }
+            if ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) {
+                document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter remote password.</font>";
+            }
         }
-    }
+   // }
     if ((document.getElementById('tempTransferMode').value) == 'push') {
-        if (((sftp_host_ip == null) || (sftp_host_ip == "")) || ((sftp_remote_port == null) || (sftp_remote_port == "")) || ((sftp_remote_userId == null) || (sftp_remote_userId == "")) || ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) || ((sftp_directory == null) || (sftp_directory == ""))) {
+        if (((sftp_host_ip == null) || (sftp_host_ip == "")) || ((sftp_remote_port == null) || (sftp_remote_port == "")) || ((sftp_remote_userId == null) || (sftp_remote_userId == "")) || ((sftp_directory == null) || (sftp_directory == ""))) {
             document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";
             return false;
         }
@@ -2703,5 +2720,21 @@ function getCommunicationsList(protocol) {
         var obTransaction = document.forms["payloadForm"]["obTransaction"].value;
         window.location = "../payload/getCommunicationsList.action?docType=" + docType + "&direction=" + direction + "&obTransaction=" + obTransaction + "&conn_type=" + conn_type + "&protocol=" + protocol;
     }
+}
 
+function authenticationTypeChange(x) {
+    //sftp_auth_method
+    if (x == 'Pwd_Only') {
+        $("#sftpPublicKeyDiv").hide();
+        $("#sftpRemotePwdDiv").show();
+    } else if (x == 'SSH_Public_Key') {
+        $("#sftpPublicKeyDiv").show();
+        $("#sftpRemotePwdDiv").hide();
+    } else if (x == 'pwd_and_public') {
+        $("#sftpPublicKeyDiv").show();
+        $("#sftpRemotePwdDiv").show();
+    } else {
+        $("#sftpPublicKeyDiv").hide();
+        $("#sftpRemotePwdDiv").hide();
+    }
 }

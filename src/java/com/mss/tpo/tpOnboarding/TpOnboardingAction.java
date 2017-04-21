@@ -216,7 +216,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                     map.put(FTPKeys[8], getFtp_directory());
                 } else if ("AS2".equals(this.getCommnProtocol())) {
                     map = new HashMap();
-
                     map.put(AS2Keys[0], getAs2_part_cert());
                     map.put(AS2Keys[1], getAs2_myOrgName());
                     map.put(AS2Keys[2], getAs2_partOrgName());
@@ -300,7 +299,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
             try {
                 int commnId = Integer.parseInt(httpServletRequest.getParameter("communicationId").toString());
                 setCommunicationId(commnId);
-                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 ServiceLocator.getTpOnboardingService().tpogetProfile(getCommunicationId(), getCommnProtocol(), this);
@@ -317,7 +316,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                 int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 String partnerName = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_NAME).toString();
                 String loginId = httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString();
@@ -403,7 +402,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         resultType = LOGIN;
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
-                  int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
+                int roleId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_ROLE_ID);
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
                 setProtocolList(DataSourceDataProvider.getInstance().getCommunicationProtocols(roleId));
                 String resultMessage = ServiceLocator.getTpOnboardingService().getDeleteProfile(getCommunicationId(), getCommnProtocol(), partnerId, getTransferMode());
@@ -501,7 +500,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         if (httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_LOGIN_ID).toString() != null) {
             try {
                 int id = (Integer) httpServletRequest.getAttribute("id");
-                System.out.println("envelope id::"+id);
+                System.out.println("envelope id::" + id);
                 String direction = httpServletRequest.getParameter("direction");
                 String transaction = httpServletRequest.getParameter("transaction");
                 int partnerId = (Integer) httpServletRequest.getSession(false).getAttribute(AppConstants.TPO_PARTNER_ID);
@@ -604,7 +603,49 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
         return isSave;
     }
 
-    
+    public void as2FileDownload() {
+        String responseString = "";
+        try {
+            System.out.println("commId===>"+getId());
+            String filePath = DataSourceDataProvider.getInstance().getAs2FilePath(getId());
+            System.out.println("Action filePath::::"+filePath);
+            httpServletResponse.setContentType("application/force-download");
+            File file = new File(filePath);
+            if (file.exists()) {
+                fileName = file.getName();
+                inputStream = new FileInputStream(file);
+                outputStream = httpServletResponse.getOutputStream();
+                httpServletResponse.setHeader("Content-Disposition", "attachment;filename=\"" + fileName + "\"");
+                int noOfBytesRead = 0;
+                byte[] byteArray = null;
+                while (true) {
+                    byteArray = new byte[1024];
+                    noOfBytesRead = inputStream.read(byteArray);
+                    if (noOfBytesRead == 0) {
+                        break;
+                    }
+                    outputStream.write(byteArray, 0, noOfBytesRead);
+                }
+                responseString = "downLoaded!!";
+                httpServletResponse.setContentType("text");
+                httpServletResponse.getWriter().write(responseString);
+
+            } else {
+                throw new FileNotFoundException("File not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }/*catch (ServiceLocatorException ex) {
+         ex.printStackTrace();
+         }*/ finally {
+            try {
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -686,8 +727,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void setOB855Transaction(String OB855Transaction) {
         this.OB855Transaction = OB855Transaction;
     }
-
-   
 
     public String getCommnProtocol() {
         return commnProtocol;
@@ -1096,7 +1135,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void setLoginId(String loginId) {
         this.loginId = loginId;
     }
-    
+
     public String getCreated_by() {
         return created_by;
     }
@@ -1340,8 +1379,6 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
-
-  
 
     public File getUpload2() {
         return upload2;

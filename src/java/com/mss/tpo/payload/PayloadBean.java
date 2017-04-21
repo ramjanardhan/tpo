@@ -34,6 +34,7 @@ public class PayloadBean {
     private String direction;
     private String fileName;
     private int correlationID;
+    private int instanceID;
 
     public int getId() {
         return id;
@@ -193,6 +194,14 @@ public class PayloadBean {
 
     public void setOutputPath(String outputPath) {
         this.outputPath = outputPath;
+    }
+
+    public int getInstanceID() {
+        return instanceID;
+    }
+
+    public void setInstanceID(int instanceID) {
+        this.instanceID = instanceID;
     }
 
 }

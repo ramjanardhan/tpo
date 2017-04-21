@@ -9,6 +9,7 @@ import com.mss.tpo.util.DataSourceDataProvider;
 import com.mss.tpo.util.DateUtility;
 import com.mss.tpo.util.MailManager;
 import com.mss.tpo.util.ServiceLocatorException;
+import java.io.File;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +41,6 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
     TpOnboardingBean tpOnboardingBean = null;
     private ArrayList<TpOnboardingBean> tpoSearchProfileList;
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
-    
 
     public ArrayList<TpOnboardingBean> tpoSearchProfile(String loginId, int roleId, int partnerId, String flag, TpOnboardingAction tpAction) {
         StringBuffer profileSearchQuery = new StringBuffer();
@@ -277,20 +277,32 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                 preparedStatement.setString(3, tpAction.getTransferMode());
                 preparedStatement.setString(4, tpAction.getSftp_conn_method());
                 preparedStatement.setString(5, tpAction.getSftp_public_key());
-                preparedStatement.setString(6, tpAction.getFilepath());
+                if (("SSH_Public_Key".equalsIgnoreCase(tpAction.getSftp_auth_method())) || ("pwd_and_public".equalsIgnoreCase(tpAction.getSftp_auth_method()))) {
+                    preparedStatement.setString(6, tpAction.getFilepath());
+                } else {
+                    preparedStatement.setString(6, "");
+                }
                 preparedStatement.setString(7, tpAction.getSftp_host_ip());
                 preparedStatement.setString(8, tpAction.getSftp_remote_userId());
                 preparedStatement.setString(9, tpAction.getSftp_method());
                 preparedStatement.setString(10, tpAction.getSftp_auth_method());
                 preparedStatement.setString(11, tpAction.getSftp_remote_port());
-                preparedStatement.setString(12, tpAction.getSftp_remote_pwd());
+                if (("Pwd_Only".equalsIgnoreCase(tpAction.getSftp_auth_method())) || ("pwd_and_public".equalsIgnoreCase(tpAction.getSftp_auth_method()))) {
+                    preparedStatement.setString(12, tpAction.getSftp_remote_pwd());
+                } else {
+                    preparedStatement.setString(12, "");
+                }
                 preparedStatement.setString(13, tpAction.getSftp_directory());
                 preparedStatement.setString(14, "N");
                 preparedStatement.setString(15, tpAction.getCreated_by());
                 preparedStatement.setTimestamp(16, curdate);
                 preparedStatement.setString(17, "INACTIVE");
-                if (!"".equalsIgnoreCase(tpAction.getFilepath())) {
-                    preparedStatement.setString(18, DataSourceDataProvider.getInstance().getCertificatePath(tpAction.getFilepath()));
+                if (("SSH_Public_Key".equalsIgnoreCase(tpAction.getSftp_auth_method())) || ("pwd_and_public".equalsIgnoreCase(tpAction.getSftp_auth_method()))) {
+                    if (!"".equalsIgnoreCase(tpAction.getFilepath())) {
+                        preparedStatement.setString(18, DataSourceDataProvider.getInstance().getCertificatePath(tpAction.getFilepath()));
+                    } else {
+                        preparedStatement.setString(18, "");
+                    }
                 } else {
                     preparedStatement.setString(18, "");
                 }
@@ -406,7 +418,9 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     int communicationid = resultSet.getInt("COMMUNICATION_ID");
                     tpOnboardingAction.setCommunicationId(communicationid);
                     tpOnboardingAction.setId(resultSet.getInt("PARTNER_ID"));
-                    tpOnboardingAction.setAs2_sysCert(resultSet.getString("UPL_YOUR_SYS_CERT"));
+                    File file = new File(resultSet.getString("UPL_YOUR_SYS_CERT"));
+                    //fileName = file.getName();
+                    tpOnboardingAction.setAs2_sysCert(file.getName());
                     tpOnboardingAction.setAs2_myOrgName(resultSet.getString("MY_ORG"));
                     tpOnboardingAction.setAs2_partOrgName(resultSet.getString("YOUR_ORG"));
                     tpOnboardingAction.setAs2_myPartname(resultSet.getString("MY_PART_PRO_NAME"));
@@ -852,9 +866,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     StringBuffer sftpUpdateQuery = new StringBuffer();
                     sftpUpdateQuery.append("UPDATE MSCVP.TPO_SFTP SET CONN_METHOD = ?,MY_SSH_PUB_KEY = ?,REMOTE_HOST_IP_ADD = ?,REMOTE_USERID = ?");
                     sftpUpdateQuery.append(",METHOD = ?,AUTH_METHOD = ?,REMOTE_PORT = ?,REMOTE_PWD = ?,DIRECTORY = ?,MODIFIED_BY = ?,MODIFIED_TS = ?,TP_FLAG = ?, STATUS = ?");
-                    if (tpOnboardingAction.getFilepath() != null) {
-                        sftpUpdateQuery.append(" ,UPL_YOUR_SSH_PUB_KEY = ?,SSH_CERT_DATA=? ");
-                    }
+                    sftpUpdateQuery.append(" ,UPL_YOUR_SSH_PUB_KEY = ?,SSH_CERT_DATA=? ");
                     sftpUpdateQuery.append(" WHERE COMMUNICATION_ID=" + communicationId);
                     preparedStatement = connection.prepareStatement(sftpUpdateQuery.toString());
                     preparedStatement.setString(1, tpOnboardingAction.getSftp_conn_method());
@@ -864,7 +876,11 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     preparedStatement.setString(5, tpOnboardingAction.getSftp_method());
                     preparedStatement.setString(6, tpOnboardingAction.getSftp_auth_method());
                     preparedStatement.setString(7, tpOnboardingAction.getSftp_remote_port());
-                    preparedStatement.setString(8, tpOnboardingAction.getSftp_remote_pwd());
+                    if (("Pwd_Only".equalsIgnoreCase(tpOnboardingAction.getSftp_auth_method())) || ("pwd_and_public".equalsIgnoreCase(tpOnboardingAction.getSftp_auth_method()))) {
+                        preparedStatement.setString(8, tpOnboardingAction.getSftp_remote_pwd());
+                    } else {
+                        preparedStatement.setString(8, "");
+                    }
                     preparedStatement.setString(9, tpOnboardingAction.getSftp_directory());
                     preparedStatement.setString(10, tpOnboardingAction.getCreated_by());
                     preparedStatement.setTimestamp(11, curdate);
@@ -875,10 +891,24 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         preparedStatement.setString(12, "U");
                     }
                     preparedStatement.setString(13, "INACTIVE");
-                    if (tpOnboardingAction.getFilepath() != null) {
-                        preparedStatement.setString(14, tpOnboardingAction.getFilepath());
-                        preparedStatement.setString(15, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
+
+                    if (("SSH_Public_Key".equalsIgnoreCase(tpOnboardingAction.getSftp_auth_method())) || ("pwd_and_public".equalsIgnoreCase(tpOnboardingAction.getSftp_auth_method()))) {
+                        if (tpOnboardingAction.getFilepath() != null) {
+                            preparedStatement.setString(14, tpOnboardingAction.getFilepath());
+                            preparedStatement.setString(15, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
+                        } else {
+                            preparedStatement.setString(14, "");
+                            preparedStatement.setString(15, "");
+                        }
+                    } else {
+                        preparedStatement.setString(14, "");
+                        preparedStatement.setString(15, "");
                     }
+
+//                    if (tpOnboardingAction.getFilepath() != null) {
+//                        preparedStatement.setString(14, tpOnboardingAction.getFilepath());
+//                        preparedStatement.setString(15, DataSourceDataProvider.getInstance().getCertificatePath(tpOnboardingAction.getFilepath()));
+//                    }
                     isProtocolUpdated = isProtocolUpdated + preparedStatement.executeUpdate();
                 } else if (commonprotocol.equalsIgnoreCase("SMTP")) {
                     String smtpUpdateQuery = "UPDATE MSCVP.TPO_SMTP SET SMTP_SERVER_PORT = ?,TO_EMAIL_ADDRESS = ?,"
@@ -1059,7 +1089,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                         } else if ("false".equalsIgnoreCase(envelopData[13])) {
                             preparedStatement.setString(15, "NO");
                         }
-                    }else{
+                    } else {
                         preparedStatement.setString(15, "NA");
                     }
                     preparedStatement.setString(16, envelopData[14]);
@@ -1152,7 +1182,7 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
             String editEnvelopeQuery = "SELECT PARTNER_ID,TRANSACTION,DIRECTION,PROTOCOL,SENDERID_ISA,SENDERID_GS,SENDERID_ST,RECEIVERID_ISA,RECEIVERID_GS,RECEIVERID_ST,"
                     + "VERSION_ISA,VERSION_GS,VERSION_ST,FUNCTIONAL_ID_CODE_GS,RESPONSIBLE_AGENCY_CODE_GS,GENERATE_AN_ACKNOWLEDGEMENT_GS,"
                     + "TRANSACTION_SET_ID_CODE_ST,TP_FLAG,CREATED_BY,CREATED_TS,MODIFIED_BY,MODIFIED_TS "
-                    + "FROM TPO_ENVELOPES WHERE ID= "+id+" ";
+                    + "FROM TPO_ENVELOPES WHERE ID= " + id + " ";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(editEnvelopeQuery);
             while (resultSet.next()) {
@@ -1231,4 +1261,37 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         }
         return responseString;
     }
+
+    public String as2FileDownload(int communicationId, TpOnboardingAction tpAction) throws ServiceLocatorException {
+        String filePath = "";
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            String editEnvelopeQuery = "SELECT UPL_YOUR_SYS_CERT FROM MSCVP.TPO_AS2 where COMMUNICATION_ID = " + communicationId;
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(editEnvelopeQuery);
+            while (resultSet.next()) {
+                filePath = resultSet.getString("UPL_YOUR_SYS_CERT");
+                System.out.println("filePath-->" + filePath);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException se) {
+                throw new ServiceLocatorException(se);
+            }
+        }
+        return filePath;
+    }
+
 }

@@ -508,7 +508,8 @@ public class DataSourceDataProvider {
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                protocolsMap.put(resultSet.getString("protocol"), resultSet.getString("protocol"));
+                //protocolsMap.put(resultSet.getString("protocol"), resultSet.getString("protocol"));
+                protocolsMap.put(resultSet.getString("protocol"), getProtocolNameByProtocol(resultSet.getString("protocol")));
             }
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);
@@ -531,6 +532,41 @@ public class DataSourceDataProvider {
             }
         }
         return protocolsMap;
+    }
+    
+    public String getProtocolNameByProtocol(String protocol) throws ServiceLocatorException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String protocolName = "";
+        connection = ConnectionProvider.getInstance().getConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT PROTOCOL_NAME FROM MSCVP.TPO_PROTOCOLS WHERE PROTOCOL ='" + protocol + "' ");
+            while (resultSet.next()) {
+                protocolName = resultSet.getString("PROTOCOL_NAME");
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return protocolName;
     }
 
     public Map getCommunicationProtocols(int roleId) throws ServiceLocatorException {
@@ -755,5 +791,39 @@ public class DataSourceDataProvider {
         return assignedCommunication;
     }
     
-    
+     public String getAs2FilePath(int communicationId) throws ServiceLocatorException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String as2FilePath = "";
+        connection = ConnectionProvider.getInstance().getConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT UPL_YOUR_SYS_CERT FROM MSCVP.TPO_AS2 where COMMUNICATION_ID = " + communicationId);
+            while (resultSet.next()) {
+                as2FilePath = resultSet.getString("UPL_YOUR_SYS_CERT");
+                System.out.println("UPL_YOUR_SYS_CERT---"+as2FilePath);
+            }
+        } catch (SQLException sql) {
+            throw new ServiceLocatorException(sql);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    resultSet = null;
+                }
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException ex) {
+                throw new ServiceLocatorException(ex);
+            }
+        }
+        return as2FilePath;
+    }
 }

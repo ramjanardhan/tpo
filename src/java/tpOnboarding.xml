@@ -93,6 +93,7 @@
         
         <!--   new     -->
         <action name="tpOnboardingDownloads" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpOnboardingDownloads"></action>
+        <action name="as2FileDownload" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="as2FileDownload"></action>
         
     </package>
 </struts>

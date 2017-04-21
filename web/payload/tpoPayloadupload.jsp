@@ -169,7 +169,7 @@
                                 <s:if test="#session.tpoCommunicationsList != null"> 
                                     <label>Communications<span class="text-danger">*</span></label>
 
-                                    <div id="site_content" class="jumbotron" style="padding-left: 0px">
+                                    <div id="site_content" class="row jumbotron" style="padding-left: 0px">
                                         <div class="container">
                                             <center><div id="resultMsg"></div></center>
                                             <center><div id="protocolmsgSsl"></div></center>

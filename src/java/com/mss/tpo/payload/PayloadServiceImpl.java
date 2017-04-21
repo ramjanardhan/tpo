@@ -45,13 +45,16 @@ public class PayloadServiceImpl implements PayloadService {
         StringBuffer payloadSearchQuery = new StringBuffer();
         payloadSearchQuery.append(" SELECT ID,PARTNER_ID, PARTNER_NAME, DOC_TYPE, DIRECTION, TRANSACTION, CONNECTION_TYPE, ");
         payloadSearchQuery.append(" COMMUNICATION_ID, PATH, FILE_NAME, OUTPUT_PATH, INPUT_PATH, STATUS, LAST_TEST_STATUS, LAST_TEST_DATE, CURRENT_TEST_STATUS, ");
-        payloadSearchQuery.append(" CURRENT_TEST_DATE, STATUS_FLAG, CREATED_BY, CREATED_TS FROM MSCVP.TPO_PAYLOAD WHERE 1=1 ");
+        payloadSearchQuery.append(" CURRENT_TEST_DATE, STATUS_FLAG, INSTANCEID, CREATED_BY, CREATED_TS FROM MSCVP.TPO_PAYLOAD WHERE 1=1 ");
         if ("searchFlag".equals(flag)) {
             if (payloadAction.getDirection() != null && !"-1".equals(payloadAction.getDirection())) {
                 payloadSearchQuery.append(" AND DIRECTION='" + payloadAction.getDirection() + "' ");
             }
             if (payloadAction.getTransaction() != null && !"-1".equals(payloadAction.getTransaction())) {
                 payloadSearchQuery.append(" AND TRANSACTION='" + payloadAction.getTransaction() + "' ");
+            }
+            if (payloadAction.getConn_type()!= null && !"-1".equals(payloadAction.getConn_type())) {
+                payloadSearchQuery.append(" AND CONNECTION_TYPE='" + payloadAction.getConn_type() + "' ");
             }
         }
         if (roleId == 3) {
@@ -68,6 +71,7 @@ public class PayloadServiceImpl implements PayloadService {
                 PayloadBean payloadBean = new PayloadBean();
                 payloadBean.setId(resultSet.getInt("ID"));
                 payloadBean.setCorrelationID(resultSet.getInt("COMMUNICATION_ID"));
+                payloadBean.setInstanceID(resultSet.getInt("INSTANCEID"));
                 payloadBean.setTransaction(resultSet.getInt("TRANSACTION"));
                 payloadBean.setDirection(resultSet.getString("DIRECTION"));
                 payloadBean.setFileName(resultSet.getString("FILE_NAME"));

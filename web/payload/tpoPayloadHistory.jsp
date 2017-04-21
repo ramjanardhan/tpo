@@ -50,11 +50,16 @@
                         <div>
                             <div class="col-sm-3">
                                 <div class="form-group">
+                                    <label>Connection Type<span class="text-danger">*</span></label>
+                                    <s:select name="conn_type" id="conn_type" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Communication_Protocol':'Communication Protocol','File_System':'File system'}" cssClass="form-control"/>         
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
                                     <label>Direction :</label>
                                     <s:select name="direction" id="direction" headerKey="-1" headerValue="-- Select --" list="#@java.util.LinkedHashMap@{'Inbound':'Inbound','Outbound':'Outbound'}" tabindex="1" value=""  cssClass="form-control"/>         
                                 </div>
                             </div>
-
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Transaction :</label>
@@ -82,6 +87,7 @@
                                     <thead>
                                     <th>CONNECTION&nbsp;TYPE</th>
                                     <th>COMMUNICATION&nbsp;ID</th>
+                                    <th>INSTANCE&nbsp;ID</th>
                                     <th>TRANSACTION</th>
                                     <th>DIRECTION</th>
                                     <th>FILE&nbsp;NAME</th>
@@ -109,7 +115,15 @@
                                                 } else {
                                                     out.println(payloadBean.getCorrelationID());
                                                 }
-                                                %> </td> 
+                                                %> 
+                                            </td> 
+                                            <td> <% if ((payloadBean.getInstanceID()) == 0) {
+                                                    out.println("--");
+                                                } else {
+                                                    out.println(payloadBean.getInstanceID());
+                                                }
+                                                %> 
+                                            </td>
                                             <td> <% out.println(payloadBean.getTransaction()); %> </td>
                                             <td> <% out.println(payloadBean.getDirection()); %> </td>
                                             <td> <% if ((payloadBean.getFileName()) == null) {
@@ -242,6 +256,7 @@
                                             function resetValues() {
                                                 document.getElementById("transaction").value = "-1";
                                                 document.getElementById("direction").value = "-1";
+                                                document.getElementById("conn_type").value = "-1";
                                             }
         </script>
     </body>
