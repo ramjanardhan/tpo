@@ -2208,7 +2208,7 @@ function validateSFTP(flag) {
     //var ftp_ssl = document.getElementById("ftp_ssl_req").checked;
     document.getElementById('tpResultMessage').innerHTML = "";
     //var commnProtocol =document.getElementById('commnProtocol').value;
-    //if (flag == 'add') {
+    if (flag == 'add') {
         var FileName = document.getElementById("attachmentFileNameSftp").value;
         var sftp_remote_pwd = document.getElementById("sftp_remote_pwd").value;
         if (sftp_auth_method == 'SSH_Public_Key') {
@@ -2219,7 +2219,8 @@ function validateSFTP(flag) {
         } else if (sftp_auth_method == 'Pwd_Only') {
             if ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) {
                 document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter remote password.</font>";
-            }
+             return false;
+         }
         } else if (sftp_auth_method == 'pwd_and_public') {
             if (((FileName == null) || (FileName == ""))) {
                 document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please upload SSH public key</font>";
@@ -2227,9 +2228,23 @@ function validateSFTP(flag) {
             }
             if ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) {
                 document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter remote password.</font>";
-            }
+             return false;
+         }
         }
-   // }
+    }else {
+        var sftp_remote_pwd = document.getElementById("sftp_remote_pwd").value;
+        if (sftp_auth_method == 'Pwd_Only') {
+            if ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) {
+                document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter remote password.</font>";
+             return false;
+         }
+        } else if (sftp_auth_method == 'pwd_and_public') {
+            if ((sftp_remote_pwd == null) || (sftp_remote_pwd == "")) {
+                document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter remote password.</font>";
+             return false;
+         }
+        }
+    }
     if ((document.getElementById('tempTransferMode').value) == 'push') {
         if (((sftp_host_ip == null) || (sftp_host_ip == "")) || ((sftp_remote_port == null) || (sftp_remote_port == "")) || ((sftp_remote_userId == null) || (sftp_remote_userId == "")) || ((sftp_directory == null) || (sftp_directory == ""))) {
             document.getElementById('protocolmsgSftp').innerHTML = "<font color=red>Please enter all mandatory fields</font>";

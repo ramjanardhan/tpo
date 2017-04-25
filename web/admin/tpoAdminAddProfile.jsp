@@ -100,7 +100,7 @@
                         <div class="container">
                             <div id="ftpDiv" style="display: none;clear:both">
                                 <div id="protocolmsgFtp"></div>
-                                <h4 style="color: #2d8fc8" class="heading_4">FTP&nbsp;Server&nbsp;Details  : </h4>
+                                <h4 style="color: #2d8fc8" class="heading_4">FTP&nbsp;Server&nbsp;Details : </h4>
                                 <div id="tpResultMessage"></div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -162,10 +162,8 @@
                             </div>
                             <div id="ftp_ssl" class="col-sm-3">
                                 <div class="" style="margin-top:30px">
-                                    <label for="ftp_ssl_req" style="display: none">
-                                        SSL&nbsp;Required
-                                    </label>
-                                    <s:checkbox  style="display:none" name="ftp_ssl_req" id="ftp_ssl_req" tabindex="12" value="%{ftp_ssl_req}" onclick="sslRequiredForAdmin('ftp')" cssClass=""/>
+                                    <label for="ftp_ssl_req" style="display: none">SSL&nbsp;Required</label>
+                                    <s:checkbox style="display:none" name="ftp_ssl_req" id="ftp_ssl_req" tabindex="12" value="%{ftp_ssl_req}" onclick="sslRequiredForAdmin('ftp')" cssClass=""/>
                                 </div>
                             </div>
                         </div>
@@ -273,15 +271,13 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Endpoint</label>
+                                    <label>Endpoint&nbsp;URI</label>
                                     <s:textfield cssClass="form-control" name="http_url" id="http_url" tabindex="27" value="%{http_url}" />
                                 </div>
                             </div>
                             <div id="http_ssl" class="col-sm-3" style="display: none">
                                 <div class="" style="margin-top:30px">
-                                    <label for="http_ssl_req" style="display: none">
-                                        SSL&nbsp;Required
-                                    </label>
+                                    <label for="http_ssl_req" style="display: none">SSL&nbsp;Required</label>
                                     <s:checkbox style="display: none" id="http_ssl_req" name="http_ssl_req" tabindex="28" value="%{http_ssl_req}" onclick="sslRequiredForAdmin('http')"/>
                                 </div>
                             </div>

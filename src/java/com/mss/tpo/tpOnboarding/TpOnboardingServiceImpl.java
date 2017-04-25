@@ -401,6 +401,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 tpOnboardingAction.setSsl_priority2(resultSet.getString("SSL_PRIORITY"));
                                 tpOnboardingAction.setSsl_cipher_stergth2(resultSet.getString("CIPHER_STRENGTH"));
                                 tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
+                                File file = new File(resultSet.getString("CA_CERTIFICATES"));
+                                tpOnboardingAction.setSsl_FileName(file.getName());
                             }
                         }
                     }
@@ -440,6 +442,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                             tpOnboardingAction.setSsl_priority2(resultSet.getString("SSL_PRIORITY"));
                             tpOnboardingAction.setSsl_cipher_stergth2(resultSet.getString("CIPHER_STRENGTH"));
                             tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
+                            File file1 = new File(resultSet.getString("CA_CERTIFICATES"));
+                                tpOnboardingAction.setSsl_FileName(file1.getName());
                         }
                     }
                     tpOnboardingAction.setCommnProtocol(commonprotocol);
@@ -481,6 +485,8 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                                 tpOnboardingAction.setSsl_priority2(resultSet.getString("SSL_PRIORITY"));
                                 tpOnboardingAction.setSsl_cipher_stergth2(resultSet.getString("CIPHER_STRENGTH"));
                                 tpOnboardingAction.setCertGroups(resultSet.getString("CA_CERTIFICATES"));
+                                File file = new File(resultSet.getString("CA_CERTIFICATES"));
+                                tpOnboardingAction.setSsl_FileName(file.getName());
                             }
                         }
                     }
@@ -499,7 +505,10 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
                     tpOnboardingAction.setId(resultSet.getInt("PARTNER_ID"));
                     tpOnboardingAction.setTransferMode(resultSet.getString("TRANSFER_MODE"));
                     tpOnboardingAction.setSftp_conn_method(resultSet.getString("CONN_METHOD"));
-                    tpOnboardingAction.setSftp_upload_public_key(resultSet.getString("UPL_YOUR_SSH_PUB_KEY"));
+                    File file = new File(resultSet.getString("UPL_YOUR_SSH_PUB_KEY"));
+                    //fileName = file.getName();
+                    tpOnboardingAction.setSftp_upload_public_key(file.getName());
+                    // tpOnboardingAction.setSftp_upload_public_key(resultSet.getString("UPL_YOUR_SSH_PUB_KEY"));
                     tpOnboardingAction.setSftp_host_ip(resultSet.getString("REMOTE_HOST_IP_ADD"));
                     tpOnboardingAction.setSftp_remote_userId(resultSet.getString("REMOTE_USERID"));
                     tpOnboardingAction.setSftp_method(resultSet.getString("METHOD"));
@@ -1266,12 +1275,42 @@ public class TpOnboardingServiceImpl implements TpOnboardingService {
         String filePath = "";
         try {
             connection = ConnectionProvider.getInstance().getConnection();
-            String editEnvelopeQuery = "SELECT UPL_YOUR_SYS_CERT FROM MSCVP.TPO_AS2 where COMMUNICATION_ID = " + communicationId;
+            String as2FileQuery = "SELECT UPL_YOUR_SYS_CERT FROM MSCVP.TPO_AS2 where COMMUNICATION_ID = " + communicationId;
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(editEnvelopeQuery);
+            resultSet = statement.executeQuery(as2FileQuery);
             while (resultSet.next()) {
                 filePath = resultSet.getString("UPL_YOUR_SYS_CERT");
-                System.out.println("filePath-->" + filePath);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                    statement = null;
+                }
+                if (connection != null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException se) {
+                throw new ServiceLocatorException(se);
+            }
+        }
+        return filePath;
+    }
+
+    public String sftpFileDownload(int communicationId, TpOnboardingAction tpAction) throws ServiceLocatorException {
+        String filePath = "";
+        try {
+            connection = ConnectionProvider.getInstance().getConnection();
+            String sftpFileQuery = "SELECT UPL_YOUR_SSH_PUB_KEY FROM MSCVP.TPO_SFTP WHERE COMMUNICATION_ID =" + communicationId;
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sftpFileQuery);
+            while (resultSet.next()) {
+                filePath = resultSet.getString("UPL_YOUR_SSH_PUB_KEY");
             }
         } catch (SQLException e) {
             e.printStackTrace();

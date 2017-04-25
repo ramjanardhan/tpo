@@ -200,11 +200,18 @@
                             </div>
                             <div class="col-sm-3" id="sftpPublicKeyDiv" style="display: none">
                                 <div class="form-group">
-                                    <label>SSH&nbsp;Public&nbsp;key </label>
                                     <div id="download" >
+                                        <label>SSH&nbsp;Public&nbsp;key </label>
                                         <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                     </div>
                                     <div id="upload">
+                                        <label>SSH&nbsp;Public&nbsp;key </label>
+                                        <s:if test="%{formAction != 'doAddProfile'}">
+                                            <s:url var="sftpFileDownloadURL" action="../tpOnboarding/sftpFileDownload.action">
+                                                <s:param name="sftpCommunicationId"><s:property value="%{communicationId}"/></s:param> 
+                                            </s:url>
+                                            <s:a href='%{#sftpFileDownloadURL}' style="color: blue;" ><s:property value="%{sftp_upload_public_key}"/></s:a>
+                                        </s:if>
                                         <s:file name="upload" id= "attachmentFileNameSftp" label="sftp_upload_public_key" tabindex="15"/>
                                     </div>
                                 </div>
@@ -286,7 +293,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Endpoint</label>
+                                    <label>Endpoint&nbsp;URI</label>
                                     <s:textfield cssClass="form-control" name="http_url" id="http_url" tabindex="27" value="%{http_url}" />
                                 </div>
                             </div>
@@ -345,18 +352,18 @@
                                         <input value="System Certificates" name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">    
-                                     <label>Upload&nbsp;System&nbsp;Certificate </label>
+                                <div class="col-sm-3">    
+                                    <label>Upload&nbsp;System&nbsp;Certificate </label>
                                     <s:if test="%{formAction != 'doAddProfile'}">
                                         <s:url var="as2FileDownloadURL" action="../tpOnboarding/as2FileDownload.action">
-                                            <s:param name="id"><s:property value="%{communicationId}"/></s:param> 
+                                            <s:param name="as2CommunicationId"><s:property value="%{communicationId}"/></s:param> 
                                         </s:url>
                                         <s:a href='%{#as2FileDownloadURL}' style="color: blue;" ><s:property value="%{as2_sysCert}"/></s:a>
                                     </s:if>
                                     <s:file name="upload" id= "attachmentFileNameAs2" label="as2_part_cert" tabindex="34"/>  
                                 </div>
                                 <div class="col-sm-5 col-md-3">
-                                <label>Download&nbsp;System&nbsp;Certificate </label>
+                                    <label>Download&nbsp;System&nbsp;Certificate </label>
                                     <a href="../tpOnboarding/tpOnboardingDownloads.action">Download this file</a>
                                 </div>
 
@@ -435,7 +442,7 @@
                                     </div>
                                 </div>  
                             </div>
-                            <div class="col-sm-12">  
+                            <div class="col-sm-12">
                                 <div class="col-sm-3 gutter_hide">
                                     <div class="threshold" style="display: none">
                                         <input value="AS2 EndPoint " name="thresholdSelect" disabled="disabled" class="jumbotron_bg" type="text">
@@ -505,6 +512,12 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>CA&nbsp;Certificate:</label>
+                                    <s:if test="%{formAction != 'doAddProfile'}">
+                                        <s:url var="sslFileDownload" action="../tpOnboarding/sslFileDownload.action">
+                                            <s:param name="filepath"><s:property value="%{certGroups}"/></s:param> 
+                                        </s:url>
+                                        <s:a href='%{#sslFileDownload}' style="color: blue;" ><s:property value="%{ssl_FileName}"/></s:a>
+                                    </s:if>
                                     <%--  <s:file name="certGroups" id="certGroups" label="certGroups" tabindex="58"/>--%>
                                     <s:file name="upload1" id= "attachmentFileName" label="certGroups" tabindex="49"/> 
                                 </div>

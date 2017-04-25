@@ -94,6 +94,8 @@
         <!--   new     -->
         <action name="tpOnboardingDownloads" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="tpOnboardingDownloads"></action>
         <action name="as2FileDownload" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="as2FileDownload"></action>
+        <action name="sftpFileDownload" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="sftpFileDownload"></action>
+        <action name="sslFileDownload" class="com.mss.tpo.tpOnboarding.TpOnboardingAction" method="sslFileDownload"></action>
         
     </package>
 </struts>

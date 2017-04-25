@@ -71,6 +71,7 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String sftp_auth_method;
     private String sftp_public_key;
     private String sftp_upload_public_key;
+    private String sftp_uploaded_file;
     private String sftp_host_ip;
     private String sftp_remote_port;
     private String sftp_remote_userId;
@@ -137,6 +138,9 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     private String direction;
     private List<TpOnboardingBean> tpoSearchProfileList;
     private ArrayList<TpOnboardingBean> tpoSearchEnvelopeList;
+    private int as2CommunicationId;
+    private int sftpCommunicationId;
+    private String ssl_FileName;
 
     public String execute() throws Exception {
         resultType = LOGIN;
@@ -606,9 +610,36 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
     public void as2FileDownload() {
         String responseString = "";
         try {
-            System.out.println("commId===>"+getId());
-            String filePath = DataSourceDataProvider.getInstance().getAs2FilePath(getId());
-            System.out.println("Action filePath::::"+filePath);
+            System.out.println("commId===>" + getAs2CommunicationId());
+            String filePath = ServiceLocator.getTpOnboardingService().as2FileDownload(getAs2CommunicationId(), this);
+            commonFileDownload(filePath);
+        } catch (Exception ex) {
+            resultType = "error";
+        }
+    }
+    public void sftpFileDownload() {
+        String responseString = "";
+        try {
+            System.out.println("commId===>" + getSftpCommunicationId());
+            String filePath = ServiceLocator.getTpOnboardingService().sftpFileDownload(getSftpCommunicationId(), this);
+            commonFileDownload(filePath);
+        } catch (Exception ex) {
+            resultType = "error";
+        }
+    }
+    
+    public void sslFileDownload() {
+        String responseString = "";
+        try {
+            System.out.println("ssl filepath===>" + getFilepath());
+            commonFileDownload(getFilepath());
+        } catch (Exception ex) {
+            resultType = "error";
+        }
+    }
+
+    public void commonFileDownload(String filePath) {
+        try {
             httpServletResponse.setContentType("application/force-download");
             File file = new File(filePath);
             if (file.exists()) {
@@ -619,25 +650,19 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
                 int noOfBytesRead = 0;
                 byte[] byteArray = null;
                 while (true) {
-                    byteArray = new byte[1024];
+                    byteArray = new byte[5120];
                     noOfBytesRead = inputStream.read(byteArray);
-                    if (noOfBytesRead == 0) {
+                    if (noOfBytesRead == -1) {
                         break;
                     }
                     outputStream.write(byteArray, 0, noOfBytesRead);
                 }
-                responseString = "downLoaded!!";
-                httpServletResponse.setContentType("text");
-                httpServletResponse.getWriter().write(responseString);
-
             } else {
                 throw new FileNotFoundException("File not found");
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }/*catch (ServiceLocatorException ex) {
-         ex.printStackTrace();
-         }*/ finally {
+        } finally {
             try {
                 inputStream.close();
                 outputStream.close();
@@ -1410,6 +1435,38 @@ public class TpOnboardingAction extends ActionSupport implements ServletRequestA
 
     public void setRegpartnerId(int regpartnerId) {
         this.regpartnerId = regpartnerId;
+    }
+
+    public int getAs2CommunicationId() {
+        return as2CommunicationId;
+    }
+
+    public void setAs2CommunicationId(int as2CommunicationId) {
+        this.as2CommunicationId = as2CommunicationId;
+    }
+
+    public int getSftpCommunicationId() {
+        return sftpCommunicationId;
+    }
+
+    public void setSftpCommunicationId(int sftpCommunicationId) {
+        this.sftpCommunicationId = sftpCommunicationId;
+    }
+
+    public String getSftp_uploaded_file() {
+        return sftp_uploaded_file;
+    }
+
+    public void setSftp_uploaded_file(String sftp_uploaded_file) {
+        this.sftp_uploaded_file = sftp_uploaded_file;
+    }
+
+    public String getSsl_FileName() {
+        return ssl_FileName;
+    }
+
+    public void setSsl_FileName(String ssl_FileName) {
+        this.ssl_FileName = ssl_FileName;
     }
 
 }

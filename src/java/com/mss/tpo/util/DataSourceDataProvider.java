@@ -533,7 +533,7 @@ public class DataSourceDataProvider {
         }
         return protocolsMap;
     }
-    
+
     public String getProtocolNameByProtocol(String protocol) throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;
@@ -753,7 +753,7 @@ public class DataSourceDataProvider {
         }
         return listNameMap;
     }
-    
+
     public int getAssignedCommunications(int partnerId, String protocol) throws ServiceLocatorException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -762,7 +762,7 @@ public class DataSourceDataProvider {
         connection = ConnectionProvider.getInstance().getConnection();
         int assignedCommunication = 0;
         try {
-                queryString = "SELECT DISTINCT(COMMUNICATION_ID) AS COMM_ID FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE PARTNER_ID ="+partnerId+" AND PROTOCOL = '"+protocol+"'";
+            queryString = "SELECT DISTINCT(COMMUNICATION_ID) AS COMM_ID FROM MSCVP.TPO_PARTNER_COMMUNICATIONS WHERE PARTNER_ID =" + partnerId + " AND PROTOCOL = '" + protocol + "'";
             preparedStatement = connection.prepareStatement(queryString);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -790,20 +790,40 @@ public class DataSourceDataProvider {
         }
         return assignedCommunication;
     }
-    
-     public String getAs2FilePath(int communicationId) throws ServiceLocatorException {
+
+    public String getFilePath(int communicationId) throws ServiceLocatorException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        String as2FilePath = "";
-        connection = ConnectionProvider.getInstance().getConnection();
+        String filePath = "";
         try {
+            String protocol = "";
+            connection = ConnectionProvider.getInstance().getConnection();
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT UPL_YOUR_SYS_CERT FROM MSCVP.TPO_AS2 where COMMUNICATION_ID = " + communicationId);
+
+            String queryString = "SELECT PROTOCOL FROM MSCVP.TPO_COMMUNICATION WHERE ID =" + communicationId;
+            resultSet = statement.executeQuery(queryString);
             while (resultSet.next()) {
-                as2FilePath = resultSet.getString("UPL_YOUR_SYS_CERT");
-                System.out.println("UPL_YOUR_SYS_CERT---"+as2FilePath);
+                protocol = resultSet.getString("PROTOCOL");
             }
+            if ("AS2".equals(protocol)) {
+                resultSet = statement.executeQuery("SELECT UPL_YOUR_SYS_CERT FROM MSCVP.TPO_AS2 where COMMUNICATION_ID = " + communicationId);
+                while (resultSet.next()) {
+                    filePath = resultSet.getString("UPL_YOUR_SYS_CERT");
+                }
+            } //            else if("FTP".equals(protocol)){
+            //                protocolQuery = "SELECT PROTOCOL FROM MSCVP.TPO_COMMUNICATION WHERE ID ="+communicationId;
+            //            }
+            else if ("SFTP".equals(protocol)) {
+                resultSet = statement.executeQuery("SELECT UPL_YOUR_SSH_PUB_KEY FROM MSCVP.TPO_SFTP WHERE COMMUNICATION_ID =" + communicationId);
+                while (resultSet.next()) {
+                    filePath = resultSet.getString("UPL_YOUR_SSH_PUB_KEY");
+                }
+            }
+//            else if("HTTP".equals(protocol)){
+//                protocolQuery = "SELECT PROTOCOL FROM MSCVP.TPO_COMMUNICATION WHERE ID ="+communicationId;
+//            }
+
         } catch (SQLException sql) {
             throw new ServiceLocatorException(sql);
         } finally {
@@ -824,6 +844,6 @@ public class DataSourceDataProvider {
                 throw new ServiceLocatorException(ex);
             }
         }
-        return as2FilePath;
+        return filePath;
     }
 }

@@ -32,4 +32,5 @@ public interface TpOnboardingService {
     public TpOnboardingBean tpoEditEnvelope(int id, int partnerId, String transaction, String direction) throws ServiceLocatorException;
 
     public String as2FileDownload(int communicationId, TpOnboardingAction tpAction) throws ServiceLocatorException;
+    public String sftpFileDownload(int communicationId, TpOnboardingAction tpAction) throws ServiceLocatorException;
 }
