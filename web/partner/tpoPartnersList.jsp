@@ -8,7 +8,7 @@
 <%@page import="com.mss.tpo.partner.PartnerBean"%>
 <html>
     <head>
-        <title>Miracle TP On-boarding</title>
+        <title>Miracle TP On-boarding Partners List</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="no-cache" />
